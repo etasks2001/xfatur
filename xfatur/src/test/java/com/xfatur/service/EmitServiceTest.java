@@ -27,6 +27,8 @@ import com.xfatur.model.Ender;
 @TestMethodOrder(OrderAnnotation.class)
 public class EmitServiceTest {
 
+    private static final String NAO_ENCONTRADO = "Não encontrado";
+
     @Autowired
     private EmitService emitService;
 
@@ -99,7 +101,7 @@ public class EmitServiceTest {
 	    this.emitService.findById(100);
 	});
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject("Não encontrado"));
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject(NAO_ENCONTRADO));
 
     }
 
@@ -113,30 +115,32 @@ public class EmitServiceTest {
     @Test
     @Order(4)
     public void test_findByCNPJ() {
-	EmitDTO found = this.emitService.findByCNPJ("65037603000103");
+	String cnpj = "65037603000103";
+	EmitDTO found = this.emitService.findByCNPJ(cnpj);
 
-	MatcherAssert.assertThat(found.getCNPJ(), Matchers.equalToObject("65037603000103"));
+	MatcherAssert.assertThat(found.getCNPJ(), Matchers.equalToObject(cnpj));
 
 	Exception exception = Assertions.assertThrows(EmitNotFoundException.class, () -> {
 	    this.emitService.findByCNPJ("");
 	});
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject("Não encontrado"));
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject(NAO_ENCONTRADO));
 
     }
 
     @Test
     @Order(5)
     public void test_queryByxName() {
-	EmitDTO found = this.emitService.queryByxName("Empresa de Viagens Ltda");
+	String nome = "Empresa de Viagens Ltda";
+	EmitDTO found = this.emitService.queryByxName(nome);
 
-	MatcherAssert.assertThat(found.getxNome(), Matchers.equalToObject("Empresa de Viagens Ltda"));
+	MatcherAssert.assertThat(found.getxNome(), Matchers.equalToObject(nome));
 
 	Exception exception = Assertions.assertThrows(EmitNotFoundException.class, () -> {
 	    this.emitService.queryByxName("");
 	});
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject("Não encontrado"));
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject(NAO_ENCONTRADO));
 
     }
 }
