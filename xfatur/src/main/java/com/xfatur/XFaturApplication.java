@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class XFaturApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(XFaturApplication.class, args);
-	}
+    public static void main(String[] args) {
+	SpringApplication.run(XFaturApplication.class, args);
+    }
 
 }
