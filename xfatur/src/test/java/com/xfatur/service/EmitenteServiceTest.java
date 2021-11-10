@@ -15,6 +15,7 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import com.xfatur.converter.DTOConverter;
 import com.xfatur.dto.EmitenteDTO;
@@ -22,7 +23,7 @@ import com.xfatur.exception.EmitenteNotFoundException;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 public class EmitenteServiceTest {
@@ -86,7 +87,6 @@ public class EmitenteServiceTest {
 
 	MatcherAssert.assertThat(savedEmitente.getId(), Matchers.greaterThan(0));
 
-	System.out.println(savedEmitente.getId());
     }
 
     @Test

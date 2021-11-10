@@ -1,9 +1,17 @@
 package com.xfatur.converter;
 
+import com.xfatur.dto.DestinatarioDTO;
 import com.xfatur.dto.EmitenteDTO;
 import com.xfatur.dto.EnderecoDTO;
+import com.xfatur.dto.NaturezaJuridicaDTO;
+import com.xfatur.dto.RamoAtividadeDTO;
+import com.xfatur.dto.RepresentanteDTO;
+import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
+import com.xfatur.model.NaturezaJuridica;
+import com.xfatur.model.RamoAtividade;
+import com.xfatur.model.Representante;
 
 public class DTOConverter {
 
@@ -45,4 +53,60 @@ public class DTOConverter {
 
 	return enderDTO;
     }
+
+    public static RamoAtividadeDTO convert(RamoAtividade ramoAtividade) {
+	RamoAtividadeDTO ramoAtividadeDTO = new RamoAtividadeDTO();
+
+	ramoAtividadeDTO.setId(ramoAtividade.getId());
+	ramoAtividadeDTO.setDescricao(ramoAtividade.getDescricao());
+	ramoAtividadeDTO.setDestinatario(ramoAtividade.getDestinatario());
+
+	return ramoAtividadeDTO;
+    }
+
+    public static NaturezaJuridicaDTO convert(NaturezaJuridica naturezaJuridica) {
+	NaturezaJuridicaDTO naturezaJuridicaDTO = new NaturezaJuridicaDTO();
+	naturezaJuridicaDTO.setId(naturezaJuridica.getId());
+	naturezaJuridicaDTO.setDescricao(naturezaJuridica.getDescricao());
+	naturezaJuridicaDTO.setDestinatario(naturezaJuridicaDTO.getDestinatario());
+
+	return naturezaJuridicaDTO;
+    }
+
+    public static RepresentanteDTO convert(Representante representante) {
+	RepresentanteDTO representanteDTO = new RepresentanteDTO();
+
+	representanteDTO.setId(representante.getId());
+	representanteDTO.setxNome(representante.getxNome());
+	representanteDTO.setDestinatario(representante.getDestinatario());
+	representanteDTO.setCNPJCPF(representante.getCNPJCPF());
+	representanteDTO.setEndereco(representante.getEndereco());
+	representanteDTO.setIE(representante.getIE());
+	representanteDTO.setEmail(representante.getEmail());
+
+	return representanteDTO;
+
+    }
+
+    public static DestinatarioDTO convert(Destinatario destinatario) {
+
+	DestinatarioDTO destinatarioDTO = new DestinatarioDTO();
+
+	destinatarioDTO.setId(destinatario.getId());
+	destinatarioDTO.setEnderEmit(destinatario.getEnderEmit());
+	destinatarioDTO.setCNPJCPF(destinatario.getCNPJCPF());
+	destinatarioDTO.setIdEstrangeiro(destinatario.getIdEstrangeiro());
+	destinatarioDTO.setIndIEDest(destinatario.getIndIEDest());
+	destinatarioDTO.setRamoAtividade(destinatario.getRamoAtividade());
+	destinatarioDTO.setRepresentante(destinatario.getRepresentante());
+	destinatarioDTO.setxNome(destinatario.getxNome());
+	destinatarioDTO.setIE(destinatario.getIE());
+	destinatarioDTO.setIM(destinatario.getIM());
+	destinatarioDTO.setEmail(destinatario.getEmail());
+	destinatarioDTO.setNaturezaJuridica(destinatario.getNaturezaJuridica());
+	destinatarioDTO.setISUF(destinatario.getISUF());
+
+	return destinatarioDTO;
+    }
+
 }

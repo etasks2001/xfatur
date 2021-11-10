@@ -20,9 +20,9 @@ public class EmitenteService {
     private EmitenteRepository emitRepository;
 
     public List<EmitenteDTO> getAll() {
-	List<Emitente> emitente = this.emitRepository.findAll();
+	List<Emitente> emitenteList = this.emitRepository.findAll();
 
-	return emitente.stream().map(DTOConverter::convert).collect(Collectors.toList());
+	return emitenteList.stream().map(DTOConverter::convert).collect(Collectors.toList());
     }
 
     public EmitenteDTO findById(Integer id) {

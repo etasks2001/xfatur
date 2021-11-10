@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.xfatur.dto.NaturezaJuridicaDTO;
+
 @Entity
 public class NaturezaJuridica {
     @Id
@@ -31,6 +33,23 @@ public class NaturezaJuridica {
 
     public void setDescricao(String descricao) {
 	this.descricao = descricao;
+    }
+
+    public List<Destinatario> getDestinatario() {
+	return destinatario;
+    }
+
+    public void setDestinatario(List<Destinatario> destinatario) {
+	this.destinatario = destinatario;
+    }
+
+    public static NaturezaJuridica convert(NaturezaJuridicaDTO naturezaJuridicaDTO) {
+	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
+	naturezaJuridica.setId(naturezaJuridicaDTO.getId());
+	naturezaJuridica.setDescricao(naturezaJuridicaDTO.getDescricao());
+	naturezaJuridica.setDestinatario(naturezaJuridicaDTO.getDestinatario());
+
+	return naturezaJuridica;
     }
 
 }
