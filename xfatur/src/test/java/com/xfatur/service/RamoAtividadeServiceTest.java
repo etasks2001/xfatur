@@ -94,9 +94,12 @@ public class RamoAtividadeServiceTest {
     @Test
     @Order(2)
     public void test_queryByDescricao() {
-	String descricao = "M";
-	List<RamoAtividadeDTO> list = this.ramoAtividadeService.queryByDescricao(descricao);
+
+	List<RamoAtividadeDTO> list = this.ramoAtividadeService.queryByDescricao("M");
 	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
+
+	list = this.ramoAtividadeService.queryByDescricao("fdasrfsdare");
+	MatcherAssert.assertThat(list.size(), Matchers.equalTo(0));
 
     }
 

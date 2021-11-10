@@ -91,9 +91,11 @@ public class NaturezaJuridicaServiceTest {
     @Test
     @Order(2)
     public void test_queryByDescricao() {
-	String descricao = "M";
-	List<NaturezaJuridicaDTO> list = this.naturezaJuridicaService.queryByDescricao(descricao);
+	List<NaturezaJuridicaDTO> list = this.naturezaJuridicaService.queryByDescricao("M");
 	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
+
+	list = this.naturezaJuridicaService.queryByDescricao("fdasdfdasdf");
+	MatcherAssert.assertThat(list.size(), Matchers.equalTo(0));
 
     }
 
