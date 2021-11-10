@@ -1,7 +1,5 @@
 package com.xfatur.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +10,7 @@ import com.xfatur.dto.EmitenteDTO;
 import com.xfatur.dto.EnderecoDTO;
 
 @Entity
-public class Emitente implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Emitente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -126,10 +122,6 @@ public class Emitente implements Serializable {
 
     public void setUltima_nnf(Integer ultima_nnf) {
 	this.ultima_nnf = ultima_nnf;
-    }
-
-    public static long getSerialversionuid() {
-	return serialVersionUID;
     }
 
     public static Emitente convert(EmitenteDTO emitenteDTO) {

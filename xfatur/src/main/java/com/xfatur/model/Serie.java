@@ -1,14 +1,11 @@
 package com.xfatur.model;
 
-import java.io.Serializable;
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 @Entity
-public class Serie implements Serializable {
+public class Serie {
 
-    private static final long serialVersionUID = 1L;
     @EmbeddedId
     private SerieId id;
     private Integer nnf_inicial;

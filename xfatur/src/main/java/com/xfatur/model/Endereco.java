@@ -1,17 +1,9 @@
 package com.xfatur.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Endereco implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    public Endereco() {
-
-    }
+public class Endereco {
 
     private String xLgr;
     private String nro;

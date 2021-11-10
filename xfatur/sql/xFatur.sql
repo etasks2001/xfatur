@@ -115,9 +115,9 @@ create table destinatario(
 	ISUF varchar(9) null,
 	IM varchar(15) null, 
 	email varchar(60) null,
-	id_ramoatividade int references ramoatividade,
-	id_naturezajuridica int references naturezajuridica,
-	id_representante int references representante,
+	ramoatividade_id int references ramoatividade,
+	naturezajuridica_id int references naturezajuridica,
+	representante_id int references representante,
 	primary key (id)
 );
 
