@@ -55,19 +55,15 @@ public class EmitenteService {
 
 	if (emitente != null) {
 	    return DTOConverter.convert(emitente);
-
 	}
 	throw new EmitenteNotFoundException("Não encontrado");
     }
 
-    public EmitenteDTO queryByxName(String nome) {
-	Emitente emitente = this.emitRepository.queryByxNome(nome);
+    public EmitenteDTO findByxNomeLike(String nome) {
+	Emitente emitente = this.emitRepository.findByxNomeLike(nome);
 	if (emitente != null) {
 	    return DTOConverter.convert(emitente);
 	}
-
 	throw new EmitenteNotFoundException("Não encontrado");
-
     }
-
 }

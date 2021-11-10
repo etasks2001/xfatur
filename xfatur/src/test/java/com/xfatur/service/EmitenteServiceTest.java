@@ -92,7 +92,6 @@ public class EmitenteServiceTest {
     @Test
     @Order(2)
     public void test_findById() {
-
 	EmitenteDTO emitenteDTO2 = this.emitenteService.findById(savedEmitente.getId());
 
 	MatcherAssert.assertThat(savedEmitente.getId(), Matchers.equalToObject(emitenteDTO2.getId()));
@@ -130,14 +129,14 @@ public class EmitenteServiceTest {
 
     @Test
     @Order(5)
-    public void test_queryByxName() {
+    public void test_findByxNomeLike() {
 	String nome = "Empresa de Viagens Ltda";
-	EmitenteDTO found = this.emitenteService.queryByxName(nome);
+	EmitenteDTO found = this.emitenteService.findByxNomeLike(nome);
 
 	MatcherAssert.assertThat(found.getxNome(), Matchers.equalToObject(nome));
 
 	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> {
-	    this.emitenteService.queryByxName("");
+	    this.emitenteService.findByxNomeLike("");
 	});
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject(NAO_ENCONTRADO));

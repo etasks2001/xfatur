@@ -10,6 +10,6 @@ public interface EmitenteRepository extends JpaRepository<Emitente, Integer> {
 
     Emitente findByCNPJ(String cnpj);
 
-    Emitente queryByxNome(String name);
+    Emitente findByxNomeLike(String name);
 
 }
