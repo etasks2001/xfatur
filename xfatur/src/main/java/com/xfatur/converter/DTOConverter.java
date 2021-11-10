@@ -1,35 +1,35 @@
 package com.xfatur.converter;
 
-import com.xfatur.dto.EmitDTO;
-import com.xfatur.dto.EnderDTO;
-import com.xfatur.model.Emit;
-import com.xfatur.model.Ender;
+import com.xfatur.dto.EmitenteDTO;
+import com.xfatur.dto.EnderecoDTO;
+import com.xfatur.model.Emitente;
+import com.xfatur.model.Endereco;
 
 public class DTOConverter {
 
-    public static EmitDTO convert(Emit emit) {
-	EmitDTO emitDTO = new EmitDTO();
+    public static EmitenteDTO convert(Emitente emitente) {
+	EmitenteDTO emitenteDTO = new EmitenteDTO();
 
-	emitDTO.setId(emit.getId());
-	emitDTO.setCNPJ(emit.getCNPJ());
-	emitDTO.setxNome(emit.getxNome());
-	emitDTO.setxFant(emit.getxFant());
+	emitenteDTO.setId(emitente.getId());
+	emitenteDTO.setCNPJ(emitente.getCNPJ());
+	emitenteDTO.setxNome(emitente.getxNome());
+	emitenteDTO.setxFant(emitente.getxFant());
 
-	emitDTO.setEnderEmit(DTOConverter.convert(emit.getEnderEmit()));
-	emitDTO.setIE(emit.getIE());
-	emitDTO.setIEST(emit.getIEST());
-	emitDTO.setIM(emit.getIM());
-	emitDTO.setCNAE(emit.getCNAE());
-	emitDTO.setCRT(emit.getCRT());
-	emitDTO.setNf_serie_atual(emit.getNf_serie_atual());
-	emitDTO.setUltima_nnf(emit.getUltima_nnf());
+	emitenteDTO.setEnderEmit(DTOConverter.convert(emitente.getEnderEmit()));
+	emitenteDTO.setIE(emitente.getIE());
+	emitenteDTO.setIEST(emitente.getIEST());
+	emitenteDTO.setIM(emitente.getIM());
+	emitenteDTO.setCNAE(emitente.getCNAE());
+	emitenteDTO.setCRT(emitente.getCRT());
+	emitenteDTO.setNf_serie_atual(emitente.getNf_serie_atual());
+	emitenteDTO.setUltima_nnf(emitente.getUltima_nnf());
 
-	return emitDTO;
+	return emitenteDTO;
     }
 
-    public static EnderDTO convert(Ender ender) {
+    public static EnderecoDTO convert(Endereco ender) {
 
-	EnderDTO enderDTO = new EnderDTO();
+	EnderecoDTO enderDTO = new EnderecoDTO();
 
 	enderDTO.setxLgr(ender.getxLgr());
 	enderDTO.setNro(ender.getNro());

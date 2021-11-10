@@ -7,14 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-import com.xfatur.dto.EmitDTO;
-import com.xfatur.dto.EnderDTO;
+import com.xfatur.dto.EmitenteDTO;
+import com.xfatur.dto.EnderecoDTO;
 
 @Entity
-@Table(name = "Emit")
-public class Emit implements Serializable {
+public class Emitente implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +23,7 @@ public class Emit implements Serializable {
     private String xNome;
     private String xFant;
     @Embedded
-    private Ender enderEmit;
+    private Endereco enderEmit;
     private String IE;
     private String IEST;
     private String IM;
@@ -66,11 +64,11 @@ public class Emit implements Serializable {
 	this.xFant = xFant;
     }
 
-    public Ender getEnderEmit() {
+    public Endereco getEnderEmit() {
 	return enderEmit;
     }
 
-    public void setEnderEmit(Ender enderEmit) {
+    public void setEnderEmit(Endereco enderEmit) {
 	this.enderEmit = enderEmit;
     }
 
@@ -134,44 +132,44 @@ public class Emit implements Serializable {
 	return serialVersionUID;
     }
 
-    public static Emit convert(EmitDTO emitDTO) {
-	Emit emit = new Emit();
+    public static Emitente convert(EmitenteDTO emitenteDTO) {
+	Emitente emitente = new Emitente();
 
-	emit.setId(emitDTO.getId());
-	emit.setCNPJ(emitDTO.getCNPJ());
-	emit.setxNome(emitDTO.getxNome());
-	emit.setxFant(emitDTO.getxFant());
+	emitente.setId(emitenteDTO.getId());
+	emitente.setCNPJ(emitenteDTO.getCNPJ());
+	emitente.setxNome(emitenteDTO.getxNome());
+	emitente.setxFant(emitenteDTO.getxFant());
 
-	emit.setEnderEmit(convert(emitDTO.getEnderEmitDTO()));
-	emit.setIE(emitDTO.getIE());
-	emit.setIEST(emitDTO.getIEST());
-	emit.setIM(emitDTO.getIM());
-	emit.setCNAE(emitDTO.getCNAE());
-	emit.setCRT(emitDTO.getCRT());
-	emit.setNf_serie_atual(emitDTO.getNf_serie_atual());
-	emit.setUltima_nnf(emitDTO.getUltima_nnf());
+	emitente.setEnderEmit(convert(emitenteDTO.getEnderEmitDTO()));
+	emitente.setIE(emitenteDTO.getIE());
+	emitente.setIEST(emitenteDTO.getIEST());
+	emitente.setIM(emitenteDTO.getIM());
+	emitente.setCNAE(emitenteDTO.getCNAE());
+	emitente.setCRT(emitenteDTO.getCRT());
+	emitente.setNf_serie_atual(emitenteDTO.getNf_serie_atual());
+	emitente.setUltima_nnf(emitenteDTO.getUltima_nnf());
 
-	return emit;
+	return emitente;
 
     }
 
-    public static Ender convert(EnderDTO enderDTO) {
+    public static Endereco convert(EnderecoDTO enderecoDTO) {
 
-	Ender ender = new Ender();
+	Endereco endereco = new Endereco();
 
-	ender.setxLgr(enderDTO.getxLgr());
-	ender.setNro(enderDTO.getNro());
-	ender.setxCpl(enderDTO.getxCpl());
-	ender.setxBairro(enderDTO.getxBairro());
-	ender.setcMun(enderDTO.getcMun());
-	ender.setxMun(enderDTO.getxMun());
-	ender.setUF(enderDTO.getUF());
-	ender.setCEP(enderDTO.getCEP());
-	ender.setcPais(enderDTO.getcPais());
-	ender.setxPais(enderDTO.getxPais());
-	ender.setFone(enderDTO.getFone());
+	endereco.setxLgr(enderecoDTO.getxLgr());
+	endereco.setNro(enderecoDTO.getNro());
+	endereco.setxCpl(enderecoDTO.getxCpl());
+	endereco.setxBairro(enderecoDTO.getxBairro());
+	endereco.setcMun(enderecoDTO.getcMun());
+	endereco.setxMun(enderecoDTO.getxMun());
+	endereco.setUF(enderecoDTO.getUF());
+	endereco.setCEP(enderecoDTO.getCEP());
+	endereco.setcPais(enderecoDTO.getcPais());
+	endereco.setxPais(enderecoDTO.getxPais());
+	endereco.setFone(enderecoDTO.getFone());
 
-	return ender;
+	return endereco;
     }
 
 }

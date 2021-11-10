@@ -1,12 +1,12 @@
 package com.xfatur.dto;
 
-public class EmitDTO {
+public class EmitenteDTO {
 
     private Integer id;
     private String CNPJ;
     private String xNome;
     private String xFant;
-    private EnderDTO enderEmitDTO;
+    private EnderecoDTO enderEmitDTO;
     private String IE;
     private String IEST;
     private String IM;
@@ -47,11 +47,11 @@ public class EmitDTO {
 	this.xFant = xFant;
     }
 
-    public EnderDTO getEnderEmitDTO() {
+    public EnderecoDTO getEnderEmitDTO() {
 	return enderEmitDTO;
     }
 
-    public void setEnderEmit(EnderDTO enderEmitDTO) {
+    public void setEnderEmit(EnderecoDTO enderEmitDTO) {
 	this.enderEmitDTO = enderEmitDTO;
     }
 

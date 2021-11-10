@@ -1,17 +1,6 @@
-package com.xfatur.model;
+package com.xfatur.dto;
 
-import java.io.Serializable;
-
-import javax.persistence.Embeddable;
-
-@Embeddable
-public class Ender implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    public Ender() {
-
-    }
+public class EnderecoDTO {
 
     private String xLgr;
     private String nro;
