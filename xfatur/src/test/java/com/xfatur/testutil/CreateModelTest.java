@@ -1,7 +1,9 @@
 package com.xfatur.testutil;
 
 import com.xfatur.converter.DTOConverter;
+import com.xfatur.dto.EmitenteDTO;
 import com.xfatur.dto.RepresentanteDTO;
+import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
 import com.xfatur.model.Representante;
 
@@ -56,6 +58,38 @@ public class CreateModelTest {
 	representante.setEmail("email@vendafacil.com.br");
 
 	return DTOConverter.convert(representante);
+
+    }
+
+    public static EmitenteDTO createEmitente1() {
+	Emitente emitente = new Emitente();
+	emitente.setCNPJ("65037603000103");
+	emitente.setxNome("Empresa de Viagens Ltda");
+	emitente.setxFant("Emp Via");
+
+	Endereco enderecoEmitente = new Endereco();
+	enderecoEmitente.setxLgr("Rua Graça Saldanha");
+	enderecoEmitente.setNro("150");
+	enderecoEmitente.setxCpl("9º - sala 9000");
+	enderecoEmitente.setxBairro("Centro");
+	enderecoEmitente.setcMun("0000000");
+	enderecoEmitente.setxMun("São Paulo");
+	enderecoEmitente.setUF("SP");
+	enderecoEmitente.setCEP("12345678");
+	enderecoEmitente.setcPais("4678");
+	enderecoEmitente.setxPais("Brasil");
+	enderecoEmitente.setFone("(11) 2254-8787");
+
+	emitente.setEnderEmit(enderecoEmitente);
+	emitente.setIE("123456789");
+	emitente.setIEST("");
+	emitente.setIM("12345678");
+	emitente.setCNAE("7654321");
+	emitente.setCRT("1");
+	emitente.setNf_serie_atual(0);
+	emitente.setUltima_nnf(25454);
+
+	return DTOConverter.convert(emitente);
 
     }
 

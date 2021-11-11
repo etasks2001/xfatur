@@ -81,7 +81,8 @@ create table representante(
 	fone varchar(14) null,
 	IE varchar(14) null, 
 	email varchar(60) null,
-	primary key (id)
+	primary key (id),
+	unique (CNPJCPF)
 );
 create table ramoatividade(
 	id serial not null,
@@ -118,7 +119,8 @@ create table destinatario(
 	ramoatividade_id int references ramoatividade,
 	naturezajuridica_id int references naturezajuridica,
 	representante_id int references representante,
-	primary key (id)
+	primary key (id),
+	unique (CNPJCPF)
 );
 
 

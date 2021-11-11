@@ -5,11 +5,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.xfatur.converter.DTOConverter;
 import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.EmitenteDTO;
+import com.xfatur.exception.EmitenteException;
 import com.xfatur.exception.EmitenteNotFoundException;
 import com.xfatur.model.Emitente;
 import com.xfatur.repository.EmitenteRepository;
@@ -35,9 +37,14 @@ public class EmitenteService {
     }
 
     public EmitenteDTO save(EmitenteDTO emitenteDTO) {
-	Emitente emit = repository.save(ModelConverter.convert(emitenteDTO));
 
-	return DTOConverter.convert(emit);
+	try {
+	    Emitente emit = repository.save(ModelConverter.convert(emitenteDTO));
+
+	    return DTOConverter.convert(emit);
+	} catch (DataIntegrityViolationException e) {
+	    throw new EmitenteException("CNPJ/CPF já cadastrado");
+	}
     }
 
     public Boolean delete(Integer id) {
