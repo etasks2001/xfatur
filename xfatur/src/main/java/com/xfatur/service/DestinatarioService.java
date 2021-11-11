@@ -11,15 +11,20 @@ import com.xfatur.repository.DestinatarioRepository;
 
 @Service
 public class DestinatarioService {
-    @Autowired
-    private DestinatarioRepository repository;
+	@Autowired
+	private DestinatarioRepository repository;
 
-    public DestinatarioDTO save(DestinatarioDTO d) {
+	public DestinatarioDTO save(DestinatarioDTO d) {
 //	try {
-	Destinatario salvo = repository.save(ModelConverter.convert(d));
-	return DTOConverter.convert(salvo);
+		Destinatario salvo = repository.save(ModelConverter.convert(d));
+		return DTOConverter.convert(salvo);
 //	} catch (DataIntegrityViolationException e) {
 //	    throw new DestinatarioException("CNPJ/CPF já cadastrado");
 //	}
-    }
+	}
+
+	public void deleteById(int id) {
+		repository.deleteById(id);
+
+	}
 }

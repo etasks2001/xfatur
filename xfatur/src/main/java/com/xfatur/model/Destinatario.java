@@ -7,132 +7,167 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Destinatario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String CNPJCPF;
-    private String idEstrangeiro;
-    private String xNome;
-    @Embedded
-    private Endereco enderDest;
-    private IndIEDest indIEDest;
-    private String IE;
-    private String ISUF;
-    private String IM;
-    private String email;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private RamoAtividade ramoAtividade;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private NaturezaJuridica naturezaJuridica;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private Representante representante;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String CNPJCPF;
+	private String idEstrangeiro;
+	private String xNome;
+	@Embedded
+	private Endereco enderDest;
+	private IndIEDest indIEDest;
+	private String IE;
+	private String ISUF;
+	private String IM;
+	private String email;
 
-    public Integer getId() {
-	return id;
-    }
+	private Integer ramoatividade_id;
+	private Integer naturezajuridica_id;
+	private Integer representante_id;
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ramoatividade_id", insertable = false, updatable = false)
+	private RamoAtividade ramoAtividade;
 
-    public String getCNPJCPF() {
-	return CNPJCPF;
-    }
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "naturezajuridica_id", insertable = false, updatable = false)
+	private NaturezaJuridica naturezaJuridica;
 
-    public void setCNPJCPF(String cNPJCPF) {
-	CNPJCPF = cNPJCPF;
-    }
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "representante_id", insertable = false, updatable = false)
+	private Representante representante;
 
-    public String getIdEstrangeiro() {
-	return idEstrangeiro;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setIdEstrangeiro(String idEstrangeiro) {
-	this.idEstrangeiro = idEstrangeiro;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getxNome() {
-	return xNome;
-    }
+	public String getCNPJCPF() {
+		return CNPJCPF;
+	}
 
-    public void setxNome(String xNome) {
-	this.xNome = xNome;
-    }
+	public void setCNPJCPF(String cNPJCPF) {
+		CNPJCPF = cNPJCPF;
+	}
 
-    public Endereco getEnderDest() {
-	return enderDest;
-    }
+	public String getIdEstrangeiro() {
+		return idEstrangeiro;
+	}
 
-    public void setEnderDest(Endereco enderDest) {
-	this.enderDest = enderDest;
-    }
+	public void setIdEstrangeiro(String idEstrangeiro) {
+		this.idEstrangeiro = idEstrangeiro;
+	}
 
-    public IndIEDest getIndIEDest() {
-	return indIEDest;
-    }
+	public String getxNome() {
+		return xNome;
+	}
 
-    public void setIndIEDest(IndIEDest indIEDest) {
-	this.indIEDest = indIEDest;
-    }
+	public void setxNome(String xNome) {
+		this.xNome = xNome;
+	}
 
-    public String getIE() {
-	return IE;
-    }
+	public Endereco getEnderDest() {
+		return enderDest;
+	}
 
-    public void setIE(String iE) {
-	IE = iE;
-    }
+	public void setEnderDest(Endereco enderDest) {
+		this.enderDest = enderDest;
+	}
 
-    public String getISUF() {
-	return ISUF;
-    }
+	public IndIEDest getIndIEDest() {
+		return indIEDest;
+	}
 
-    public void setISUF(String iSUF) {
-	ISUF = iSUF;
-    }
+	public void setIndIEDest(IndIEDest indIEDest) {
+		this.indIEDest = indIEDest;
+	}
 
-    public String getIM() {
-	return IM;
-    }
+	public String getIE() {
+		return IE;
+	}
 
-    public void setIM(String iM) {
-	IM = iM;
-    }
+	public void setIE(String iE) {
+		IE = iE;
+	}
 
-    public String getEmail() {
-	return email;
-    }
+	public String getISUF() {
+		return ISUF;
+	}
 
-    public void setEmail(String email) {
-	this.email = email;
-    }
+	public void setISUF(String iSUF) {
+		ISUF = iSUF;
+	}
 
-    public RamoAtividade getRamoAtividade() {
-	return ramoAtividade;
-    }
+	public String getIM() {
+		return IM;
+	}
 
-    public void setRamoAtividade(RamoAtividade ramoAtividade) {
-	this.ramoAtividade = ramoAtividade;
-    }
+	public void setIM(String iM) {
+		IM = iM;
+	}
 
-    public NaturezaJuridica getNaturezaJuridica() {
-	return naturezaJuridica;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setNaturezaJuridica(NaturezaJuridica naturezaJuridica) {
-	this.naturezaJuridica = naturezaJuridica;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public Representante getRepresentante() {
-	return representante;
-    }
+	public RamoAtividade getRamoAtividade() {
+		return ramoAtividade;
+	}
 
-    public void setRepresentante(Representante representante) {
-	this.representante = representante;
-    }
+	public void setRamoAtividade(RamoAtividade ramoAtividade) {
+		this.ramoAtividade = ramoAtividade;
+	}
+
+	public NaturezaJuridica getNaturezaJuridica() {
+		return naturezaJuridica;
+	}
+
+	public void setNaturezaJuridica(NaturezaJuridica naturezaJuridica) {
+		this.naturezaJuridica = naturezaJuridica;
+	}
+
+	public Representante getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(Representante representante) {
+		this.representante = representante;
+	}
+
+	public Integer getRamoatividade_id() {
+		return ramoatividade_id;
+	}
+
+	public void setRamoatividade_id(Integer ramoatividade_id) {
+		this.ramoatividade_id = ramoatividade_id;
+	}
+
+	public Integer getNaturezajuridica_id() {
+		return naturezajuridica_id;
+	}
+
+	public void setNaturezajuridica_id(Integer naturezajuridica_id) {
+		this.naturezajuridica_id = naturezajuridica_id;
+	}
+
+	public Integer getRepresentante_id() {
+		return representante_id;
+	}
+
+	public void setRepresentante_id(Integer representante_id) {
+		this.representante_id = representante_id;
+	}
 
 }
