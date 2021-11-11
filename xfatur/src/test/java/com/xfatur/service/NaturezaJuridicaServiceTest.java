@@ -1,120 +1,117 @@
 package com.xfatur.service;
 
-import java.util.ArrayList;
+import static java.lang.Boolean.TRUE;
+
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-import com.xfatur.converter.DTOConverter;
-import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.NaturezaJuridicaDTO;
+import com.xfatur.exception.NaturezaJuridicaException;
 import com.xfatur.exception.NaturezaJuridicaNotFoundException;
-import com.xfatur.model.NaturezaJuridica;
+import com.xfatur.testutil.CreateModelTest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
-public class NaturezaJuridicaServiceTest {
-
+class NaturezaJuridicaServiceTest {
     @Autowired
-    private NaturezaJuridicaService service;
+    NaturezaJuridicaService service;
 
-    private List<NaturezaJuridicaDTO> naturezaJuridicaDTOList;
-
-    @BeforeAll
-    public void create() {
-	List<NaturezaJuridica> naturezaJuridicaList = new ArrayList<NaturezaJuridica>();
-	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
-	naturezaJuridica.setDescricao("EMPRESA PEQUENO PORTE (EPP)");
-	naturezaJuridicaList.add(naturezaJuridica);
-
-	naturezaJuridica = new NaturezaJuridica();
-	naturezaJuridica.setDescricao("MICRO EMPRESA (ME)");
-	naturezaJuridicaList.add(naturezaJuridica);
-
-	naturezaJuridica = new NaturezaJuridica();
-	naturezaJuridica.setDescricao("EMPRESA (OUTRAS)");
-	naturezaJuridicaList.add(naturezaJuridica);
-
-	naturezaJuridica = new NaturezaJuridica();
-	naturezaJuridica.setDescricao("CONSUMIDOR FINAL");
-	naturezaJuridicaList.add(naturezaJuridica);
-
-	naturezaJuridica = new NaturezaJuridica();
-	naturezaJuridica.setDescricao("ENQUADRADO NO SIMPLES NACIONAL");
-	naturezaJuridicaList.add(naturezaJuridica);
-
-	naturezaJuridicaDTOList = naturezaJuridicaList.stream().map(DTOConverter::convert).collect(Collectors.toList());
-    }
-
-    @AfterAll
-    public void delete() {
-	for (NaturezaJuridicaDTO naturezaJuridicaDTO : naturezaJuridicaDTOList) {
-	    this.service.delete(naturezaJuridicaDTO.getId());
-	}
-
-	Boolean result = this.service.delete(454);
-
-	MatcherAssert.assertThat(result, Matchers.equalToObject(Boolean.FALSE));
+    static Stream<NaturezaJuridicaDTO> model() {
+	return Stream.of(CreateModelTest.createNaturezaJuridica1(), CreateModelTest.createNaturezaJuridica2(), CreateModelTest.createNaturezaJuridica3(), CreateModelTest.createNaturezaJuridica4(),
+		CreateModelTest.createNaturezaJuridica5());
 
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("model")
     @Order(1)
-    public void test_save() {
+    void test_save(NaturezaJuridicaDTO nj) {
+	Integer id = this.service.save(nj).getId();
+	nj.setId(id);
 
-	for (int i = 0; i < naturezaJuridicaDTOList.size(); i++) {
-	    NaturezaJuridicaDTO naturezaJuridicaDTO = naturezaJuridicaDTOList.get(i);
-
-	    NaturezaJuridicaDTO raDTO = this.service.save(naturezaJuridicaDTO);
-
-	    naturezaJuridicaDTO.setId(raDTO.getId());
-	    MatcherAssert.assertThat(raDTO.getId(), Matchers.equalTo(naturezaJuridicaDTO.getId()));
-
-	}
-
+	MatcherAssert.assertThat(id, Matchers.is(nj.getId()));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("model")
     @Order(2)
-    public void test_buscaPorDescricao() {
-	List<NaturezaJuridicaDTO> list = this.service.buscaPorDescricao("M");
-	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
+    void test_save_cnpj_ja_cadastrado(NaturezaJuridicaDTO e) {
+	NaturezaJuridicaException exception = Assertions.assertThrows(NaturezaJuridicaException.class, () -> service.save(e));
 
-	list = this.service.buscaPorDescricao("fdasdfdasdf");
-	MatcherAssert.assertThat(list.size(), Matchers.equalTo(0));
-
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Descrição já cadastrada"));
     }
 
     @Test
     @Order(3)
-    public void test_findById() {
-	NaturezaJuridicaDTO toFind = this.naturezaJuridicaDTOList.get(0);
-	NaturezaJuridicaDTO found = this.service.findById(toFind.getId());
-	NaturezaJuridica naturezaJuridica = ModelConverter.convert(found);
+    void test_buscaPorDescricao() {
+	List<NaturezaJuridicaDTO> list = this.service.buscaPorDescricao("M");
 
-	MatcherAssert.assertThat(naturezaJuridica.getId(), Matchers.equalToObject(found.getId()));
+	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
+    }
 
-	Exception exception = Assertions.assertThrows(NaturezaJuridicaNotFoundException.class, () -> {
-	    this.service.findById(100);
+    @Test
+    @Order(4)
+    void test_buscaPorDescricao_tamanho_0() {
+	List<NaturezaJuridicaDTO> list = this.service.buscaPorDescricao("fdasdfdasdf");
+
+	MatcherAssert.assertThat(list.size(), Matchers.is(0));
+    }
+
+    @ParameterizedTest
+    @MethodSource("model")
+    @Order(5)
+    void test_findById(NaturezaJuridicaDTO nj) {
+	List<NaturezaJuridicaDTO> findAll = service.findAll();
+
+	Integer id = findAll.get(0).getId();
+
+	Integer id2 = this.service.findById(id).getId();
+
+	MatcherAssert.assertThat(id2, Matchers.is(id));
+    }
+
+    @Test
+    @Order(6)
+    void test_findById_nao_encontrado() {
+	Exception exception = Assertions.assertThrows(NaturezaJuridicaNotFoundException.class, () -> this.service.findById(100));
+
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Natureza Jurídica não encontrada"));
+    }
+
+    @ParameterizedTest
+    @MethodSource("model")
+    @Order(7)
+    void delete(NaturezaJuridicaDTO n) {
+	List<NaturezaJuridicaDTO> findAll = service.findAll();
+	findAll.forEach(nj -> {
+	    Boolean apagado = this.service.delete(nj.getId());
+	    MatcherAssert.assertThat(apagado, Matchers.is(TRUE));
 	});
+    }
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject("Natureza Jurídica não encontrada"));
+    @ParameterizedTest
+    @MethodSource("model")
+    @Order(8)
+    void delete_nao_encontrado(NaturezaJuridicaDTO n) {
+	Boolean result = this.service.delete(454);
 
+	MatcherAssert.assertThat(result, Matchers.is(Boolean.FALSE));
     }
 
 }

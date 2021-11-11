@@ -1,6 +1,6 @@
 package com.xfatur.dto;
 
-import com.xfatur.model.Endereco;
+import com.xfatur.model.IndIEDest;
 import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
@@ -10,8 +10,8 @@ public class DestinatarioDTO {
     private String CNPJCPF;
     private String idEstrangeiro;
     private String xNome;
-    private Endereco enderEmit;
-    private String indIEDest;
+    private EnderecoDTO enderEmitDTO;
+    private IndIEDest indIEDest;
     private String IE;
     private String ISUF;
     private String IM;
@@ -52,19 +52,11 @@ public class DestinatarioDTO {
 	this.xNome = xNome;
     }
 
-    public Endereco getEnderEmit() {
-	return enderEmit;
-    }
-
-    public void setEnderEmit(Endereco enderEmit) {
-	this.enderEmit = enderEmit;
-    }
-
-    public String getIndIEDest() {
+    public IndIEDest getIndIEDest() {
 	return indIEDest;
     }
 
-    public void setIndIEDest(String indIEDest) {
+    public void setIndIEDest(IndIEDest indIEDest) {
 	this.indIEDest = indIEDest;
     }
 
@@ -122,6 +114,14 @@ public class DestinatarioDTO {
 
     public void setRepresentante(Representante representante) {
 	this.representante = representante;
+    }
+
+    public EnderecoDTO getEnderEmitDTO() {
+	return enderEmitDTO;
+    }
+
+    public void setEnderEmitDTO(EnderecoDTO enderEmitDTO) {
+	this.enderEmitDTO = enderEmitDTO;
     }
 
 }

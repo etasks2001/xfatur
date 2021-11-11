@@ -29,23 +29,23 @@ import com.xfatur.testutil.CreateModelTest;
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
-public class RepresentanteServiceTest {
-
-    public static Stream<RepresentanteDTO> model() {
-	return Stream.of(CreateModelTest.createRepresentante1(), CreateModelTest.createRepresentante2());
-    }
+class RepresentanteServiceTest {
 
     @Autowired
     RepresentanteService service;
+
+    static Stream<RepresentanteDTO> model() {
+	return Stream.of(CreateModelTest.createRepresentante1(), CreateModelTest.createRepresentante2());
+    }
 
     @ParameterizedTest
     @MethodSource("model")
     @Order(1)
     void test_save(RepresentanteDTO r) {
-	RepresentanteDTO saved = service.save(r);
-	r.setId(saved.getId());
+	Integer id = service.save(r).getId();
+	r.setId(id);
 
-	MatcherAssert.assertThat(saved.getId(), Matchers.greaterThan(0));
+	MatcherAssert.assertThat(id, Matchers.greaterThan(0));
     }
 
     @ParameterizedTest
@@ -60,18 +60,15 @@ public class RepresentanteServiceTest {
     @Test
     @Order(3)
     void test_findByCNPJCPF_encontrado() {
-	RepresentanteDTO found = this.service.findByCNPJCPF("77851609000107");
+	String cnpjcpf = this.service.findByCNPJCPF("77851609000107").getCNPJCPF();
 
-	MatcherAssert.assertThat(found.getCNPJCPF(), Matchers.is("77851609000107"));
-
+	MatcherAssert.assertThat(cnpjcpf, Matchers.is("77851609000107"));
     }
 
     @Test
     @Order(4)
     void test_findByCNPJCPF_naoEncontrado() {
-	Exception exception = Assertions.assertThrows(RepresentanteNotFoundException.class, () -> {
-	    this.service.findByCNPJCPF("12456");
-	});
+	Exception exception = Assertions.assertThrows(RepresentanteNotFoundException.class, () -> this.service.findByCNPJCPF("12456"));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Representante não encontrado"));
     }
@@ -80,27 +77,41 @@ public class RepresentanteServiceTest {
     @Order(5)
     void test_buscaPorNome() {
 	List<RepresentanteDTO> found = this.service.buscaPorNome("S");
-	MatcherAssert.assertThat(found.size(), Matchers.greaterThan(0));
-	MatcherAssert.assertThat(found.size(), Matchers.is(2));
 
-	found = this.service.buscaPorNome("sss");
+	MatcherAssert.assertThat(found.size(), Matchers.greaterThan(0));
+    }
+
+    @Test
+    @Order(6)
+    void test_buscaPorNome_total_2() {
+	List<RepresentanteDTO> found = this.service.buscaPorNome("S");
+
+	MatcherAssert.assertThat(found.size(), Matchers.is(2));
+    }
+
+    @Test
+    @Order(7)
+    void test_buscaPorNome_nao_encontrado() {
+	List<RepresentanteDTO> found = this.service.buscaPorNome("sss");
 
 	MatcherAssert.assertThat(found.size(), Matchers.is(0));
     }
 
     @ParameterizedTest
     @MethodSource("model")
-    @Order(6)
-    void delete(RepresentanteDTO r) {
-	RepresentanteDTO found = service.findByCNPJCPF(r.getCNPJCPF());
-	Boolean apagado = service.delete(found.getId());
+    @Order(8)
+    void test_delete(RepresentanteDTO r) {
+	Integer id = service.findByCNPJCPF(r.getCNPJCPF()).getId();
+	Boolean apagado = service.delete(id);
+
 	MatcherAssert.assertThat(apagado, Matchers.is(TRUE));
     }
 
-    @Order(7)
-    void delete_nao_encontrado() {
-	Boolean apagado = this.service.delete(100);
+    @Test
+    @Order(9)
+    void test_delete_nao_encontrado() {
+	Boolean apagado = this.service.delete(100000);
+
 	MatcherAssert.assertThat(apagado, Matchers.is(FALSE));
     }
-
 }

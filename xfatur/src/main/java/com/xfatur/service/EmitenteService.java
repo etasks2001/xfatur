@@ -22,12 +22,6 @@ public class EmitenteService {
     @Autowired
     private EmitenteRepository repository;
 
-    public List<EmitenteDTO> getAll() {
-	List<Emitente> emitenteList = repository.findAll();
-
-	return emitenteList.stream().map(DTOConverter::convert).collect(Collectors.toList());
-    }
-
     public EmitenteDTO findById(Integer id) {
 	Optional<Emitente> emitente = repository.findById(id);
 	if (emitente.isPresent()) {
@@ -37,7 +31,6 @@ public class EmitenteService {
     }
 
     public EmitenteDTO save(EmitenteDTO emitenteDTO) {
-
 	try {
 	    Emitente emit = repository.save(ModelConverter.convert(emitenteDTO));
 
@@ -67,11 +60,9 @@ public class EmitenteService {
 	throw new EmitenteNotFoundException("Emitente Não encontrado");
     }
 
-    public EmitenteDTO findByxNomeContaining(String nome) {
-	Emitente emitente = repository.findByxNomeContaining(nome);
-	if (emitente != null) {
-	    return DTOConverter.convert(emitente);
-	}
-	throw new EmitenteNotFoundException("Emitente Não encontrado");
+    public List<EmitenteDTO> buscaPorNome(String nome) {
+	List<Emitente> emitentes = repository.buscaPorNome(nome);
+
+	return emitentes.stream().map(DTOConverter::convert).collect(Collectors.toList());
     }
 }

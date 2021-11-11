@@ -87,13 +87,15 @@ create table representante(
 create table ramoatividade(
 	id serial not null,
 	descricao varchar(70),
-	primary key (id)
+	primary key (id),
+	unique (descricao)
 );
 
 create table naturezajuridica(
 	id serial not null,
 	descricao varchar (70),
-	primary key (id)
+	primary key (id),
+	unique(descricao)
 );
 create table destinatario(
 	id serial not null,

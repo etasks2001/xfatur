@@ -5,11 +5,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.xfatur.converter.DTOConverter;
 import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.NaturezaJuridicaDTO;
+import com.xfatur.exception.NaturezaJuridicaException;
 import com.xfatur.exception.NaturezaJuridicaNotFoundException;
 import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.repository.NaturezaJuridicaRepository;
@@ -21,24 +23,31 @@ public class NaturezaJuridicaService {
     private NaturezaJuridicaRepository repository;
 
     public NaturezaJuridicaDTO save(NaturezaJuridicaDTO naturezaJuridicaDTO) {
-	NaturezaJuridica naturezaJuridica = repository.save(ModelConverter.convert(naturezaJuridicaDTO));
+	try {
+	    NaturezaJuridica naturezaJuridica = repository.save(ModelConverter.convert(naturezaJuridicaDTO));
 
-	return DTOConverter.convert(naturezaJuridica);
+	    return DTOConverter.convert(naturezaJuridica);
+	} catch (DataIntegrityViolationException e) {
+	    throw new NaturezaJuridicaException("Descrição já cadastrada");
+	}
+    }
+
+    public List<NaturezaJuridicaDTO> findAll() {
+	List<NaturezaJuridica> findAll = repository.findAll();
+
+	return findAll.stream().map(DTOConverter::convert).collect(Collectors.toList());
     }
 
     public Boolean delete(Integer id) {
-
 	Optional<NaturezaJuridica> naturezaJuridica = repository.findById(id);
 	if (naturezaJuridica.isPresent()) {
 	    repository.deleteById(id);
 	    return Boolean.TRUE;
 	}
 	return Boolean.FALSE;
-
     }
 
     public List<NaturezaJuridicaDTO> buscaPorDescricao(String descricao) {
-
 	List<NaturezaJuridica> queryByDescricao = repository.buscaPorDescricao(descricao);
 
 	return queryByDescricao.stream().map(DTOConverter::convert).collect(Collectors.toList());
@@ -50,7 +59,5 @@ public class NaturezaJuridicaService {
 	    return DTOConverter.convert(findById.get());
 	}
 	throw new NaturezaJuridicaNotFoundException("Natureza Jurídica não encontrada");
-
     }
-
 }

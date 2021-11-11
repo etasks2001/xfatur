@@ -1,5 +1,6 @@
 package com.xfatur.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,17 +18,17 @@ public class Destinatario {
     private String idEstrangeiro;
     private String xNome;
     @Embedded
-    private Endereco enderEmit;
-    private String indIEDest;
+    private Endereco enderDest;
+    private IndIEDest indIEDest;
     private String IE;
     private String ISUF;
     private String IM;
     private String email;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private RamoAtividade ramoAtividade;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private NaturezaJuridica naturezaJuridica;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Representante representante;
 
     public Integer getId() {
@@ -62,19 +63,19 @@ public class Destinatario {
 	this.xNome = xNome;
     }
 
-    public Endereco getEnderEmit() {
-	return enderEmit;
+    public Endereco getEnderDest() {
+	return enderDest;
     }
 
-    public void setEnderEmit(Endereco enderEmit) {
-	this.enderEmit = enderEmit;
+    public void setEnderDest(Endereco enderDest) {
+	this.enderDest = enderDest;
     }
 
-    public String getIndIEDest() {
+    public IndIEDest getIndIEDest() {
 	return indIEDest;
     }
 
-    public void setIndIEDest(String indIEDest) {
+    public void setIndIEDest(IndIEDest indIEDest) {
 	this.indIEDest = indIEDest;
     }
 

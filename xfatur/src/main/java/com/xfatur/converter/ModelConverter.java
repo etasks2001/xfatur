@@ -1,10 +1,12 @@
 package com.xfatur.converter;
 
+import com.xfatur.dto.DestinatarioDTO;
 import com.xfatur.dto.EmitenteDTO;
 import com.xfatur.dto.EnderecoDTO;
 import com.xfatur.dto.NaturezaJuridicaDTO;
 import com.xfatur.dto.RamoAtividadeDTO;
 import com.xfatur.dto.RepresentanteDTO;
+import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
 import com.xfatur.model.NaturezaJuridica;
@@ -84,6 +86,28 @@ public class ModelConverter {
 
 	return emitente;
 
+    }
+
+    public static Destinatario convert(DestinatarioDTO destinatarioDTO) {
+	Destinatario destinatario = new Destinatario();
+
+	destinatario.setId(destinatarioDTO.getId());
+
+	Endereco enderEmit = ModelConverter.convert(destinatarioDTO.getEnderEmitDTO());
+	destinatario.setEnderDest(enderEmit);
+	destinatario.setCNPJCPF(destinatarioDTO.getCNPJCPF());
+	destinatario.setIdEstrangeiro(destinatarioDTO.getIdEstrangeiro());
+	destinatario.setIndIEDest(destinatarioDTO.getIndIEDest());
+	destinatario.setRamoAtividade(destinatarioDTO.getRamoAtividade());
+	destinatario.setRepresentante(destinatarioDTO.getRepresentante());
+	destinatario.setxNome(destinatarioDTO.getxNome());
+	destinatario.setIE(destinatarioDTO.getIE());
+	destinatario.setIM(destinatarioDTO.getIM());
+	destinatario.setEmail(destinatarioDTO.getEmail());
+	destinatario.setNaturezaJuridica(destinatarioDTO.getNaturezaJuridica());
+	destinatario.setISUF(destinatarioDTO.getISUF());
+
+	return destinatario;
     }
 
 }

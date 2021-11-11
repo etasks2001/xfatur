@@ -1,10 +1,17 @@
 package com.xfatur.testutil;
 
 import com.xfatur.converter.DTOConverter;
+import com.xfatur.dto.DestinatarioDTO;
 import com.xfatur.dto.EmitenteDTO;
+import com.xfatur.dto.NaturezaJuridicaDTO;
+import com.xfatur.dto.RamoAtividadeDTO;
 import com.xfatur.dto.RepresentanteDTO;
+import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
+import com.xfatur.model.IndIEDest;
+import com.xfatur.model.NaturezaJuridica;
+import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
 
 public class CreateModelTest {
@@ -91,6 +98,120 @@ public class CreateModelTest {
 
 	return DTOConverter.convert(emitente);
 
+    }
+
+    public static NaturezaJuridicaDTO createNaturezaJuridica1() {
+	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
+	naturezaJuridica.setDescricao("EMPRESA PEQUENO PORTE (EPP)");
+
+	return DTOConverter.convert(naturezaJuridica);
+    }
+
+    public static NaturezaJuridicaDTO createNaturezaJuridica2() {
+	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
+
+	naturezaJuridica = new NaturezaJuridica();
+	naturezaJuridica.setDescricao("MICRO EMPRESA (ME)");
+	return DTOConverter.convert(naturezaJuridica);
+    }
+
+    public static NaturezaJuridicaDTO createNaturezaJuridica3() {
+	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
+
+	naturezaJuridica = new NaturezaJuridica();
+	naturezaJuridica.setDescricao("EMPRESA (OUTRAS)");
+	return DTOConverter.convert(naturezaJuridica);
+
+    }
+
+    public static NaturezaJuridicaDTO createNaturezaJuridica4() {
+	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
+
+	naturezaJuridica = new NaturezaJuridica();
+	naturezaJuridica.setDescricao("CONSUMIDOR FINAL");
+	return DTOConverter.convert(naturezaJuridica);
+    }
+
+    public static NaturezaJuridicaDTO createNaturezaJuridica5() {
+	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
+
+	naturezaJuridica = new NaturezaJuridica();
+	naturezaJuridica.setDescricao("ENQUADRADO NO SIMPLES NACIONAL");
+	return DTOConverter.convert(naturezaJuridica);
+    }
+
+    public static RamoAtividadeDTO createRamoAtividade1() {
+	RamoAtividade ramoAtividade = new RamoAtividade();
+	ramoAtividade.setDescricao("ATACADISTA");
+	return DTOConverter.convert(ramoAtividade);
+    }
+
+    public static RamoAtividadeDTO createRamoAtividade2() {
+	RamoAtividade ramoAtividade = new RamoAtividade();
+	ramoAtividade = new RamoAtividade();
+	ramoAtividade.setDescricao("BAR");
+
+	return DTOConverter.convert(ramoAtividade);
+    }
+
+    public static RamoAtividadeDTO createRamoAtividade3() {
+
+	RamoAtividade ramoAtividade = new RamoAtividade();
+	ramoAtividade.setDescricao("BAR/RESTAURANTE");
+
+	return DTOConverter.convert(ramoAtividade);
+    }
+
+    public static RamoAtividadeDTO createRamoAtividade4() {
+	RamoAtividade ramoAtividade = new RamoAtividade();
+	ramoAtividade.setDescricao("BUFFET");
+	return DTOConverter.convert(ramoAtividade);
+    }
+
+    public static RamoAtividadeDTO createRamoAtividade5() {
+	RamoAtividade ramoAtividade = new RamoAtividade();
+	ramoAtividade.setDescricao("CONSUMIDOR");
+	return DTOConverter.convert(ramoAtividade);
+
+    }
+
+    public static RamoAtividadeDTO createRamoAtividade6() {
+	RamoAtividade ramoAtividade = new RamoAtividade();
+	ramoAtividade.setDescricao("DIRETO");
+	return DTOConverter.convert(ramoAtividade);
+
+    }
+
+    public static DestinatarioDTO createPJ() {
+	Destinatario destinatario = new Destinatario();
+
+	Endereco enderDest = new Endereco();
+	enderDest.setxLgr("Rua Santa Clara");
+	enderDest.setNro("70");
+	enderDest.setxCpl("15º andar");
+	enderDest.setxBairro("Vila Marieta");
+	enderDest.setcMun("3564788");
+	enderDest.setxMun("São Paulo");
+	enderDest.setUF("SP");
+	enderDest.setCEP("45698715");
+	enderDest.setcPais("0123");
+	enderDest.setxPais("Brasil");
+	enderDest.setFone("4478-7887");
+
+	destinatario.setCNPJCPF("60977980000109");
+	destinatario.setIdEstrangeiro(null);
+	destinatario.setxNome("Supermercado do Bairro");
+	destinatario.setEnderDest(enderDest);
+	destinatario.setIndIEDest(IndIEDest.CONTRIBUINTE_ICMS);
+	destinatario.setIE("123456789");
+	destinatario.setISUF(null);
+	destinatario.setIM(null);
+	destinatario.setEmail("mercadodobairro@gmail.com");
+	destinatario.setRamoAtividade(null);
+	destinatario.setRepresentante(null);
+	destinatario.setNaturezaJuridica(null);
+
+	return DTOConverter.convert(destinatario);
     }
 
 }

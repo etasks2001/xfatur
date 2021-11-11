@@ -89,11 +89,13 @@ public class DTOConverter {
     }
 
     public static DestinatarioDTO convert(Destinatario destinatario) {
-
 	DestinatarioDTO destinatarioDTO = new DestinatarioDTO();
 
 	destinatarioDTO.setId(destinatario.getId());
-	destinatarioDTO.setEnderEmit(destinatario.getEnderEmit());
+
+	Endereco enderDest = destinatario.getEnderDest();
+	EnderecoDTO enderDestDTO = DTOConverter.convert(enderDest);
+	destinatarioDTO.setEnderEmitDTO(enderDestDTO);
 	destinatarioDTO.setCNPJCPF(destinatario.getCNPJCPF());
 	destinatarioDTO.setIdEstrangeiro(destinatario.getIdEstrangeiro());
 	destinatarioDTO.setIndIEDest(destinatario.getIndIEDest());

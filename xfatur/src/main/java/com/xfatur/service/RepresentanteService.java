@@ -23,7 +23,6 @@ public class RepresentanteService {
     private RepresentanteRepository repository;
 
     public RepresentanteDTO save(RepresentanteDTO representanteDTO) {
-
 	try {
 	    Representante representante = repository.save(ModelConverter.convert(representanteDTO));
 	    return DTOConverter.convert(representante);
@@ -53,6 +52,6 @@ public class RepresentanteService {
 	List<Representante> representanteList = repository.buscaPorNome(nome);
 
 	return representanteList.stream().map(DTOConverter::convert).collect(Collectors.toList());
-
     }
+
 }

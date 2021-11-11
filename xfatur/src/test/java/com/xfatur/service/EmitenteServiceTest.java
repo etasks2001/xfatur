@@ -29,29 +29,28 @@ import com.xfatur.testutil.CreateModelTest;
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
-public class EmitenteServiceTest {
-
-    public static Stream<EmitenteDTO> model() {
-	return Stream.of(CreateModelTest.createEmitente1());
-
-    }
+class EmitenteServiceTest {
 
     @Autowired
-    private EmitenteService service;
+    EmitenteService service;
+
+    static Stream<EmitenteDTO> model() {
+	return Stream.of(CreateModelTest.createEmitente1());
+    }
 
     @ParameterizedTest
     @MethodSource("model")
     @Order(1)
     void test_save(EmitenteDTO e) {
-	EmitenteDTO savedEmitente = this.service.save(e);
+	Integer id = this.service.save(e).getId();
 
-	MatcherAssert.assertThat(savedEmitente.getId(), Matchers.greaterThan(0));
+	MatcherAssert.assertThat(id, Matchers.greaterThan(0));
     }
 
     @ParameterizedTest
     @MethodSource("model")
     @Order(2)
-    void test_save_ja_cadastrado(EmitenteDTO e) {
+    void test_save_cnpj_ja_cadastrado(EmitenteDTO e) {
 	EmitenteException exception = Assertions.assertThrows(EmitenteException.class, () -> service.save(e));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF já cadastrado"));
@@ -61,27 +60,18 @@ public class EmitenteServiceTest {
     @MethodSource("model")
     @Order(3)
     void test_findById(EmitenteDTO e) {
-	EmitenteDTO found = service.findByCNPJ(e.getCNPJ());
-	EmitenteDTO found2 = this.service.findById(found.getId());
+	Integer id = service.findByCNPJ(e.getCNPJ()).getId();
+	Integer id_encontrado = service.findById(id).getId();
 
-	MatcherAssert.assertThat(found.getId(), Matchers.is(found2.getId()));
-
+	MatcherAssert.assertThat(id, Matchers.is(id_encontrado));
     }
 
     @Test
     @Order(4)
     void test_findById_erro() {
-	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> this.service.findById(100));
+	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> this.service.findById(10000));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Emitente Não encontrado"));
-    }
-
-    @Test
-    @Order(5)
-    void test_getAll() {
-	List<EmitenteDTO> emits = this.service.getAll();
-
-	MatcherAssert.assertThat(emits.size(), Matchers.greaterThan(0));
     }
 
     @Test
@@ -90,52 +80,48 @@ public class EmitenteServiceTest {
 	EmitenteDTO found = this.service.findByCNPJ("65037603000103");
 
 	MatcherAssert.assertThat(found.getCNPJ(), Matchers.is("65037603000103"));
-
     }
 
     @Test
     @Order(7)
     void test_findByCNPJ_erro() {
-	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> {
-	    this.service.findByCNPJ("");
-	});
+	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> this.service.findByCNPJ(""));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Emitente Não encontrado"));
-
     }
 
     @Test
     @Order(8)
-    void test_findByxNomeContaining() {
-	EmitenteDTO found = this.service.findByxNomeContaining("Empresa de Viagens Ltda");
+    void test_buscaPorNome() {
+	List<EmitenteDTO> emitentes = this.service.buscaPorNome("Empresa");
 
-	MatcherAssert.assertThat(found.getxNome(), Matchers.is("Empresa de Viagens Ltda"));
+	MatcherAssert.assertThat(emitentes.size(), Matchers.greaterThan(0));
     }
 
     @Test
     @Order(9)
-    void test_findByxNomeContaining_error() {
-	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> this.service.findByxNomeContaining("fdasfdsa"));
+    void test_buscaPorNome_tamanho_0() {
+	List<EmitenteDTO> emitentes = this.service.buscaPorNome("fdasfdsa");
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Emitente Não encontrado"));
+	MatcherAssert.assertThat(emitentes.size(), Matchers.is(0));
     }
 
     @ParameterizedTest
     @MethodSource("model")
     @Order(10)
     void delete(EmitenteDTO e) {
-	EmitenteDTO found = service.findByCNPJ(e.getCNPJ());
+	Integer id = service.findByCNPJ(e.getCNPJ()).getId();
 
-	Boolean result = service.delete(found.getId());
+	Boolean result = service.delete(id);
 
 	MatcherAssert.assertThat(result, Matchers.is(TRUE));
-
     }
 
     @Test
     @Order(11)
     void delete_error() {
 	Boolean result = service.delete(77);
+
 	MatcherAssert.assertThat(result, Matchers.is(FALSE));
     }
 }
