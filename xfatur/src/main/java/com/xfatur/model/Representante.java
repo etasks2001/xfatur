@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.xfatur.dto.RepresentanteDTO;
-
 @Entity
 public class Representante {
     @Id
@@ -79,20 +77,6 @@ public class Representante {
 
     public void setDestinatario(List<Destinatario> destinatario) {
 	this.destinatario = destinatario;
-    }
-
-    public static Representante convert(RepresentanteDTO representanteDTO) {
-	Representante representante = new Representante();
-
-	representante.setId(representanteDTO.getId());
-	representante.setxNome(representanteDTO.getxNome());
-	representante.setDestinatario(representanteDTO.getDestinatario());
-	representante.setCNPJCPF(representanteDTO.getCNPJCPF());
-	representante.setEndereco(representanteDTO.getEndereco());
-	representante.setIE(representanteDTO.getIE());
-	representante.setEmail(representanteDTO.getEmail());
-
-	return representante;
     }
 
 }

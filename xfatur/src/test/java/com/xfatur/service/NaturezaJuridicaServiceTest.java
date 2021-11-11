@@ -20,22 +20,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import com.xfatur.converter.DTOConverter;
+import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.NaturezaJuridicaDTO;
 import com.xfatur.exception.NaturezaJuridicaNotFoundException;
 import com.xfatur.model.NaturezaJuridica;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 public class NaturezaJuridicaServiceTest {
 
     @Autowired
-    private NaturezaJuridicaService naturezaJuridicaService;
+    private NaturezaJuridicaService service;
 
     private List<NaturezaJuridicaDTO> naturezaJuridicaDTOList;
 
     @BeforeAll
-    public void createNaturezaJuridicaService() {
+    public void create() {
 	List<NaturezaJuridica> naturezaJuridicaList = new ArrayList<NaturezaJuridica>();
 	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
 	naturezaJuridica.setDescricao("EMPRESA PEQUENO PORTE (EPP)");
@@ -63,10 +64,10 @@ public class NaturezaJuridicaServiceTest {
     @AfterAll
     public void delete() {
 	for (NaturezaJuridicaDTO naturezaJuridicaDTO : naturezaJuridicaDTOList) {
-	    this.naturezaJuridicaService.delete(naturezaJuridicaDTO.getId());
+	    this.service.delete(naturezaJuridicaDTO.getId());
 	}
 
-	Boolean result = this.naturezaJuridicaService.delete(454);
+	Boolean result = this.service.delete(454);
 
 	MatcherAssert.assertThat(result, Matchers.equalToObject(Boolean.FALSE));
 
@@ -79,7 +80,7 @@ public class NaturezaJuridicaServiceTest {
 	for (int i = 0; i < naturezaJuridicaDTOList.size(); i++) {
 	    NaturezaJuridicaDTO naturezaJuridicaDTO = naturezaJuridicaDTOList.get(i);
 
-	    NaturezaJuridicaDTO raDTO = this.naturezaJuridicaService.save(naturezaJuridicaDTO);
+	    NaturezaJuridicaDTO raDTO = this.service.save(naturezaJuridicaDTO);
 
 	    naturezaJuridicaDTO.setId(raDTO.getId());
 	    MatcherAssert.assertThat(raDTO.getId(), Matchers.equalTo(naturezaJuridicaDTO.getId()));
@@ -90,11 +91,11 @@ public class NaturezaJuridicaServiceTest {
 
     @Test
     @Order(2)
-    public void test_queryByDescricao() {
-	List<NaturezaJuridicaDTO> list = this.naturezaJuridicaService.queryByDescricao("M");
+    public void test_buscaPorDescricao() {
+	List<NaturezaJuridicaDTO> list = this.service.buscaPorDescricao("M");
 	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
 
-	list = this.naturezaJuridicaService.queryByDescricao("fdasdfdasdf");
+	list = this.service.buscaPorDescricao("fdasdfdasdf");
 	MatcherAssert.assertThat(list.size(), Matchers.equalTo(0));
 
     }
@@ -103,13 +104,13 @@ public class NaturezaJuridicaServiceTest {
     @Order(3)
     public void test_findById() {
 	NaturezaJuridicaDTO toFind = this.naturezaJuridicaDTOList.get(0);
-	NaturezaJuridicaDTO found = this.naturezaJuridicaService.findById(toFind.getId());
-	NaturezaJuridica naturezaJuridica = NaturezaJuridica.convert(found);
+	NaturezaJuridicaDTO found = this.service.findById(toFind.getId());
+	NaturezaJuridica naturezaJuridica = ModelConverter.convert(found);
 
 	MatcherAssert.assertThat(naturezaJuridica.getId(), Matchers.equalToObject(found.getId()));
 
 	Exception exception = Assertions.assertThrows(NaturezaJuridicaNotFoundException.class, () -> {
-	    this.naturezaJuridicaService.findById(100);
+	    this.service.findById(100);
 	});
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject("Natureza Jurídica não encontrada"));

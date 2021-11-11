@@ -10,6 +10,6 @@ import com.xfatur.model.NaturezaJuridica;
 
 public interface NaturezaJuridicaRepository extends JpaRepository<NaturezaJuridica, Integer> {
 
-    @Query("select nj from NaturezaJuridica nj where nj.descricao like %:descricao%")
-    List<NaturezaJuridica> queryByDescricao(@Param("descricao") String descricao);
+    @Query("select nj from NaturezaJuridica nj where nj.descricao like %:descricao% order by nj.descricao")
+    List<NaturezaJuridica> buscaPorDescricao(@Param("descricao") String descricao);
 }

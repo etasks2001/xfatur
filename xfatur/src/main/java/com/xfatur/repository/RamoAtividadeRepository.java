@@ -10,7 +10,7 @@ import com.xfatur.model.RamoAtividade;
 
 public interface RamoAtividadeRepository extends JpaRepository<RamoAtividade, Integer> {
 
-    @Query("select ra from RamoAtividade ra where ra.descricao like %:descricao%")
-    List<RamoAtividade> queryByDescricao(@Param("descricao") String descricao);
+    @Query("select ra from RamoAtividade ra where ra.descricao like %:descricao% order by ra.descricao asc")
+    List<RamoAtividade> buscaPorDescricao(@Param("descricao") String descricao);
 
 }

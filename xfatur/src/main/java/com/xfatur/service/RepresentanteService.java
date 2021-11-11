@@ -5,10 +5,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.xfatur.converter.DTOConverter;
+import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.RepresentanteDTO;
+import com.xfatur.exception.RepresentanteException;
 import com.xfatur.exception.RepresentanteNotFoundException;
 import com.xfatur.model.Representante;
 import com.xfatur.repository.RepresentanteRepository;
@@ -17,24 +20,29 @@ import com.xfatur.repository.RepresentanteRepository;
 public class RepresentanteService {
 
     @Autowired
-    private RepresentanteRepository representanteRepository;
+    private RepresentanteRepository repository;
 
     public RepresentanteDTO save(RepresentanteDTO representanteDTO) {
-	Representante representante = this.representanteRepository.save(Representante.convert(representanteDTO));
-	return DTOConverter.convert(representante);
+
+	try {
+	    Representante representante = repository.save(ModelConverter.convert(representanteDTO));
+	    return DTOConverter.convert(representante);
+	} catch (DataIntegrityViolationException e) {
+	    throw new RepresentanteException("CNPJ/CPF já cadastrado");
+	}
     }
 
     public Boolean delete(Integer id) {
-	Optional<Representante> found = this.representanteRepository.findById(id);
+	Optional<Representante> found = repository.findById(id);
 	if (found.isPresent()) {
-	    this.representanteRepository.deleteById(id);
+	    repository.deleteById(id);
 	    return Boolean.TRUE;
 	}
 	return Boolean.FALSE;
     }
 
     public RepresentanteDTO findByCNPJCPF(String cnpjcpf) {
-	Representante found = this.representanteRepository.findByCNPJCPF(cnpjcpf);
+	Representante found = repository.findByCNPJCPF(cnpjcpf);
 	if (found != null) {
 	    return DTOConverter.convert(found);
 	}
@@ -42,7 +50,7 @@ public class RepresentanteService {
     }
 
     public List<RepresentanteDTO> buscaPorNome(String nome) {
-	List<Representante> representanteList = this.representanteRepository.buscaPorNome(nome);
+	List<Representante> representanteList = repository.buscaPorNome(nome);
 
 	return representanteList.stream().map(DTOConverter::convert).collect(Collectors.toList());
 

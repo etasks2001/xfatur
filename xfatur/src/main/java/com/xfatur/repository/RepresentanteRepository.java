@@ -12,7 +12,7 @@ public interface RepresentanteRepository extends JpaRepository<Representante, In
 
     Representante findByCNPJCPF(String cnpj);
 
-    @Query("select r from Representante r where r.xNome like %:nome%")
+    @Query("select r from Representante r where r.xNome like %:nome% order by r.xNome asc")
     List<Representante> buscaPorNome(@Param("nome") String nome);
 
 }

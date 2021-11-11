@@ -23,22 +23,20 @@ import com.xfatur.exception.EmitenteNotFoundException;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 public class EmitenteServiceTest {
 
-    private static final String NAO_ENCONTRADO = "Não encontrado";
-
     @Autowired
-    private EmitenteService emitenteService;
+    private EmitenteService service;
 
     private EmitenteDTO emitenteDTO;
 
     private EmitenteDTO savedEmitente;
 
     @BeforeAll
-    public void createEmitDTO() {
+    public void create() {
 	Emitente emitente = new Emitente();
 	emitente.setCNPJ("65037603000103");
 	emitente.setxNome("Empresa de Viagens Ltda");
@@ -71,11 +69,11 @@ public class EmitenteServiceTest {
 
     @AfterAll
     public void delete() {
-	Boolean result = emitenteService.delete(savedEmitente.getId());
+	Boolean result = service.delete(savedEmitente.getId());
 
 	MatcherAssert.assertThat(result, Matchers.equalToObject(Boolean.TRUE));
 
-	result = emitenteService.delete(77);
+	result = service.delete(77);
 	MatcherAssert.assertThat(result, Matchers.equalTo(Boolean.FALSE));
     }
 
@@ -83,7 +81,7 @@ public class EmitenteServiceTest {
     @Order(1)
     public void test_save() {
 
-	savedEmitente = this.emitenteService.save(emitenteDTO);
+	savedEmitente = this.service.save(emitenteDTO);
 
 	MatcherAssert.assertThat(savedEmitente.getId(), Matchers.greaterThan(0));
 
@@ -92,54 +90,51 @@ public class EmitenteServiceTest {
     @Test
     @Order(2)
     public void test_findById() {
-	EmitenteDTO emitenteDTO2 = this.emitenteService.findById(savedEmitente.getId());
+	EmitenteDTO emitenteDTO2 = this.service.findById(savedEmitente.getId());
 
 	MatcherAssert.assertThat(savedEmitente.getId(), Matchers.equalToObject(emitenteDTO2.getId()));
 
 	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> {
-	    this.emitenteService.findById(100);
+	    this.service.findById(100);
 	});
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject(NAO_ENCONTRADO));
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject("Emitente Não encontrado"));
 
     }
 
     @Test
     @Order(3)
     public void test_getAll() {
-	List<EmitenteDTO> emits = this.emitenteService.getAll();
+	List<EmitenteDTO> emits = this.service.getAll();
 	MatcherAssert.assertThat(emits.size(), Matchers.greaterThan(0));
     }
 
     @Test
     @Order(4)
     public void test_findByCNPJ() {
-	String cnpj = "65037603000103";
-	EmitenteDTO found = this.emitenteService.findByCNPJ(cnpj);
+	EmitenteDTO found = this.service.findByCNPJ("65037603000103");
 
-	MatcherAssert.assertThat(found.getCNPJ(), Matchers.equalToObject(cnpj));
+	MatcherAssert.assertThat(found.getCNPJ(), Matchers.equalToObject("65037603000103"));
 
 	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> {
-	    this.emitenteService.findByCNPJ("");
+	    this.service.findByCNPJ("");
 	});
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject(NAO_ENCONTRADO));
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject("Emitente Não encontrado"));
 
     }
 
     @Test
     @Order(5)
-    public void test_findByxNomeLike() {
-	String nome = "Empresa de Viagens Ltda";
-	EmitenteDTO found = this.emitenteService.findByxNomeLike(nome);
+    public void test_findByxNomeContaining() {
+	EmitenteDTO found = this.service.findByxNomeContaining("Empresa de Viagens Ltda");
 
-	MatcherAssert.assertThat(found.getxNome(), Matchers.equalToObject(nome));
+	MatcherAssert.assertThat(found.getxNome(), Matchers.equalToObject("Empresa de Viagens Ltda"));
 
 	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> {
-	    this.emitenteService.findByxNomeLike("");
+	    this.service.findByxNomeContaining("fdasfdsa");
 	});
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject(NAO_ENCONTRADO));
-
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.equalToObject("Emitente Não encontrado"));
     }
 }

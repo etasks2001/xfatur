@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xfatur.converter.DTOConverter;
+import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.NaturezaJuridicaDTO;
 import com.xfatur.exception.NaturezaJuridicaNotFoundException;
 import com.xfatur.model.NaturezaJuridica;
@@ -17,34 +18,34 @@ import com.xfatur.repository.NaturezaJuridicaRepository;
 public class NaturezaJuridicaService {
 
     @Autowired
-    private NaturezaJuridicaRepository naturezaJuridicaRepository;
+    private NaturezaJuridicaRepository repository;
 
     public NaturezaJuridicaDTO save(NaturezaJuridicaDTO naturezaJuridicaDTO) {
-	NaturezaJuridica naturezaJuridica = this.naturezaJuridicaRepository.save(NaturezaJuridica.convert(naturezaJuridicaDTO));
+	NaturezaJuridica naturezaJuridica = repository.save(ModelConverter.convert(naturezaJuridicaDTO));
 
 	return DTOConverter.convert(naturezaJuridica);
     }
 
     public Boolean delete(Integer id) {
 
-	Optional<NaturezaJuridica> naturezaJuridica = this.naturezaJuridicaRepository.findById(id);
+	Optional<NaturezaJuridica> naturezaJuridica = repository.findById(id);
 	if (naturezaJuridica.isPresent()) {
-	    this.naturezaJuridicaRepository.deleteById(id);
+	    repository.deleteById(id);
 	    return Boolean.TRUE;
 	}
 	return Boolean.FALSE;
 
     }
 
-    public List<NaturezaJuridicaDTO> queryByDescricao(String descricao) {
+    public List<NaturezaJuridicaDTO> buscaPorDescricao(String descricao) {
 
-	List<NaturezaJuridica> queryByDescricao = this.naturezaJuridicaRepository.queryByDescricao(descricao);
+	List<NaturezaJuridica> queryByDescricao = repository.buscaPorDescricao(descricao);
 
 	return queryByDescricao.stream().map(DTOConverter::convert).collect(Collectors.toList());
     }
 
     public NaturezaJuridicaDTO findById(int id) {
-	Optional<NaturezaJuridica> findById = this.naturezaJuridicaRepository.findById(id);
+	Optional<NaturezaJuridica> findById = repository.findById(id);
 	if (findById.isPresent()) {
 	    return DTOConverter.convert(findById.get());
 	}

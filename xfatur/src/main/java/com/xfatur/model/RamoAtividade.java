@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.xfatur.dto.RamoAtividadeDTO;
-
 @Entity
 public class RamoAtividade {
     @Id
@@ -42,16 +40,6 @@ public class RamoAtividade {
 
     public void setDescricao(String descricao) {
 	this.descricao = descricao;
-    }
-
-    public static RamoAtividade convert(RamoAtividadeDTO ramoAtividadeDTO) {
-	RamoAtividade ramoAtividade = new RamoAtividade();
-
-	ramoAtividade.setId(ramoAtividadeDTO.getId());
-	ramoAtividade.setDescricao(ramoAtividadeDTO.getDescricao());
-	ramoAtividade.setDestinatario(ramoAtividadeDTO.getDestinatario());
-
-	return ramoAtividade;
     }
 
 }

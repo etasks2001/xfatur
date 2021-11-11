@@ -6,9 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.xfatur.dto.EmitenteDTO;
-import com.xfatur.dto.EnderecoDTO;
-
 @Entity
 public class Emitente {
 
@@ -122,46 +119,6 @@ public class Emitente {
 
     public void setUltima_nnf(Integer ultima_nnf) {
 	this.ultima_nnf = ultima_nnf;
-    }
-
-    public static Emitente convert(EmitenteDTO emitenteDTO) {
-	Emitente emitente = new Emitente();
-
-	emitente.setId(emitenteDTO.getId());
-	emitente.setCNPJ(emitenteDTO.getCNPJ());
-	emitente.setxNome(emitenteDTO.getxNome());
-	emitente.setxFant(emitenteDTO.getxFant());
-
-	emitente.setEnderEmit(convert(emitenteDTO.getEnderEmitDTO()));
-	emitente.setIE(emitenteDTO.getIE());
-	emitente.setIEST(emitenteDTO.getIEST());
-	emitente.setIM(emitenteDTO.getIM());
-	emitente.setCNAE(emitenteDTO.getCNAE());
-	emitente.setCRT(emitenteDTO.getCRT());
-	emitente.setNf_serie_atual(emitenteDTO.getNf_serie_atual());
-	emitente.setUltima_nnf(emitenteDTO.getUltima_nnf());
-
-	return emitente;
-
-    }
-
-    public static Endereco convert(EnderecoDTO enderecoDTO) {
-
-	Endereco endereco = new Endereco();
-
-	endereco.setxLgr(enderecoDTO.getxLgr());
-	endereco.setNro(enderecoDTO.getNro());
-	endereco.setxCpl(enderecoDTO.getxCpl());
-	endereco.setxBairro(enderecoDTO.getxBairro());
-	endereco.setcMun(enderecoDTO.getcMun());
-	endereco.setxMun(enderecoDTO.getxMun());
-	endereco.setUF(enderecoDTO.getUF());
-	endereco.setCEP(enderecoDTO.getCEP());
-	endereco.setcPais(enderecoDTO.getcPais());
-	endereco.setxPais(enderecoDTO.getxPais());
-	endereco.setFone(enderecoDTO.getFone());
-
-	return endereco;
     }
 
 }
