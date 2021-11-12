@@ -23,6 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import com.xfatur.dto.EmitenteDTO;
 import com.xfatur.exception.EmitenteException;
+import com.xfatur.exception.EmitenteIdNotFoundException;
 import com.xfatur.exception.EmitenteNotFoundException;
 import com.xfatur.testutil.CreateModelTest;
 
@@ -42,7 +43,7 @@ class EmitenteServiceTest {
     @MethodSource("model")
     @Order(1)
     void test_save(EmitenteDTO e) {
-	Integer id = this.service.save(e).getId();
+	Integer id = service.save(e).getId();
 
 	MatcherAssert.assertThat(id, Matchers.greaterThan(0));
     }
@@ -69,7 +70,7 @@ class EmitenteServiceTest {
     @Test
     @Order(4)
     void test_findById_erro() {
-	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> this.service.findById(10000));
+	Exception exception = Assertions.assertThrows(EmitenteIdNotFoundException.class, () -> service.findById(10000));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Emitente Não encontrado"));
     }
@@ -77,7 +78,7 @@ class EmitenteServiceTest {
     @Test
     @Order(6)
     void test_findByCNPJ() {
-	EmitenteDTO found = this.service.findByCNPJ("65037603000103");
+	EmitenteDTO found = service.findByCNPJ("65037603000103");
 
 	MatcherAssert.assertThat(found.getCNPJ(), Matchers.is("65037603000103"));
     }
@@ -85,7 +86,7 @@ class EmitenteServiceTest {
     @Test
     @Order(7)
     void test_findByCNPJ_erro() {
-	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> this.service.findByCNPJ(""));
+	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> service.findByCNPJ(""));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Emitente Não encontrado"));
     }
@@ -93,7 +94,7 @@ class EmitenteServiceTest {
     @Test
     @Order(8)
     void test_buscaPorNome() {
-	List<EmitenteDTO> emitentes = this.service.buscaPorNome("Empresa");
+	List<EmitenteDTO> emitentes = service.buscaPorNome("Empresa");
 
 	MatcherAssert.assertThat(emitentes.size(), Matchers.greaterThan(0));
     }
@@ -101,7 +102,7 @@ class EmitenteServiceTest {
     @Test
     @Order(9)
     void test_buscaPorNome_tamanho_0() {
-	List<EmitenteDTO> emitentes = this.service.buscaPorNome("fdasfdsa");
+	List<EmitenteDTO> emitentes = service.buscaPorNome("aaaaaaaaaaaa");
 
 	MatcherAssert.assertThat(emitentes.size(), Matchers.is(0));
     }
@@ -124,4 +125,5 @@ class EmitenteServiceTest {
 
 	MatcherAssert.assertThat(result, Matchers.is(FALSE));
     }
+
 }

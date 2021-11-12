@@ -12,7 +12,7 @@ import com.xfatur.converter.DTOConverter;
 import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.NaturezaJuridicaDTO;
 import com.xfatur.exception.NaturezaJuridicaException;
-import com.xfatur.exception.NaturezaJuridicaNotFoundException;
+import com.xfatur.exception.NaturezaJuridicaIdNotFoundException;
 import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.repository.NaturezaJuridicaRepository;
 
@@ -58,6 +58,6 @@ public class NaturezaJuridicaService {
 	if (findById.isPresent()) {
 	    return DTOConverter.convert(findById.get());
 	}
-	throw new NaturezaJuridicaNotFoundException("Natureza Jurídica não encontrada");
+	throw new NaturezaJuridicaIdNotFoundException("Natureza Jurídica não encontrada");
     }
 }

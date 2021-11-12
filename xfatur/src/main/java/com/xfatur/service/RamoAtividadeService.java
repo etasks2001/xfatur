@@ -12,7 +12,7 @@ import com.xfatur.converter.DTOConverter;
 import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.RamoAtividadeDTO;
 import com.xfatur.exception.RamoAtividadeException;
-import com.xfatur.exception.RamoAtividadeNotFoundException;
+import com.xfatur.exception.RamoAtividadeIdNotFoundException;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.repository.RamoAtividadeRepository;
 
@@ -58,6 +58,6 @@ public class RamoAtividadeService {
 	if (findById.isPresent()) {
 	    return DTOConverter.convert(findById.get());
 	}
-	throw new RamoAtividadeNotFoundException("Ramo de Atividade não encontrado");
+	throw new RamoAtividadeIdNotFoundException("Ramo de Atividade não encontrado");
     }
 }

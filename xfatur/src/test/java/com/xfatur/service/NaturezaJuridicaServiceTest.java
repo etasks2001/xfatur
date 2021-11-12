@@ -22,7 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import com.xfatur.dto.NaturezaJuridicaDTO;
 import com.xfatur.exception.NaturezaJuridicaException;
-import com.xfatur.exception.NaturezaJuridicaNotFoundException;
+import com.xfatur.exception.NaturezaJuridicaIdNotFoundException;
 import com.xfatur.testutil.CreateModelTest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -89,7 +89,7 @@ class NaturezaJuridicaServiceTest {
     @Test
     @Order(6)
     void test_findById_nao_encontrado() {
-	Exception exception = Assertions.assertThrows(NaturezaJuridicaNotFoundException.class, () -> this.service.findById(100));
+	Exception exception = Assertions.assertThrows(NaturezaJuridicaIdNotFoundException.class, () -> this.service.findById(100));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Natureza Jurídica não encontrada"));
     }

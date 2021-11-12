@@ -12,6 +12,7 @@ import com.xfatur.converter.DTOConverter;
 import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.EmitenteDTO;
 import com.xfatur.exception.EmitenteException;
+import com.xfatur.exception.EmitenteIdNotFoundException;
 import com.xfatur.exception.EmitenteNotFoundException;
 import com.xfatur.model.Emitente;
 import com.xfatur.repository.EmitenteRepository;
@@ -27,7 +28,7 @@ public class EmitenteService {
 	if (emitente.isPresent()) {
 	    return DTOConverter.convert(emitente.get());
 	}
-	throw new EmitenteNotFoundException("Emitente Não encontrado");
+	throw new EmitenteIdNotFoundException("Emitente Não encontrado");
     }
 
     public EmitenteDTO save(EmitenteDTO emitenteDTO) {

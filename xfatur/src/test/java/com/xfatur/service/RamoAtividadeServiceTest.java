@@ -23,7 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import com.xfatur.dto.RamoAtividadeDTO;
 import com.xfatur.exception.RamoAtividadeException;
-import com.xfatur.exception.RamoAtividadeNotFoundException;
+import com.xfatur.exception.RamoAtividadeIdNotFoundException;
 import com.xfatur.testutil.CreateModelTest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -95,7 +95,7 @@ class RamoAtividadeServiceTest {
     @Test
     @Order(7)
     void test_findById_erro() {
-	Exception exception = Assertions.assertThrows(RamoAtividadeNotFoundException.class, () -> this.service.findById(100));
+	Exception exception = Assertions.assertThrows(RamoAtividadeIdNotFoundException.class, () -> this.service.findById(100));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Ramo de Atividade não encontrado"));
     }
