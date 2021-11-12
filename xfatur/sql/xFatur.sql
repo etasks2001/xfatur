@@ -1,4 +1,7 @@
 ﻿select * from representante;
+select * from ramoatividade;
+select * from naturezajuridica;
+select * from emitente;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 select * from information_schema.table_constraints;
@@ -26,6 +29,8 @@ drop table if exists representante;
 drop table if exists ramoatividade;
 drop table if exists serie;
 drop table if exists nf;
+drop table if exists entrega;
+drop table if exists retirada;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 drop function if exists create_id_emitente_serie_sequence();
@@ -60,8 +65,6 @@ create table emitente(
 	primary key (id),
 	unique (CNPJ)
 );
-
-
 /*---------------------------------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------------------------*/
 create table representante(
@@ -97,6 +100,9 @@ create table naturezajuridica(
 	primary key (id),
 	unique(descricao)
 );
+
+
+
 create table destinatario(
 	id serial not null,
 	CNPJCPF varchar(14) not null, 
@@ -110,10 +116,10 @@ create table destinatario(
 	xMun varchar(60) not null, 
 	UF varchar(2)  not null, 
 	CEP varchar(8) not null, 
-	cPais varchar(4) not null, 
-	xPais varchar(60) not null, 
-	indIEDest varchar(1) not null,
+	cPais varchar(4) null, 
+	xPais varchar(60) null, 
 	fone varchar(14) null,
+	indIEDest varchar(1) not null,
 	IE varchar(14) null, 
 	ISUF varchar(9) null,
 	IM varchar(15) null, 
@@ -124,7 +130,42 @@ create table destinatario(
 	primary key (id),
 	unique (CNPJCPF)
 );
-
+create table entrega(
+	id integer primary key references cliente(id),
+	CNPJCPF varchar(14) not null, 
+	xNome varchar(60) not null,
+	xLgr varchar(60) not null, 
+	nro varchar(60) not null, 
+	xCpl varchar(60) null, 
+	xBairro varchar(60)  not null, 
+	cMun varchar(7)  not null, 
+	xMun varchar(60) not null, 
+	UF varchar(2)  not null, 
+	CEP varchar(8) not null, 
+	cPais varchar(4) null, 
+	xPais varchar(60) null, 
+	fone varchar(14) null,
+	email varchar(60) null,
+	IE varchar(14) null
+);
+create table retirada(
+	id integer primary key references cliente(id),
+	CNPJCPF varchar(14) not null, 
+	xNome varchar(60) not null,
+	xLgr varchar(60) not null, 
+	nro varchar(60) not null, 
+	xCpl varchar(60) null, 
+	xBairro varchar(60)  not null, 
+	cMun varchar(7)  not null, 
+	xMun varchar(60) not null, 
+	UF varchar(2)  not null, 
+	CEP varchar(8) not null, 
+	cPais varchar(4) null, 
+	xPais varchar(60) null, 
+	fone varchar(14) null,
+	email varchar(60) null,
+	IE varchar(14) null
+);
 
 
 
@@ -279,9 +320,9 @@ CREATE TRIGGER create_id_emitente_serie_sequence AFTER INSERT ON serie FOR EACH 
 
 
 insert into emitente(CNPJ,xNome,xFant,xLgr,nro,xCpl,xBairro,cMun,xMun,UF,CEP,cPais,xPais,fone,IE,IEST,IM,CNAE,CRT,nf_serie_atual,ultima_nnf) values
-           ('00000000000000','empresa','','rua sem saida','150','','centro','0000000','são paulo','sp','12345678','1234','brasil','12478','111222333444','','1111111','1234567','2',0,25965);
+           ('00000000000000','empresa 1','','rua sem saida','150','','centro','0000000','são paulo','sp','12345678','1234','brasil','12478','111222333444','','1111111','1234567','2',0,25965);
 insert into emitente(CNPJ,xNome,xFant,xLgr,nro,xCpl,xBairro,cMun,xMun,UF,CEP,cPais,xPais,fone,IE,IEST,IM,CNAE,CRT,nf_serie_atual,ultima_nnf) values
-           ('11111111111111','empresa','','rua sem saida','150','','centro','0000000','são paulo','sp','12345678','1234','brasil','12478','111222333444','','1111111','1234567','2',0,0);
+           ('11111111111111','empresa 2','','rua sem saida','150','','centro','0000000','são paulo','sp','12345678','1234','brasil','12478','111222333444','','1111111','1234567','2',0,0);
 
 
 
