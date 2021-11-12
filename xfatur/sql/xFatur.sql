@@ -1,7 +1,35 @@
-﻿select * from representante;
+﻿/*drop table enderecoentrega;
+drop table cliente;
+
+create table cliente(
+id serial,
+nome varchar(50),
+primary key(id)
+);
+
+
+create table enderecoentrega(
+id integer primary key references cliente(id),
+logardouro varchar(100)
+
+
+
+);
+
+insert into cliente (nome) values('fdasfad');
+insert into enderecoentrega (id, logardouro) values (1, 'rua sem saida');
+insert into enderecoentrega (id, logardouro) values (2, 'rua sem saida');
+
+
+
+se	lect * from cliente c left join enderecoentrega e on c.id=e.id;
+*/
+
+select * from representante;
 select * from ramoatividade;
 select * from naturezajuridica;
 select * from emitente;
+select * from destinatario;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 select * from information_schema.table_constraints;
@@ -131,7 +159,7 @@ create table destinatario(
 	unique (CNPJCPF)
 );
 create table entrega(
-	id integer primary key references cliente(id),
+	destinatario_id integer primary key references cliente(id),
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
 	xLgr varchar(60) not null, 
@@ -149,7 +177,7 @@ create table entrega(
 	IE varchar(14) null
 );
 create table retirada(
-	id integer primary key references cliente(id),
+	destinatario_id integer primary key references cliente(id),
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
 	xLgr varchar(60) not null, 
