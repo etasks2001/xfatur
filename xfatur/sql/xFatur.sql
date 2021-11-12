@@ -159,7 +159,7 @@ create table destinatario(
 	unique (CNPJCPF)
 );
 create table entrega(
-	destinatario_id integer primary key references cliente(id),
+	destinatario_id integer primary key references destinatario(id),
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
 	xLgr varchar(60) not null, 
@@ -177,7 +177,7 @@ create table entrega(
 	IE varchar(14) null
 );
 create table retirada(
-	destinatario_id integer primary key references cliente(id),
+	destinatario_id integer primary key references destinatario(id),
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
 	xLgr varchar(60) not null, 
