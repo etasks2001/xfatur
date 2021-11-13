@@ -29,7 +29,9 @@ select * from representante;
 select * from ramoatividade;
 select * from naturezajuridica;
 select * from emitente;
+
 select * from destinatario;
+select * from entrega;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 select * from information_schema.table_constraints;
@@ -52,13 +54,13 @@ $$;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 drop table if exists emitente;
 drop table if exists destinatario;
+drop table if exists entrega;
+drop table if exists retirada;
 drop table if exists naturezajuridica;
 drop table if exists representante;
 drop table if exists ramoatividade;
 drop table if exists serie;
 drop table if exists nf;
-drop table if exists entrega;
-drop table if exists retirada;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 drop function if exists create_id_emitente_serie_sequence();
@@ -159,7 +161,7 @@ create table destinatario(
 	unique (CNPJCPF)
 );
 create table entrega(
-	destinatario_id integer primary key references destinatario(id),
+	id integer primary key references destinatario(id),
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
 	xLgr varchar(60) not null, 
@@ -177,7 +179,7 @@ create table entrega(
 	IE varchar(14) null
 );
 create table retirada(
-	destinatario_id integer primary key references destinatario(id),
+	id integer primary key references destinatario(id),
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
 	xLgr varchar(60) not null, 
