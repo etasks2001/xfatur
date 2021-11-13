@@ -18,35 +18,35 @@ import com.xfatur.repository.DestinatarioRepository;
 
 @Service
 public class DestinatarioService {
-    @Autowired
-    private DestinatarioRepository repository;
+	@Autowired
+	private DestinatarioRepository repository;
 
-    public DestinatarioDTO save(DestinatarioDTO d) {
-	try {
-	    Destinatario salvo = repository.save(ModelConverter.convert(d));
-	    return DTOConverter.convert(salvo);
-	} catch (DataIntegrityViolationException e) {
-	    throw new DestinatarioException("CNPJ/CPF já cadastrado");
-	}
-    }
-
-    public void deleteById(int id) {
-	repository.deleteById(id);
-    }
-
-    public DestinatarioDTO findById(Integer id) {
-	Optional<Destinatario> found = repository.findById(id);
-	if (found.isPresent()) {
-	    return DTOConverter.convert(found.get());
+	public DestinatarioDTO save(DestinatarioDTO d) {
+		try {
+			Destinatario salvo = repository.save(ModelConverter.convert(d));
+			return DTOConverter.convert(salvo);
+		} catch (DataIntegrityViolationException e) {
+			throw new DestinatarioException("CNPJ/CPF já cadastrado");
+		}
 	}
 
-	throw new DestinatarioIdNotFoundException("Destinatario não encontrado");
-    }
+	public void deleteById(int id) {
+		repository.deleteById(id);
+	}
 
-    public List<DestinatarioDTO> buscaPorNome(String nome) {
-	List<Destinatario> list = repository.buscaPorNome(nome);
+	public DestinatarioDTO findById(Integer id) {
+		Optional<Destinatario> found = repository.findById(id);
+		if (found.isPresent()) {
+			return DTOConverter.convert(found.get());
+		}
 
-	return list.stream().map(DTOConverter::convert).collect(Collectors.toList());
-    }
+		throw new DestinatarioIdNotFoundException("Destinatario não encontrado");
+	}
+
+	public List<DestinatarioDTO> buscaPorNome(String nome) {
+		List<Destinatario> list = repository.buscaPorNome(nome);
+
+		return list.stream().map(DTOConverter::convert).collect(Collectors.toList());
+	}
 
 }

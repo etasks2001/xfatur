@@ -1,9 +1,6 @@
-package com.xfatur.model;
+package com.xfatur.dto;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
-public class Pessoa {
+public class PessoaDTO {
 	private String xNome;
 	private String CNPJCPF;
 	private String IE;
@@ -39,11 +36,6 @@ public class Pessoa {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	@Override
-	public String toString() {
-		return "Pessoa [xNome=" + xNome + ", CNPJCPF=" + CNPJCPF + ", IE=" + IE + ", email=" + email + "]";
 	}
 
 }

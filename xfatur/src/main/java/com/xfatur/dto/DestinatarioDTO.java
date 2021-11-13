@@ -22,6 +22,8 @@ public class DestinatarioDTO {
 	private Integer ramoAtividade_id;
 	private Integer naturezaJuridica_id;
 	private Integer representante_id;
+	private EntregaDTO entregaDTO;
+	private RetiradaDTO retiradaDTO;
 
 	public Integer getId() {
 		return id;
@@ -149,6 +151,22 @@ public class DestinatarioDTO {
 
 	public void setRepresentante_id(Integer representante_id) {
 		this.representante_id = representante_id;
+	}
+
+	public EntregaDTO getEntregaDTO() {
+		return entregaDTO;
+	}
+
+	public void setEntregaDTO(EntregaDTO entregaDTO) {
+		this.entregaDTO = entregaDTO;
+	}
+
+	public RetiradaDTO getRetiradaDTO() {
+		return retiradaDTO;
+	}
+
+	public void setRetiradaDTO(RetiradaDTO retiradaDTO) {
+		this.retiradaDTO = retiradaDTO;
 	}
 
 }

@@ -10,36 +10,37 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class RamoAtividade {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    public List<Destinatario> getDestinatario() {
-	return destinatario;
-    }
+	public List<Destinatario> getDestinatario() {
+		return destinatario;
+	}
 
-    public void setDestinatario(List<Destinatario> destinatario) {
-	this.destinatario = destinatario;
-    }
+	public void setDestinatario(List<Destinatario> destinatario) {
+		this.destinatario = destinatario;
+	}
 
-    private String descricao;
-    @OneToMany(mappedBy = "ramoAtividade")
-    private List<Destinatario> destinatario;
+	private String descricao;
 
-    public Integer getId() {
-	return id;
-    }
+	@OneToMany(mappedBy = "ramoAtividade")
+	private List<Destinatario> destinatario;
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getDescricao() {
-	return descricao;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setDescricao(String descricao) {
-	this.descricao = descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
 }

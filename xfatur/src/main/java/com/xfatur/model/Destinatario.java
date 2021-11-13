@@ -13,169 +13,202 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Destinatario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String CNPJCPF;
-    private String idEstrangeiro;
-    private String xNome;
-    @Embedded
-    private Endereco enderDest;
-    private IndIEDest indIEDest;
-    private String IE;
-    private String ISUF;
-    private String IM;
-    private String email;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String CNPJCPF;
+	private String idEstrangeiro;
+	private String xNome;
+	@Embedded
+	private Endereco enderDest;
+	private IndIEDest indIEDest;
+	private String IE;
+	private String ISUF;
+	private String IM;
+	private String email;
 
-    @OneToOne(mappedBy = "destinatario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "destinatario_id")
-    private Entrega entrega;
+//	@OneToOne(mappedBy = "destinatario", fetch = FetchType.LAZY)
+//	@JoinColumn(name = "ramoatividade_id", insertable = false, updatable = false)
+//	private Entrega entrega;
 
-    @OneToOne(mappedBy = "destinatario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "destinatario_id")
-    private Retirada retirada;
+//	@OneToOne(mappedBy = "destinatario", cascade = CascadeType.ALL)
+//	private Retirada retirada;
 
-    private Integer ramoatividade_id;
-    private Integer naturezajuridica_id;
-    private Integer representante_id;
+	private Integer ramoatividade_id;
+	private Integer naturezajuridica_id;
+	private Integer representante_id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ramoatividade_id", insertable = false, updatable = false)
-    private RamoAtividade ramoAtividade;
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "destinatario", fetch = FetchType.LAZY)
+	private Entrega entrega;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "naturezajuridica_id", insertable = false, updatable = false)
-    private NaturezaJuridica naturezaJuridica;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ramoatividade_id", insertable = false, updatable = false)
+	private RamoAtividade ramoAtividade;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "representante_id", insertable = false, updatable = false)
-    private Representante representante;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "naturezajuridica_id", insertable = false, updatable = false)
+	private NaturezaJuridica naturezaJuridica;
 
-    public Integer getId() {
-	return id;
-    }
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "representante_id", insertable = false, updatable = false)
+	private Representante representante;
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getCNPJCPF() {
-	return CNPJCPF;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setCNPJCPF(String cNPJCPF) {
-	CNPJCPF = cNPJCPF;
-    }
+	public String getCNPJCPF() {
+		return CNPJCPF;
+	}
 
-    public String getIdEstrangeiro() {
-	return idEstrangeiro;
-    }
+	public void setCNPJCPF(String cNPJCPF) {
+		CNPJCPF = cNPJCPF;
+	}
 
-    public void setIdEstrangeiro(String idEstrangeiro) {
-	this.idEstrangeiro = idEstrangeiro;
-    }
+	public String getIdEstrangeiro() {
+		return idEstrangeiro;
+	}
 
-    public String getxNome() {
-	return xNome;
-    }
+	public void setIdEstrangeiro(String idEstrangeiro) {
+		this.idEstrangeiro = idEstrangeiro;
+	}
 
-    public void setxNome(String xNome) {
-	this.xNome = xNome;
-    }
+	public String getxNome() {
+		return xNome;
+	}
 
-    public Endereco getEnderDest() {
-	return enderDest;
-    }
+	public void setxNome(String xNome) {
+		this.xNome = xNome;
+	}
 
-    public void setEnderDest(Endereco enderDest) {
-	this.enderDest = enderDest;
-    }
+	public Endereco getEnderDest() {
+		return enderDest;
+	}
 
-    public IndIEDest getIndIEDest() {
-	return indIEDest;
-    }
+	public void setEnderDest(Endereco enderDest) {
+		this.enderDest = enderDest;
+	}
 
-    public void setIndIEDest(IndIEDest indIEDest) {
-	this.indIEDest = indIEDest;
-    }
+	public IndIEDest getIndIEDest() {
+		return indIEDest;
+	}
 
-    public String getIE() {
-	return IE;
-    }
+	public void setIndIEDest(IndIEDest indIEDest) {
+		this.indIEDest = indIEDest;
+	}
 
-    public void setIE(String iE) {
-	IE = iE;
-    }
+	public String getIE() {
+		return IE;
+	}
 
-    public String getISUF() {
-	return ISUF;
-    }
+	public void setIE(String iE) {
+		IE = iE;
+	}
 
-    public void setISUF(String iSUF) {
-	ISUF = iSUF;
-    }
+	public String getISUF() {
+		return ISUF;
+	}
 
-    public String getIM() {
-	return IM;
-    }
+	public void setISUF(String iSUF) {
+		ISUF = iSUF;
+	}
 
-    public void setIM(String iM) {
-	IM = iM;
-    }
+	public String getIM() {
+		return IM;
+	}
 
-    public String getEmail() {
-	return email;
-    }
+	public void setIM(String iM) {
+		IM = iM;
+	}
 
-    public void setEmail(String email) {
-	this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public Integer getRamoatividade_id() {
-	return ramoatividade_id;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setRamoatividade_id(Integer ramoatividade_id) {
-	this.ramoatividade_id = ramoatividade_id;
-    }
+	public Integer getRamoatividade_id() {
+		return ramoatividade_id;
+	}
 
-    public Integer getNaturezajuridica_id() {
-	return naturezajuridica_id;
-    }
+	public void setRamoatividade_id(Integer ramoatividade_id) {
+		this.ramoatividade_id = ramoatividade_id;
+	}
 
-    public void setNaturezajuridica_id(Integer naturezajuridica_id) {
-	this.naturezajuridica_id = naturezajuridica_id;
-    }
+	public Integer getNaturezajuridica_id() {
+		return naturezajuridica_id;
+	}
 
-    public Integer getRepresentante_id() {
-	return representante_id;
-    }
+	public void setNaturezajuridica_id(Integer naturezajuridica_id) {
+		this.naturezajuridica_id = naturezajuridica_id;
+	}
 
-    public void setRepresentante_id(Integer representante_id) {
-	this.representante_id = representante_id;
-    }
+	public Integer getRepresentante_id() {
+		return representante_id;
+	}
 
-    public RamoAtividade getRamoAtividade() {
-	return ramoAtividade;
-    }
+	public void setRepresentante_id(Integer representante_id) {
+		this.representante_id = representante_id;
+	}
 
-    public void setRamoAtividade(RamoAtividade ramoAtividade) {
-	this.ramoAtividade = ramoAtividade;
-    }
+	public RamoAtividade getRamoAtividade() {
+		return ramoAtividade;
+	}
 
-    public NaturezaJuridica getNaturezaJuridica() {
-	return naturezaJuridica;
-    }
+	public void setRamoAtividade(RamoAtividade ramoAtividade) {
+		this.ramoAtividade = ramoAtividade;
+	}
 
-    public void setNaturezaJuridica(NaturezaJuridica naturezaJuridica) {
-	this.naturezaJuridica = naturezaJuridica;
-    }
+	public NaturezaJuridica getNaturezaJuridica() {
+		return naturezaJuridica;
+	}
 
-    public Representante getRepresentante() {
-	return representante;
-    }
+	public void setNaturezaJuridica(NaturezaJuridica naturezaJuridica) {
+		this.naturezaJuridica = naturezaJuridica;
+	}
 
-    public void setRepresentante(Representante representante) {
-	this.representante = representante;
-    }
+	public Representante getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(Representante representante) {
+		this.representante = representante;
+	}
+//
+//	public Entrega getEntrega() {
+//		return entrega;
+//	}
+//
+//	public void setEntrega(Entrega entrega) {
+//		this.entrega = entrega;
+//	}
+
+//	public Retirada getRetirada() {
+//		return retirada;
+//	}
+//
+//	public void setRetirada(Retirada retirada) {
+//		this.retirada = retirada;
+//	}
+
+	@Override
+	public String toString() {
+		return "Destinatario [id=" + id + ", CNPJCPF=" + CNPJCPF + ", idEstrangeiro=" + idEstrangeiro + ", xNome=" + xNome + ", enderDest=" + enderDest + ", indIEDest=" + indIEDest + ", IE=" + IE + ", ISUF=" + ISUF + ", IM=" + IM + ", email=" + email + ", ramoatividade_id=" + ramoatividade_id + ", naturezajuridica_id=" + naturezajuridica_id + ", representante_id=" + representante_id + ", ramoAtividade=" + ramoAtividade + ", naturezaJuridica=" + naturezaJuridica + ", representante="
+				+ representante + "]";
+	}
+
+	public Entrega getEntrega() {
+		return entrega;
+	}
+
+	public void setEntrega(Entrega entrega) {
+		this.entrega = entrega;
+	}
+
 }

@@ -3,13 +3,19 @@ package com.xfatur.converter;
 import com.xfatur.dto.DestinatarioDTO;
 import com.xfatur.dto.EmitenteDTO;
 import com.xfatur.dto.EnderecoDTO;
+import com.xfatur.dto.EntregaDTO;
+import com.xfatur.dto.LocalDTO;
 import com.xfatur.dto.NaturezaJuridicaDTO;
+import com.xfatur.dto.PessoaDTO;
 import com.xfatur.dto.RamoAtividadeDTO;
 import com.xfatur.dto.RepresentanteDTO;
 import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
+import com.xfatur.model.Entrega;
+import com.xfatur.model.Local;
 import com.xfatur.model.NaturezaJuridica;
+import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
 
@@ -109,8 +115,43 @@ public class ModelConverter {
 		destinatario.setRamoatividade_id(destinatarioDTO.getRamoAtividade_id());
 		destinatario.setNaturezajuridica_id(destinatarioDTO.getNaturezaJuridica_id());
 		destinatario.setRepresentante_id(destinatarioDTO.getRepresentante_id());
+//		destinatario.setEntrega(ModelConverter.convert(destinatarioDTO.getEntregaDTO()));
 
 		return destinatario;
+	}
+
+	public static Entrega convert(EntregaDTO entregaDTO) {
+		if (entregaDTO == null) {
+			return null;
+		}
+		Entrega entrega = new Entrega();
+		entrega.setId(entregaDTO.getId());
+		entrega.setLocal(ModelConverter.convert(entregaDTO.getLocalDTO()));
+		entrega.setDestinatario(ModelConverter.convert(entregaDTO.getDestinatarioDTO()));
+
+		return entrega;
+	}
+
+	public static Local convert(LocalDTO localDTO) {
+		if (localDTO == null) {
+			return null;
+		}
+		Local local = new Local();
+		local.setEndereco(ModelConverter.convert(localDTO.getEndereco()));
+		local.setPessoa(ModelConverter.convert(localDTO.getPessoa()));
+
+		return local;
+	}
+
+	public static Pessoa convert(PessoaDTO pessoaDTO) {
+		Pessoa pessoa = new Pessoa();
+
+		pessoa.setCNPJCPF(pessoaDTO.getCNPJCPF());
+		pessoa.setxNome(pessoaDTO.getxNome());
+		pessoa.setIE(pessoaDTO.getIE());
+		pessoa.setEmail(pessoaDTO.getEmail());
+
+		return pessoa;
 	}
 
 }

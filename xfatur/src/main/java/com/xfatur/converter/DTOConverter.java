@@ -3,13 +3,19 @@ package com.xfatur.converter;
 import com.xfatur.dto.DestinatarioDTO;
 import com.xfatur.dto.EmitenteDTO;
 import com.xfatur.dto.EnderecoDTO;
+import com.xfatur.dto.EntregaDTO;
+import com.xfatur.dto.LocalDTO;
 import com.xfatur.dto.NaturezaJuridicaDTO;
+import com.xfatur.dto.PessoaDTO;
 import com.xfatur.dto.RamoAtividadeDTO;
 import com.xfatur.dto.RepresentanteDTO;
 import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
+import com.xfatur.model.Entrega;
+import com.xfatur.model.Local;
 import com.xfatur.model.NaturezaJuridica;
+import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
 
@@ -110,8 +116,39 @@ public class DTOConverter {
 		destinatarioDTO.setRamoAtividade_id(destinatario.getRamoatividade_id());
 		destinatarioDTO.setNaturezaJuridica_id(destinatario.getNaturezajuridica_id());
 		destinatarioDTO.setRepresentante_id(destinatario.getRepresentante_id());
+//		destinatarioDTO.setEntregaDTO(DTOConverter.convert(destinatario.getEntrega()));
 
 		return destinatarioDTO;
+	}
+
+	public static EntregaDTO convert(Entrega entrega) {
+		if (entrega == null) {
+			return null;
+		}
+		EntregaDTO entregaDTO = new EntregaDTO();
+		entregaDTO.setId(entrega.getId());
+		entregaDTO.setLocalDTO(DTOConverter.convert(entrega.getLocal()));
+
+		return entregaDTO;
+	}
+
+	private static LocalDTO convert(Local local) {
+		LocalDTO localDTO = new LocalDTO();
+		localDTO.setEndereco(DTOConverter.convert(local.getEndereco()));
+		localDTO.setPessoa(DTOConverter.convert(local.getPessoa()));
+
+		return localDTO;
+	}
+
+	private static PessoaDTO convert(Pessoa pessoa) {
+		PessoaDTO pessoaDTO = new PessoaDTO();
+
+		pessoaDTO.setCNPJCPF(pessoa.getCNPJCPF());
+		pessoaDTO.setxNome(pessoa.getxNome());
+		pessoaDTO.setIE(pessoa.getIE());
+		pessoaDTO.setEmail(pessoa.getEmail());
+
+		return pessoaDTO;
 	}
 
 }
