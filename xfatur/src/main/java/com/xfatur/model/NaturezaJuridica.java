@@ -6,39 +6,42 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
 public class NaturezaJuridica {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String descricao;
-    @OneToMany(mappedBy = "naturezaJuridica")
-    private List<Destinatario> destinatario;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String descricao;
 
-    public Integer getId() {
-	return id;
-    }
+	@OneToMany // (mappedBy = "naturezaJuridica")
+	@JoinColumn(name = "NaturezaJuridica_id")
+	private List<Destinatario> destinatario;
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getDescricao() {
-	return descricao;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setDescricao(String descricao) {
-	this.descricao = descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public List<Destinatario> getDestinatario() {
-	return destinatario;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public void setDestinatario(List<Destinatario> destinatario) {
-	this.destinatario = destinatario;
-    }
+	public List<Destinatario> getDestinatario() {
+		return destinatario;
+	}
+
+	public void setDestinatario(List<Destinatario> destinatario) {
+		this.destinatario = destinatario;
+	}
 
 }

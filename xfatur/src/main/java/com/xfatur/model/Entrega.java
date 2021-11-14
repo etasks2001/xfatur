@@ -5,10 +5,11 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+//@NamedEntityGraph(name = "Child.withParent", attributeNodes = @NamedAttributeNode("destinatario"))
 public class Entrega {
 
 	@Id
@@ -17,8 +18,9 @@ public class Entrega {
 	@Embedded
 	private Local local;
 
-	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@PrimaryKeyJoinColumn
+	@JoinColumn(name = "id")
 	private Destinatario destinatario;
 
 	public Integer getId() {
@@ -43,11 +45,6 @@ public class Entrega {
 
 	public void setDestinatario(Destinatario destinatario) {
 		this.destinatario = destinatario;
-	}
-
-	@Override
-	public String toString() {
-		return "Entrega [id=" + id + ", local=" + local + ", destinatario=" + destinatario + "]";
 	}
 
 }

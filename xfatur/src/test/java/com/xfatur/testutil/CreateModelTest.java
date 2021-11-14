@@ -326,6 +326,17 @@ public class CreateModelTest {
 		return DTOConverter.convert(entrega);
 	}
 
+	public static EntregaDTO createEntrega3() {
+		Entrega entrega = new Entrega();
+
+		Local local = new Local();
+		local.setEndereco(CreateModelTest.createEndereco3());
+		local.setPessoa(createPessoa1());
+		entrega.setLocal(local);
+
+		return DTOConverter.convert(entrega);
+	}
+
 	private static Pessoa createPessoa1() {
 		Pessoa pessoa = new Pessoa();
 		pessoa.setCNPJCPF("77851609000107");

@@ -27,13 +27,6 @@ public class Destinatario {
 	private String IM;
 	private String email;
 
-//	@OneToOne(mappedBy = "destinatario", fetch = FetchType.LAZY)
-//	@JoinColumn(name = "ramoatividade_id", insertable = false, updatable = false)
-//	private Entrega entrega;
-
-//	@OneToOne(mappedBy = "destinatario", cascade = CascadeType.ALL)
-//	private Retirada retirada;
-
 	private Integer ramoatividade_id;
 	private Integer naturezajuridica_id;
 	private Integer representante_id;
@@ -179,28 +172,6 @@ public class Destinatario {
 
 	public void setRepresentante(Representante representante) {
 		this.representante = representante;
-	}
-//
-//	public Entrega getEntrega() {
-//		return entrega;
-//	}
-//
-//	public void setEntrega(Entrega entrega) {
-//		this.entrega = entrega;
-//	}
-
-//	public Retirada getRetirada() {
-//		return retirada;
-//	}
-//
-//	public void setRetirada(Retirada retirada) {
-//		this.retirada = retirada;
-//	}
-
-	@Override
-	public String toString() {
-		return "Destinatario [id=" + id + ", CNPJCPF=" + CNPJCPF + ", idEstrangeiro=" + idEstrangeiro + ", xNome=" + xNome + ", enderDest=" + enderDest + ", indIEDest=" + indIEDest + ", IE=" + IE + ", ISUF=" + ISUF + ", IM=" + IM + ", email=" + email + ", ramoatividade_id=" + ramoatividade_id + ", naturezajuridica_id=" + naturezajuridica_id + ", representante_id=" + representante_id + ", ramoAtividade=" + ramoAtividade + ", naturezaJuridica=" + naturezaJuridica + ", representante="
-				+ representante + "]";
 	}
 
 	public Entrega getEntrega() {

@@ -1,5 +1,7 @@
 package com.xfatur.service;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -21,16 +23,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.DestinatarioDTO;
 import com.xfatur.dto.EntregaDTO;
 import com.xfatur.dto.NaturezaJuridicaDTO;
 import com.xfatur.dto.RamoAtividadeDTO;
 import com.xfatur.dto.RepresentanteDTO;
-import com.xfatur.exception.DestinatarioException;
+import com.xfatur.exception.DestinatarioCNPJCPFExistException;
+import com.xfatur.exception.DestinatarioCNPJCPFNotFoundException;
 import com.xfatur.exception.DestinatarioIdNotFoundException;
-import com.xfatur.model.Entrega;
-import com.xfatur.repository.EntregaRepository;
 import com.xfatur.testutil.CreateModelTest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -41,6 +41,10 @@ class DestinatarioServiceTest {
 		return Stream.of(CreateModelTest.createDestinatarioPJ(), CreateModelTest.createDestinatarioPJI(), CreateModelTest.createDestinatarioPF());
 	}
 
+	Stream<EntregaDTO> modelEntrega() {
+		return Stream.of(CreateModelTest.createEntrega1());
+	}
+
 	@Autowired
 	DestinatarioService destinatarioService;
 	@Autowired
@@ -49,48 +53,49 @@ class DestinatarioServiceTest {
 	NaturezaJuridicaService naturezaJuridicaService;
 	@Autowired
 	RepresentanteService representanteService;
-	@Autowired
-	EntregaRepository entregaRepository;
 
-	List<Integer> codigosRepresentante = new ArrayList<Integer>();
-	List<Integer> codigosRamoAtividade = new ArrayList<Integer>();
-	List<Integer> codigosNaturezaJuridica = new ArrayList<Integer>();
-	List<Integer> codigosDestinatario = new ArrayList<Integer>();
+	@Autowired
+	EntregaService entregaService;
+
+	List<Integer> idsRepresentante = new ArrayList<Integer>();
+	List<Integer> idsRamoAtividade = new ArrayList<Integer>();
+	List<Integer> idsNaturezaJuridica = new ArrayList<Integer>();
+	List<Integer> idsDestinatario = new ArrayList<Integer>();
 
 	@BeforeAll
 	void cadastrosAuxiliares() {
-		CreateModelTest.ramoAtividadeList().forEach(a -> {
-			RamoAtividadeDTO saved = ramoAtividadeService.save(a);
-			codigosRamoAtividade.add(saved.getId());
+		CreateModelTest.ramoAtividadeList().forEach(ra -> {
+			RamoAtividadeDTO saved = ramoAtividadeService.save(ra);
+			idsRamoAtividade.add(saved.getId());
 		}
 
 		);
-		CreateModelTest.naturezaJuridicaList().forEach(a -> {
-			NaturezaJuridicaDTO saved = naturezaJuridicaService.save(a);
-			codigosNaturezaJuridica.add(saved.getId());
+		CreateModelTest.naturezaJuridicaList().forEach(nj -> {
+			NaturezaJuridicaDTO saved = naturezaJuridicaService.save(nj);
+			idsNaturezaJuridica.add(saved.getId());
 		});
 
-		CreateModelTest.representanteList().forEach(a -> {
-			RepresentanteDTO saved = representanteService.save(a);
-			codigosRepresentante.add(saved.getId());
+		CreateModelTest.representanteList().forEach(r -> {
+			RepresentanteDTO saved = representanteService.save(r);
+			idsRepresentante.add(saved.getId());
 		});
 	}
 
 	@AfterAll
 	void deletarCadastrosAuxiliares() {
-		codigosDestinatario.forEach(id -> destinatarioService.deleteById(id));
-		codigosRamoAtividade.forEach(id -> ramoAtividadeService.delete(id));
-		codigosNaturezaJuridica.forEach(id -> naturezaJuridicaService.delete(id));
-		codigosRepresentante.forEach(id -> representanteService.delete(id));
+		idsDestinatario.forEach(id -> destinatarioService.deleteById(id));
+		idsRamoAtividade.forEach(id -> ramoAtividadeService.delete(id));
+		idsNaturezaJuridica.forEach(id -> naturezaJuridicaService.delete(id));
+		idsRepresentante.forEach(id -> representanteService.delete(id));
 	}
 
 	@ParameterizedTest
 	@MethodSource("model")
 	@Order(1)
 	void teste_save(DestinatarioDTO destinatarioDTO) {
-		int ramoAtividade_id = CreateModelTest.getCodigoAleatorio(codigosRamoAtividade);
-		int naturezaJuridica_id = CreateModelTest.getCodigoAleatorio(codigosNaturezaJuridica);
-		int representante_id = CreateModelTest.getCodigoAleatorio(codigosRepresentante);
+		int ramoAtividade_id = CreateModelTest.getCodigoAleatorio(idsRamoAtividade);
+		int naturezaJuridica_id = CreateModelTest.getCodigoAleatorio(idsNaturezaJuridica);
+		int representante_id = CreateModelTest.getCodigoAleatorio(idsRepresentante);
 
 		destinatarioDTO.setRamoAtividade_id(ramoAtividade_id);
 		destinatarioDTO.setNaturezaJuridica_id(naturezaJuridica_id);
@@ -98,41 +103,51 @@ class DestinatarioServiceTest {
 
 		DestinatarioDTO saved = destinatarioService.save(destinatarioDTO);
 
-		codigosDestinatario.add(saved.getId());
-
-		MatcherAssert.assertThat(saved.getId(), Matchers.greaterThan(0));
+		idsDestinatario.add(saved.getId());
 	}
 
 	@ParameterizedTest
 	@MethodSource("model")
 	@Order(2)
 	void test_save_cnpjcpf_ja_cadastrado_exception(DestinatarioDTO destinatarioDTO) {
-		Exception exception = Assertions.assertThrows(DestinatarioException.class, () -> destinatarioService.save(destinatarioDTO));
+		Exception exception = Assertions.assertThrows(DestinatarioCNPJCPFExistException.class, () -> destinatarioService.save(destinatarioDTO));
 
 		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF já cadastrado"));
 	}
 
-	@Test
+	@ParameterizedTest
+	@MethodSource("model")
 	@Order(3)
-	void test_gravar_entrega() {
-		Integer id = codigosDestinatario.get(0);
+	void test_busca_cnpjcpf_nao_encontrado_exception(DestinatarioDTO destinatarioDTO) {
+		Exception exception = Assertions.assertThrows(DestinatarioCNPJCPFNotFoundException.class, () -> destinatarioService.buscaPorCNPJCPF("456"));
 
-		EntregaDTO entregaDTO = CreateModelTest.createEntrega1();
-
-		DestinatarioDTO DestinatarioDTO = destinatarioService.findById(id);
-		entregaDTO.setDestinatarioDTO(DestinatarioDTO);
-		entregaDTO.setId(DestinatarioDTO.getId());
-
-		Entrega entrega = ModelConverter.convert(entregaDTO);
-
-		entregaRepository.save(entrega);
-		Integer foundId = entregaRepository.findById(id).get().getId();
-
-		MatcherAssert.assertThat(id, Matchers.is(foundId));
+		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF não encontrado"));
 	}
 
 	@Test
 	@Order(4)
+	void test_busca_cnpjcpf() {
+		DestinatarioDTO destinatarioDTO = destinatarioService.buscaPorCNPJCPF("60977980000109");
+
+		assertNotNull(destinatarioDTO);
+	}
+
+	@ParameterizedTest
+	@MethodSource("modelEntrega")
+	@Order(5)
+	void test_gravar_entrega(EntregaDTO entregaDTO) {
+		DestinatarioDTO destinatarioDTO = destinatarioService.findById(idsDestinatario.get(0));
+
+		entregaDTO.setDestinatarioDTO(destinatarioDTO);
+		entregaDTO.setId(destinatarioDTO.getId());
+
+		EntregaDTO saved = entregaService.save(entregaDTO);
+
+		assertNotNull(saved);
+	}
+
+	@Test
+	@Order(6)
 	void test_buscaPorNome() {
 		List<DestinatarioDTO> destinatarios = destinatarioService.buscaPorNome("a");
 
@@ -140,28 +155,49 @@ class DestinatarioServiceTest {
 	}
 
 	@Test
-	@Order(5)
+	@Order(7)
 	void test_buscaPorNome_tamanho_0() {
 		List<DestinatarioDTO> destinatarios = destinatarioService.buscaPorNome("aaaaaaaaaaaaaaaa");
+
 		MatcherAssert.assertThat(destinatarios.size(), Matchers.is(0));
 	}
 
 	@Test
-	@Order(6)
+	@Order(8)
 	void test_findById() {
-		List<DestinatarioDTO> destinatarios = destinatarioService.buscaPorNome("a");
-		Integer id = destinatarios.get(0).getId();
+		idsDestinatario.forEach(id -> {
+			DestinatarioDTO destinatarioDTO = destinatarioService.findById(id);
+			assertNotNull(destinatarioDTO);
+		});
 
-		DestinatarioDTO found = destinatarioService.findById(id);
-
-		MatcherAssert.assertThat(found, Matchers.notNullValue());
 	}
 
 	@Test
-	@Order(7)
+	@Order(9)
 	void test_findById_NotFoundException() {
 		Exception exception = Assertions.assertThrows(DestinatarioIdNotFoundException.class, () -> destinatarioService.findById(10001));
 
 		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Destinatario não encontrado"));
 	}
+
+	@Test
+	@Order(10)
+	void test_find_buscaPorIdComEntrega() {
+		idsDestinatario.forEach(id -> {
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>111:" + id);
+
+			DestinatarioDTO destinatarioDTO = destinatarioService.buscaPorIdComEntrega(id);
+			assertNotNull(destinatarioDTO);
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>111:" + id);
+		});
+		idsDestinatario.forEach(id -> {
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>222:" + id);
+
+			DestinatarioDTO destinatarioDTO = destinatarioService.findById(id);
+			assertNotNull(destinatarioDTO);
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>222:" + id);
+		});
+
+	}
+
 }

@@ -12,9 +12,9 @@ import com.xfatur.model.Emitente;
 @Repository
 public interface EmitenteRepository extends JpaRepository<Emitente, Integer> {
 
-    Emitente findByCNPJ(String cnpj);
+	Emitente findByCNPJ(String cnpj);
 
-    @Query("select e from Emitente e where e.xNome like %:nome% order by e.xNome asc, e.CNPJ asc")
-    List<Emitente> buscaPorNome(@Param("nome") String name);
+	@Query("select e from Emitente e where e.xNome like %:nome% order by e.xNome asc, e.CNPJ asc")
+	List<Emitente> buscaPorNome(@Param("nome") String name);
 
 }
