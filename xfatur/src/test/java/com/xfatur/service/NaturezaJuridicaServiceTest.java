@@ -1,7 +1,11 @@
 package com.xfatur.service;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -29,89 +33,94 @@ import com.xfatur.testutil.CreateModelTest;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 class NaturezaJuridicaServiceTest {
-    @Autowired
-    NaturezaJuridicaService service;
+	@Autowired
+	NaturezaJuridicaService service;
 
-    static Stream<NaturezaJuridicaDTO> model() {
-	return Stream.of(CreateModelTest.createNaturezaJuridica1(), CreateModelTest.createNaturezaJuridica2(), CreateModelTest.createNaturezaJuridica3(), CreateModelTest.createNaturezaJuridica4(),
-		CreateModelTest.createNaturezaJuridica5());
+	List<Integer> ids = new ArrayList<Integer>();
 
-    }
+	static Stream<NaturezaJuridicaDTO> model() {
+		return Stream.of(CreateModelTest.createNaturezaJuridica1(), CreateModelTest.createNaturezaJuridica2(), CreateModelTest.createNaturezaJuridica3(), CreateModelTest.createNaturezaJuridica4(), CreateModelTest.createNaturezaJuridica5());
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(1)
-    void test_save(NaturezaJuridicaDTO nj) {
-	Integer id = this.service.save(nj).getId();
-	nj.setId(id);
+	}
 
-	MatcherAssert.assertThat(id, Matchers.is(nj.getId()));
-    }
+	@ParameterizedTest
+	@MethodSource("model")
+	@Order(1)
+	void test_save(NaturezaJuridicaDTO nj) {
+		NaturezaJuridicaDTO naturezaJuridicaDTO = service.save(nj);
+		ids.add(naturezaJuridicaDTO.getId());
+	}
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(2)
-    void test_save_cnpj_ja_cadastrado(NaturezaJuridicaDTO e) {
-	NaturezaJuridicaException exception = Assertions.assertThrows(NaturezaJuridicaException.class, () -> service.save(e));
+	@Test
+	@Order(2)
+	void test_update() {
+		ids.forEach(id -> {
+			NaturezaJuridicaDTO naturezaJuridicaDTO = service.findById(id);
+			naturezaJuridicaDTO.setDescricao(naturezaJuridicaDTO.getDescricao() + " alterado");
+			service.save(naturezaJuridicaDTO);
+		});
+	}
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Descrição já cadastrada"));
-    }
+	@ParameterizedTest
+	@MethodSource("model")
+	@Order(3)
+	void test_save_ja_cadastrado(NaturezaJuridicaDTO naturezaJuridicaDTO) {
+		naturezaJuridicaDTO.setDescricao(naturezaJuridicaDTO.getDescricao() + " alterado");
 
-    @Test
-    @Order(3)
-    void test_buscaPorDescricao() {
-	List<NaturezaJuridicaDTO> list = this.service.buscaPorDescricao("M");
+		NaturezaJuridicaException exception = Assertions.assertThrows(NaturezaJuridicaException.class, () -> service.save(naturezaJuridicaDTO));
 
-	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
-    }
+		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Descrição já cadastrada"));
+	}
 
-    @Test
-    @Order(4)
-    void test_buscaPorDescricao_tamanho_0() {
-	List<NaturezaJuridicaDTO> list = this.service.buscaPorDescricao("fdasdfdasdf");
+	@Test
+	@Order(4)
+	void test_buscaPorDescricao() {
+		List<NaturezaJuridicaDTO> list = this.service.buscaPorDescricao("M");
 
-	MatcherAssert.assertThat(list.size(), Matchers.is(0));
-    }
+		MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
+	}
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(5)
-    void test_findById(NaturezaJuridicaDTO nj) {
-	List<NaturezaJuridicaDTO> findAll = service.findAll();
+	@Test
+	@Order(5)
+	void test_buscaPorDescricao_nao_encontrado() {
+		List<NaturezaJuridicaDTO> list = this.service.buscaPorDescricao("fdasdfdasdf");
 
-	Integer id = findAll.get(0).getId();
+		MatcherAssert.assertThat(list.size(), Matchers.is(0));
+	}
 
-	Integer id2 = this.service.findById(id).getId();
+	@Test
+	@Order(6)
+	void test_findById() {
+		ids.forEach(id -> {
+			NaturezaJuridicaDTO naturezaJuridicaDTO = service.findById(id);
+			assertNotNull(naturezaJuridicaDTO);
+		});
+	}
 
-	MatcherAssert.assertThat(id2, Matchers.is(id));
-    }
+	@Test
+	@Order(7)
+	void test_findById_nao_encontrado() {
+		Exception exception = Assertions.assertThrows(NaturezaJuridicaIdNotFoundException.class, () -> this.service.findById(15446));
 
-    @Test
-    @Order(6)
-    void test_findById_nao_encontrado() {
-	Exception exception = Assertions.assertThrows(NaturezaJuridicaIdNotFoundException.class, () -> this.service.findById(100));
+		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Natureza Jurídica não encontrada"));
+	}
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Natureza Jurídica não encontrada"));
-    }
+	@Test
+	@Order(8)
+	void delete() {
+		ids.forEach(id -> {
+			Boolean apagado = service.delete(id);
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(7)
-    void delete(NaturezaJuridicaDTO n) {
-	List<NaturezaJuridicaDTO> findAll = service.findAll();
-	findAll.forEach(nj -> {
-	    Boolean apagado = this.service.delete(nj.getId());
-	    MatcherAssert.assertThat(apagado, Matchers.is(TRUE));
-	});
-    }
+			assertEquals(apagado, TRUE);
+		});
+	}
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(8)
-    void delete_nao_encontrado(NaturezaJuridicaDTO n) {
-	Boolean result = this.service.delete(454);
+	@Test
+	@Order(9)
+	void delete_nao_encontrado() {
+		Boolean result = this.service.delete(454);
 
-	MatcherAssert.assertThat(result, Matchers.is(Boolean.FALSE));
-    }
+		assertEquals(result, FALSE);
+	}
 
 }

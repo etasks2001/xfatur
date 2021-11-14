@@ -12,6 +12,7 @@ import com.xfatur.converter.DTOConverter;
 import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.RepresentanteDTO;
 import com.xfatur.exception.RepresentanteException;
+import com.xfatur.exception.RepresentanteIdNotFoundException;
 import com.xfatur.exception.RepresentanteNotFoundException;
 import com.xfatur.model.Representante;
 import com.xfatur.repository.RepresentanteRepository;
@@ -19,39 +20,48 @@ import com.xfatur.repository.RepresentanteRepository;
 @Service
 public class RepresentanteService {
 
-    @Autowired
-    private RepresentanteRepository repository;
+	@Autowired
+	private RepresentanteRepository repository;
 
-    public RepresentanteDTO save(RepresentanteDTO representanteDTO) {
-	try {
-	    Representante representante = repository.save(ModelConverter.convert(representanteDTO));
-	    return DTOConverter.convert(representante);
-	} catch (DataIntegrityViolationException e) {
-	    throw new RepresentanteException("CNPJ/CPF já cadastrado");
+	public RepresentanteDTO save(RepresentanteDTO representanteDTO) {
+		try {
+			Representante representante = repository.save(ModelConverter.convert(representanteDTO));
+			return DTOConverter.convert(representante);
+		} catch (DataIntegrityViolationException e) {
+			throw new RepresentanteException("CNPJ/CPF já cadastrado");
+		}
 	}
-    }
 
-    public Boolean delete(Integer id) {
-	Optional<Representante> found = repository.findById(id);
-	if (found.isPresent()) {
-	    repository.deleteById(id);
-	    return Boolean.TRUE;
+	public Boolean delete(Integer id) {
+		Optional<Representante> found = repository.findById(id);
+		if (found.isPresent()) {
+			repository.deleteById(id);
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
 	}
-	return Boolean.FALSE;
-    }
 
-    public RepresentanteDTO findByCNPJCPF(String cnpjcpf) {
-	Representante found = repository.findByCNPJCPF(cnpjcpf);
-	if (found != null) {
-	    return DTOConverter.convert(found);
+	public RepresentanteDTO findByCNPJCPF(String cnpjcpf) {
+		Representante found = repository.findByCNPJCPF(cnpjcpf);
+		if (found != null) {
+			return DTOConverter.convert(found);
+		}
+		throw new RepresentanteNotFoundException("Representante não encontrado");
 	}
-	throw new RepresentanteNotFoundException("Representante não encontrado");
-    }
 
-    public List<RepresentanteDTO> buscaPorNome(String nome) {
-	List<Representante> representanteList = repository.buscaPorNome(nome);
+	public List<RepresentanteDTO> buscaPorNome(String nome) {
+		List<Representante> representanteList = repository.buscaPorNome(nome);
 
-	return representanteList.stream().map(DTOConverter::convert).collect(Collectors.toList());
-    }
+		return representanteList.stream().map(DTOConverter::convert).collect(Collectors.toList());
+	}
+
+	public RepresentanteDTO findById(Integer id) {
+		Optional<Representante> found = repository.findById(id);
+		if (found.isPresent()) {
+			return DTOConverter.convert(found.get());
+		}
+
+		throw new RepresentanteIdNotFoundException("Código do Representante não encontrado");
+	}
 
 }

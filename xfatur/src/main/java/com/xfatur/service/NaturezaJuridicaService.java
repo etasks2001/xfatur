@@ -19,45 +19,39 @@ import com.xfatur.repository.NaturezaJuridicaRepository;
 @Service
 public class NaturezaJuridicaService {
 
-    @Autowired
-    private NaturezaJuridicaRepository repository;
+	@Autowired
+	private NaturezaJuridicaRepository repository;
 
-    public NaturezaJuridicaDTO save(NaturezaJuridicaDTO naturezaJuridicaDTO) {
-	try {
-	    NaturezaJuridica naturezaJuridica = repository.save(ModelConverter.convert(naturezaJuridicaDTO));
+	public NaturezaJuridicaDTO save(NaturezaJuridicaDTO naturezaJuridicaDTO) {
+		try {
+			NaturezaJuridica naturezaJuridica = repository.save(ModelConverter.convert(naturezaJuridicaDTO));
 
-	    return DTOConverter.convert(naturezaJuridica);
-	} catch (DataIntegrityViolationException e) {
-	    throw new NaturezaJuridicaException("Descrição já cadastrada");
+			return DTOConverter.convert(naturezaJuridica);
+		} catch (DataIntegrityViolationException e) {
+			throw new NaturezaJuridicaException("Descrição já cadastrada");
+		}
 	}
-    }
 
-    public List<NaturezaJuridicaDTO> findAll() {
-	List<NaturezaJuridica> findAll = repository.findAll();
-
-	return findAll.stream().map(DTOConverter::convert).collect(Collectors.toList());
-    }
-
-    public Boolean delete(Integer id) {
-	Optional<NaturezaJuridica> naturezaJuridica = repository.findById(id);
-	if (naturezaJuridica.isPresent()) {
-	    repository.deleteById(id);
-	    return Boolean.TRUE;
+	public Boolean delete(Integer id) {
+		Optional<NaturezaJuridica> naturezaJuridica = repository.findById(id);
+		if (naturezaJuridica.isPresent()) {
+			repository.deleteById(id);
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
 	}
-	return Boolean.FALSE;
-    }
 
-    public List<NaturezaJuridicaDTO> buscaPorDescricao(String descricao) {
-	List<NaturezaJuridica> queryByDescricao = repository.buscaPorDescricao(descricao);
+	public List<NaturezaJuridicaDTO> buscaPorDescricao(String descricao) {
+		List<NaturezaJuridica> queryByDescricao = repository.buscaPorDescricao(descricao);
 
-	return queryByDescricao.stream().map(DTOConverter::convert).collect(Collectors.toList());
-    }
-
-    public NaturezaJuridicaDTO findById(int id) {
-	Optional<NaturezaJuridica> findById = repository.findById(id);
-	if (findById.isPresent()) {
-	    return DTOConverter.convert(findById.get());
+		return queryByDescricao.stream().map(DTOConverter::convert).collect(Collectors.toList());
 	}
-	throw new NaturezaJuridicaIdNotFoundException("Natureza Jurídica não encontrada");
-    }
+
+	public NaturezaJuridicaDTO findById(int id) {
+		Optional<NaturezaJuridica> findById = repository.findById(id);
+		if (findById.isPresent()) {
+			return DTOConverter.convert(findById.get());
+		}
+		throw new NaturezaJuridicaIdNotFoundException("Natureza Jurídica não encontrada");
+	}
 }

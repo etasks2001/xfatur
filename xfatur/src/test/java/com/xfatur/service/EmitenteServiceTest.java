@@ -2,6 +2,8 @@ package com.xfatur.service;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -32,98 +34,96 @@ import com.xfatur.testutil.CreateModelTest;
 @TestMethodOrder(OrderAnnotation.class)
 class EmitenteServiceTest {
 
-    @Autowired
-    EmitenteService service;
+	@Autowired
+	EmitenteService service;
 
-    static Stream<EmitenteDTO> model() {
-	return Stream.of(CreateModelTest.createEmitente1());
-    }
+	private static Integer id;
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(1)
-    void test_save(EmitenteDTO e) {
-	Integer id = service.save(e).getId();
+	static Stream<EmitenteDTO> model() {
+		return Stream.of(CreateModelTest.createEmitente1());
+	}
 
-	MatcherAssert.assertThat(id, Matchers.greaterThan(0));
-    }
+	@ParameterizedTest
+	@MethodSource("model")
+	@Order(1)
+	void test_save(EmitenteDTO e) {
+		id = service.save(e).getId();
+	}
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(2)
-    void test_save_cnpj_ja_cadastrado(EmitenteDTO e) {
-	EmitenteException exception = Assertions.assertThrows(EmitenteException.class, () -> service.save(e));
+	@Test
+	@Order(2)
+	void test_findById() {
+		EmitenteDTO emitenteDTO = service.findById(id);
+		assertNotNull(emitenteDTO);
+		assertEquals(CreateModelTest.createEmitente1().getxNome(), emitenteDTO.getxNome());
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF já cadastrado"));
-    }
+		Exception exception = Assertions.assertThrows(EmitenteIdNotFoundException.class, () -> service.findById(1456));
+		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Emitente Não encontrado"));
+	}
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(3)
-    void test_findById(EmitenteDTO e) {
-	Integer id = service.findByCNPJ(e.getCNPJ()).getId();
-	Integer id_encontrado = service.findById(id).getId();
+	@Test
+	@Order(3)
+	void test_update() {
+		EmitenteDTO emitenteDTO = service.findById(id);
+		emitenteDTO.setxNome("Nova empresa");
 
-	MatcherAssert.assertThat(id, Matchers.is(id_encontrado));
-    }
+		service.save(emitenteDTO);
+	}
 
-    @Test
-    @Order(4)
-    void test_findById_erro() {
-	Exception exception = Assertions.assertThrows(EmitenteIdNotFoundException.class, () -> service.findById(10000));
+	@ParameterizedTest
+	@MethodSource("model")
+	@Order(4)
+	void test_save_cnpj_ja_cadastrado(EmitenteDTO e) {
+		EmitenteException exception = Assertions.assertThrows(EmitenteException.class, () -> service.save(e));
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Emitente Não encontrado"));
-    }
+		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF já cadastrado"));
+	}
 
-    @Test
-    @Order(6)
-    void test_findByCNPJ() {
-	EmitenteDTO found = service.findByCNPJ("65037603000103");
+	@Test
+	@Order(5)
+	void test_findByCNPJ() {
+		EmitenteDTO emitenteDTO = service.findByCNPJ("65037603000103");
 
-	MatcherAssert.assertThat(found.getCNPJ(), Matchers.is("65037603000103"));
-    }
+		assertNotNull(emitenteDTO);
+	}
 
-    @Test
-    @Order(7)
-    void test_findByCNPJ_erro() {
-	Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> service.findByCNPJ(""));
+	@Test
+	@Order(6)
+	void test_findByCNPJ_erro() {
+		Exception exception = Assertions.assertThrows(EmitenteNotFoundException.class, () -> service.findByCNPJ(""));
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Emitente Não encontrado"));
-    }
+		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Emitente Não encontrado"));
+	}
 
-    @Test
-    @Order(8)
-    void test_buscaPorNome() {
-	List<EmitenteDTO> emitentes = service.buscaPorNome("Empresa");
+	@Test
+	@Order(7)
+	void test_buscaPorNome() {
+		List<EmitenteDTO> emitentes = service.buscaPorNome("mpresa");
 
-	MatcherAssert.assertThat(emitentes.size(), Matchers.greaterThan(0));
-    }
+		MatcherAssert.assertThat(emitentes.size(), Matchers.greaterThan(0));
+	}
 
-    @Test
-    @Order(9)
-    void test_buscaPorNome_tamanho_0() {
-	List<EmitenteDTO> emitentes = service.buscaPorNome("aaaaaaaaaaaa");
+	@Test
+	@Order(8)
+	void test_buscaPorNome_nao_encontrado() {
+		List<EmitenteDTO> emitentesDTO = service.buscaPorNome("aaaaaaaaaaaa");
 
-	MatcherAssert.assertThat(emitentes.size(), Matchers.is(0));
-    }
+		MatcherAssert.assertThat(emitentesDTO.size(), Matchers.is(0));
+	}
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(10)
-    void delete(EmitenteDTO e) {
-	Integer id = service.findByCNPJ(e.getCNPJ()).getId();
+	@Test
+	@Order(9)
+	void test_delete() {
+		Boolean result = service.delete(id);
 
-	Boolean result = service.delete(id);
+		MatcherAssert.assertThat(result, Matchers.is(TRUE));
+	}
 
-	MatcherAssert.assertThat(result, Matchers.is(TRUE));
-    }
+	@Test
+	@Order(10)
+	void test_delete_error() {
+		Boolean result = service.delete(77);
 
-    @Test
-    @Order(11)
-    void delete_error() {
-	Boolean result = service.delete(77);
-
-	MatcherAssert.assertThat(result, Matchers.is(FALSE));
-    }
-
+		MatcherAssert.assertThat(result, Matchers.is(FALSE));
+	}
 }

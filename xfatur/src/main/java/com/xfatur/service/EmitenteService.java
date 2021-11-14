@@ -20,50 +20,50 @@ import com.xfatur.repository.EmitenteRepository;
 @Service
 public class EmitenteService {
 
-    @Autowired
-    private EmitenteRepository repository;
+	@Autowired
+	private EmitenteRepository repository;
 
-    public EmitenteDTO findById(Integer id) {
-	Optional<Emitente> emitente = repository.findById(id);
-	if (emitente.isPresent()) {
-	    return DTOConverter.convert(emitente.get());
+	public EmitenteDTO findById(Integer id) {
+		Optional<Emitente> emitente = repository.findById(id);
+		if (emitente.isPresent()) {
+			return DTOConverter.convert(emitente.get());
+		}
+		throw new EmitenteIdNotFoundException("Emitente Não encontrado");
 	}
-	throw new EmitenteIdNotFoundException("Emitente Não encontrado");
-    }
 
-    public EmitenteDTO save(EmitenteDTO emitenteDTO) {
-	try {
-	    Emitente emit = repository.save(ModelConverter.convert(emitenteDTO));
+	public EmitenteDTO save(EmitenteDTO emitenteDTO) {
+		try {
+			Emitente emit = repository.save(ModelConverter.convert(emitenteDTO));
 
-	    return DTOConverter.convert(emit);
-	} catch (DataIntegrityViolationException e) {
-	    throw new EmitenteException("CNPJ/CPF já cadastrado");
+			return DTOConverter.convert(emit);
+		} catch (DataIntegrityViolationException e) {
+			throw new EmitenteException("CNPJ/CPF já cadastrado");
+		}
 	}
-    }
 
-    public Boolean delete(Integer id) {
-	Optional<Emitente> emitente = repository.findById(id);
+	public Boolean delete(Integer id) {
+		Optional<Emitente> emitente = repository.findById(id);
 
-	if (emitente.isPresent()) {
-	    repository.delete(emitente.get());
-	    return Boolean.TRUE;
+		if (emitente.isPresent()) {
+			repository.delete(emitente.get());
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
+
 	}
-	return Boolean.FALSE;
 
-    }
+	public EmitenteDTO findByCNPJ(String cnpj) {
+		Emitente emitente = repository.findByCNPJ(cnpj);
 
-    public EmitenteDTO findByCNPJ(String cnpj) {
-	Emitente emitente = repository.findByCNPJ(cnpj);
-
-	if (emitente != null) {
-	    return DTOConverter.convert(emitente);
+		if (emitente != null) {
+			return DTOConverter.convert(emitente);
+		}
+		throw new EmitenteNotFoundException("Emitente Não encontrado");
 	}
-	throw new EmitenteNotFoundException("Emitente Não encontrado");
-    }
 
-    public List<EmitenteDTO> buscaPorNome(String nome) {
-	List<Emitente> emitentes = repository.buscaPorNome(nome);
+	public List<EmitenteDTO> buscaPorNome(String nome) {
+		List<Emitente> emitentes = repository.buscaPorNome(nome);
 
-	return emitentes.stream().map(DTOConverter::convert).collect(Collectors.toList());
-    }
+		return emitentes.stream().map(DTOConverter::convert).collect(Collectors.toList());
+	}
 }
