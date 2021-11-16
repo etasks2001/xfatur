@@ -29,7 +29,6 @@ import com.xfatur.dto.NaturezaJuridicaDTO;
 import com.xfatur.dto.RamoAtividadeDTO;
 import com.xfatur.dto.RepresentanteDTO;
 import com.xfatur.dto.RetiradaDTO;
-import com.xfatur.exception.DestinatarioCNPJCPFExistException;
 import com.xfatur.exception.DestinatarioCNPJCPFNotFoundException;
 import com.xfatur.exception.DestinatarioIdNotFoundException;
 import com.xfatur.testutil.CreateModelTest;
@@ -114,14 +113,14 @@ class DestinatarioServiceTest {
 	idsDestinatario.add(saved.getId());
     }
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(2)
-    void test_save_cnpjcpf_ja_cadastrado_exception(DestinatarioDTO destinatarioDTO) {
-	Exception exception = Assertions.assertThrows(DestinatarioCNPJCPFExistException.class, () -> destinatarioService.save(destinatarioDTO));
-
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF já cadastrado"));
-    }
+//    @ParameterizedTest
+//    @MethodSource("model")
+//    @Order(2)
+//    void test_save_cnpjcpf_ja_cadastrado_exception(DestinatarioDTO destinatarioDTO) {
+//	Exception exception = Assertions.assertThrows(DestinatarioCNPJCPFExistException.class, () -> destinatarioService.save(destinatarioDTO));
+//
+//	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF já cadastrado"));
+//    }
 
     @ParameterizedTest
     @MethodSource("model")

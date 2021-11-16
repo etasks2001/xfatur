@@ -1,10 +1,13 @@
 package com.xfatur.model;
 
+import java.util.List;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Representante {
@@ -17,6 +20,9 @@ public class Representante {
     private Endereco endereco;
     private String IE;
     private String email;
+
+    @OneToMany(mappedBy = "representante")
+    private List<Destinatario> destinatarios;
 
     public Integer getId() {
 	return id;
@@ -64,6 +70,14 @@ public class Representante {
 
     public void setEmail(String email) {
 	this.email = email;
+    }
+
+    public List<Destinatario> getDestinatario() {
+	return destinatarios;
+    }
+
+    public void setDestinatario(List<Destinatario> destinatario) {
+	this.destinatarios = destinatario;
     }
 
 }

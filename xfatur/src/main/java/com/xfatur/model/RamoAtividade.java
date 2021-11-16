@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -17,9 +16,8 @@ public class RamoAtividade {
 
     private String descricao;
 
-    @OneToMany // (mappedBy = "representante")
-    @JoinColumn(name = "id")
-    private List<Destinatario> destinatario;
+    @OneToMany(mappedBy = "ramoAtividade")
+    private List<Destinatario> destinatarios;
 
     public Integer getId() {
 	return id;

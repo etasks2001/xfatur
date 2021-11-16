@@ -133,7 +133,7 @@ public class DTOConverter {
 	destinatarioDTO.setISUF(destinatario.getISUF());
 //	destinatarioDTO.setRamoAtividade_id(destinatario.getRamoatividade_id());
 	destinatarioDTO.setNaturezaJuridica_id(destinatario.getNaturezajuridica_id());
-	destinatarioDTO.setRepresentante_id(destinatario.getRepresentante_id());
+//	destinatarioDTO.setRepresentante_id(destinatario.getRepresentante_id());
 	destinatarioDTO.setEntregaDTO(DTOConverter.convert(destinatario.getEntrega()));
 //	destinatarioDTO.setRamoAtividadeDTO(DTOConverter.convert(destinatario.getRamoAtividade()));
 //	destinatarioDTO.setRepresentanteDTO(DTOConverter.convert(destinatario.getRepresentante()));

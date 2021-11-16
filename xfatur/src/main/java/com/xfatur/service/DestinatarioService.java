@@ -5,13 +5,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.xfatur.converter.DTOConverter;
 import com.xfatur.converter.ModelConverter;
 import com.xfatur.dto.DestinatarioDTO;
-import com.xfatur.exception.DestinatarioCNPJCPFExistException;
 import com.xfatur.exception.DestinatarioCNPJCPFNotFoundException;
 import com.xfatur.exception.DestinatarioIdNotFoundException;
 import com.xfatur.model.Destinatario;
@@ -23,12 +21,8 @@ public class DestinatarioService {
     private DestinatarioRepository repository;
 
     public DestinatarioDTO save(DestinatarioDTO d) {
-	try {
-	    Destinatario salvo = repository.save(ModelConverter.convert(d));
-	    return DTOConverter.convert(salvo);
-	} catch (DataIntegrityViolationException e) {
-	    throw new DestinatarioCNPJCPFExistException("CNPJ/CPF já cadastrado");
-	}
+	Destinatario salvo = repository.save(ModelConverter.convert(d));
+	return DTOConverter.convert(salvo);
     }
 
     public void deleteById(int id) {

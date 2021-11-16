@@ -222,7 +222,7 @@ public class CreateModelTest {
 	destinatario.setIM(null);
 	destinatario.setEmail("mercadodobairro@gmail.com");
 	destinatario.setRamoatividade_id(1);
-	destinatario.setRepresentante_id(1);
+//	destinatario.setRepresentante_id(1);
 	destinatario.setNaturezajuridica_id(1);
 
 	return DTOConverter.convert(destinatario);
@@ -243,7 +243,7 @@ public class CreateModelTest {
 	destinatario.setIM(null);
 	destinatario.setEmail("mercadodobairro@gmail.com");
 	destinatario.setRamoatividade_id(1);
-	destinatario.setRepresentante_id(1);
+//	destinatario.setRepresentante_id(1);
 	destinatario.setNaturezajuridica_id(1);
 
 	return DTOConverter.convert(destinatario);
@@ -264,7 +264,7 @@ public class CreateModelTest {
 	destinatario.setIM(null);
 	destinatario.setEmail("heitoraugusto@hotmail.com");
 	destinatario.setRamoatividade_id(1);
-	destinatario.setRepresentante_id(1);
+//	destinatario.setRepresentante_id(1);
 	destinatario.setNaturezajuridica_id(3);
 
 	return DTOConverter.convert(destinatario);

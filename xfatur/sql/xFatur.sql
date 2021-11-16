@@ -32,6 +32,9 @@ select * from emitente;
 
 select * from destinatario;
 select * from entrega;
+select * from retirada;
+
+
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 select * from information_schema.table_constraints;
@@ -156,7 +159,7 @@ create table destinatario(
 	email varchar(60) null,
 	ramoatividade_id int references ramoatividade,
 	naturezajuridica_id int references naturezajuridica,
-	representante_id int references representante,
+	representante_id int not null references representante,
 	primary key (id),
 	unique (CNPJCPF)
 );

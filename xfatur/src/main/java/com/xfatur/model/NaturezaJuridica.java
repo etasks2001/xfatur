@@ -1,9 +1,12 @@
 package com.xfatur.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class NaturezaJuridica {
@@ -11,6 +14,9 @@ public class NaturezaJuridica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String descricao;
+
+    @OneToMany(mappedBy = "naturezaJuridica")
+    private List<Destinatario> destinatarios;
 
     public Integer getId() {
 	return id;
