@@ -2,13 +2,11 @@ package com.xfatur.dto;
 
 import java.util.List;
 
-import com.xfatur.model.Destinatario;
-
 public class NaturezaJuridicaDTO {
 
     private Integer id;
     private String descricao;
-    private List<Destinatario> destinatario;
+    private List<DestinatarioDTO> destinatarioDTO;
 
     public Integer getId() {
 	return id;
@@ -26,12 +24,12 @@ public class NaturezaJuridicaDTO {
 	this.descricao = descricao;
     }
 
-    public List<Destinatario> getDestinatario() {
-	return destinatario;
+    public List<DestinatarioDTO> getDestinatarioDTO() {
+	return destinatarioDTO;
     }
 
-    public void setDestinatario(List<Destinatario> destinatario) {
-	this.destinatario = destinatario;
+    public void setDestinatarioDTO(List<DestinatarioDTO> destinatarioDTO) {
+	this.destinatarioDTO = destinatarioDTO;
     }
 
 }

@@ -2,7 +2,6 @@ package com.xfatur.dto;
 
 import java.util.List;
 
-import com.xfatur.model.Destinatario;
 import com.xfatur.model.Endereco;
 
 public class RepresentanteDTO {
@@ -12,7 +11,7 @@ public class RepresentanteDTO {
     private Endereco endereco;
     private String IE;
     private String email;
-    private List<Destinatario> destinatario;
+    private List<DestinatarioDTO> destinatarioDTO;
 
     public Integer getId() {
 	return id;
@@ -62,12 +61,12 @@ public class RepresentanteDTO {
 	this.email = email;
     }
 
-    public List<Destinatario> getDestinatario() {
-	return destinatario;
+    public List<DestinatarioDTO> getDestinatarioDTO() {
+	return destinatarioDTO;
     }
 
-    public void setDestinatario(List<Destinatario> destinatario) {
-	this.destinatario = destinatario;
+    public void setDestinatarioDTO(List<DestinatarioDTO> destinatarioDTO) {
+	this.destinatarioDTO = destinatarioDTO;
     }
 
 }

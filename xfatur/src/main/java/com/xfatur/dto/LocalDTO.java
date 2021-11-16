@@ -1,23 +1,23 @@
 package com.xfatur.dto;
 
 public class LocalDTO {
-	private EnderecoDTO endereco;
-	private PessoaDTO pessoa;
+    private EnderecoDTO enderecoDTO;
+    private PessoaDTO pessoaDTO;
 
-	public EnderecoDTO getEndereco() {
-		return endereco;
-	}
+    public EnderecoDTO getEnderecoDTO() {
+	return enderecoDTO;
+    }
 
-	public void setEndereco(EnderecoDTO endereco) {
-		this.endereco = endereco;
-	}
+    public void setEnderecoDTO(EnderecoDTO enderecoDTO) {
+	this.enderecoDTO = enderecoDTO;
+    }
 
-	public PessoaDTO getPessoa() {
-		return pessoa;
-	}
+    public PessoaDTO getPessoaDTO() {
+	return pessoaDTO;
+    }
 
-	public void setPessoa(PessoaDTO pessoa) {
-		this.pessoa = pessoa;
-	}
+    public void setPessoaDTO(PessoaDTO pessoaDTO) {
+	this.pessoaDTO = pessoaDTO;
+    }
 
 }

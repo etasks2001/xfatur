@@ -1,5 +1,8 @@
 package com.xfatur.converter;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.xfatur.dto.DestinatarioDTO;
 import com.xfatur.dto.EmitenteDTO;
 import com.xfatur.dto.EnderecoDTO;
@@ -9,6 +12,7 @@ import com.xfatur.dto.NaturezaJuridicaDTO;
 import com.xfatur.dto.PessoaDTO;
 import com.xfatur.dto.RamoAtividadeDTO;
 import com.xfatur.dto.RepresentanteDTO;
+import com.xfatur.dto.RetiradaDTO;
 import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
@@ -18,140 +22,159 @@ import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
+import com.xfatur.model.Retirada;
 
 public class ModelConverter {
 
-	public static Representante convert(RepresentanteDTO representanteDTO) {
-		Representante representante = new Representante();
+    public static List<Destinatario> convert(List<DestinatarioDTO> list) {
+	return list.stream().map(ModelConverter::convert).collect(Collectors.toList());
 
-		representante.setId(representanteDTO.getId());
-		representante.setxNome(representanteDTO.getxNome());
-		representante.setDestinatario(representanteDTO.getDestinatario());
-		representante.setCNPJCPF(representanteDTO.getCNPJCPF());
-		representante.setEndereco(representanteDTO.getEndereco());
-		representante.setIE(representanteDTO.getIE());
-		representante.setEmail(representanteDTO.getEmail());
+    }
 
-		return representante;
-	}
+    public static Representante convert(RepresentanteDTO representanteDTO) {
+	Representante representante = new Representante();
 
-	public static RamoAtividade convert(RamoAtividadeDTO ramoAtividadeDTO) {
-		RamoAtividade ramoAtividade = new RamoAtividade();
+	representante.setId(representanteDTO.getId());
+	representante.setxNome(representanteDTO.getxNome());
+//	representante.setDestinatario(ModelConverter.convert(representanteDTO.getDestinatarioDTO()));
+	representante.setCNPJCPF(representanteDTO.getCNPJCPF());
+	representante.setEndereco(representanteDTO.getEndereco());
+	representante.setIE(representanteDTO.getIE());
+	representante.setEmail(representanteDTO.getEmail());
 
-		ramoAtividade.setId(ramoAtividadeDTO.getId());
-		ramoAtividade.setDescricao(ramoAtividadeDTO.getDescricao());
-		ramoAtividade.setDestinatario(ramoAtividadeDTO.getDestinatario());
+	return representante;
+    }
 
-		return ramoAtividade;
-	}
+    public static RamoAtividade convert(RamoAtividadeDTO ramoAtividadeDTO) {
+	RamoAtividade ramoAtividade = new RamoAtividade();
 
-	public static NaturezaJuridica convert(NaturezaJuridicaDTO naturezaJuridicaDTO) {
-		NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
-		naturezaJuridica.setId(naturezaJuridicaDTO.getId());
-		naturezaJuridica.setDescricao(naturezaJuridicaDTO.getDescricao());
-		naturezaJuridica.setDestinatario(naturezaJuridicaDTO.getDestinatario());
+	ramoAtividade.setId(ramoAtividadeDTO.getId());
+	ramoAtividade.setDescricao(ramoAtividadeDTO.getDescricao());
+//	ramoAtividade.setDestinatario(ModelConverter.convert(ramoAtividadeDTO.getDestinatarioDTO()));
 
-		return naturezaJuridica;
-	}
+	return ramoAtividade;
+    }
 
-	public static Endereco convert(EnderecoDTO enderecoDTO) {
+    public static NaturezaJuridica convert(NaturezaJuridicaDTO naturezaJuridicaDTO) {
+	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
+	naturezaJuridica.setId(naturezaJuridicaDTO.getId());
+	naturezaJuridica.setDescricao(naturezaJuridicaDTO.getDescricao());
+//	if (naturezaJuridicaDTO.getDestinatarioDTO() != null) {
+//
+//	    naturezaJuridica.setDestinatario(ModelConverter.convert(naturezaJuridicaDTO.getDestinatarioDTO()));
+//	}
 
-		Endereco endereco = new Endereco();
+	return naturezaJuridica;
+    }
 
-		endereco.setxLgr(enderecoDTO.getxLgr());
-		endereco.setNro(enderecoDTO.getNro());
-		endereco.setxCpl(enderecoDTO.getxCpl());
-		endereco.setxBairro(enderecoDTO.getxBairro());
-		endereco.setcMun(enderecoDTO.getcMun());
-		endereco.setxMun(enderecoDTO.getxMun());
-		endereco.setUF(enderecoDTO.getUF());
-		endereco.setCEP(enderecoDTO.getCEP());
-		endereco.setcPais(enderecoDTO.getcPais());
-		endereco.setxPais(enderecoDTO.getxPais());
-		endereco.setFone(enderecoDTO.getFone());
+    public static Endereco convert(EnderecoDTO enderecoDTO) {
 
-		return endereco;
-	}
+	Endereco endereco = new Endereco();
 
-	public static Emitente convert(EmitenteDTO emitenteDTO) {
-		Emitente emitente = new Emitente();
+	endereco.setxLgr(enderecoDTO.getxLgr());
+	endereco.setNro(enderecoDTO.getNro());
+	endereco.setxCpl(enderecoDTO.getxCpl());
+	endereco.setxBairro(enderecoDTO.getxBairro());
+	endereco.setcMun(enderecoDTO.getcMun());
+	endereco.setxMun(enderecoDTO.getxMun());
+	endereco.setUF(enderecoDTO.getUF());
+	endereco.setCEP(enderecoDTO.getCEP());
+	endereco.setcPais(enderecoDTO.getcPais());
+	endereco.setxPais(enderecoDTO.getxPais());
+	endereco.setFone(enderecoDTO.getFone());
 
-		emitente.setId(emitenteDTO.getId());
-		emitente.setCNPJ(emitenteDTO.getCNPJ());
-		emitente.setxNome(emitenteDTO.getxNome());
-		emitente.setxFant(emitenteDTO.getxFant());
+	return endereco;
+    }
 
-		emitente.setEnderEmit(convert(emitenteDTO.getEnderEmitDTO()));
-		emitente.setIE(emitenteDTO.getIE());
-		emitente.setIEST(emitenteDTO.getIEST());
-		emitente.setIM(emitenteDTO.getIM());
-		emitente.setCNAE(emitenteDTO.getCNAE());
-		emitente.setCRT(emitenteDTO.getCRT());
-		emitente.setNf_serie_atual(emitenteDTO.getNf_serie_atual());
-		emitente.setUltima_nnf(emitenteDTO.getUltima_nnf());
+    public static Emitente convert(EmitenteDTO emitenteDTO) {
+	Emitente emitente = new Emitente();
 
-		return emitente;
+	emitente.setId(emitenteDTO.getId());
+	emitente.setCNPJ(emitenteDTO.getCNPJ());
+	emitente.setxNome(emitenteDTO.getxNome());
+	emitente.setxFant(emitenteDTO.getxFant());
 
-	}
+	emitente.setEnderEmit(convert(emitenteDTO.getEnderEmitDTO()));
+	emitente.setIE(emitenteDTO.getIE());
+	emitente.setIEST(emitenteDTO.getIEST());
+	emitente.setIM(emitenteDTO.getIM());
+	emitente.setCNAE(emitenteDTO.getCNAE());
+	emitente.setCRT(emitenteDTO.getCRT());
+	emitente.setNf_serie_atual(emitenteDTO.getNf_serie_atual());
+	emitente.setUltima_nnf(emitenteDTO.getUltima_nnf());
 
-	public static Destinatario convert(DestinatarioDTO destinatarioDTO) {
-		Destinatario destinatario = new Destinatario();
+	return emitente;
 
-		destinatario.setId(destinatarioDTO.getId());
+    }
 
-		Endereco enderEmit = ModelConverter.convert(destinatarioDTO.getEnderEmitDTO());
-		destinatario.setEnderDest(enderEmit);
-		destinatario.setCNPJCPF(destinatarioDTO.getCNPJCPF());
-		destinatario.setIdEstrangeiro(destinatarioDTO.getIdEstrangeiro());
-		destinatario.setIndIEDest(destinatarioDTO.getIndIEDest());
-		destinatario.setRamoAtividade(destinatarioDTO.getRamoAtividade());
-		destinatario.setRepresentante(destinatarioDTO.getRepresentante());
-		destinatario.setxNome(destinatarioDTO.getxNome());
-		destinatario.setIE(destinatarioDTO.getIE());
-		destinatario.setIM(destinatarioDTO.getIM());
-		destinatario.setEmail(destinatarioDTO.getEmail());
-		destinatario.setNaturezaJuridica(destinatarioDTO.getNaturezaJuridica());
-		destinatario.setISUF(destinatarioDTO.getISUF());
-		destinatario.setRamoatividade_id(destinatarioDTO.getRamoAtividade_id());
-		destinatario.setNaturezajuridica_id(destinatarioDTO.getNaturezaJuridica_id());
-		destinatario.setRepresentante_id(destinatarioDTO.getRepresentante_id());
+    public static Destinatario convert(DestinatarioDTO destinatarioDTO) {
+	Destinatario destinatario = new Destinatario();
+
+	destinatario.setId(destinatarioDTO.getId());
+
+	Endereco enderEmit = ModelConverter.convert(destinatarioDTO.getEnderEmitDTO());
+	destinatario.setEnderDest(enderEmit);
+	destinatario.setCNPJCPF(destinatarioDTO.getCNPJCPF());
+	destinatario.setIdEstrangeiro(destinatarioDTO.getIdEstrangeiro());
+	destinatario.setIndIEDest(destinatarioDTO.getIndIEDest());
+//	destinatario.setRamoAtividade(ModelConverter.convert(destinatarioDTO.getRamoAtividadeDTO()));
+//	destinatario.setRepresentante(ModelConverter.convert(destinatarioDTO.getRepresentanteDTO()));
+	destinatario.setxNome(destinatarioDTO.getxNome());
+	destinatario.setIE(destinatarioDTO.getIE());
+	destinatario.setIM(destinatarioDTO.getIM());
+	destinatario.setEmail(destinatarioDTO.getEmail());
+//	destinatario.setNaturezaJuridica(ModelConverter.convert(destinatarioDTO.getNaturezaJuridicaDTO()));
+	destinatario.setISUF(destinatarioDTO.getISUF());
+	destinatario.setRamoatividade_id(destinatarioDTO.getRamoAtividade_id());
+	destinatario.setNaturezajuridica_id(destinatarioDTO.getNaturezaJuridica_id());
+	destinatario.setRepresentante_id(destinatarioDTO.getRepresentante_id());
 //		destinatario.setEntrega(ModelConverter.convert(destinatarioDTO.getEntregaDTO()));
 
-		return destinatario;
+	return destinatario;
+    }
+
+    public static Entrega convert(EntregaDTO entregaDTO) {
+	if (entregaDTO == null) {
+	    return null;
 	}
+	Entrega entrega = new Entrega();
+	entrega.setId(entregaDTO.getId());
+	entrega.setLocal(ModelConverter.convert(entregaDTO.getLocalDTO()));
+	entrega.setDestinatario(ModelConverter.convert(entregaDTO.getDestinatarioDTO()));
 
-	public static Entrega convert(EntregaDTO entregaDTO) {
-		if (entregaDTO == null) {
-			return null;
-		}
-		Entrega entrega = new Entrega();
-		entrega.setId(entregaDTO.getId());
-		entrega.setLocal(ModelConverter.convert(entregaDTO.getLocalDTO()));
-		entrega.setDestinatario(ModelConverter.convert(entregaDTO.getDestinatarioDTO()));
+	return entrega;
+    }
 
-		return entrega;
+    public static Local convert(LocalDTO localDTO) {
+	if (localDTO == null) {
+	    return null;
 	}
+	Local local = new Local();
+	local.setEndereco(ModelConverter.convert(localDTO.getEnderecoDTO()));
+	local.setPessoa(ModelConverter.convert(localDTO.getPessoaDTO()));
 
-	public static Local convert(LocalDTO localDTO) {
-		if (localDTO == null) {
-			return null;
-		}
-		Local local = new Local();
-		local.setEndereco(ModelConverter.convert(localDTO.getEndereco()));
-		local.setPessoa(ModelConverter.convert(localDTO.getPessoa()));
+	return local;
+    }
 
-		return local;
-	}
+    public static Pessoa convert(PessoaDTO pessoaDTO) {
+	Pessoa pessoa = new Pessoa();
 
-	public static Pessoa convert(PessoaDTO pessoaDTO) {
-		Pessoa pessoa = new Pessoa();
+	pessoa.setCNPJCPF(pessoaDTO.getCNPJCPF());
+	pessoa.setxNome(pessoaDTO.getxNome());
+	pessoa.setIE(pessoaDTO.getIE());
+	pessoa.setEmail(pessoaDTO.getEmail());
 
-		pessoa.setCNPJCPF(pessoaDTO.getCNPJCPF());
-		pessoa.setxNome(pessoaDTO.getxNome());
-		pessoa.setIE(pessoaDTO.getIE());
-		pessoa.setEmail(pessoaDTO.getEmail());
+	return pessoa;
+    }
 
-		return pessoa;
-	}
+    public static Retirada convert(RetiradaDTO retiradaDTO) {
+	Retirada retirada = new Retirada();
+
+	retirada.setId(retiradaDTO.getId());
+	retirada.setLocal(ModelConverter.convert(retiradaDTO.getLocal()));
+	retirada.setDestinatario(ModelConverter.convert(retiradaDTO.getDestinatarioDTO()));
+
+	return retirada;
+    }
 
 }

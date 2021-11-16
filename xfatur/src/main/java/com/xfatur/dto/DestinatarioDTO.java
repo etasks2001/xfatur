@@ -1,172 +1,169 @@
 package com.xfatur.dto;
 
 import com.xfatur.model.IndIEDest;
-import com.xfatur.model.NaturezaJuridica;
-import com.xfatur.model.RamoAtividade;
-import com.xfatur.model.Representante;
 
 public class DestinatarioDTO {
-	private Integer id;
-	private String CNPJCPF;
-	private String idEstrangeiro;
-	private String xNome;
-	private EnderecoDTO enderEmitDTO;
-	private IndIEDest indIEDest;
-	private String IE;
-	private String ISUF;
-	private String IM;
-	private String email;
-	private RamoAtividade ramoAtividade;
-	private NaturezaJuridica naturezaJuridica;
-	private Representante representante;
-	private Integer ramoAtividade_id;
-	private Integer naturezaJuridica_id;
-	private Integer representante_id;
-	private EntregaDTO entregaDTO;
-	private RetiradaDTO retiradaDTO;
+    private Integer id;
+    private String CNPJCPF;
+    private String idEstrangeiro;
+    private String xNome;
+    private EnderecoDTO enderEmitDTO;
+    private IndIEDest indIEDest;
+    private String IE;
+    private String ISUF;
+    private String IM;
+    private String email;
+    private RamoAtividadeDTO ramoAtividadeDTO;
+    private NaturezaJuridicaDTO naturezaJuridicaDTO;
+    private RepresentanteDTO representanteDTO;
+    private Integer ramoAtividade_id;
+    private Integer naturezaJuridica_id;
+    private Integer representante_id;
+    private EntregaDTO entregaDTO;
+    private RetiradaDTO retiradaDTO;
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+	return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+	this.id = id;
+    }
 
-	public String getCNPJCPF() {
-		return CNPJCPF;
-	}
+    public String getCNPJCPF() {
+	return CNPJCPF;
+    }
 
-	public void setCNPJCPF(String cNPJCPF) {
-		CNPJCPF = cNPJCPF;
-	}
+    public void setCNPJCPF(String cNPJCPF) {
+	CNPJCPF = cNPJCPF;
+    }
 
-	public String getIdEstrangeiro() {
-		return idEstrangeiro;
-	}
+    public String getIdEstrangeiro() {
+	return idEstrangeiro;
+    }
 
-	public void setIdEstrangeiro(String idEstrangeiro) {
-		this.idEstrangeiro = idEstrangeiro;
-	}
+    public void setIdEstrangeiro(String idEstrangeiro) {
+	this.idEstrangeiro = idEstrangeiro;
+    }
 
-	public String getxNome() {
-		return xNome;
-	}
+    public String getxNome() {
+	return xNome;
+    }
 
-	public void setxNome(String xNome) {
-		this.xNome = xNome;
-	}
+    public void setxNome(String xNome) {
+	this.xNome = xNome;
+    }
 
-	public IndIEDest getIndIEDest() {
-		return indIEDest;
-	}
+    public IndIEDest getIndIEDest() {
+	return indIEDest;
+    }
 
-	public void setIndIEDest(IndIEDest indIEDest) {
-		this.indIEDest = indIEDest;
-	}
+    public void setIndIEDest(IndIEDest indIEDest) {
+	this.indIEDest = indIEDest;
+    }
 
-	public String getIE() {
-		return IE;
-	}
+    public String getIE() {
+	return IE;
+    }
 
-	public void setIE(String iE) {
-		IE = iE;
-	}
+    public void setIE(String iE) {
+	IE = iE;
+    }
 
-	public String getISUF() {
-		return ISUF;
-	}
+    public String getISUF() {
+	return ISUF;
+    }
 
-	public void setISUF(String iSUF) {
-		ISUF = iSUF;
-	}
+    public void setISUF(String iSUF) {
+	ISUF = iSUF;
+    }
 
-	public String getIM() {
-		return IM;
-	}
+    public String getIM() {
+	return IM;
+    }
 
-	public void setIM(String iM) {
-		IM = iM;
-	}
+    public void setIM(String iM) {
+	IM = iM;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+	return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+	this.email = email;
+    }
 
-	public RamoAtividade getRamoAtividade() {
-		return ramoAtividade;
-	}
+    public EnderecoDTO getEnderEmitDTO() {
+	return enderEmitDTO;
+    }
 
-	public void setRamoAtividade(RamoAtividade ramoAtividade) {
-		this.ramoAtividade = ramoAtividade;
-	}
+    public void setEnderEmitDTO(EnderecoDTO enderEmitDTO) {
+	this.enderEmitDTO = enderEmitDTO;
+    }
 
-	public NaturezaJuridica getNaturezaJuridica() {
-		return naturezaJuridica;
-	}
+    public Integer getRamoAtividade_id() {
+	return ramoAtividade_id;
+    }
 
-	public void setNaturezaJuridica(NaturezaJuridica naturezaJuridica) {
-		this.naturezaJuridica = naturezaJuridica;
-	}
+    public void setRamoAtividade_id(Integer ramoAtividade_id) {
+	this.ramoAtividade_id = ramoAtividade_id;
+    }
 
-	public Representante getRepresentante() {
-		return representante;
-	}
+    public Integer getNaturezaJuridica_id() {
+	return naturezaJuridica_id;
+    }
 
-	public void setRepresentante(Representante representante) {
-		this.representante = representante;
-	}
+    public void setNaturezaJuridica_id(Integer naturezaJuridica_id) {
+	this.naturezaJuridica_id = naturezaJuridica_id;
+    }
 
-	public EnderecoDTO getEnderEmitDTO() {
-		return enderEmitDTO;
-	}
+    public Integer getRepresentante_id() {
+	return representante_id;
+    }
 
-	public void setEnderEmitDTO(EnderecoDTO enderEmitDTO) {
-		this.enderEmitDTO = enderEmitDTO;
-	}
+    public void setRepresentante_id(Integer representante_id) {
+	this.representante_id = representante_id;
+    }
 
-	public Integer getRamoAtividade_id() {
-		return ramoAtividade_id;
-	}
+    public EntregaDTO getEntregaDTO() {
+	return entregaDTO;
+    }
 
-	public void setRamoAtividade_id(Integer ramoAtividade_id) {
-		this.ramoAtividade_id = ramoAtividade_id;
-	}
+    public void setEntregaDTO(EntregaDTO entregaDTO) {
+	this.entregaDTO = entregaDTO;
+    }
 
-	public Integer getNaturezaJuridica_id() {
-		return naturezaJuridica_id;
-	}
+    public RetiradaDTO getRetiradaDTO() {
+	return retiradaDTO;
+    }
 
-	public void setNaturezaJuridica_id(Integer naturezaJuridica_id) {
-		this.naturezaJuridica_id = naturezaJuridica_id;
-	}
+    public void setRetiradaDTO(RetiradaDTO retiradaDTO) {
+	this.retiradaDTO = retiradaDTO;
+    }
 
-	public Integer getRepresentante_id() {
-		return representante_id;
-	}
+    public RamoAtividadeDTO getRamoAtividadeDTO() {
+	return ramoAtividadeDTO;
+    }
 
-	public void setRepresentante_id(Integer representante_id) {
-		this.representante_id = representante_id;
-	}
+    public void setRamoAtividadeDTO(RamoAtividadeDTO ramoAtividadeDTO) {
+	this.ramoAtividadeDTO = ramoAtividadeDTO;
+    }
 
-	public EntregaDTO getEntregaDTO() {
-		return entregaDTO;
-	}
+    public NaturezaJuridicaDTO getNaturezaJuridicaDTO() {
+	return naturezaJuridicaDTO;
+    }
 
-	public void setEntregaDTO(EntregaDTO entregaDTO) {
-		this.entregaDTO = entregaDTO;
-	}
+    public void setNaturezaJuridicaDTO(NaturezaJuridicaDTO naturezaJuridicaDTO) {
+	this.naturezaJuridicaDTO = naturezaJuridicaDTO;
+    }
 
-	public RetiradaDTO getRetiradaDTO() {
-		return retiradaDTO;
-	}
+    public RepresentanteDTO getRepresentanteDTO() {
+	return representanteDTO;
+    }
 
-	public void setRetiradaDTO(RetiradaDTO retiradaDTO) {
-		this.retiradaDTO = retiradaDTO;
-	}
+    public void setRepresentanteDTO(RepresentanteDTO representanteDTO) {
+	this.representanteDTO = representanteDTO;
+    }
 
 }
