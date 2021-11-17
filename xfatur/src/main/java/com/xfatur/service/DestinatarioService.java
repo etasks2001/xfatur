@@ -2,15 +2,10 @@ package com.xfatur.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xfatur.converter.DTOConverter;
-import com.xfatur.converter.ModelConverter;
-import com.xfatur.dto.DestinatarioDTO;
-import com.xfatur.exception.DestinatarioCNPJCPFNotFoundException;
 import com.xfatur.exception.DestinatarioIdNotFoundException;
 import com.xfatur.model.Destinatario;
 import com.xfatur.repository.DestinatarioRepository;
@@ -20,38 +15,33 @@ public class DestinatarioService {
     @Autowired
     private DestinatarioRepository repository;
 
-    public DestinatarioDTO save(DestinatarioDTO d) {
-	Destinatario salvo = repository.save(ModelConverter.convert(d));
-	return DTOConverter.convert(salvo);
+    public Destinatario save(Destinatario destinatario) {
+	Destinatario saved = repository.save(destinatario);
+	return saved;
     }
 
     public void deleteById(int id) {
 	repository.deleteById(id);
     }
 
-    public DestinatarioDTO findById(Integer id) {
+    public Destinatario findById(Integer id) {
 	Optional<Destinatario> found = repository.findById(id);
 	if (found.isPresent()) {
-	    return DTOConverter.convert(found.get());
+	    return found.get();
 	}
 
 	throw new DestinatarioIdNotFoundException("Destinatario não encontrado");
     }
 
-    public List<DestinatarioDTO> buscaPorNome(String nome) {
+    public List<Destinatario> buscaPorNome(String nome) {
 	List<Destinatario> list = repository.buscaPorNome(nome);
 
-	return list.stream().map(DTOConverter::convert).collect(Collectors.toList());
+	return list;
     }
 
-    public DestinatarioDTO buscaPorCNPJCPF(String cnpjcpf) {
-	try {
-	    Destinatario destinatario = repository.buscaPorCNPJCPF(cnpjcpf);
-	    System.out.println(">>>>>>>>>>>>>>buscacnpj: " + destinatario);
-	    return DTOConverter.convert(destinatario);
-	} catch (Exception e) {
-	    throw new DestinatarioCNPJCPFNotFoundException("CNPJ/CPF não encontrado");
-	}
+    public Destinatario buscaPorCNPJCPF(String cnpjcpf) {
+	Destinatario destinatario = repository.buscaPorCNPJCPF(cnpjcpf);
+	return destinatario;
 
     }
 

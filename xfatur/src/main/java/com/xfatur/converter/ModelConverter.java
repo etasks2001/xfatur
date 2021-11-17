@@ -24,7 +24,7 @@ import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
 import com.xfatur.model.Retirada;
 
-public class ModelConverter {
+class ModelConverter {
 
     public static List<Destinatario> convert(List<DestinatarioDTO> list) {
 	return list.stream().map(ModelConverter::convert).collect(Collectors.toList());

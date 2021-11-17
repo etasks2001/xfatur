@@ -24,103 +24,104 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-import com.xfatur.dto.RamoAtividadeDTO;
 import com.xfatur.exception.RamoAtividadeDescricaoException;
 import com.xfatur.exception.RamoAtividadeIdNotFoundException;
+import com.xfatur.model.RamoAtividade;
 import com.xfatur.testutil.CreateModelTest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 class RamoAtividadeServiceTest {
-	@Autowired
-	RamoAtividadeService service;
+    @Autowired
+    RamoAtividadeService service;
 
-	List<Integer> ids = new ArrayList<Integer>();
+    List<Integer> ids = new ArrayList<Integer>();
 
-	static Stream<RamoAtividadeDTO> model() {
-		return Stream.of(CreateModelTest.createRamoAtividade1(), CreateModelTest.createRamoAtividade2(), CreateModelTest.createRamoAtividade3(), CreateModelTest.createRamoAtividade4(), CreateModelTest.createRamoAtividade5(), CreateModelTest.createRamoAtividade6());
+    static Stream<RamoAtividade> model() {
+	return Stream.of(CreateModelTest.createRamoAtividade1(), CreateModelTest.createRamoAtividade2(), CreateModelTest.createRamoAtividade3(), CreateModelTest.createRamoAtividade4(),
+		CreateModelTest.createRamoAtividade5(), CreateModelTest.createRamoAtividade6());
 
-	}
+    }
 
-	@ParameterizedTest
-	@MethodSource("model")
-	@Order(1)
-	void test_save(RamoAtividadeDTO ra) {
-		RamoAtividadeDTO ramoAtividadeDTO = service.save(ra);
-		ids.add(ramoAtividadeDTO.getId());
-	}
+    @ParameterizedTest
+    @MethodSource("model")
+    @Order(1)
+    void test_save(RamoAtividade ra) {
+	RamoAtividade ramoAtividade = service.save(ra);
+	ids.add(ramoAtividade.getId());
+    }
 
-	@Test
-	@Order(2)
-	void test_update() {
-		ids.forEach(id -> {
-			RamoAtividadeDTO ramoAtividadeDTO = service.findById(id);
-			ramoAtividadeDTO.setDescricao(ramoAtividadeDTO.getDescricao() + " alterado");
-			service.save(ramoAtividadeDTO);
-		});
-	}
+    @Test
+    @Order(2)
+    void test_update() {
+	ids.forEach(id -> {
+	    RamoAtividade ramoAtividade = service.findById(id);
+	    ramoAtividade.setDescricao(ramoAtividade.getDescricao() + " alterado");
+	    service.save(ramoAtividade);
+	});
+    }
 
-	@ParameterizedTest
-	@MethodSource("model")
-	@Order(3)
-	void test_save_ja_cadastrado(RamoAtividadeDTO ramoAtividadeDTO) {
-		ramoAtividadeDTO.setDescricao(ramoAtividadeDTO.getDescricao() + " alterado");
+    @ParameterizedTest
+    @MethodSource("model")
+    @Order(3)
+    void test_save_ja_cadastrado(RamoAtividade ramoAtividade) {
+	ramoAtividade.setDescricao(ramoAtividade.getDescricao() + " alterado");
 
-		RamoAtividadeDescricaoException exception = Assertions.assertThrows(RamoAtividadeDescricaoException.class, () -> service.save(ramoAtividadeDTO));
+	RamoAtividadeDescricaoException exception = Assertions.assertThrows(RamoAtividadeDescricaoException.class, () -> service.save(ramoAtividade));
 
-		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Descrição já cadastrada"));
-	}
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Descrição já cadastrada"));
+    }
 
-	@Test
-	@Order(4)
-	void test_buscaPorDescricao() {
-		List<RamoAtividadeDTO> list = this.service.buscaPorDescricao("M");
+    @Test
+    @Order(4)
+    void test_buscaPorDescricao() {
+	List<RamoAtividade> list = this.service.buscaPorDescricao("M");
 
-		MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
-	}
+	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
+    }
 
-	@Test
-	@Order(5)
-	void test_buscaPorDescricao_nao_encontradao() {
-		List<RamoAtividadeDTO> list = this.service.buscaPorDescricao("fdasrfsdare");
+    @Test
+    @Order(5)
+    void test_buscaPorDescricao_nao_encontradao() {
+	List<RamoAtividade> list = this.service.buscaPorDescricao("fdasrfsdare");
 
-		MatcherAssert.assertThat(list.size(), Matchers.is(0));
-	}
+	MatcherAssert.assertThat(list.size(), Matchers.is(0));
+    }
 
-	@Test
-	@Order(6)
-	void test_findById() {
-		ids.forEach(id -> {
-			RamoAtividadeDTO ramoAtividadeDTO = this.service.findById(id);
-			assertNotNull(ramoAtividadeDTO);
-		});
-	}
+    @Test
+    @Order(6)
+    void test_findById() {
+	ids.forEach(id -> {
+	    RamoAtividade ramoAtividade = this.service.findById(id);
+	    assertNotNull(ramoAtividade);
+	});
+    }
 
-	@Test
-	@Order(7)
-	void test_findById_nao_encontrado() {
-		Exception exception = Assertions.assertThrows(RamoAtividadeIdNotFoundException.class, () -> this.service.findById(100));
+    @Test
+    @Order(7)
+    void test_findById_nao_encontrado() {
+	Exception exception = Assertions.assertThrows(RamoAtividadeIdNotFoundException.class, () -> this.service.findById(100));
 
-		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Ramo de Atividade não encontrado"));
-	}
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Ramo de Atividade não encontrado"));
+    }
 
-	@Test
-	@Order(8)
-	void delete() {
-		ids.forEach(id -> {
-			Boolean apagado = service.delete(id);
+    @Test
+    @Order(8)
+    void delete() {
+	ids.forEach(id -> {
+	    Boolean apagado = service.delete(id);
 
-			assertEquals(apagado, TRUE);
-		});
-	}
+	    assertEquals(apagado, TRUE);
+	});
+    }
 
-	@Test
-	@Order(9)
-	void delete_nao_encontrado() {
-		Boolean result = this.service.delete(454);
+    @Test
+    @Order(9)
+    void delete_nao_encontrado() {
+	Boolean result = this.service.delete(454);
 
-		assertEquals(result, FALSE);
-	}
+	assertEquals(result, FALSE);
+    }
 
 }

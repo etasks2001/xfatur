@@ -24,7 +24,7 @@ import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
 import com.xfatur.model.Retirada;
 
-public class DTOConverter {
+class DTOConverter {
 
     public static EmitenteDTO convert(Emitente emitente) {
 	EmitenteDTO emitenteDTO = new EmitenteDTO();
@@ -134,7 +134,7 @@ public class DTOConverter {
 //	destinatarioDTO.setRamoAtividade_id(destinatario.getRamoatividade_id());
 	destinatarioDTO.setNaturezaJuridica_id(destinatario.getNaturezajuridica_id());
 //	destinatarioDTO.setRepresentante_id(destinatario.getRepresentante_id());
-	destinatarioDTO.setEntregaDTO(DTOConverter.convert(destinatario.getEntrega()));
+//	destinatarioDTO.setEntregaDTO(DTOConverter.convert(destinatario.getEntrega()));
 //	destinatarioDTO.setRamoAtividadeDTO(DTOConverter.convert(destinatario.getRamoAtividade()));
 //	destinatarioDTO.setRepresentanteDTO(DTOConverter.convert(destinatario.getRepresentante()));
 //	destinatarioDTO.setNaturezaJuridicaDTO(DTOConverter.convert(destinatario.getNaturezaJuridica()));

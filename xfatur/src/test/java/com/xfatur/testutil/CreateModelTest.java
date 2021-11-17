@@ -4,14 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-import com.xfatur.converter.DTOConverter;
-import com.xfatur.dto.DestinatarioDTO;
-import com.xfatur.dto.EmitenteDTO;
-import com.xfatur.dto.EntregaDTO;
-import com.xfatur.dto.NaturezaJuridicaDTO;
-import com.xfatur.dto.RamoAtividadeDTO;
-import com.xfatur.dto.RepresentanteDTO;
-import com.xfatur.dto.RetiradaDTO;
 import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
@@ -26,7 +18,7 @@ import com.xfatur.model.Retirada;
 
 public class CreateModelTest {
 
-    public static RepresentanteDTO createRepresentante1() {
+    public static Representante createRepresentante1() {
 
 	Representante representante = new Representante();
 	representante.setCNPJCPF("77851609000107");
@@ -37,7 +29,7 @@ public class CreateModelTest {
 	representante.setIE("111222333444");
 	representante.setEmail("email@outrosemail.com");
 
-	return DTOConverter.convert(representante);
+	return representante;
 
     }
 
@@ -57,7 +49,7 @@ public class CreateModelTest {
 	return endereco;
     }
 
-    public static RepresentanteDTO createRepresentante2() {
+    public static Representante createRepresentante2() {
 
 	Representante representante = new Representante();
 	representante.setCNPJCPF("54705267000103");
@@ -68,7 +60,7 @@ public class CreateModelTest {
 	representante.setIE("444888666888");
 	representante.setEmail("email@vendafacil.com.br");
 
-	return DTOConverter.convert(representante);
+	return representante;
 
     }
 
@@ -88,7 +80,7 @@ public class CreateModelTest {
 	return endereco;
     }
 
-    public static EmitenteDTO createEmitente1() {
+    public static Emitente createEmitente1() {
 	Emitente emitente = new Emitente();
 	emitente.setCNPJ("65037603000103");
 	emitente.setxNome("Empresa de Viagens Ltda");
@@ -105,7 +97,7 @@ public class CreateModelTest {
 	emitente.setNf_serie_atual(0);
 	emitente.setUltima_nnf(25454);
 
-	return DTOConverter.convert(emitente);
+	return emitente;
 
     }
 
@@ -125,89 +117,89 @@ public class CreateModelTest {
 	return enderecoEmitente;
     }
 
-    public static NaturezaJuridicaDTO createNaturezaJuridica1() {
+    public static NaturezaJuridica createNaturezaJuridica1() {
 	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
 	naturezaJuridica.setDescricao("EMPRESA PEQUENO PORTE (EPP)");
 
-	return DTOConverter.convert(naturezaJuridica);
+	return naturezaJuridica;
     }
 
-    public static NaturezaJuridicaDTO createNaturezaJuridica2() {
+    public static NaturezaJuridica createNaturezaJuridica2() {
 	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
 
 	naturezaJuridica = new NaturezaJuridica();
 	naturezaJuridica.setDescricao("MICRO EMPRESA (ME)");
-	return DTOConverter.convert(naturezaJuridica);
+	return naturezaJuridica;
     }
 
-    public static NaturezaJuridicaDTO createNaturezaJuridica3() {
+    public static NaturezaJuridica createNaturezaJuridica3() {
 	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
 
 	naturezaJuridica = new NaturezaJuridica();
 	naturezaJuridica.setDescricao("EMPRESA (OUTRAS)");
-	return DTOConverter.convert(naturezaJuridica);
+	return naturezaJuridica;
 
     }
 
-    public static NaturezaJuridicaDTO createNaturezaJuridica4() {
+    public static NaturezaJuridica createNaturezaJuridica4() {
 	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
 
 	naturezaJuridica = new NaturezaJuridica();
 	naturezaJuridica.setDescricao("CONSUMIDOR FINAL");
-	return DTOConverter.convert(naturezaJuridica);
+	return naturezaJuridica;
     }
 
-    public static NaturezaJuridicaDTO createNaturezaJuridica5() {
+    public static NaturezaJuridica createNaturezaJuridica5() {
 	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
 
 	naturezaJuridica = new NaturezaJuridica();
 	naturezaJuridica.setDescricao("ENQUADRADO NO SIMPLES NACIONAL");
-	return DTOConverter.convert(naturezaJuridica);
+	return naturezaJuridica;
     }
 
-    public static RamoAtividadeDTO createRamoAtividade1() {
+    public static RamoAtividade createRamoAtividade1() {
 	RamoAtividade ramoAtividade = new RamoAtividade();
 	ramoAtividade.setDescricao("ATACADISTA");
-	return DTOConverter.convert(ramoAtividade);
+	return ramoAtividade;
     }
 
-    public static RamoAtividadeDTO createRamoAtividade2() {
+    public static RamoAtividade createRamoAtividade2() {
 	RamoAtividade ramoAtividade = new RamoAtividade();
 	ramoAtividade = new RamoAtividade();
 	ramoAtividade.setDescricao("BAR");
 
-	return DTOConverter.convert(ramoAtividade);
+	return ramoAtividade;
     }
 
-    public static RamoAtividadeDTO createRamoAtividade3() {
+    public static RamoAtividade createRamoAtividade3() {
 
 	RamoAtividade ramoAtividade = new RamoAtividade();
 	ramoAtividade.setDescricao("BAR/RESTAURANTE");
 
-	return DTOConverter.convert(ramoAtividade);
+	return ramoAtividade;
     }
 
-    public static RamoAtividadeDTO createRamoAtividade4() {
+    public static RamoAtividade createRamoAtividade4() {
 	RamoAtividade ramoAtividade = new RamoAtividade();
 	ramoAtividade.setDescricao("BUFFET");
-	return DTOConverter.convert(ramoAtividade);
+	return ramoAtividade;
     }
 
-    public static RamoAtividadeDTO createRamoAtividade5() {
+    public static RamoAtividade createRamoAtividade5() {
 	RamoAtividade ramoAtividade = new RamoAtividade();
 	ramoAtividade.setDescricao("CONSUMIDOR");
-	return DTOConverter.convert(ramoAtividade);
+	return ramoAtividade;
 
     }
 
-    public static RamoAtividadeDTO createRamoAtividade6() {
+    public static RamoAtividade createRamoAtividade6() {
 	RamoAtividade ramoAtividade = new RamoAtividade();
 	ramoAtividade.setDescricao("DIRETO");
-	return DTOConverter.convert(ramoAtividade);
+	return ramoAtividade;
 
     }
 
-    public static DestinatarioDTO createDestinatarioPJ() {
+    public static Destinatario createDestinatarioPJ() {
 	Destinatario destinatario = new Destinatario();
 
 	Endereco enderDest = createEndereco3();
@@ -225,10 +217,10 @@ public class CreateModelTest {
 //	destinatario.setRepresentante_id(1);
 	destinatario.setNaturezajuridica_id(1);
 
-	return DTOConverter.convert(destinatario);
+	return destinatario;
     }
 
-    public static DestinatarioDTO createDestinatarioPJI() {
+    public static Destinatario createDestinatarioPJI() {
 	Destinatario destinatario = new Destinatario();
 
 	Endereco enderDest = createEndereco1();
@@ -246,10 +238,10 @@ public class CreateModelTest {
 //	destinatario.setRepresentante_id(1);
 	destinatario.setNaturezajuridica_id(1);
 
-	return DTOConverter.convert(destinatario);
+	return destinatario;
     }
 
-    public static DestinatarioDTO createDestinatarioPF() {
+    public static Destinatario createDestinatarioPF() {
 	Destinatario destinatario = new Destinatario();
 
 	Endereco enderDest = createEndereco2();
@@ -267,7 +259,7 @@ public class CreateModelTest {
 //	destinatario.setRepresentante_id(1);
 	destinatario.setNaturezajuridica_id(3);
 
-	return DTOConverter.convert(destinatario);
+	return destinatario;
     }
 
     private static Endereco createEndereco4() {
@@ -286,17 +278,17 @@ public class CreateModelTest {
 	return enderDest;
     }
 
-    public static Stream<RamoAtividadeDTO> ramoAtividadeList() {
+    public static Stream<RamoAtividade> ramoAtividadeList() {
 	return Stream.of(CreateModelTest.createRamoAtividade1(), CreateModelTest.createRamoAtividade2(), CreateModelTest.createRamoAtividade3(), CreateModelTest.createRamoAtividade4(),
 		CreateModelTest.createRamoAtividade5(), CreateModelTest.createRamoAtividade6());
     }
 
-    public static Stream<NaturezaJuridicaDTO> naturezaJuridicaList() {
+    public static Stream<NaturezaJuridica> naturezaJuridicaList() {
 	return Stream.of(CreateModelTest.createNaturezaJuridica1(), CreateModelTest.createNaturezaJuridica2(), CreateModelTest.createNaturezaJuridica3(), CreateModelTest.createNaturezaJuridica4(),
 		CreateModelTest.createNaturezaJuridica5());
     }
 
-    public static Stream<RepresentanteDTO> representanteList() {
+    public static Stream<Representante> representanteList() {
 	return Stream.of(CreateModelTest.createRepresentante1(), CreateModelTest.createRepresentante2());
     }
 
@@ -308,7 +300,7 @@ public class CreateModelTest {
 
     }
 
-    public static EntregaDTO createEntrega1() {
+    public static Entrega createEntrega1() {
 	Entrega entrega = new Entrega();
 
 	Local local = new Local();
@@ -316,10 +308,10 @@ public class CreateModelTest {
 	local.setPessoa(createPessoa2());
 	entrega.setLocal(local);
 
-	return DTOConverter.convert(entrega);
+	return entrega;
     }
 
-    public static EntregaDTO createEntrega2() {
+    public static Entrega createEntrega2() {
 	Entrega entrega = new Entrega();
 
 	Local local = new Local();
@@ -327,10 +319,10 @@ public class CreateModelTest {
 	local.setPessoa(createPessoa2());
 	entrega.setLocal(local);
 
-	return DTOConverter.convert(entrega);
+	return entrega;
     }
 
-    public static EntregaDTO createEntrega3() {
+    public static Entrega createEntrega3() {
 	Entrega entrega = new Entrega();
 
 	Local local = new Local();
@@ -338,7 +330,7 @@ public class CreateModelTest {
 	local.setPessoa(createPessoa1());
 	entrega.setLocal(local);
 
-	return DTOConverter.convert(entrega);
+	return entrega;
     }
 
     private static Pessoa createPessoa1() {
@@ -361,7 +353,7 @@ public class CreateModelTest {
 	return pessoa;
     }
 
-    public static RetiradaDTO createRetirada1() {
+    public static Retirada createRetirada1() {
 	Retirada retirada = new Retirada();
 
 	Local local = new Local();
@@ -369,10 +361,10 @@ public class CreateModelTest {
 	local.setPessoa(createPessoa2());
 	retirada.setLocal(local);
 
-	return DTOConverter.convert(retirada);
+	return retirada;
     }
 
-    public static RetiradaDTO createRetirada2() {
+    public static Retirada createRetirada2() {
 	Retirada retirada = new Retirada();
 
 	Local local = new Local();
@@ -380,7 +372,7 @@ public class CreateModelTest {
 	local.setPessoa(createPessoa1());
 	retirada.setLocal(local);
 
-	return DTOConverter.convert(retirada);
+	return retirada;
     }
 
 }

@@ -1,4 +1,39 @@
-﻿/*drop table enderecoentrega;
+﻿/*
+drop table phone_number;
+drop table customer;
+
+
+create table customer(
+	id serial,
+	name varchar(20),
+	primary key(id)
+);
+
+
+create table phone_number(
+	id serial,
+	customer_id int not null,
+	number varchar(20),
+	type varchar(20),
+	primary key(id),
+	foreign key (customer_id) references customer(id)
+);
+
+
+select * from customer order by id;
+
+select * from phone_number;
+
+
+*/
+
+
+
+
+
+
+
+/*drop table enderecoentrega;
 drop table cliente;
 
 create table cliente(
@@ -390,4 +425,15 @@ select * from emitente;
 select * from serie;
 
 --delete from serie where serie = 55
+
+
+
+
+
+
+
+
+
+
+
 

@@ -24,9 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-import com.xfatur.dto.NaturezaJuridicaDTO;
 import com.xfatur.exception.NaturezaJuridicaException;
 import com.xfatur.exception.NaturezaJuridicaIdNotFoundException;
+import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.testutil.CreateModelTest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -38,7 +38,7 @@ class NaturezaJuridicaServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    static Stream<NaturezaJuridicaDTO> model() {
+    static Stream<NaturezaJuridica> model() {
 	return Stream.of(CreateModelTest.createNaturezaJuridica1(), CreateModelTest.createNaturezaJuridica2(), CreateModelTest.createNaturezaJuridica3(), CreateModelTest.createNaturezaJuridica4(),
 		CreateModelTest.createNaturezaJuridica5());
     }
@@ -46,9 +46,9 @@ class NaturezaJuridicaServiceTest {
     @ParameterizedTest
     @MethodSource("model")
     @Order(1)
-    void test_save(NaturezaJuridicaDTO nj) {
-	NaturezaJuridicaDTO naturezaJuridicaDTO = service.save(nj);
-	ids.add(naturezaJuridicaDTO.getId());
+    void test_save(NaturezaJuridica nj) {
+	NaturezaJuridica naturezaJuridica = service.save(nj);
+	ids.add(naturezaJuridica.getId());
     }
 
     @Test
@@ -56,19 +56,19 @@ class NaturezaJuridicaServiceTest {
     void test_update() {
 	ids.forEach(id -> {
 	    System.out.println(">>>>>>>>>>>>>>>>>: " + id);
-	    NaturezaJuridicaDTO naturezaJuridicaDTO = service.findById(id);
-	    naturezaJuridicaDTO.setDescricao(naturezaJuridicaDTO.getDescricao() + " alterado");
-	    service.save(naturezaJuridicaDTO);
+	    NaturezaJuridica naturezaJuridica = service.findById(id);
+	    naturezaJuridica.setDescricao(naturezaJuridica.getDescricao() + " alterado");
+	    service.save(naturezaJuridica);
 	});
     }
 
     @ParameterizedTest
     @MethodSource("model")
     @Order(3)
-    void test_save_ja_cadastrado(NaturezaJuridicaDTO naturezaJuridicaDTO) {
-	naturezaJuridicaDTO.setDescricao(naturezaJuridicaDTO.getDescricao() + " alterado");
+    void test_save_ja_cadastrado(NaturezaJuridica naturezaJuridica) {
+	naturezaJuridica.setDescricao(naturezaJuridica.getDescricao() + " alterado");
 
-	NaturezaJuridicaException exception = Assertions.assertThrows(NaturezaJuridicaException.class, () -> service.save(naturezaJuridicaDTO));
+	NaturezaJuridicaException exception = Assertions.assertThrows(NaturezaJuridicaException.class, () -> service.save(naturezaJuridica));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Descrição já cadastrada"));
     }
@@ -76,7 +76,7 @@ class NaturezaJuridicaServiceTest {
     @Test
     @Order(4)
     void test_buscaPorDescricao() {
-	List<NaturezaJuridicaDTO> list = this.service.buscaPorDescricao("M");
+	List<NaturezaJuridica> list = this.service.buscaPorDescricao("M");
 
 	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
     }
@@ -84,7 +84,7 @@ class NaturezaJuridicaServiceTest {
     @Test
     @Order(5)
     void test_buscaPorDescricao_nao_encontrado() {
-	List<NaturezaJuridicaDTO> list = this.service.buscaPorDescricao("fdasdfdasdf");
+	List<NaturezaJuridica> list = this.service.buscaPorDescricao("fdasdfdasdf");
 
 	MatcherAssert.assertThat(list.size(), Matchers.is(0));
     }
@@ -93,8 +93,8 @@ class NaturezaJuridicaServiceTest {
     @Order(6)
     void test_findById() {
 	ids.forEach(id -> {
-	    NaturezaJuridicaDTO naturezaJuridicaDTO = service.findById(id);
-	    assertNotNull(naturezaJuridicaDTO);
+	    NaturezaJuridica naturezaJuridica = service.findById(id);
+	    assertNotNull(naturezaJuridica);
 	});
     }
 
