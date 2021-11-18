@@ -1,5 +1,7 @@
 package com.xfatur.repository.test;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -17,37 +19,63 @@ import com.xfatur.model.test.PhoneNumber;
 @TestMethodOrder(OrderAnnotation.class)
 class CustumerRepositoryTest {
 
-    @Autowired
-    CustomerRepository repository;
+	@Autowired
+	CustomerRepository repository;
 
-    @Test
-    @Order(1)
-    void test_cria_customer() {
-	Customer customer = new Customer();
-	customer.setName("Heitor");
+	@Test
+	@Order(1)
+	void test_cria_customer() {
+		Customer customer = new Customer();
+		customer.setName("Heitor");
 
-	PhoneNumber phoneNumber1 = new PhoneNumber();
-	phoneNumber1.setNumber("7489789");
-	phoneNumber1.setType("cell");
+		PhoneNumber phoneNumber1 = new PhoneNumber();
+		phoneNumber1.setNumber("7489789");
+		phoneNumber1.setType("work");
 
-	PhoneNumber phoneNumber2 = new PhoneNumber();
-	phoneNumber2.setNumber("15935489");
-	phoneNumber2.setType("home");
+		PhoneNumber phoneNumber2 = new PhoneNumber();
+		phoneNumber2.setNumber("15935489");
+		phoneNumber2.setType("home");
 
-	customer.addPhoneNumber(phoneNumber1);
-	customer.addPhoneNumber(phoneNumber2);
+		customer.addPhoneNumber(phoneNumber1);
+		customer.addPhoneNumber(phoneNumber2);
 
-	repository.save(customer);
+		repository.save(customer);
 
-    }
+	}
 
-    @Test
-    @Order(2)
-    void test_altera_customer() {
-	Customer customer = repository.findById(1).get();
+	@Test
+	@Order(2)
+	void test_load_customer() {
+		Customer customer = repository.findById(1).get();
+		System.out.println(customer.getName());
 
-	customer.setName(customer.getName() + "888");
+		Set<PhoneNumber> phoneNumbers = customer.getPhoneNumbers();
+		phoneNumbers.forEach(phoneNumber -> System.out.println(phoneNumber.getNumber()));
+	}
 
-	repository.save(customer);
-    }
+	@Test
+	@Order(3)
+	void test_update_customer() {
+		Customer customer = repository.findById(1).get();
+		customer.setName("Heitor Augusto");
+
+		Set<PhoneNumber> phoneNumbers = customer.getPhoneNumbers();
+
+		phoneNumbers.forEach(pn -> {
+			if (pn.getId() == 1) {
+				pn.setNumber("55 11 3333-4444");
+				pn.setType("cell");
+			} else if (pn.getId() == 2) {
+				pn.setNumber("55 11 6666-9999");
+				pn.setType("school");
+			}
+		});
+		repository.save(customer);
+	}
+//
+//	@Test
+//	void test_delete() {
+//		repository.deleteById(1);
+//	}
+
 }
