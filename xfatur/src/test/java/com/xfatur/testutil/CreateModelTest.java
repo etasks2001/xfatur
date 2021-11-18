@@ -213,9 +213,9 @@ public class CreateModelTest {
 	destinatario.setISUF(null);
 	destinatario.setIM(null);
 	destinatario.setEmail("mercadodobairro@gmail.com");
-	destinatario.setRamoatividade_id(1);
+//	destinatario.setRamoatividade_id(1);
 //	destinatario.setRepresentante_id(1);
-	destinatario.setNaturezajuridica_id(1);
+//	destinatario.setNaturezajuridica_id(1);
 
 	return destinatario;
     }
@@ -234,9 +234,9 @@ public class CreateModelTest {
 	destinatario.setISUF(null);
 	destinatario.setIM(null);
 	destinatario.setEmail("mercadodobairro@gmail.com");
-	destinatario.setRamoatividade_id(1);
+//	destinatario.setRamoatividade_id(1);
 //	destinatario.setRepresentante_id(1);
-	destinatario.setNaturezajuridica_id(1);
+//	destinatario.setNaturezajuridica_id(1);
 
 	return destinatario;
     }
@@ -255,9 +255,9 @@ public class CreateModelTest {
 	destinatario.setISUF(null);
 	destinatario.setIM(null);
 	destinatario.setEmail("heitoraugusto@hotmail.com");
-	destinatario.setRamoatividade_id(1);
+//	destinatario.setRamoatividade_id(1);
 //	destinatario.setRepresentante_id(1);
-	destinatario.setNaturezajuridica_id(3);
+//	destinatario.setNaturezajuridica_id(3);
 
 	return destinatario;
     }

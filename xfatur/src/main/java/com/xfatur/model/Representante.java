@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Representante {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -21,7 +23,7 @@ public class Representante {
     private String IE;
     private String email;
 
-    @OneToMany(mappedBy = "representante")
+    @OneToMany(mappedBy = "representante", fetch = FetchType.LAZY)
     private List<Destinatario> destinatarios;
 
     public Integer getId() {

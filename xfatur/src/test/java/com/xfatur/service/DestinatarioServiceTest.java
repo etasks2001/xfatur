@@ -1,6 +1,7 @@
 package com.xfatur.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
+import com.xfatur.exception.DestinatarioCNPJCPFExistException;
 import com.xfatur.exception.DestinatarioIdNotFoundException;
 import com.xfatur.model.Destinatario;
 import com.xfatur.model.Entrega;
@@ -103,32 +105,51 @@ class DestinatarioServiceTest {
 	int naturezaJuridica_id = CreateModelTest.getCodigoAleatorio(idsNaturezaJuridica);
 	int representante_id = CreateModelTest.getCodigoAleatorio(idsRepresentante);
 
-	destinatario.setRamoatividade_id(ramoAtividade_id);
-	destinatario.setNaturezajuridica_id(naturezaJuridica_id);
-	destinatario.setRepresentante_id(representante_id);
+	RamoAtividade ramoAtividade = ramoAtividadeService.findById(ramoAtividade_id);
+	NaturezaJuridica naturezaJuridica = naturezaJuridicaService.findById(naturezaJuridica_id);
+	Representante representante = representanteService.findById(representante_id);
+
+	destinatario.setRamoAtividade(ramoAtividade);
+	destinatario.setNaturezaJuridica(naturezaJuridica);
+	destinatario.setRepresentante(representante);
 
 	Destinatario saved = destinatarioService.save(destinatario);
 
 	idsDestinatario.add(saved.getId());
     }
 
-//    @ParameterizedTest
-//    @MethodSource("model")
-//    @Order(2)
-//    void test_save_cnpjcpf_ja_cadastrado_exception(Destinatario destinatario) {
-//	Exception exception = Assertions.assertThrows(DestinatarioCNPJCPFExistException.class, () -> destinatarioService.save(destinatario));
-//
-//	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF já cadastrado"));
-//    }
+    @ParameterizedTest
+    @MethodSource("model")
+    @Order(2)
+    void test_save_cnpjcpf_ja_cadastrado_exception(Destinatario destinatario) {
+	Exception exception = Assertions.assertThrows(DestinatarioCNPJCPFExistException.class, () -> {
+	    int ramoAtividade_id = CreateModelTest.getCodigoAleatorio(idsRamoAtividade);
+	    int naturezaJuridica_id = CreateModelTest.getCodigoAleatorio(idsNaturezaJuridica);
+	    int representante_id = CreateModelTest.getCodigoAleatorio(idsRepresentante);
 
-//    @ParameterizedTest
-//    @MethodSource("model")
-//    @Order(3)
-//    void test_busca_cnpjcpf_nao_encontrado_exception(Destinatario destinatario) {
-//	Exception exception = Assertions.assertThrows(DestinatarioCNPJCPFNotFoundException.class, () -> destinatarioService.buscaPorCNPJCPF("456"));
-//
-//	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF não encontrado"));
-//    }
+	    RamoAtividade ramoAtividade = ramoAtividadeService.findById(ramoAtividade_id);
+	    NaturezaJuridica naturezaJuridica = naturezaJuridicaService.findById(naturezaJuridica_id);
+	    Representante representante = representanteService.findById(representante_id);
+
+	    destinatario.setRamoAtividade(ramoAtividade);
+	    destinatario.setNaturezaJuridica(naturezaJuridica);
+	    destinatario.setRepresentante(representante);
+
+	    destinatarioService.save(destinatario);
+	}
+
+	);
+
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF já cadastrado"));
+    }
+
+    @Test
+    @Order(3)
+    void test_busca_cnpjcpf_nao_encontrado_exception() {
+	Destinatario destinatario = destinatarioService.buscaPorCNPJCPF("456");
+
+	assertNull(destinatario);
+    }
 
     @Test
     @Order(4)

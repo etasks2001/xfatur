@@ -1,6 +1,7 @@
 ﻿/*
-drop table phone_number;
-drop table customer;
+
+drop table if exists phone_number;
+drop table if exists customer;
 
 
 create table customer(
@@ -22,12 +23,48 @@ create table phone_number(
 
 select * from customer order by id;
 
-select * from phone_number;
+select * from phone_number  order by customer_id;
+delete from phone_number;
 
 
 */
 
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
+
+/*
+
+
+drop table if exists bankaccount;
+
+create table (
+	accno int,
+	lastname varchar(25),
+	firstname varchar(25),
+	bal int
+);
+
+insert into bankaccount values(1,'obama','barack',5000);
+insert into bankaccount values(2,'donald','trump',4000);
+
+select * from bankaccount;
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+
+
+
+
+
+
+
+
+
+
+
+*/
 
 
 
@@ -192,9 +229,10 @@ create table destinatario(
 	ISUF varchar(9) null,
 	IM varchar(15) null, 
 	email varchar(60) null,
-	ramoatividade_id int references ramoatividade,
-	naturezajuridica_id int references naturezajuridica,
+	ramoatividade_id int not null references ramoatividade,
+	naturezajuridica_id int not null references naturezajuridica,
 	representante_id int not null references representante,
+
 	primary key (id),
 	unique (CNPJCPF)
 );

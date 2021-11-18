@@ -125,9 +125,9 @@ class ModelConverter {
 	destinatario.setEmail(destinatarioDTO.getEmail());
 //	destinatario.setNaturezaJuridica(ModelConverter.convert(destinatarioDTO.getNaturezaJuridicaDTO()));
 	destinatario.setISUF(destinatarioDTO.getISUF());
-	destinatario.setRamoatividade_id(destinatarioDTO.getRamoAtividade_id());
-	destinatario.setNaturezajuridica_id(destinatarioDTO.getNaturezaJuridica_id());
-	destinatario.setRepresentante_id(destinatarioDTO.getRepresentante_id());
+//	destinatario.setRamoatividade_id(destinatarioDTO.getRamoAtividade_id());
+//	destinatario.setNaturezajuridica_id(destinatarioDTO.getNaturezaJuridica_id());
+//	destinatario.setRepresentante_id(destinatarioDTO.getRepresentante_id());
 //		destinatario.setEntrega(ModelConverter.convert(destinatarioDTO.getEntregaDTO()));
 
 	return destinatario;

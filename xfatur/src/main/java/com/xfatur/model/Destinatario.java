@@ -25,10 +25,6 @@ public class Destinatario {
     private String IM;
     private String email;
 
-    private Integer ramoatividade_id;
-    private Integer naturezajuridica_id;
-    private Integer representante_id;
-
 //    @OneToOne(cascade = CascadeType.ALL, mappedBy = "destinatario", fetch = FetchType.LAZY)
 //    private Entrega entrega;
 //
@@ -36,15 +32,15 @@ public class Destinatario {
 //    private Retirada retirada;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ramoatividade_id", insertable = false, updatable = false)
+    @JoinColumn(name = "ramoatividade_id")
     private RamoAtividade ramoAtividade;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "naturezajuridica_id", insertable = false, updatable = false)
+    @JoinColumn(name = "naturezajuridica_id")
     private NaturezaJuridica naturezaJuridica;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "representante_id", insertable = false, updatable = false)
+    @JoinColumn(name = "representante_id")
     private Representante representante;
 
     public Integer getId() {
@@ -125,30 +121,6 @@ public class Destinatario {
 
     public void setEmail(String email) {
 	this.email = email;
-    }
-
-    public Integer getRamoatividade_id() {
-	return ramoatividade_id;
-    }
-
-    public void setRamoatividade_id(Integer ramoatividade_id) {
-	this.ramoatividade_id = ramoatividade_id;
-    }
-
-    public Integer getNaturezajuridica_id() {
-	return naturezajuridica_id;
-    }
-
-    public void setNaturezajuridica_id(Integer naturezajuridica_id) {
-	this.naturezajuridica_id = naturezajuridica_id;
-    }
-
-    public Integer getRepresentante_id() {
-	return representante_id;
-    }
-
-    public void setRepresentante_id(Integer representante_id) {
-	this.representante_id = representante_id;
     }
 
     public RamoAtividade getRamoAtividade() {

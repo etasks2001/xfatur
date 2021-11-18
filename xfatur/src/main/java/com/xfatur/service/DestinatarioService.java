@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.xfatur.exception.DestinatarioCNPJCPFExistException;
 import com.xfatur.exception.DestinatarioIdNotFoundException;
 import com.xfatur.model.Destinatario;
 import com.xfatur.repository.DestinatarioRepository;
@@ -16,8 +17,13 @@ public class DestinatarioService {
     private DestinatarioRepository repository;
 
     public Destinatario save(Destinatario destinatario) {
-	Destinatario saved = repository.save(destinatario);
-	return saved;
+
+	try {
+	    Destinatario saved = repository.save(destinatario);
+	    return saved;
+	} catch (Exception e) {
+	    throw new DestinatarioCNPJCPFExistException("CNPJ/CPF já cadastrado");
+	}
     }
 
     public void deleteById(int id) {

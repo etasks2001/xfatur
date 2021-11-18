@@ -3,6 +3,7 @@ package com.xfatur.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ public class RamoAtividade {
 
     private String descricao;
 
-    @OneToMany(mappedBy = "ramoAtividade")
+    @OneToMany(mappedBy = "ramoAtividade", fetch = FetchType.LAZY)
     private List<Destinatario> destinatarios;
 
     public Integer getId() {
