@@ -1,5 +1,55 @@
 ﻿/*
 
+drop table if exists license;
+drop table if exists person;
+
+
+
+
+
+create table person(
+	id serial,
+	first_name varchar(20),
+	last_name varchar(20),
+	age int,
+	primary key (id)
+);
+
+create table license(
+	id serial,
+	type varchar(20),
+	valid_from date,
+	valid_to date,
+	person_id int,
+	primary key (id),
+	FOREIGN KEY (person_id) REFERENCES person(id)
+);
+
+
+select * from person order by id;
+
+select * from license order by id, person_id ;
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
 drop table if exists phone_number;
 drop table if exists customer;
 
@@ -30,6 +80,9 @@ delete from phone_number;
 */
 
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
 
 /*
@@ -50,6 +103,8 @@ insert into bankaccount values(2,'donald','trump',4000);
 select * from bankaccount;
 
 
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
@@ -237,7 +292,7 @@ create table destinatario(
 	unique (CNPJCPF)
 );
 create table entrega(
-	id integer primary key references destinatario(id),
+	id serial,
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
 	xLgr varchar(60) not null, 
@@ -252,7 +307,8 @@ create table entrega(
 	xPais varchar(60) null, 
 	fone varchar(14) null,
 	email varchar(60) null,
-	IE varchar(14) null
+	IE varchar(14) null,
+	destinatario_id int not null references destinatario
 );
 create table retirada(
 	id integer primary key references destinatario(id),

@@ -91,10 +91,10 @@ class DestinatarioServiceTest {
 
     @AfterAll
     void deletarCadastrosAuxiliares() {
-	idsDestinatario.forEach(id -> destinatarioService.deleteById(id));
-	idsRamoAtividade.forEach(id -> ramoAtividadeService.delete(id));
-	idsNaturezaJuridica.forEach(id -> naturezaJuridicaService.delete(id));
-	idsRepresentante.forEach(id -> representanteService.delete(id));
+//	idsDestinatario.forEach(id -> destinatarioService.deleteById(id));
+//	idsRamoAtividade.forEach(id -> ramoAtividadeService.delete(id));
+//	idsNaturezaJuridica.forEach(id -> naturezaJuridicaService.delete(id));
+//	idsRepresentante.forEach(id -> representanteService.delete(id));
     }
 
     @ParameterizedTest
@@ -159,19 +159,20 @@ class DestinatarioServiceTest {
 	assertNotNull(destinatario);
     }
 
-//    @ParameterizedTest
-//    @MethodSource("modelEntrega")
-//    @Order(5)
-//    void test_gravar_entrega(Entrega entrega) {
-//	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(0));
-//
-//	entrega.setDestinatario(destinatario);
-//	entrega.setId(destinatario.getId());
-//
-//	Entrega saved = entregaService.save(entrega);
-//
-//	assertNotNull(saved);
-//    }
+    @ParameterizedTest
+    @MethodSource("modelEntrega")
+    @Order(5)
+    void test_gravar_entrega(Entrega entrega) {
+	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(0));
+
+	entrega.setDestinatario(destinatario);
+	entrega.setId(destinatario.getId());
+	destinatario.setEntrega(entrega);
+
+	Destinatario saved = destinatarioService.save(destinatario);
+
+	assertNotNull(saved);
+    }
 //
 //    @ParameterizedTest
 //    @MethodSource("modelRetirada")

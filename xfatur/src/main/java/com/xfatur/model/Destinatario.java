@@ -1,5 +1,6 @@
 package com.xfatur.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Destinatario {
@@ -25,8 +27,8 @@ public class Destinatario {
     private String IM;
     private String email;
 
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "destinatario", fetch = FetchType.LAZY)
-//    private Entrega entrega;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "destinatario", fetch = FetchType.LAZY)
+    private Entrega entrega;
 //
 //    @OneToOne(cascade = CascadeType.ALL, mappedBy = "destinatario", fetch = FetchType.LAZY)
 //    private Retirada retirada;
@@ -146,4 +148,13 @@ public class Destinatario {
     public void setRepresentante(Representante representante) {
 	this.representante = representante;
     }
+
+    public Entrega getEntrega() {
+	return entrega;
+    }
+
+    public void setEntrega(Entrega entrega) {
+	this.entrega = entrega;
+    }
+
 }
