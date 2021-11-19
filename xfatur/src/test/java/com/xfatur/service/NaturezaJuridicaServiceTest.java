@@ -55,7 +55,6 @@ class NaturezaJuridicaServiceTest {
     @Order(2)
     void test_update() {
 	ids.forEach(id -> {
-	    System.out.println(">>>>>>>>>>>>>>>>>: " + id);
 	    NaturezaJuridica naturezaJuridica = service.findById(id);
 	    naturezaJuridica.setDescricao(naturezaJuridica.getDescricao() + " alterado");
 	    service.save(naturezaJuridica);
