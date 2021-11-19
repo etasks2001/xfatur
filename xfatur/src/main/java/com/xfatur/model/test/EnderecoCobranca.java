@@ -74,4 +74,12 @@ public class EnderecoCobranca {
 	this.estado = estado;
     }
 
+    public Destinatario getDestinatario() {
+	return destinatario;
+    }
+
+    public void setDestinatario(Destinatario destinatario) {
+	this.destinatario = destinatario;
+    }
+
 }

@@ -390,7 +390,7 @@ public class CreateModelTest {
     public static EnderecoCobranca createEnderecoCobranca2() {
 	EnderecoCobranca enderecoCobranca = new EnderecoCobranca();
 	enderecoCobranca.setLogradouro("Rua Dos Pescadores, 30 - 1º andar");
-	enderecoCobranca.setBairro("Vila Sem nome");
+	enderecoCobranca.setBairro("Vila SM");
 	enderecoCobranca.setCep("87654321");
 	enderecoCobranca.setCidade("Rio de Janeiro");
 	enderecoCobranca.setEstado("RJ");

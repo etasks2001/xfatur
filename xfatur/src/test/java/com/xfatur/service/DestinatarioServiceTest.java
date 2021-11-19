@@ -3,7 +3,6 @@ package com.xfatur.service;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -36,6 +35,7 @@ import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
+import com.xfatur.model.test.EnderecoCobranca;
 import com.xfatur.testutil.CreateModelTest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -51,9 +51,15 @@ class DestinatarioServiceTest {
     }
 
     Stream<EnderecoRetirada> modelEnderecoRetirada() {
-	return Stream.of(CreateModelTest.createEnderecoRetirada1(), CreateModelTest.createEnderecoRetirada2());
+	return Stream.of(CreateModelTest.createEnderecoRetirada1());
     }
 
+    Stream<EnderecoCobranca> modelEnderecoCobranca() {
+	return Stream.of(CreateModelTest.createEnderecoCobranca1());
+    }
+
+    @Autowired
+    EnderecoCobrancaService enderecoCobrancaService;
     @Autowired
     DestinatarioService destinatarioService;
     @Autowired
@@ -137,6 +143,7 @@ class DestinatarioServiceTest {
 	MatcherAssert.assertThat(saved.getRamoAtividade(), Matchers.is(destinatario.getRamoAtividade()));
 	MatcherAssert.assertThat(saved.getRepresentante(), Matchers.is(destinatario.getRepresentante()));
 	MatcherAssert.assertThat(saved.getEnderecoEntrega(), Matchers.is(destinatario.getEnderecoEntrega()));
+	MatcherAssert.assertThat(saved.getEnderecoCobranca(), Matchers.is(destinatario.getEnderecoCobranca()));
 	MatcherAssert.assertThat(saved.getEnderecoRetirada(), Matchers.is(destinatario.getEnderecoRetirada()));
 	MatcherAssert.assertThat(saved.getCNPJCPF(), Matchers.is(destinatario.getCNPJCPF()));
 	MatcherAssert.assertThat(saved.getIdEstrangeiro(), Matchers.is(destinatario.getIdEstrangeiro()));
@@ -158,6 +165,7 @@ class DestinatarioServiceTest {
     @Order(2)
     void test_save_cnpjcpf_ja_cadastrado_exception(Destinatario destinatario) {
 	Exception exception = Assertions.assertThrows(DestinatarioCNPJCPFExistException.class, () -> {
+
 	    int ramoAtividade_id = CreateModelTest.getCodigoAleatorio(idsRamoAtividade);
 	    int naturezaJuridica_id = CreateModelTest.getCodigoAleatorio(idsNaturezaJuridica);
 	    int representante_id = CreateModelTest.getCodigoAleatorio(idsRepresentante);
@@ -193,10 +201,30 @@ class DestinatarioServiceTest {
     }
 
     @ParameterizedTest
-    @MethodSource("modelEnderecoEntrega")
+    @MethodSource("modelEnderecoCobranca")
     @Order(5)
-    void test_gravar_entrega(EnderecoEntrega enderecoEntrega) {
-	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(0));
+    void test_gravar_endereco_cobranca(EnderecoCobranca enderecoCobranca) {
+	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(1));
+
+	enderecoCobranca.setDestinatario(destinatario);
+	enderecoCobranca.setId(destinatario.getId());
+	destinatario.setEnderecoCobranca(enderecoCobranca);
+
+	EnderecoCobranca saved = enderecoCobrancaService.save(enderecoCobranca);
+
+	MatcherAssert.assertThat(saved.getCep(), Matchers.is(enderecoCobranca.getCep()));
+	MatcherAssert.assertThat(saved.getLogradouro(), Matchers.is(enderecoCobranca.getLogradouro()));
+	MatcherAssert.assertThat(saved.getBairro(), Matchers.is(enderecoCobranca.getBairro()));
+	MatcherAssert.assertThat(saved.getCidade(), Matchers.is(enderecoCobranca.getCidade()));
+	MatcherAssert.assertThat(saved.getEstado(), Matchers.is(enderecoCobranca.getEstado()));
+
+    }
+
+    @ParameterizedTest
+    @MethodSource("modelEnderecoEntrega")
+    @Order(6)
+    void test_gravar_endereco_entrega(EnderecoEntrega enderecoEntrega) {
+	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(1));
 
 	enderecoEntrega.setDestinatario(destinatario);
 	enderecoEntrega.setId(destinatario.getId());
@@ -228,9 +256,9 @@ class DestinatarioServiceTest {
 
     @ParameterizedTest
     @MethodSource("modelEnderecoRetirada")
-    @Order(6)
-    void test_gravar_retirada(EnderecoRetirada enderecoRetirada) {
-	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(2));
+    @Order(7)
+    void test_gravar_endereco_retirada(EnderecoRetirada enderecoRetirada) {
+	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(1));
 
 	enderecoRetirada.setDestinatario(destinatario);
 	enderecoRetirada.setId(destinatario.getId());
@@ -260,16 +288,8 @@ class DestinatarioServiceTest {
 
     }
 
-    public static void main(String[] args) {
-	Method[] declaredMethods = Pessoa.class.getDeclaredMethods();
-	for (Method method : declaredMethods) {
-
-	    System.out.println(method.getName());
-	}
-    }
-
     @Test
-    @Order(7)
+    @Order(8)
     void test_buscaPorNome() {
 	List<Destinatario> destinatarios = destinatarioService.buscaPorNome("a");
 
@@ -277,7 +297,7 @@ class DestinatarioServiceTest {
     }
 
     @Test
-    @Order(8)
+    @Order(9)
     void test_buscaPorNome_tamanho_0() {
 	List<Destinatario> destinatarios = destinatarioService.buscaPorNome("aaaaaaaaaaaaaaaa");
 
@@ -285,7 +305,7 @@ class DestinatarioServiceTest {
     }
 
     @Test
-    @Order(9)
+    @Order(10)
     void test_findById() {
 	idsDestinatario.forEach(id -> {
 	    Destinatario destinatario = destinatarioService.findById(id);
@@ -294,7 +314,7 @@ class DestinatarioServiceTest {
     }
 
     @Test
-    @Order(10)
+    @Order(11)
     void test_findById_NotFoundException() {
 	Exception exception = Assertions.assertThrows(DestinatarioIdNotFoundException.class, () -> destinatarioService.findById(10001));
 
@@ -302,11 +322,50 @@ class DestinatarioServiceTest {
     }
 
     @Test
-    @Order(11)
+    @Order(12)
     void test_find_buscaPorIdComEntrega() {
 	idsDestinatario.forEach(id -> {
 	    Destinatario destinatario = destinatarioService.findById(id);
 	    assertNotNull(destinatario);
 	});
+    }
+
+    @Test
+    @Order(13)
+    void test_update_enderecoCobranca() {
+	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(1));
+
+	EnderecoCobranca enderecoCobranca = destinatario.getEnderecoCobranca();
+
+	if (enderecoCobranca != null) {
+	    enderecoCobranca.setCep("88888888");
+	    destinatarioService.save(destinatario);
+	}
+    }
+
+    @Test
+    @Order(14)
+    void test_update_enderecoEntrega() {
+	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(1));
+
+	EnderecoEntrega enderecoEntrega = destinatario.getEnderecoEntrega();
+
+	if (enderecoEntrega != null) {
+	    enderecoEntrega.getLocal().getPessoa().setCNPJCPF("11111111111");
+	    destinatarioService.save(destinatario);
+	}
+    }
+
+    @Test
+    @Order(15)
+    void test_update_enderecoRetirada() {
+	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(1));
+
+	EnderecoRetirada enderecoRetirada = destinatario.getEnderecoRetirada();
+
+	if (enderecoRetirada != null) {
+	    enderecoRetirada.getLocal().getPessoa().setCNPJCPF("22222222222");
+	    destinatarioService.save(destinatario);
+	}
     }
 }
