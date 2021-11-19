@@ -136,8 +136,8 @@ class DestinatarioServiceTest {
 
 	MatcherAssert.assertThat(saved.getRamoAtividade(), Matchers.is(destinatario.getRamoAtividade()));
 	MatcherAssert.assertThat(saved.getRepresentante(), Matchers.is(destinatario.getRepresentante()));
-	MatcherAssert.assertThat(saved.getEntrega(), Matchers.is(destinatario.getEntrega()));
-	MatcherAssert.assertThat(saved.getRetirada(), Matchers.is(destinatario.getRetirada()));
+	MatcherAssert.assertThat(saved.getEnderecoEntrega(), Matchers.is(destinatario.getEnderecoEntrega()));
+	MatcherAssert.assertThat(saved.getEnderecoRetirada(), Matchers.is(destinatario.getEnderecoRetirada()));
 	MatcherAssert.assertThat(saved.getCNPJCPF(), Matchers.is(destinatario.getCNPJCPF()));
 	MatcherAssert.assertThat(saved.getIdEstrangeiro(), Matchers.is(destinatario.getIdEstrangeiro()));
 	MatcherAssert.assertThat(saved.getNaturezaJuridica(), Matchers.is(destinatario.getNaturezaJuridica()));
@@ -200,7 +200,7 @@ class DestinatarioServiceTest {
 
 	enderecoEntrega.setDestinatario(destinatario);
 	enderecoEntrega.setId(destinatario.getId());
-	destinatario.setEntrega(enderecoEntrega);
+	destinatario.setEnderecoEntrega(enderecoEntrega);
 
 	EnderecoEntrega saved = entregaService.save(enderecoEntrega);
 
@@ -234,7 +234,7 @@ class DestinatarioServiceTest {
 
 	enderecoRetirada.setDestinatario(destinatario);
 	enderecoRetirada.setId(destinatario.getId());
-	destinatario.setRetirada(enderecoRetirada);
+	destinatario.setEnderecoRetirada(enderecoRetirada);
 
 	EnderecoRetirada saved = retiradaService.save(enderecoRetirada);
 	assertNotNull(saved);

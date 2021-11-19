@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.xfatur.model.test.EnderecoCobranca;
+
 @Entity
 public class Destinatario {
     @Id
@@ -28,10 +30,13 @@ public class Destinatario {
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "destinatario", fetch = FetchType.LAZY)
-    private EnderecoEntrega entrega;
+    private EnderecoEntrega enderecoEntrega;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "destinatario", fetch = FetchType.LAZY)
-    private EnderecoRetirada retirada;
+    private EnderecoRetirada enderecoRetirada;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "destinatario", fetch = FetchType.LAZY)
+    private EnderecoCobranca enderecoCobranca;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ramoatividade_id")
@@ -145,20 +150,28 @@ public class Destinatario {
 	this.representante = representante;
     }
 
-    public EnderecoEntrega getEntrega() {
-	return entrega;
+    public EnderecoEntrega getEnderecoEntrega() {
+	return enderecoEntrega;
     }
 
-    public void setEntrega(EnderecoEntrega entrega) {
-	this.entrega = entrega;
+    public void setEnderecoEntrega(EnderecoEntrega enderecoEntrega) {
+	this.enderecoEntrega = enderecoEntrega;
     }
 
-    public EnderecoRetirada getRetirada() {
-	return retirada;
+    public EnderecoRetirada getEnderecoRetirada() {
+	return enderecoRetirada;
     }
 
-    public void setRetirada(EnderecoRetirada retirada) {
-	this.retirada = retirada;
+    public void setEnderecoRetirada(EnderecoRetirada enderecoRetirada) {
+	this.enderecoRetirada = enderecoRetirada;
+    }
+
+    public EnderecoCobranca getEnderecoCobranca() {
+	return enderecoCobranca;
+    }
+
+    public void setEnderecoCobranca(EnderecoCobranca enderecoCobranca) {
+	this.enderecoCobranca = enderecoCobranca;
     }
 
 }

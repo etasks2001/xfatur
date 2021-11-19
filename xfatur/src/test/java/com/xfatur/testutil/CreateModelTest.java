@@ -8,13 +8,14 @@ import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
 import com.xfatur.model.EnderecoEntrega;
+import com.xfatur.model.EnderecoRetirada;
 import com.xfatur.model.IndIEDest;
 import com.xfatur.model.Local;
 import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
-import com.xfatur.model.EnderecoRetirada;
+import com.xfatur.model.test.EnderecoCobranca;
 
 public class CreateModelTest {
 
@@ -373,6 +374,28 @@ public class CreateModelTest {
 	enderecoRetirada.setLocal(local);
 
 	return enderecoRetirada;
+    }
+
+    public static EnderecoCobranca createEnderecoCobranca1() {
+	EnderecoCobranca enderecoCobranca = new EnderecoCobranca();
+	enderecoCobranca.setLogradouro("Rua Das Graças, 150 - Conj. 457");
+	enderecoCobranca.setBairro("Centro");
+	enderecoCobranca.setCep("12345678");
+	enderecoCobranca.setCidade("São Paulo");
+	enderecoCobranca.setEstado("SP");
+
+	return enderecoCobranca;
+    }
+
+    public static EnderecoCobranca createEnderecoCobranca2() {
+	EnderecoCobranca enderecoCobranca = new EnderecoCobranca();
+	enderecoCobranca.setLogradouro("Rua Dos Pescadores, 30 - 1º andar");
+	enderecoCobranca.setBairro("Vila Sem nome");
+	enderecoCobranca.setCep("87654321");
+	enderecoCobranca.setCidade("Rio de Janeiro");
+	enderecoCobranca.setEstado("RJ");
+
+	return enderecoCobranca;
     }
 
 }
