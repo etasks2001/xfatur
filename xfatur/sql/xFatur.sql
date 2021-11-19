@@ -90,7 +90,7 @@ delete from phone_number;
 
 drop table if exists bankaccount;
 
-create table (
+create table bankaccount(
 	accno int,
 	lastname varchar(25),
 	firstname varchar(25),
@@ -160,6 +160,9 @@ select * from emitente;
 select * from destinatario;
 select * from entrega;
 select * from retirada;
+
+
+
 
 
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
@@ -292,7 +295,7 @@ create table destinatario(
 	unique (CNPJCPF)
 );
 create table entrega(
-	id serial,
+	id serial not null,
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
 	xLgr varchar(60) not null, 
@@ -311,7 +314,7 @@ create table entrega(
 	destinatario_id int not null references destinatario
 );
 create table retirada(
-	id integer primary key references destinatario(id),
+	id serial not null,
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
 	xLgr varchar(60) not null, 
@@ -326,7 +329,8 @@ create table retirada(
 	xPais varchar(60) null, 
 	fone varchar(14) null,
 	email varchar(60) null,
-	IE varchar(14) null
+	IE varchar(14) null,
+	destinatario_id int not null references destinatario
 );
 
 
@@ -347,7 +351,7 @@ create table serie(
 
 
 create table nf(
-  sk serial primary key,
+  id serial not null,
   id_emitente integer references emitente,
 
   cnpj varchar(14) not null,
@@ -360,7 +364,7 @@ create table nf(
                       */
   
   versao varchar(4) not null,
-  id varchar(44) not null, -- chave NF-e
+  chaveNFe varchar(44) not null, -- chave NF-e
   cUF varchar(2) not null, -- CODIGO UF
   cNF varchar(8) not null, --ALEATÓRIO
   natOp varchar(60) not null, 
@@ -420,7 +424,8 @@ create table nf(
   verProc varchar(20) not null, 
   dhCont timestamp null, --CONTINGÊNCIA data
   xJust varchar(256) null, --CONTINGÊNCIA justificativa de 15 a 256
-  unique  (cnpj, serie, nNF)
+  unique  (cnpj, serie, nNF),
+  primary key (id)
 );
 
 
@@ -500,16 +505,16 @@ declare
    counter integer := 0;
 begin
    while counter < 55 loop
-	insert into nf (id_emitente,cnpj,serie,nnf,ind_emitente,versao,id,cuf,cnf,natop,mod,dhemi,dhsaient,tpnf,iddest,cmunfg,tpimp,tpemis,cdv,tpamb,finnfe,indfinal,indpres,indIntermed,procemi,verproc,dhcont,xjust) values 
+	insert into nf (id_emitente,cnpj,serie,nnf,ind_emitente,versao,chaveNFe,cuf,cnf,natop,mod,dhemi,dhsaient,tpnf,iddest,cmunfg,tpimp,tpemis,cdv,tpamb,finnfe,indfinal,indpres,indIntermed,procemi,verproc,dhcont,xjust) values 
 	(1,'00000000000000',0,2,0,'1.4','11111111112222222222333333333344444444445555','35','17897897','vendas','55','01/01/2001',null,1,1,1234567,1,1,1,2,1,0,0,null,0,'1.1',null,null);	
 
-	insert into nf (id_emitente,cnpj,serie,nnf,ind_emitente,versao,id,cuf,cnf,natop,mod,dhemi,dhsaient,tpnf,iddest,cmunfg,tpimp,tpemis,cdv,tpamb,finnfe,indfinal,indpres,indIntermed,procemi,verproc,dhcont,xjust) values 
+	insert into nf (id_emitente,cnpj,serie,nnf,ind_emitente,versao,chaveNFe,cuf,cnf,natop,mod,dhemi,dhsaient,tpnf,iddest,cmunfg,tpimp,tpemis,cdv,tpamb,finnfe,indfinal,indpres,indIntermed,procemi,verproc,dhcont,xjust) values 
 	(1,'00000000000000',1,2,0,'1.4','11111111112222222222333333333344444444445555','35','17897897','vendas','55','01/01/2001',null,1,1,1234567,1,1,1,2,1,0,0,null,0,'1.1',null,null);	
 
 	counter := counter + 1;
    end loop;
 end$$;
-	insert into nf (id_emitente,cnpj,serie,nnf,ind_emitente,versao,id,cuf,cnf,natop,mod,dhemi,dhsaient,tpnf,iddest,cmunfg,tpimp,tpemis,cdv,tpamb,finnfe,indfinal,indpres,indIntermed,procemi,verproc,dhcont,xjust) values 
+	insert into nf (id_emitente,cnpj,serie,nnf,ind_emitente,versao,chaveNFe,cuf,cnf,natop,mod,dhemi,dhsaient,tpnf,iddest,cmunfg,tpimp,tpemis,cdv,tpamb,finnfe,indfinal,indpres,indIntermed,procemi,verproc,dhcont,xjust) values 
 	(1,'11111111111111',0,19999,1,'1.4','11111111112222222222333333333344444444445555','35','17897897','vendas','55','01/01/2001',null,1,1,1234567,1,1,1,2,1,0,0,null,0,'1.1',null,null);	
 
 

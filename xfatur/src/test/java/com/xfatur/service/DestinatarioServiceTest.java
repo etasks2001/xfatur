@@ -38,200 +38,195 @@ import com.xfatur.testutil.CreateModelTest;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 class DestinatarioServiceTest {
-    Stream<Destinatario> model() {
-	return Stream.of(CreateModelTest.createDestinatarioPJ(), CreateModelTest.createDestinatarioPJI(), CreateModelTest.createDestinatarioPF());
-    }
-
-    Stream<Entrega> modelEntrega() {
-	return Stream.of(CreateModelTest.createEntrega1());
-    }
-
-    Stream<Retirada> modelRetirada() {
-	return Stream.of(CreateModelTest.createRetirada1(), CreateModelTest.createRetirada2());
-    }
-
-    @Autowired
-    DestinatarioService destinatarioService;
-    @Autowired
-    RamoAtividadeService ramoAtividadeService;
-    @Autowired
-    NaturezaJuridicaService naturezaJuridicaService;
-    @Autowired
-    RepresentanteService representanteService;
-
-    @Autowired
-    EntregaService entregaService;
-
-    @Autowired
-    RetiradaService retiradaService;
-
-    List<Integer> idsRepresentante = new ArrayList<Integer>();
-    List<Integer> idsRamoAtividade = new ArrayList<Integer>();
-    List<Integer> idsNaturezaJuridica = new ArrayList<Integer>();
-    List<Integer> idsDestinatario = new ArrayList<Integer>();
-
-    @BeforeAll
-    void cadastrosAuxiliares() {
-	CreateModelTest.ramoAtividadeList().forEach(ra -> {
-	    RamoAtividade saved = ramoAtividadeService.save(ra);
-	    idsRamoAtividade.add(saved.getId());
+	Stream<Destinatario> model() {
+		return Stream.of(CreateModelTest.createDestinatarioPJ(), CreateModelTest.createDestinatarioPJI(), CreateModelTest.createDestinatarioPF());
 	}
 
-	);
-	CreateModelTest.naturezaJuridicaList().forEach(nj -> {
-	    NaturezaJuridica saved = naturezaJuridicaService.save(nj);
-	    idsNaturezaJuridica.add(saved.getId());
-	});
-
-	CreateModelTest.representanteList().forEach(r -> {
-	    Representante saved = representanteService.save(r);
-	    idsRepresentante.add(saved.getId());
-	});
-    }
-
-    @AfterAll
-    void deletarCadastrosAuxiliares() {
-//	idsDestinatario.forEach(id -> destinatarioService.deleteById(id));
-//	idsRamoAtividade.forEach(id -> ramoAtividadeService.delete(id));
-//	idsNaturezaJuridica.forEach(id -> naturezaJuridicaService.delete(id));
-//	idsRepresentante.forEach(id -> representanteService.delete(id));
-    }
-
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(1)
-    void teste_save(Destinatario destinatario) {
-	int ramoAtividade_id = CreateModelTest.getCodigoAleatorio(idsRamoAtividade);
-	int naturezaJuridica_id = CreateModelTest.getCodigoAleatorio(idsNaturezaJuridica);
-	int representante_id = CreateModelTest.getCodigoAleatorio(idsRepresentante);
-
-	RamoAtividade ramoAtividade = ramoAtividadeService.findById(ramoAtividade_id);
-	NaturezaJuridica naturezaJuridica = naturezaJuridicaService.findById(naturezaJuridica_id);
-	Representante representante = representanteService.findById(representante_id);
-
-	destinatario.setRamoAtividade(ramoAtividade);
-	destinatario.setNaturezaJuridica(naturezaJuridica);
-	destinatario.setRepresentante(representante);
-
-	Destinatario saved = destinatarioService.save(destinatario);
-
-	idsDestinatario.add(saved.getId());
-    }
-
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(2)
-    void test_save_cnpjcpf_ja_cadastrado_exception(Destinatario destinatario) {
-	Exception exception = Assertions.assertThrows(DestinatarioCNPJCPFExistException.class, () -> {
-	    int ramoAtividade_id = CreateModelTest.getCodigoAleatorio(idsRamoAtividade);
-	    int naturezaJuridica_id = CreateModelTest.getCodigoAleatorio(idsNaturezaJuridica);
-	    int representante_id = CreateModelTest.getCodigoAleatorio(idsRepresentante);
-
-	    RamoAtividade ramoAtividade = ramoAtividadeService.findById(ramoAtividade_id);
-	    NaturezaJuridica naturezaJuridica = naturezaJuridicaService.findById(naturezaJuridica_id);
-	    Representante representante = representanteService.findById(representante_id);
-
-	    destinatario.setRamoAtividade(ramoAtividade);
-	    destinatario.setNaturezaJuridica(naturezaJuridica);
-	    destinatario.setRepresentante(representante);
-
-	    destinatarioService.save(destinatario);
+	Stream<Entrega> modelEntrega() {
+		return Stream.of(CreateModelTest.createEntrega1());
 	}
 
-	);
+	Stream<Retirada> modelRetirada() {
+		return Stream.of(CreateModelTest.createRetirada1(), CreateModelTest.createRetirada2());
+	}
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF já cadastrado"));
-    }
+	@Autowired
+	DestinatarioService destinatarioService;
+	@Autowired
+	RamoAtividadeService ramoAtividadeService;
+	@Autowired
+	NaturezaJuridicaService naturezaJuridicaService;
+	@Autowired
+	RepresentanteService representanteService;
 
-    @Test
-    @Order(3)
-    void test_busca_cnpjcpf_nao_encontrado_exception() {
-	Destinatario destinatario = destinatarioService.buscaPorCNPJCPF("456");
+	@Autowired
+	EntregaService entregaService;
 
-	assertNull(destinatario);
-    }
+	@Autowired
+	RetiradaService retiradaService;
 
-    @Test
-    @Order(4)
-    void test_busca_cnpjcpf() {
-	Destinatario destinatario = destinatarioService.buscaPorCNPJCPF("60977980000109");
+	List<Integer> idsRepresentante = new ArrayList<Integer>();
+	List<Integer> idsRamoAtividade = new ArrayList<Integer>();
+	List<Integer> idsNaturezaJuridica = new ArrayList<Integer>();
+	List<Integer> idsDestinatario = new ArrayList<Integer>();
 
-	assertNotNull(destinatario);
-    }
+	@BeforeAll
+	void cadastrosAuxiliares() {
+		CreateModelTest.ramoAtividadeList().forEach(ra -> {
+			RamoAtividade saved = ramoAtividadeService.save(ra);
+			idsRamoAtividade.add(saved.getId());
+		}
 
-    @ParameterizedTest
-    @MethodSource("modelEntrega")
-    @Order(5)
-    void test_gravar_entrega(Entrega entrega) {
-	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(0));
+		);
+		CreateModelTest.naturezaJuridicaList().forEach(nj -> {
+			NaturezaJuridica saved = naturezaJuridicaService.save(nj);
+			idsNaturezaJuridica.add(saved.getId());
+		});
 
-	entrega.setDestinatario(destinatario);
-	entrega.setId(destinatario.getId());
-	destinatario.setEntrega(entrega);
+		CreateModelTest.representanteList().forEach(r -> {
+			Representante saved = representanteService.save(r);
+			idsRepresentante.add(saved.getId());
+		});
+	}
 
-	Destinatario saved = destinatarioService.save(destinatario);
+	@AfterAll
+	void deletarCadastrosAuxiliares() {
+		idsDestinatario.forEach(id -> destinatarioService.deleteById(id));
+		idsRamoAtividade.forEach(id -> ramoAtividadeService.delete(id));
+		idsNaturezaJuridica.forEach(id -> naturezaJuridicaService.delete(id));
+		idsRepresentante.forEach(id -> representanteService.delete(id));
+	}
 
-	assertNotNull(saved);
-    }
-//
-//    @ParameterizedTest
-//    @MethodSource("modelRetirada")
-//    @Order(6)
-//    void test_gravar_retirada(Retirada retirada) {
-//	Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(1));
-//
-//	retirada.setDestinatario(destinatario);
-//	retirada.setId(destinatario.getId());
-//
-//	Retirada saved = retiradaService.save(retirada);
-//	assertNotNull(saved);
-//
-//    }
+	@ParameterizedTest
+	@MethodSource("model")
+	@Order(1)
+	void teste_save(Destinatario destinatario) {
+		int ramoAtividade_id = CreateModelTest.getCodigoAleatorio(idsRamoAtividade);
+		int naturezaJuridica_id = CreateModelTest.getCodigoAleatorio(idsNaturezaJuridica);
+		int representante_id = CreateModelTest.getCodigoAleatorio(idsRepresentante);
 
-    @Test
-    @Order(7)
-    void test_buscaPorNome() {
-	List<Destinatario> destinatarios = destinatarioService.buscaPorNome("a");
+		RamoAtividade ramoAtividade = ramoAtividadeService.findById(ramoAtividade_id);
+		NaturezaJuridica naturezaJuridica = naturezaJuridicaService.findById(naturezaJuridica_id);
+		Representante representante = representanteService.findById(representante_id);
 
-	MatcherAssert.assertThat(destinatarios.size(), Matchers.greaterThan(0));
-    }
+		destinatario.setRamoAtividade(ramoAtividade);
+		destinatario.setNaturezaJuridica(naturezaJuridica);
+		destinatario.setRepresentante(representante);
 
-    @Test
-    @Order(8)
-    void test_buscaPorNome_tamanho_0() {
-	List<Destinatario> destinatarios = destinatarioService.buscaPorNome("aaaaaaaaaaaaaaaa");
+		Destinatario saved = destinatarioService.save(destinatario);
 
-	MatcherAssert.assertThat(destinatarios.size(), Matchers.is(0));
-    }
+		idsDestinatario.add(saved.getId());
+	}
 
-    @Test
-    @Order(9)
-    void test_findById() {
-	idsDestinatario.forEach(id -> {
-	    Destinatario destinatario = destinatarioService.findById(id);
-	    assertNotNull(destinatario);
-	});
+	@ParameterizedTest
+	@MethodSource("model")
+	@Order(2)
+	void test_save_cnpjcpf_ja_cadastrado_exception(Destinatario destinatario) {
+		Exception exception = Assertions.assertThrows(DestinatarioCNPJCPFExistException.class, () -> {
+			int ramoAtividade_id = CreateModelTest.getCodigoAleatorio(idsRamoAtividade);
+			int naturezaJuridica_id = CreateModelTest.getCodigoAleatorio(idsNaturezaJuridica);
+			int representante_id = CreateModelTest.getCodigoAleatorio(idsRepresentante);
 
-    }
+			RamoAtividade ramoAtividade = ramoAtividadeService.findById(ramoAtividade_id);
+			NaturezaJuridica naturezaJuridica = naturezaJuridicaService.findById(naturezaJuridica_id);
+			Representante representante = representanteService.findById(representante_id);
 
-    @Test
-    @Order(10)
-    void test_findById_NotFoundException() {
-	Exception exception = Assertions.assertThrows(DestinatarioIdNotFoundException.class, () -> destinatarioService.findById(10001));
+			destinatario.setRamoAtividade(ramoAtividade);
+			destinatario.setNaturezaJuridica(naturezaJuridica);
+			destinatario.setRepresentante(representante);
 
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Destinatario não encontrado"));
-    }
+			destinatarioService.save(destinatario);
+		});
 
-    @Test
-    @Order(11)
-    void test_find_buscaPorIdComEntrega() {
-	idsDestinatario.forEach(id -> {
-	    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>222:" + id);
+		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("CNPJ/CPF já cadastrado"));
+	}
 
-	    Destinatario destinatario = destinatarioService.findById(id);
-	    assertNotNull(destinatario);
-	    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>222:" + id);
-	});
+	@Test
+	@Order(3)
+	void test_busca_cnpjcpf_nao_encontrado_exception() {
+		Destinatario destinatario = destinatarioService.buscaPorCNPJCPF("456");
 
-    }
+		assertNull(destinatario);
+	}
+
+	@Test
+	@Order(4)
+	void test_busca_cnpjcpf() {
+		Destinatario destinatario = destinatarioService.buscaPorCNPJCPF("60977980000109");
+
+		assertNotNull(destinatario);
+	}
+
+	@ParameterizedTest
+	@MethodSource("modelEntrega")
+	@Order(5)
+	void test_gravar_entrega(Entrega entrega) {
+		Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(0));
+
+		entrega.setDestinatario(destinatario);
+		entrega.setId(destinatario.getId());
+		destinatario.setEntrega(entrega);
+
+		Destinatario saved = destinatarioService.save(destinatario);
+
+		assertNotNull(saved);
+	}
+
+	@ParameterizedTest
+	@MethodSource("modelRetirada")
+	@Order(6)
+	void test_gravar_retirada(Retirada retirada) {
+		Destinatario destinatario = destinatarioService.findById(idsDestinatario.get(2));
+
+		retirada.setDestinatario(destinatario);
+		retirada.setId(destinatario.getId());
+		destinatario.setRetirada(retirada);
+
+		Retirada saved = retiradaService.save(retirada);
+		assertNotNull(saved);
+
+	}
+
+	@Test
+	@Order(7)
+	void test_buscaPorNome() {
+		List<Destinatario> destinatarios = destinatarioService.buscaPorNome("a");
+
+		MatcherAssert.assertThat(destinatarios.size(), Matchers.greaterThan(0));
+	}
+
+	@Test
+	@Order(8)
+	void test_buscaPorNome_tamanho_0() {
+		List<Destinatario> destinatarios = destinatarioService.buscaPorNome("aaaaaaaaaaaaaaaa");
+
+		MatcherAssert.assertThat(destinatarios.size(), Matchers.is(0));
+	}
+
+	@Test
+	@Order(9)
+	void test_findById() {
+		idsDestinatario.forEach(id -> {
+			Destinatario destinatario = destinatarioService.findById(id);
+			assertNotNull(destinatario);
+		});
+	}
+
+	@Test
+	@Order(10)
+	void test_findById_NotFoundException() {
+		Exception exception = Assertions.assertThrows(DestinatarioIdNotFoundException.class, () -> destinatarioService.findById(10001));
+
+		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Destinatario não encontrado"));
+	}
+
+	@Test
+	@Order(11)
+	void test_find_buscaPorIdComEntrega() {
+		idsDestinatario.forEach(id -> {
+
+			Destinatario destinatario = destinatarioService.findById(id);
+			assertNotNull(destinatario);
+		});
+	}
 }
