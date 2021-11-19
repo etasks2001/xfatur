@@ -16,13 +16,13 @@ import com.xfatur.dto.RetiradaDTO;
 import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
-import com.xfatur.model.Entrega;
+import com.xfatur.model.EnderecoEntrega;
 import com.xfatur.model.Local;
 import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
-import com.xfatur.model.Retirada;
+import com.xfatur.model.EnderecoRetirada;
 
 class DTOConverter {
 
@@ -142,7 +142,7 @@ class DTOConverter {
 	return destinatarioDTO;
     }
 
-    public static EntregaDTO convert(Entrega entrega) {
+    public static EntregaDTO convert(EnderecoEntrega entrega) {
 	if (entrega == null) {
 	    return null;
 	}
@@ -172,7 +172,7 @@ class DTOConverter {
 	return pessoaDTO;
     }
 
-    public static RetiradaDTO convert(Retirada retirada) {
+    public static RetiradaDTO convert(EnderecoRetirada retirada) {
 	RetiradaDTO retiradaDTO = new RetiradaDTO();
 	retiradaDTO.setId(retirada.getId());
 	retiradaDTO.setLocal(DTOConverter.convert(retirada.getLocal()));

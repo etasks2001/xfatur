@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Retirada {
+public class EnderecoRetirada {
 
 	@Id
 	private Integer id;

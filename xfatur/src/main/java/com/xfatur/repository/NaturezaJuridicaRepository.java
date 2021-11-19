@@ -12,4 +12,7 @@ public interface NaturezaJuridicaRepository extends JpaRepository<NaturezaJuridi
 
     @Query("select nj from NaturezaJuridica nj where nj.descricao like %:descricao% order by nj.descricao")
     List<NaturezaJuridica> buscaPorDescricao(@Param("descricao") String descricao);
+
+    @Query("select nj.id from NaturezaJuridica nj where nj.descricao=:descricao")
+    Integer findIdByDescricao(@Param("descricao") String descricao);
 }

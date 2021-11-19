@@ -50,4 +50,10 @@ public class RamoAtividadeService {
 	}
 	throw new RamoAtividadeIdNotFoundException("Ramo de Atividade não encontrado");
     }
+
+    public Integer findIdByDescricao(String descricao) {
+
+	return repository.findIdByDescricao(descricao);
+
+    }
 }

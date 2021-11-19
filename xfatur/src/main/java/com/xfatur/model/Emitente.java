@@ -29,10 +29,6 @@ public class Emitente {
 	return id;
     }
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
-
     public String getCNPJ() {
 	return CNPJ;
     }

@@ -15,4 +15,7 @@ public interface RepresentanteRepository extends JpaRepository<Representante, In
     @Query("select r from Representante r where r.xNome like %:nome% order by r.xNome asc")
     List<Representante> buscaPorNome(@Param("nome") String nome);
 
+    @Query("select r.id from Representante r where cnpjcpf=:cnpjcpf")
+    Integer findIdByCNPJCPF(@Param("cnpjcpf") String cnpjcpf);
+
 }

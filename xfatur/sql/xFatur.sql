@@ -158,8 +158,9 @@ select * from naturezajuridica;
 select * from emitente;
 
 select * from destinatario;
-select * from entrega;
-select * from retirada;
+select * from enderecoentrega;
+select * from enderecoretirada;
+select * from enderecocobranca;
 
 
 
@@ -187,8 +188,9 @@ $$;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 drop table if exists emitente;
 drop table if exists destinatario;
-drop table if exists entrega;
-drop table if exists retirada;
+drop table if exists enderecoentrega;
+drop table if exists enderecoretirada;
+drop table if exists enderecocobranca;
 drop table if exists naturezajuridica;
 drop table if exists representante;
 drop table if exists ramoatividade;
@@ -294,7 +296,7 @@ create table destinatario(
 	primary key (id),
 	unique (CNPJCPF)
 );
-create table entrega(
+create table enderecoentrega(
 	id serial not null,
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
@@ -313,7 +315,7 @@ create table entrega(
 	IE varchar(14) null,
 	destinatario_id int not null references destinatario
 );
-create table retirada(
+create table enderecoretirada(
 	id serial not null,
 	CNPJCPF varchar(14) not null, 
 	xNome varchar(60) not null,
@@ -333,7 +335,15 @@ create table retirada(
 	destinatario_id int not null references destinatario
 );
 
-
+create table enderecocobranca(
+	id serial not null,
+	logradouro varchar(40) not null,
+	bairro varchar(12) null,
+	cep varchar(8) not null,
+	cidade varchar(15) not null, 
+	estado varchar(2) not null,
+	destinatario_id int not null references destinatario
+);
 
 
 /*---------------------------------------------------------------------------------------------------------------------------*/

@@ -50,4 +50,8 @@ public class NaturezaJuridicaService {
 	}
 	throw new NaturezaJuridicaIdNotFoundException("Natureza Jurídica não encontrada");
     }
+
+    public Integer findIdByDescricao(String descricao) {
+	return repository.findIdByDescricao(descricao);
+    }
 }

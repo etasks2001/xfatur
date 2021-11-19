@@ -3,16 +3,16 @@ package com.xfatur.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xfatur.model.Entrega;
-import com.xfatur.repository.EntregaRepository;
+import com.xfatur.model.EnderecoEntrega;
+import com.xfatur.repository.EnderecoEntregaRepository;
 
 @Service
-public class EntregaService {
+public class EnderecoEntregaService {
     @Autowired
-    private EntregaRepository repository;
+    private EnderecoEntregaRepository repository;
 
-    public Entrega save(Entrega entrega) {
-	Entrega saved = repository.save(entrega);
+    public EnderecoEntrega save(EnderecoEntrega entrega) {
+	EnderecoEntrega saved = repository.save(entrega);
 	return saved;
     }
 

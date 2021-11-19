@@ -60,4 +60,8 @@ public class RepresentanteService {
 	throw new RepresentanteIdNotFoundException("Código do Representante não encontrado");
     }
 
+    public Integer findIdByCNPJCPF(String cnpjcpf) {
+	return repository.findIdByCNPJCPF(cnpjcpf);
+    }
+
 }

@@ -48,8 +48,13 @@ class RamoAtividadeServiceTest {
     @MethodSource("model")
     @Order(1)
     void test_save(RamoAtividade ra) {
-	RamoAtividade ramoAtividade = service.save(ra);
-	ids.add(ramoAtividade.getId());
+	Integer id = service.findIdByDescricao(ra.getDescricao());
+
+	if (id == null) {
+	    RamoAtividade saved = service.save(ra);
+	    id = saved.getId();
+	}
+	ids.add(id);
     }
 
     @Test

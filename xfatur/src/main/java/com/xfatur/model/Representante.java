@@ -30,10 +30,6 @@ public class Representante {
 	return id;
     }
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
-
     public String getCNPJCPF() {
 	return CNPJCPF;
     }
@@ -76,10 +72,6 @@ public class Representante {
 
     public List<Destinatario> getDestinatario() {
 	return destinatarios;
-    }
-
-    public void setDestinatario(List<Destinatario> destinatario) {
-	this.destinatarios = destinatario;
     }
 
 }

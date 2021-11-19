@@ -3,6 +3,8 @@ package com.xfatur.service;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +48,17 @@ class RepresentanteServiceTest {
     @ParameterizedTest
     @MethodSource("model")
     @Order(1)
-    void test_save(Representante r) {
-	Representante representante = service.save(r);
-	ids.add(representante.getId());
+    void test_save(Representante representante) {
+	Representante saved = service.save(representante);
+
+	ids.add(saved.getId());
+
+	assertNotNull(saved.getEndereco());
+	assertNull(saved.getDestinatario());
+
+	MatcherAssert.assertThat(saved.getIE(), Matchers.is(representante.getIE()));
+	MatcherAssert.assertThat(saved.getEmail(), Matchers.is(representante.getEmail()));
+
     }
 
     @Test

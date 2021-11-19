@@ -7,14 +7,14 @@ import java.util.stream.Stream;
 import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
-import com.xfatur.model.Entrega;
+import com.xfatur.model.EnderecoEntrega;
 import com.xfatur.model.IndIEDest;
 import com.xfatur.model.Local;
 import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
-import com.xfatur.model.Retirada;
+import com.xfatur.model.EnderecoRetirada;
 
 public class CreateModelTest {
 
@@ -300,19 +300,19 @@ public class CreateModelTest {
 
     }
 
-    public static Entrega createEntrega1() {
-	Entrega entrega = new Entrega();
+    public static EnderecoEntrega createEnderecoEntrega1() {
+	EnderecoEntrega enderecoEntrega = new EnderecoEntrega();
 
 	Local local = new Local();
 	local.setEndereco(CreateModelTest.createEndereco1());
 	local.setPessoa(createPessoa2());
-	entrega.setLocal(local);
+	enderecoEntrega.setLocal(local);
 
-	return entrega;
+	return enderecoEntrega;
     }
 
-    public static Entrega createEntrega2() {
-	Entrega entrega = new Entrega();
+    public static EnderecoEntrega createEntrega2() {
+	EnderecoEntrega entrega = new EnderecoEntrega();
 
 	Local local = new Local();
 	local.setEndereco(CreateModelTest.createEndereco2());
@@ -322,8 +322,8 @@ public class CreateModelTest {
 	return entrega;
     }
 
-    public static Entrega createEntrega3() {
-	Entrega entrega = new Entrega();
+    public static EnderecoEntrega createEntrega3() {
+	EnderecoEntrega entrega = new EnderecoEntrega();
 
 	Local local = new Local();
 	local.setEndereco(CreateModelTest.createEndereco3());
@@ -353,26 +353,26 @@ public class CreateModelTest {
 	return pessoa;
     }
 
-    public static Retirada createRetirada1() {
-	Retirada retirada = new Retirada();
+    public static EnderecoRetirada createEnderecoRetirada1() {
+	EnderecoRetirada enderecoRetirada = new EnderecoRetirada();
 
 	Local local = new Local();
 	local.setEndereco(CreateModelTest.createEndereco1());
 	local.setPessoa(createPessoa2());
-	retirada.setLocal(local);
+	enderecoRetirada.setLocal(local);
 
-	return retirada;
+	return enderecoRetirada;
     }
 
-    public static Retirada createRetirada2() {
-	Retirada retirada = new Retirada();
+    public static EnderecoRetirada createEnderecoRetirada2() {
+	EnderecoRetirada enderecoRetirada = new EnderecoRetirada();
 
 	Local local = new Local();
 	local.setEndereco(CreateModelTest.createEndereco4());
 	local.setPessoa(createPessoa1());
-	retirada.setLocal(local);
+	enderecoRetirada.setLocal(local);
 
-	return retirada;
+	return enderecoRetirada;
     }
 
 }

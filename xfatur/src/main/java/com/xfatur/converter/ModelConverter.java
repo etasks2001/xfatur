@@ -16,13 +16,13 @@ import com.xfatur.dto.RetiradaDTO;
 import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
-import com.xfatur.model.Entrega;
+import com.xfatur.model.EnderecoEntrega;
 import com.xfatur.model.Local;
 import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
-import com.xfatur.model.Retirada;
+import com.xfatur.model.EnderecoRetirada;
 
 class ModelConverter {
 
@@ -34,7 +34,7 @@ class ModelConverter {
     public static Representante convert(RepresentanteDTO representanteDTO) {
 	Representante representante = new Representante();
 
-	representante.setId(representanteDTO.getId());
+//	representante.setId(representanteDTO.getId());
 	representante.setxNome(representanteDTO.getxNome());
 //	representante.setDestinatario(ModelConverter.convert(representanteDTO.getDestinatarioDTO()));
 	representante.setCNPJCPF(representanteDTO.getCNPJCPF());
@@ -48,7 +48,7 @@ class ModelConverter {
     public static RamoAtividade convert(RamoAtividadeDTO ramoAtividadeDTO) {
 	RamoAtividade ramoAtividade = new RamoAtividade();
 
-	ramoAtividade.setId(ramoAtividadeDTO.getId());
+//	ramoAtividade.setId(ramoAtividadeDTO.getId());
 	ramoAtividade.setDescricao(ramoAtividadeDTO.getDescricao());
 //	ramoAtividade.setDestinatario(ModelConverter.convert(ramoAtividadeDTO.getDestinatarioDTO()));
 
@@ -57,7 +57,7 @@ class ModelConverter {
 
     public static NaturezaJuridica convert(NaturezaJuridicaDTO naturezaJuridicaDTO) {
 	NaturezaJuridica naturezaJuridica = new NaturezaJuridica();
-	naturezaJuridica.setId(naturezaJuridicaDTO.getId());
+//	naturezaJuridica.setId(naturezaJuridicaDTO.getId());
 	naturezaJuridica.setDescricao(naturezaJuridicaDTO.getDescricao());
 //	if (naturezaJuridicaDTO.getDestinatarioDTO() != null) {
 //
@@ -89,7 +89,7 @@ class ModelConverter {
     public static Emitente convert(EmitenteDTO emitenteDTO) {
 	Emitente emitente = new Emitente();
 
-	emitente.setId(emitenteDTO.getId());
+//	emitente.setId(emitenteDTO.getId());
 	emitente.setCNPJ(emitenteDTO.getCNPJ());
 	emitente.setxNome(emitenteDTO.getxNome());
 	emitente.setxFant(emitenteDTO.getxFant());
@@ -110,7 +110,7 @@ class ModelConverter {
     public static Destinatario convert(DestinatarioDTO destinatarioDTO) {
 	Destinatario destinatario = new Destinatario();
 
-	destinatario.setId(destinatarioDTO.getId());
+//	destinatario.setId(destinatarioDTO.getId());
 
 	Endereco enderEmit = ModelConverter.convert(destinatarioDTO.getEnderEmitDTO());
 	destinatario.setEnderDest(enderEmit);
@@ -133,11 +133,11 @@ class ModelConverter {
 	return destinatario;
     }
 
-    public static Entrega convert(EntregaDTO entregaDTO) {
+    public static EnderecoEntrega convert(EntregaDTO entregaDTO) {
 	if (entregaDTO == null) {
 	    return null;
 	}
-	Entrega entrega = new Entrega();
+	EnderecoEntrega entrega = new EnderecoEntrega();
 	entrega.setId(entregaDTO.getId());
 	entrega.setLocal(ModelConverter.convert(entregaDTO.getLocalDTO()));
 	entrega.setDestinatario(ModelConverter.convert(entregaDTO.getDestinatarioDTO()));
@@ -167,8 +167,8 @@ class ModelConverter {
 	return pessoa;
     }
 
-    public static Retirada convert(RetiradaDTO retiradaDTO) {
-	Retirada retirada = new Retirada();
+    public static EnderecoRetirada convert(RetiradaDTO retiradaDTO) {
+	EnderecoRetirada retirada = new EnderecoRetirada();
 
 	retirada.setId(retiradaDTO.getId());
 	retirada.setLocal(ModelConverter.convert(retiradaDTO.getLocal()));

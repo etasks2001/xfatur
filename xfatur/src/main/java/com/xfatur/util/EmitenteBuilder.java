@@ -16,7 +16,7 @@ public class EmitenteBuilder {
     }
 
     public EmitenteBuilder addId(Integer id) {
-	this.emit.setId(id);
+//	this.emit.setId(id);
 	return this;
     }
 

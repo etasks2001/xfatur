@@ -46,9 +46,9 @@ class NaturezaJuridicaServiceTest {
     @ParameterizedTest
     @MethodSource("model")
     @Order(1)
-    void test_save(NaturezaJuridica nj) {
-	NaturezaJuridica naturezaJuridica = service.save(nj);
-	ids.add(naturezaJuridica.getId());
+    void test_save(NaturezaJuridica naturezaJuridica) {
+	NaturezaJuridica saved = service.save(naturezaJuridica);
+	ids.add(saved.getId());
     }
 
     @Test
