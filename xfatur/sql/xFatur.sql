@@ -153,7 +153,7 @@ se	lect * from cliente c left join enderecoentrega e on c.id=e.id;
 */
 
 select * from representante;
-select * from ramoatividade;
+select * from ramoatividade order by id;
 select * from naturezajuridica;
 select * from emitente;
 
