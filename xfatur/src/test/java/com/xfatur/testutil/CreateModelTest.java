@@ -1,5 +1,6 @@
 package com.xfatur.testutil;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
@@ -15,6 +16,7 @@ import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
+import com.xfatur.model.produto.Produto;
 import com.xfatur.model.test.EnderecoCobranca;
 
 public class CreateModelTest {
@@ -396,6 +398,82 @@ public class CreateModelTest {
 	enderecoCobranca.setEstado("RJ");
 
 	return enderecoCobranca;
+    }
+
+    public static Produto createProduto1() {
+	Produto produto = new Produto();
+
+	produto.setCodigoProduto("000.11.444");
+	produto.setDescricao("BEBIDA");
+	produto.setUnidadeDetalhada("114456");
+	produto.setGraduacaoAlcoolica("10%");
+	produto.setPesoLiquido(new BigDecimal("10.12"));
+	produto.setPesoBruto(new BigDecimal("15.12"));
+	produto.setCodigoDeBarras("01234567891234");
+	produto.setPesoDaCaixa(new BigDecimal("154.12"));
+	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
+	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
+	produto.setIpiUnitario(new BigDecimal("10.12"));
+	produto.setAliquotaDeReducao(Boolean.FALSE);
+	produto.setIsentoICMS(Boolean.FALSE);
+	produto.setAliquotaIPI(new BigDecimal("12"));
+	produto.setAdquiridoComST(Boolean.FALSE);
+	produto.setCest("123457");
+	produto.setReducaoICMS_id(1);
+	produto.setIva_id(1);
+	produto.setProdutor_id(1);
+	produto.setUnidade_id(1);
+	produto.setClassificacaoFiscal_id(1);
+	produto.setCodigoDeTributacao_id("12");
+	produto.setRegiaoProdutora_id(1);
+	produto.setLinhaDeProduto_id(1);
+	produto.setPais_id(1);
+	produto.setTipoDeValidade_id(1);
+	produto.setMarca_id(1);
+	produto.setOrigem_id(1);
+	produto.setTipoProduto_id("11");
+	produto.setFundoCombatePobreza_id(1);
+	produto.setSeloIPI_id("123456");
+
+	return produto;
+    }
+
+    public static Produto createProduto2() {
+	Produto produto = new Produto();
+
+	produto.setCodigoProduto("000.11.001");
+	produto.setDescricao("CHOCOLATE ");
+	produto.setUnidadeDetalhada("114456");
+	produto.setGraduacaoAlcoolica("10%");
+	produto.setPesoLiquido(new BigDecimal("10.12"));
+	produto.setPesoBruto(new BigDecimal("15.12"));
+	produto.setCodigoDeBarras("01234567891234");
+	produto.setPesoDaCaixa(new BigDecimal("154.12"));
+	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
+	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
+	produto.setIpiUnitario(new BigDecimal("10.12"));
+	produto.setAliquotaDeReducao(Boolean.TRUE);
+	produto.setIsentoICMS(Boolean.TRUE);
+	produto.setAliquotaIPI(new BigDecimal("12"));
+	produto.setAdquiridoComST(Boolean.TRUE);
+	produto.setCest("123457");
+	produto.setReducaoICMS_id(1);
+	produto.setIva_id(1);
+	produto.setProdutor_id(1);
+	produto.setUnidade_id(1);
+	produto.setClassificacaoFiscal_id(1);
+	produto.setCodigoDeTributacao_id("12");
+	produto.setRegiaoProdutora_id(1);
+	produto.setLinhaDeProduto_id(1);
+	produto.setPais_id(1);
+	produto.setTipoDeValidade_id(1);
+	produto.setMarca_id(1);
+	produto.setOrigem_id(1);
+	produto.setTipoProduto_id("11");
+	produto.setFundoCombatePobreza_id(1);
+	produto.setSeloIPI_id("123456");
+
+	return produto;
     }
 
 }

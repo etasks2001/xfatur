@@ -163,6 +163,10 @@ select * from enderecoretirada;
 select * from enderecocobranca;
 
 
+select * from produto;
+
+
+
 
 
 
@@ -196,6 +200,14 @@ drop table if exists representante;
 drop table if exists ramoatividade;
 drop table if exists serie;
 drop table if exists nf;
+
+
+
+
+drop table if exists produto;
+
+
+
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 drop function if exists create_id_emitente_serie_sequence();
@@ -205,149 +217,197 @@ drop function if exists numero_nNF();
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
 create table emitente(
-	id serial,
-	CNPJ varchar(14) not null, 
-	xNome varchar(60) not null, 
-	xFant varchar(60) null, 
-	xLgr varchar(60) not null, 
-	nro varchar(60) not null, 
-	xCpl varchar(60) null, 
-	xBairro varchar(60)  not null, 
-	cMun varchar(7)  not null, 
-	xMun varchar(60) not null, 
-	UF varchar(2)  not null, 
-	CEP varchar(8) not null, 
-	cPais varchar(4) not null, 
-	xPais varchar(60) not null, 
-	fone varchar(14) null,
-	IE varchar(14) not null, 
-	IEST varchar(14) null, 
-	IM varchar(15) not null, 
-	CNAE varchar(7) null,
-	CRT varchar(1) not null,
-	nf_serie_atual int not null,
-	ultima_nnf int not null,
-	primary key (id),
-	unique (CNPJ)
+	id 		serial,
+	CNPJ 		varchar(14) not null, 
+	xNome 		varchar(60) not null, 
+	xFant 		varchar(60) null, 
+	xLgr 		varchar(60) not null, 
+	nro 		varchar(60) not null, 
+	xCpl 		varchar(60) null, 
+	xBairro 	varchar(60)  not null, 
+	cMun 		varchar(7)  not null, 
+	xMun 		varchar(60) not null, 
+	UF 		varchar(2)  not null, 
+	CEP 		varchar(8) not null, 
+	cPais 		varchar(4) not null, 
+	xPais 		varchar(60) not null, 
+	fone 		varchar(14) null,
+	IE 		varchar(14) not null, 
+	IEST 		varchar(14) null, 
+	IM 		varchar(15) not null, 
+	CNAE 		varchar(7) null,
+	CRT 		varchar(1) not null,
+	nf_serie_atual	int not null,
+	ultima_nnf 	int not null,
+	primary key 	(id),
+	unique 		(CNPJ)
 );
-/*---------------------------------------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------------------------------------*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 create table representante(
-	id serial not null,
-	CNPJCPF varchar(14) not null, 
-	xNome varchar(60) not null,
-	xLgr varchar(60) not null, 
-	nro varchar(60) not null, 
-	xCpl varchar(60) null, 
-	xBairro varchar(60)  not null, 
-	cMun varchar(7)  not null, 
-	xMun varchar(60) not null, 
-	UF varchar(2)  not null, 
-	CEP varchar(8) not null, 
-	cPais varchar(4) not null, 
-	xPais varchar(60) not null, 
-	fone varchar(14) null,
-	IE varchar(14) null, 
-	email varchar(60) null,
-	primary key (id),
-	unique (CNPJCPF)
+	id 		serial not null,
+	CNPJCPF 	varchar(14) not null, 
+	xNome 		varchar(60) not null,
+	xLgr 		varchar(60) not null, 
+	nro 		varchar(60) not null, 
+	xCpl 		varchar(60) null, 
+	xBairro 	varchar(60)  not null, 
+	cMun 		varchar(7)  not null, 
+	xMun 		varchar(60) not null, 
+	UF 		varchar(2)  not null, 
+	CEP 		varchar(8) not null, 
+	cPais 		varchar(4) not null, 
+	xPais 		varchar(60) not null, 
+	fone 		varchar(14) null,
+	IE 		varchar(14) null, 
+	email 		varchar(60) null,
+	primary key 	(id),
+	unique 		(CNPJCPF)
 );
 create table ramoatividade(
-	id serial not null,
-	descricao varchar(70),
-	primary key (id),
-	unique (descricao)
+	id 		serial not null,
+	descricao 	varchar(70),
+	primary key 	(id),
+	unique 		(descricao)
 );
 
 create table naturezajuridica(
-	id serial not null,
-	descricao varchar (70),
-	primary key (id),
-	unique(descricao)
+	id 		serial not null,
+	descricao 	varchar (70),
+	primary key 	(id),
+	unique		(descricao)
 );
 
 
 
 create table destinatario(
-	id serial not null,
-	CNPJCPF varchar(14) not null, 
-	idEstrangeiro varchar(20) null,
-	xNome varchar(60) not null,
-	xLgr varchar(60) not null, 
-	nro varchar(60) not null, 
-	xCpl varchar(60) null, 
-	xBairro varchar(60)  not null, 
-	cMun varchar(7)  not null, 
-	xMun varchar(60) not null, 
-	UF varchar(2)  not null, 
-	CEP varchar(8) not null, 
-	cPais varchar(4) null, 
-	xPais varchar(60) null, 
-	fone varchar(14) null,
-	indIEDest varchar(1) not null,
-	IE varchar(14) null, 
-	ISUF varchar(9) null,
-	IM varchar(15) null, 
-	email varchar(60) null,
-	ramoatividade_id int not null references ramoatividade,
-	naturezajuridica_id int not null references naturezajuridica,
-	representante_id int not null references representante,
-
-	primary key (id),
-	unique (CNPJCPF)
+	id 			serial not null,
+	CNPJCPF 		varchar(14) not null, 
+	idEstrangeiro 		varchar(20) null,
+	xNome 			varchar(60) not null,
+	xLgr 			varchar(60) not null, 
+	nro 			varchar(60) not null, 
+	xCpl 			varchar(60) null, 
+	xBairro 		varchar(60)  not null, 
+	cMun 			varchar(7)  not null, 
+	xMun 			varchar(60) not null, 
+	UF 			varchar(2)  not null, 
+	CEP 			varchar(8) not null, 
+	cPais 			varchar(4) null, 
+	xPais 			varchar(60) null, 
+	fone 			varchar(14) null,
+	indIEDest 		varchar(1) not null,
+	IE 			varchar(14) null, 
+	ISUF 			varchar(9) null,
+	IM 			varchar(15) null, 
+	email 			varchar(60) null,
+	ramoatividade_id 	int not null references ramoatividade,
+	naturezajuridica_id 	int not null references naturezajuridica,
+	representante_id 	int not null references representante,
+	primary key 		(id),
+	unique 			(CNPJCPF)
 );
 create table enderecoentrega(
-	id serial not null,
-	CNPJCPF varchar(14) not null, 
-	xNome varchar(60) not null,
-	xLgr varchar(60) not null, 
-	nro varchar(60) not null, 
-	xCpl varchar(60) null, 
-	xBairro varchar(60)  not null, 
-	cMun varchar(7)  not null, 
-	xMun varchar(60) not null, 
-	UF varchar(2)  not null, 
-	CEP varchar(8) not null, 
-	cPais varchar(4) null, 
-	xPais varchar(60) null, 
-	fone varchar(14) null,
-	email varchar(60) null,
-	IE varchar(14) null,
-	destinatario_id int not null references destinatario
+	id 			serial not null,
+	CNPJCPF 		varchar(14) not null, 
+	xNome 			varchar(60) not null,
+	xLgr 			varchar(60) not null, 
+	nro 			varchar(60) not null, 
+	xCpl 			varchar(60) null, 
+	xBairro 		varchar(60)  not null, 
+	cMun 			varchar(7)  not null, 
+	xMun 			varchar(60) not null, 
+	UF 			varchar(2)  not null, 
+	CEP 			varchar(8) not null, 
+	cPais 			varchar(4) null, 
+	xPais 			varchar(60) null, 
+	fone 			varchar(14) null,
+	email 			varchar(60) null,
+	IE 			varchar(14) null,
+	destinatario_id		int not null references destinatario
 );
 create table enderecoretirada(
-	id serial not null,
-	CNPJCPF varchar(14) not null, 
-	xNome varchar(60) not null,
-	xLgr varchar(60) not null, 
-	nro varchar(60) not null, 
-	xCpl varchar(60) null, 
-	xBairro varchar(60)  not null, 
-	cMun varchar(7)  not null, 
-	xMun varchar(60) not null, 
-	UF varchar(2)  not null, 
-	CEP varchar(8) not null, 
-	cPais varchar(4) null, 
-	xPais varchar(60) null, 
-	fone varchar(14) null,
-	email varchar(60) null,
-	IE varchar(14) null,
-	destinatario_id int not null references destinatario
+	id 			serial not null,
+	CNPJCPF 		varchar(14) not null, 
+	xNome 			varchar(60) not null,
+	xLgr 			varchar(60) not null, 
+	nro 			varchar(60) not null, 
+	xCpl 			varchar(60) null, 
+	xBairro			varchar(60)  not null, 
+	cMun 			varchar(7)  not null, 
+	xMun 			varchar(60) not null, 
+	UF 			varchar(2)  not null, 
+	CEP 			varchar(8) not null, 
+	cPais 			varchar(4) null, 
+	xPais 			varchar(60) null, 
+	fone 			varchar(14) null,
+	email 			varchar(60) null,
+	IE 			varchar(14) null,
+	destinatario_id		int not null references destinatario
 );
 
 create table enderecocobranca(
-	id serial not null,
-	logradouro varchar(40) not null,
-	bairro varchar(12) null,
-	cep varchar(8) not null,
-	cidade varchar(15) not null, 
-	estado varchar(2) not null,
-	destinatario_id int not null references destinatario
+	id 			serial not null,
+	logradouro 		varchar(40) not null,
+	bairro 			varchar(12) null,
+	cep 			varchar(8) not null,
+	cidade 			varchar(15) not null, 
+	estado 			varchar(2) not null,
+	destinatario_id 	int not null references destinatario
 );
 
 
-/*---------------------------------------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------------------------------------*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+create table produto(
+	id 			serial not null,
+	codigoProduto		varchar(10) not null,
+	descricao		varchar(90) not null,
+	unidadeDetalhada	varchar(20) not null,
+	graduacaoAlcoolica	varchar(15) null,
+	pesoLiquido		numeric default 0,
+	pesoBruto		numeric default 0,
+	codigoDeBarras		varchar(14) null,
+	pesoDaCaixa		numeric default 0,
+	larguraDaCaixa		numeric default 0,
+	comprimentoDaCaixa	numeric default 0,
+	ipiUnitario		numeric default 0,
+	aliquotaDeReducao	boolean,
+	isentoICMS		boolean,
+	aliquotaIPI		decimal default 0,
+	adquiridoComST		boolean,
+	cest			varchar(7) not null,
+	reducaoICMS_id		int,
+	iva_id			int,
+	produtor_id		int,
+	unidade_id		int,
+	classificacaoFiscal_id	int,
+	codigoDeTributacao_id	varchar(2),
+	regiaoProdutora_id	int,
+	linhaDeProduto_id	int,
+	pais_id			int,
+	tipoDeValidade_id	int,
+	marca_id		int,
+	origem_id		int,
+	tipoProduto_id		varchar(2),
+	fundoCombatePobreza_id	int,
+	seloIPI_id		varchar(6),
+	primary key 		(id),
+	unique 			(codigoProduto)
+
+
+);
+
+
+
+
+
+
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 create table serie(
 	id_emitente int references emitente,
 	serie int not null,
