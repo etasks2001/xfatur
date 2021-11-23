@@ -10,6 +10,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -21,10 +22,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
 import com.xfatur.model.produto.Produto;
+import com.xfatur.model.produto.Produtor;
 import com.xfatur.testutil.CreateModelTest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -33,24 +36,52 @@ import com.xfatur.testutil.CreateModelTest;
 class ProdutoServiceTest {
     @Autowired
     ProdutoService produtoService;
+
+    @Autowired
+    ProdutorService produtorService;
+
     List<Integer> idsProduto = new ArrayList<Integer>();
+    List<Integer> idsProdutor = new ArrayList<Integer>();
 
     Stream<Produto> model() {
 	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2());
     }
 
     @AfterAll
-    private void delete() {
+    void delete() {
 	idsProduto.forEach(id -> produtoService.deleteById(id));
+	idsProdutor.forEach(id -> produtorService.deleteById(id));
+    }
+
+    @BeforeAll
+    void insert() {
+	CreateModelTest.produtorList().forEach(p -> {
+	    Integer id = produtorService.findByIdDescricao(p.getDescricao());
+	    if (id == null) {
+		Produtor saved = produtorService.save(p);
+		id = saved.getId();
+	    }
+
+	    idsProdutor.add(id);
+	});
+
     }
 
     @ParameterizedTest
     @MethodSource("model")
     @Order(1)
     void test_save(Produto produto) {
+	int produtor_id = CreateModelTest.getCodigoAleatorio(idsProdutor);
+	Produtor produtor = produtorService.findById(produtor_id);
+
+	produto.setProdutor(produtor);
+
 	Produto saved = produtoService.save(produto);
 
 	idsProduto.add(saved.getId());
+
+	System.out.println("incluido:" + saved.getId());
+
 	produto.setId(saved.getId());
 
 	MatcherAssert.assertThat(saved.getId(), Matchers.is(produto.getId()));
@@ -63,7 +94,7 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(saved.getIsentoICMS(), Matchers.is(produto.getIsentoICMS()));
 	MatcherAssert.assertThat(saved.getAliquotaIPI(), Matchers.is(produto.getAliquotaIPI()));
 	MatcherAssert.assertThat(saved.getIva_id(), Matchers.is(produto.getIva_id()));
-	MatcherAssert.assertThat(saved.getProdutor_id(), Matchers.is(produto.getProdutor_id()));
+	MatcherAssert.assertThat(saved.getProdutor(), Matchers.is(produto.getProdutor()));
 	MatcherAssert.assertThat(saved.getUnidade_id(), Matchers.is(produto.getUnidade_id()));
 	MatcherAssert.assertThat(saved.getCest(), Matchers.is(produto.getCest()));
 	MatcherAssert.assertThat(saved.getClassificacaoFiscal_id(), Matchers.is(produto.getClassificacaoFiscal_id()));
@@ -90,6 +121,7 @@ class ProdutoServiceTest {
 
     @Test
     @Order(2)
+    @Transactional
     void test_findById() {
 	idsProduto.forEach(id -> {
 	    Produto found = produtoService.findById(id);

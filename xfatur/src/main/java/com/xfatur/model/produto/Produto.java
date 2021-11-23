@@ -3,9 +3,12 @@ package com.xfatur.model.produto;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Produto {
@@ -29,9 +32,13 @@ public class Produto {
     private BigDecimal aliquotaIPI;
     private Boolean adquiridoComST;
     private String cest;
+
     private Integer reducaoICMS_id;
     private Integer iva_id;
-    private Integer produtor_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "produtor_id")
+    private Produtor produtor;
     private Integer unidade_id;
     private Integer classificacaoFiscal_id;
     private String codigoDeTributacao_id;
@@ -197,12 +204,12 @@ public class Produto {
 	this.iva_id = iva_id;
     }
 
-    public Integer getProdutor_id() {
-	return produtor_id;
+    public Produtor getProdutor() {
+	return produtor;
     }
 
-    public void setProdutor_id(Integer produtor_id) {
-	this.produtor_id = produtor_id;
+    public void setProdutor(Produtor produtor) {
+	this.produtor = produtor;
     }
 
     public Integer getUnidade_id() {
