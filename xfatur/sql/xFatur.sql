@@ -162,8 +162,8 @@ select * from enderecoentrega;
 select * from enderecoretirada;
 select * from enderecocobranca;
 
-
-
+select * from classificacaofiscal;
+select * from unidade;
 select * from produtor;
 select * from produto;
 
@@ -205,10 +205,9 @@ drop table if exists nf;
 
 
 
-
-
+drop table if exists classificacaofiscal;
+drop table if exists unidade;
 drop table if exists produtor;
-
 drop table if exists produto;
 
 
@@ -367,6 +366,20 @@ create table enderecocobranca(
 
 
 
+create table classificacaofiscal(
+	id		serial not null,
+	ncm		varchar(8) not null,
+	descricao	varchar(80) not null,
+	primary key	(id),
+	unique 		(descricao)
+);
+create table unidade(
+	id		serial not null,
+	descricao 	varchar(80) not null,
+	abreviacao 	varchar(6) not null,
+	primary key 	(id),
+	unique 		(abreviacao)
+);
 
 
 create table produtor(
@@ -377,6 +390,9 @@ create table produtor(
 );
 
 
+
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
 
 create table produto(
 	id 			serial not null,
@@ -400,8 +416,8 @@ create table produto(
 	iva_id			int,
 	
 	produtor_id		int not null references produtor,
-	unidade_id		int,
-	classificacaoFiscal_id	int,
+	unidade_id		int not null references unidade,
+	classificacaoFiscal_id	int not null references classificacaofiscal,
 	codigoDeTributacao_id	varchar(2),
 	regiaoProdutora_id	int,
 	linhaDeProduto_id	int,

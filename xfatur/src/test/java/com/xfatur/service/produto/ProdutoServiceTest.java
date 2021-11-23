@@ -26,22 +26,33 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
+import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
+import com.xfatur.model.produto.Unidade;
 import com.xfatur.testutil.CreateModelTest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 class ProdutoServiceTest {
+
+    @Autowired
+    ClassificacaoFiscalService classificacaoFiscalService;
+
+    @Autowired
+    UnidadeService unidadeService;
+
     @Autowired
     ProdutoService produtoService;
 
     @Autowired
     ProdutorService produtorService;
 
+    List<Integer> idsClassificacaoFiscal = new ArrayList<Integer>();
     List<Integer> idsProduto = new ArrayList<Integer>();
     List<Integer> idsProdutor = new ArrayList<Integer>();
+    List<Integer> idsUnidade = new ArrayList<Integer>();
 
     Stream<Produto> model() {
 	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2());
@@ -65,6 +76,27 @@ class ProdutoServiceTest {
 	    idsProdutor.add(id);
 	});
 
+	CreateModelTest.unidadeList().forEach(u -> {
+	    Integer id = unidadeService.findIdByAbreviacao(u.getAbreviacao());
+	    if (id == null) {
+
+		Unidade save = unidadeService.save(u);
+		id = save.getId();
+	    }
+	    idsUnidade.add(id);
+
+	});
+
+	CreateModelTest.classificacaoFiscalList().forEach(classificacaoFiscal -> {
+
+	    Integer id = classificacaoFiscalService.findIdByDescricao(classificacaoFiscal.getDescricao());
+	    if (id == null) {
+		ClassificacaoFiscal saved = classificacaoFiscalService.save(classificacaoFiscal);
+		id = saved.getId();
+	    }
+	    idsClassificacaoFiscal.add(id);
+
+	});
     }
 
     @ParameterizedTest
@@ -72,9 +104,16 @@ class ProdutoServiceTest {
     @Order(1)
     void test_save(Produto produto) {
 	int produtor_id = CreateModelTest.getCodigoAleatorio(idsProdutor);
+	int unidade_id = CreateModelTest.getCodigoAleatorio(idsUnidade);
+	int classificacaoFiscal_id = CreateModelTest.getCodigoAleatorio(idsClassificacaoFiscal);
+
 	Produtor produtor = produtorService.findById(produtor_id);
+	Unidade unidade = unidadeService.findById(unidade_id);
+	ClassificacaoFiscal classificacaoFiscal = classificacaoFiscalService.findById(classificacaoFiscal_id);
 
 	produto.setProdutor(produtor);
+	produto.setUnidade(unidade);
+	produto.setClassificacaoFiscal(classificacaoFiscal);
 
 	Produto saved = produtoService.save(produto);
 
@@ -95,9 +134,9 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(saved.getAliquotaIPI(), Matchers.is(produto.getAliquotaIPI()));
 	MatcherAssert.assertThat(saved.getIva_id(), Matchers.is(produto.getIva_id()));
 	MatcherAssert.assertThat(saved.getProdutor(), Matchers.is(produto.getProdutor()));
-	MatcherAssert.assertThat(saved.getUnidade_id(), Matchers.is(produto.getUnidade_id()));
+	MatcherAssert.assertThat(saved.getUnidade(), Matchers.is(produto.getUnidade()));
 	MatcherAssert.assertThat(saved.getCest(), Matchers.is(produto.getCest()));
-	MatcherAssert.assertThat(saved.getClassificacaoFiscal_id(), Matchers.is(produto.getClassificacaoFiscal_id()));
+	MatcherAssert.assertThat(saved.getClassificacaoFiscal(), Matchers.is(produto.getClassificacaoFiscal()));
 	MatcherAssert.assertThat(saved.getFundoCombatePobreza_id(), Matchers.is(produto.getFundoCombatePobreza_id()));
 	MatcherAssert.assertThat(saved.getUnidadeDetalhada(), Matchers.is(produto.getUnidadeDetalhada()));
 	MatcherAssert.assertThat(saved.getGraduacaoAlcoolica(), Matchers.is(produto.getGraduacaoAlcoolica()));

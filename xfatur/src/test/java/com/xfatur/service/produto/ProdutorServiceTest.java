@@ -2,7 +2,6 @@ package com.xfatur.service.produto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -31,10 +30,6 @@ class ProdutorServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    Stream<Produtor> model() {
-	return CreateModelTest.produtorList();
-    }
-
     @AfterAll
     void delete() {
 	ids.forEach(id -> produtorService.deleteById(id));
@@ -43,15 +38,15 @@ class ProdutorServiceTest {
     @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.produtorList().forEach(p -> {
-	    Integer id = produtorService.findByIdDescricao(p.getDescricao());
+	CreateModelTest.produtorList().forEach(produtor -> {
+	    Integer id = produtorService.findByIdDescricao(produtor.getDescricao());
 	    if (id == null) {
-		Produtor saved = produtorService.save(p);
+		Produtor saved = produtorService.save(produtor);
 
 		id = saved.getId();
 
-		p.setId(id);
-		MatcherAssert.assertThat(p.getId(), Matchers.is(saved.getId()));
+		produtor.setId(id);
+		MatcherAssert.assertThat(produtor.getId(), Matchers.is(saved.getId()));
 	    }
 
 	    ids.add(id);

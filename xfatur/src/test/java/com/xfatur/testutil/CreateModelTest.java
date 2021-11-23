@@ -16,8 +16,10 @@ import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
+import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
+import com.xfatur.model.produto.Unidade;
 import com.xfatur.model.test.EnderecoCobranca;
 
 public class CreateModelTest {
@@ -423,8 +425,8 @@ public class CreateModelTest {
 	produto.setReducaoICMS_id(1);
 	produto.setIva_id(1);
 	produto.setProdutor(null);
-	produto.setUnidade_id(1);
-	produto.setClassificacaoFiscal_id(1);
+	produto.setUnidade(null);
+	produto.setClassificacaoFiscal(null);
 	produto.setCodigoDeTributacao_id("12");
 	produto.setRegiaoProdutora_id(1);
 	produto.setLinhaDeProduto_id(1);
@@ -461,8 +463,8 @@ public class CreateModelTest {
 	produto.setReducaoICMS_id(1);
 	produto.setIva_id(1);
 	produto.setProdutor(null);
-	produto.setUnidade_id(1);
-	produto.setClassificacaoFiscal_id(1);
+	produto.setUnidade(null);
+	produto.setClassificacaoFiscal(null);
 	produto.setCodigoDeTributacao_id("12");
 	produto.setRegiaoProdutora_id(1);
 	produto.setLinhaDeProduto_id(1);
@@ -481,6 +483,38 @@ public class CreateModelTest {
 	return Stream.of(createProdutor1(), createProdutor2(), createProdutor3());
     }
 
+    public static Stream<Unidade> unidadeList() {
+	return Stream.of(createUnidade1(), createUnidade2(), createUnidade3(), createUnidade4());
+    }
+
+    private static Unidade createUnidade1() {
+	Unidade unidade = new Unidade();
+	unidade.setAbreviacao("cx");
+	unidade.setDescricao("caixa");
+	return unidade;
+    }
+
+    private static Unidade createUnidade2() {
+	Unidade unidade = new Unidade();
+	unidade.setAbreviacao("kg");
+	unidade.setDescricao("quilograma");
+	return unidade;
+    }
+
+    private static Unidade createUnidade3() {
+	Unidade unidade = new Unidade();
+	unidade.setAbreviacao("lt");
+	unidade.setDescricao("litro");
+	return unidade;
+    }
+
+    private static Unidade createUnidade4() {
+	Unidade unidade = new Unidade();
+	unidade.setAbreviacao("unid");
+	unidade.setDescricao("unidade");
+	return unidade;
+    }
+
     public static Produtor createProdutor1() {
 	Produtor produtor = new Produtor();
 	produtor.setDescricao("CERVEJARIA DO SUL");
@@ -497,5 +531,59 @@ public class CreateModelTest {
 	Produtor produtor = new Produtor();
 	produtor.setDescricao("PESSEGOS DA ITALIA");
 	return produtor;
+    }
+
+    public static Stream<ClassificacaoFiscal> classificacaoFiscalList() {
+
+	return Stream.of(createClassificacaoFiscal1(), createClassificacaoFiscal2(), createClassificacaoFiscal3(), createClassificacaoFiscal4(), createClassificacaoFiscal5(),
+		createClassificacaoFiscal6());
+    }
+
+    private static ClassificacaoFiscal createClassificacaoFiscal1() {
+	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+	classificacaoFiscal.setNcm("12345678");
+	classificacaoFiscal.setDescricao("SORVETE DE MASSA");
+
+	return classificacaoFiscal;
+    }
+
+    private static ClassificacaoFiscal createClassificacaoFiscal2() {
+	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+	classificacaoFiscal.setNcm("45879314");
+	classificacaoFiscal.setDescricao("SORVETE DE COPO");
+
+	return classificacaoFiscal;
+    }
+
+    private static ClassificacaoFiscal createClassificacaoFiscal3() {
+	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+	classificacaoFiscal.setNcm("52975484");
+	classificacaoFiscal.setDescricao("SORVETE DE MASSA E COPO");
+
+	return classificacaoFiscal;
+    }
+
+    private static ClassificacaoFiscal createClassificacaoFiscal4() {
+	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+	classificacaoFiscal.setNcm("15975344");
+	classificacaoFiscal.setDescricao("SORVETE DE PALITO");
+
+	return classificacaoFiscal;
+    }
+
+    private static ClassificacaoFiscal createClassificacaoFiscal5() {
+	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+	classificacaoFiscal.setNcm("55487974");
+	classificacaoFiscal.setDescricao("COLHER DE MADEIRA");
+
+	return classificacaoFiscal;
+    }
+
+    private static ClassificacaoFiscal createClassificacaoFiscal6() {
+	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+	classificacaoFiscal.setNcm("14534564");
+	classificacaoFiscal.setDescricao("COPO DE PLASTICO");
+
+	return classificacaoFiscal;
     }
 }

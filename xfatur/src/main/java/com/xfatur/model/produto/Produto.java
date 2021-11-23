@@ -39,8 +39,15 @@ public class Produto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produtor_id")
     private Produtor produtor;
-    private Integer unidade_id;
-    private Integer classificacaoFiscal_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "unidade_id")
+    private Unidade unidade;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "classificacaofiscal_id")
+    private ClassificacaoFiscal classificacaoFiscal;
+
     private String codigoDeTributacao_id;
     private Integer regiaoProdutora_id;
     private Integer linhaDeProduto_id;
@@ -212,24 +219,24 @@ public class Produto {
 	this.produtor = produtor;
     }
 
-    public Integer getUnidade_id() {
-	return unidade_id;
+    public Unidade getUnidade() {
+	return unidade;
     }
 
-    public void setUnidade_id(Integer unidade_id) {
-	this.unidade_id = unidade_id;
-    }
-
-    public Integer getClassificacaoFiscal_id() {
-	return classificacaoFiscal_id;
-    }
-
-    public void setClassificacaoFiscal_id(Integer classificacaoFiscal_id) {
-	this.classificacaoFiscal_id = classificacaoFiscal_id;
+    public void setUnidade(Unidade unidade) {
+	this.unidade = unidade;
     }
 
     public String getCodigoDeTributacao_id() {
 	return codigoDeTributacao_id;
+    }
+
+    public ClassificacaoFiscal getClassificacaoFiscal() {
+	return classificacaoFiscal;
+    }
+
+    public void setClassificacaoFiscal(ClassificacaoFiscal classificacaoFiscal) {
+	this.classificacaoFiscal = classificacaoFiscal;
     }
 
     public void setCodigoDeTributacao_id(String codigoDeTributacao_id) {
