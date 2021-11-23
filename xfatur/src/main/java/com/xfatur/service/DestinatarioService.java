@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.xfatur.exception.DestinatarioCNPJCPFExistException;
@@ -12,6 +13,7 @@ import com.xfatur.model.Destinatario;
 import com.xfatur.repository.DestinatarioRepository;
 
 @Service
+@Scope
 public class DestinatarioService {
     @Autowired
     private DestinatarioRepository repository;

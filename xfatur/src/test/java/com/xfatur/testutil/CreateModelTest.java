@@ -17,6 +17,7 @@ import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
 import com.xfatur.model.produto.Produto;
+import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.test.EnderecoCobranca;
 
 public class CreateModelTest {
@@ -421,7 +422,7 @@ public class CreateModelTest {
 	produto.setCest("123457");
 	produto.setReducaoICMS_id(1);
 	produto.setIva_id(1);
-	produto.setProdutor_id(1);
+	produto.setProdutor(null);
 	produto.setUnidade_id(1);
 	produto.setClassificacaoFiscal_id(1);
 	produto.setCodigoDeTributacao_id("12");
@@ -459,7 +460,7 @@ public class CreateModelTest {
 	produto.setCest("123457");
 	produto.setReducaoICMS_id(1);
 	produto.setIva_id(1);
-	produto.setProdutor_id(1);
+	produto.setProdutor(null);
 	produto.setUnidade_id(1);
 	produto.setClassificacaoFiscal_id(1);
 	produto.setCodigoDeTributacao_id("12");
@@ -476,4 +477,25 @@ public class CreateModelTest {
 	return produto;
     }
 
+    public static Stream<Produtor> produtorList() {
+	return Stream.of(createProdutor1(), createProdutor2(), createProdutor3());
+    }
+
+    public static Produtor createProdutor1() {
+	Produtor produtor = new Produtor();
+	produtor.setDescricao("CERVEJARIA DO SUL");
+	return produtor;
+    }
+
+    public static Produtor createProdutor2() {
+	Produtor produtor = new Produtor();
+	produtor.setDescricao("TOMATES DO JAPÃO");
+	return produtor;
+    }
+
+    public static Produtor createProdutor3() {
+	Produtor produtor = new Produtor();
+	produtor.setDescricao("PESSEGOS DA ITALIA");
+	return produtor;
+    }
 }
