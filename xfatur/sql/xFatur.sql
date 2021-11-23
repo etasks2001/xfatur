@@ -163,6 +163,8 @@ select * from enderecoretirada;
 select * from enderecocobranca;
 
 
+
+select * from produtor;
 select * from produto;
 
 
@@ -203,6 +205,9 @@ drop table if exists nf;
 
 
 
+
+
+drop table if exists produtor;
 
 drop table if exists produto;
 
@@ -360,6 +365,19 @@ create table enderecocobranca(
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
+
+
+
+
+create table produtor(
+	id 		serial not null,
+	descricao 	varchar(80),
+	primary key	(id),
+	unique 		(descricao)
+);
+
+
+
 create table produto(
 	id 			serial not null,
 	codigoProduto		varchar(10) not null,
@@ -380,7 +398,8 @@ create table produto(
 	cest			varchar(7) not null,
 	reducaoICMS_id		int,
 	iva_id			int,
-	produtor_id		int,
+	
+	produtor_id		int not null references produtor,
 	unidade_id		int,
 	classificacaoFiscal_id	int,
 	codigoDeTributacao_id	varchar(2),
@@ -395,9 +414,9 @@ create table produto(
 	seloIPI_id		varchar(6),
 	primary key 		(id),
 	unique 			(codigoProduto)
-
-
+	
 );
+
 
 
 
@@ -587,12 +606,12 @@ end$$;
 	insert into nf (id_emitente,cnpj,serie,nnf,ind_emitente,versao,chaveNFe,cuf,cnf,natop,mod,dhemi,dhsaient,tpnf,iddest,cmunfg,tpimp,tpemis,cdv,tpamb,finnfe,indfinal,indpres,indIntermed,procemi,verproc,dhcont,xjust) values 
 	(1,'11111111111111',0,19999,1,'1.4','11111111112222222222333333333344444444445555','35','17897897','vendas','55','01/01/2001',null,1,1,1234567,1,1,1,2,1,0,0,null,0,'1.1',null,null);	
 
-
+/*
 select * from nf  ;
 select * from emitente;
 
 select * from serie;
-
+*/
 --delete from serie where serie = 55
 
 
