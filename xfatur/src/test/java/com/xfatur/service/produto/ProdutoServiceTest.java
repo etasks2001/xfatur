@@ -29,6 +29,8 @@ import com.xfatur.exception.ProdutoIdNotFoundException;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
+import com.xfatur.model.produto.RegiaoProdutora;
+import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.model.produto.Tributacao;
 import com.xfatur.model.produto.Unidade;
 import com.xfatur.testutil.CreateModelTest;
@@ -52,11 +54,18 @@ class ProdutoServiceTest {
 
     @Autowired
     TributacaoService tributacaoService;
+    @Autowired
+    RegiaoProdutoraService regiaoProdutoraService;
+    @Autowired
+    TipoValidadeService tipoValidadeService;
+
     List<String> idsTributacao = new ArrayList<String>();
     List<Integer> idsClassificacaoFiscal = new ArrayList<Integer>();
     List<Integer> idsProduto = new ArrayList<Integer>();
     List<Integer> idsProdutor = new ArrayList<Integer>();
     List<Integer> idsUnidade = new ArrayList<Integer>();
+    List<Integer> idsRegiaoProdutora = new ArrayList<Integer>();
+    List<Integer> idsTipoValidade = new ArrayList<Integer>();
 
     Stream<Produto> model() {
 	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2());
@@ -74,6 +83,8 @@ class ProdutoServiceTest {
 	CreateModelTest.unidadeList().forEach(entity -> CreateModelTest.createAndIds(unidadeService, entity, idsUnidade));
 	CreateModelTest.classificacaoFiscalList().forEach(entity -> CreateModelTest.createAndIds(classificacaoFiscalService, entity, idsClassificacaoFiscal));
 	CreateModelTest.tributacaoList().forEach(entity -> CreateModelTest.createAndIds(tributacaoService, entity, idsTributacao));
+	CreateModelTest.regiaoProdutoraList().forEach(entity -> CreateModelTest.createAndIds(regiaoProdutoraService, entity, idsRegiaoProdutora));
+	CreateModelTest.tipoValidadeList().forEach(entity -> CreateModelTest.createAndIds(tipoValidadeService, entity, idsTipoValidade));
     }
 
     @ParameterizedTest
@@ -84,16 +95,22 @@ class ProdutoServiceTest {
 	int unidade_id = CreateModelTest.getCodigoAleatorio(idsUnidade);
 	int classificacaoFiscal_id = CreateModelTest.getCodigoAleatorio(idsClassificacaoFiscal);
 	String tributacao_id = CreateModelTest.getCodigoAleatorio(idsTributacao);
+	int regiaoProdutora_id = CreateModelTest.getCodigoAleatorio(idsRegiaoProdutora);
+	int tipoValidade_id = CreateModelTest.getCodigoAleatorio(idsTipoValidade);
 
 	Produtor produtor = produtorService.findById(produtor_id);
 	Unidade unidade = unidadeService.findById(unidade_id);
 	ClassificacaoFiscal classificacaoFiscal = classificacaoFiscalService.findById(classificacaoFiscal_id);
 	Tributacao tributacao = tributacaoService.findById(tributacao_id);
+	RegiaoProdutora regiaoProdutora = regiaoProdutoraService.findById(regiaoProdutora_id);
+	TipoValidade tipoValidade = tipoValidadeService.findById(tipoValidade_id);
 
 	produto.setProdutor(produtor);
 	produto.setUnidade(unidade);
 	produto.setClassificacaoFiscal(classificacaoFiscal);
 	produto.setTributacao(tributacao);
+	produto.setRegiaoProdutora(regiaoProdutora);
+	produto.setTipoValidade(tipoValidade);
 
 	Produto saved = produtoService.save(produto);
 
@@ -129,7 +146,7 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(saved.getTributacao(), Matchers.is(produto.getTributacao()));
 	MatcherAssert.assertThat(saved.getRegiaoProdutora(), Matchers.is(produto.getRegiaoProdutora()));
 	MatcherAssert.assertThat(saved.getLinhaDeProduto_id(), Matchers.is(produto.getLinhaDeProduto_id()));
-	MatcherAssert.assertThat(saved.getTipoDeValidade_id(), Matchers.is(produto.getTipoDeValidade_id()));
+	MatcherAssert.assertThat(saved.getTipoValidade(), Matchers.is(produto.getTipoValidade()));
 	MatcherAssert.assertThat(saved.getTipoProduto_id(), Matchers.is(produto.getTipoProduto_id()));
 	MatcherAssert.assertThat(saved.getPais_id(), Matchers.is(produto.getPais_id()));
 	MatcherAssert.assertThat(saved.getMarca_id(), Matchers.is(produto.getMarca_id()));
@@ -174,7 +191,7 @@ class ProdutoServiceTest {
     @Test
     @Order(5)
     void test_buscaPorDescricao() {
-	List<Produto> produtos = produtoService.buscaPorDescricao("a");
+	List<Produto> produtos = produtoService.buscaPorDescricao("A");
 
 	MatcherAssert.assertThat(produtos.size(), Matchers.greaterThan(0));
 

@@ -13,7 +13,7 @@ public interface UnidadeRepository extends JpaRepository<Unidade, Integer> {
     @Query("select u.id from Unidade u where u.abreviacao =:abreviacao")
     Integer findIdByAbreviacao(@Param("abreviacao") String abreviacao);
 
-    @Query("select u from Unidade u where u.descricao like %:descricao%")
+    @Query("select u from Unidade u where u.descricao like %:descricao% order by u.descricao asc")
     List<Unidade> findByDescricao(@Param("descricao") String descricao);
 
 }

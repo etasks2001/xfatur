@@ -43,19 +43,19 @@ import com.xfatur.testutil.CreateModelTest;
 @TestMethodOrder(OrderAnnotation.class)
 class DestinatarioServiceTest {
     Stream<Destinatario> model() {
-	return Stream.of(CreateModelTest.createDestinatarioPJ(), CreateModelTest.createDestinatarioPJI(), CreateModelTest.createDestinatarioPF());
+	return CreateModelTest.destinatarioList();
     }
 
     Stream<EnderecoEntrega> modelEnderecoEntrega() {
-	return Stream.of(CreateModelTest.createEnderecoEntrega1());
+	return CreateModelTest.enderecoEntregaList();
     }
 
     Stream<EnderecoRetirada> modelEnderecoRetirada() {
-	return Stream.of(CreateModelTest.createEnderecoRetirada1());
+	return CreateModelTest.EnderecoRetiradaList();
     }
 
     Stream<EnderecoCobranca> modelEnderecoCobranca() {
-	return Stream.of(CreateModelTest.createEnderecoCobranca1());
+	return CreateModelTest.enderecoCobrancaList();
     }
 
     @Autowired

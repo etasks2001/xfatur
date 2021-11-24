@@ -16,11 +16,4 @@ public class EnderecoEntregaService {
 	return saved;
     }
 
-    public void deleteById(Integer id) {
-	if (repository.existsById(id)) {
-	    repository.deleteById(id);
-	}
-
-    }
-
 }

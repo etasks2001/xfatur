@@ -19,6 +19,8 @@ import com.xfatur.model.Representante;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
+import com.xfatur.model.produto.RegiaoProdutora;
+import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.model.produto.Tributacao;
 import com.xfatur.model.produto.Unidade;
 import com.xfatur.model.test.EnderecoCobranca;
@@ -27,6 +29,8 @@ import com.xfatur.service.RamoAtividadeService;
 import com.xfatur.service.RepresentanteService;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
 import com.xfatur.service.produto.ProdutorService;
+import com.xfatur.service.produto.RegiaoProdutoraService;
+import com.xfatur.service.produto.TipoValidadeService;
 import com.xfatur.service.produto.TributacaoService;
 import com.xfatur.service.produto.UnidadeService;
 
@@ -439,7 +443,7 @@ public class CreateModelTest {
 	produto.setRegiaoProdutora(null);
 	produto.setLinhaDeProduto_id(1);
 	produto.setPais_id(1);
-	produto.setTipoDeValidade_id(1);
+	produto.setTipoValidade(null);
 	produto.setMarca_id(1);
 	produto.setOrigem_id(1);
 	produto.setTipoProduto_id("11");
@@ -477,7 +481,7 @@ public class CreateModelTest {
 	produto.setRegiaoProdutora(null);
 	produto.setLinhaDeProduto_id(1);
 	produto.setPais_id(1);
-	produto.setTipoDeValidade_id(1);
+	produto.setTipoValidade(null);
 	produto.setMarca_id(1);
 	produto.setOrigem_id(1);
 	produto.setTipoProduto_id("11");
@@ -680,11 +684,11 @@ public class CreateModelTest {
 	return tributacao;
     }
 
-    public static void createAndIds(TributacaoService tributacaoService, Tributacao entity, List<String> ids) {
-	String id = tributacaoService.findIdByDescricao(entity.getDescricao());
+    public static void createAndIds(TributacaoService service, Tributacao entity, List<String> ids) {
+	String id = service.findIdByDescricao(entity.getDescricao());
 
 	if (id == null) {
-	    Tributacao saved = tributacaoService.save(entity);
+	    Tributacao saved = service.save(entity);
 	    id = saved.getId();
 	}
 	ids.add(id);
@@ -700,21 +704,21 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static void createAndIds(ProdutorService produtorService, Produtor entity, List<Integer> idsProdutor) {
-	Integer id = produtorService.findByIdDescricao(entity.getDescricao());
+    public static void createAndIds(ProdutorService service, Produtor entity, List<Integer> ids) {
+	Integer id = service.findByIdDescricao(entity.getDescricao());
 	if (id == null) {
-	    Produtor saved = produtorService.save(entity);
+	    Produtor saved = service.save(entity);
 	    id = saved.getId();
 	}
 
-	idsProdutor.add(id);
+	ids.add(id);
     }
 
-    public static void createAndIds(UnidadeService unidadeService, Unidade entity, List<Integer> ids) {
-	Integer id = unidadeService.findIdByAbreviacao(entity.getAbreviacao());
+    public static void createAndIds(UnidadeService service, Unidade entity, List<Integer> ids) {
+	Integer id = service.findIdByAbreviacao(entity.getAbreviacao());
 	if (id == null) {
 
-	    Unidade save = unidadeService.save(entity);
+	    Unidade save = service.save(entity);
 	    id = save.getId();
 	}
 	ids.add(id);
@@ -749,6 +753,98 @@ public class CreateModelTest {
 	    Representante saved = service.save(entity);
 	    id = saved.getId();
 	}
+	ids.add(id);
+    }
+
+    public static void createAndIds(RegiaoProdutoraService service, RegiaoProdutora entity, List<Integer> ids) {
+	Integer id = service.findByIdDescricao(entity.getDescricao());
+	if (id == null) {
+	    RegiaoProdutora saved = service.save(entity);
+	    id = saved.getId();
+	}
+
+	ids.add(id);
+    }
+
+    public static Stream<Destinatario> destinatarioList() {
+	return Stream.of(CreateModelTest.createDestinatarioPJ(), CreateModelTest.createDestinatarioPJI(), CreateModelTest.createDestinatarioPF());
+    }
+
+    public static Stream<EnderecoEntrega> enderecoEntregaList() {
+	return Stream.of(CreateModelTest.createEnderecoEntrega1());
+    }
+
+    public static Stream<EnderecoRetirada> EnderecoRetiradaList() {
+	return Stream.of(CreateModelTest.createEnderecoRetirada1());
+    }
+
+    public static Stream<EnderecoCobranca> enderecoCobrancaList() {
+	return Stream.of(CreateModelTest.createEnderecoCobranca1());
+    }
+
+    public static Stream<RegiaoProdutora> regiaoProdutoraList() {
+	return Stream.of(createRegiaoProdutora1(), createRegiaoProdutora2(), createRegiaoProdutora3(), createRegiaoProdutora4(), createRegiaoProdutora5());
+    }
+
+    private static RegiaoProdutora createRegiaoProdutora1() {
+	RegiaoProdutora regiaoProdutora = new RegiaoProdutora();
+	regiaoProdutora.setDescricao("ZONA DA MATA");
+	return regiaoProdutora;
+    }
+
+    private static RegiaoProdutora createRegiaoProdutora2() {
+	RegiaoProdutora regiaoProdutora = new RegiaoProdutora();
+	regiaoProdutora.setDescricao("SUL DE MINAS GERAIS");
+	return regiaoProdutora;
+    }
+
+    private static RegiaoProdutora createRegiaoProdutora3() {
+	RegiaoProdutora regiaoProdutora = new RegiaoProdutora();
+	regiaoProdutora.setDescricao("VALE DO PARANAPIACABA");
+	return regiaoProdutora;
+    }
+
+    private static RegiaoProdutora createRegiaoProdutora4() {
+	RegiaoProdutora regiaoProdutora = new RegiaoProdutora();
+	regiaoProdutora.setDescricao("VALE DO SAO FRANCISCO");
+	return regiaoProdutora;
+    }
+
+    private static RegiaoProdutora createRegiaoProdutora5() {
+	RegiaoProdutora regiaoProdutora = new RegiaoProdutora();
+	regiaoProdutora.setDescricao("NORTE DE SAO PAULO");
+	return regiaoProdutora;
+    }
+
+    public static Stream<TipoValidade> tipoValidadeList() {
+	return Stream.of(createTipoValidade1(), createTipoValidade2(), createTipoValidade3());
+    }
+
+    private static TipoValidade createTipoValidade1() {
+	TipoValidade tipoValidade = new TipoValidade();
+	tipoValidade.setDescricao("INDETERMINADA");
+	return tipoValidade;
+    }
+
+    private static TipoValidade createTipoValidade2() {
+	TipoValidade tipoValidade = new TipoValidade();
+	tipoValidade.setDescricao("IMPERECÍVEL");
+	return tipoValidade;
+    }
+
+    private static TipoValidade createTipoValidade3() {
+	TipoValidade tipoValidade = new TipoValidade();
+	tipoValidade.setDescricao("OUTRA");
+	return tipoValidade;
+    }
+
+    public static void createAndIds(TipoValidadeService service, TipoValidade entity, List<Integer> ids) {
+	Integer id = service.findByIdDescricao(entity.getDescricao());
+	if (id == null) {
+	    TipoValidade saved = service.save(entity);
+	    id = saved.getId();
+	}
+
 	ids.add(id);
     }
 

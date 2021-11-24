@@ -58,7 +58,11 @@ public class Produto {
 
     private Integer linhaDeProduto_id;
     private Integer pais_id;
-    private Integer tipoDeValidade_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipovalidade_id")
+    private TipoValidade tipoValidade;
+
     private Integer marca_id;
     private Integer origem_id;
     private String tipoProduto_id;
@@ -273,12 +277,12 @@ public class Produto {
 	this.pais_id = pais_id;
     }
 
-    public Integer getTipoDeValidade_id() {
-	return tipoDeValidade_id;
+    public TipoValidade getTipoValidade() {
+	return tipoValidade;
     }
 
-    public void setTipoDeValidade_id(Integer tipoDeValidade_id) {
-	this.tipoDeValidade_id = tipoDeValidade_id;
+    public void setTipoValidade(TipoValidade tipoValidade) {
+	this.tipoValidade = tipoValidade;
     }
 
     public Integer getMarca_id() {

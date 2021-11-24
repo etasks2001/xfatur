@@ -13,7 +13,7 @@ public interface ProdutorRepository extends JpaRepository<Produtor, Integer> {
     @Query("select p.id from Produtor p where p.descricao=:descricao")
     Integer findByIdDescricao(@Param("descricao") String descricao);
 
-    @Query("select p from Produtor p where p.descricao like %:descricao%")
+    @Query("select p from Produtor p where p.descricao like %:descricao% order by p.descricao asc")
     List<Produtor> findByDescricao(@Param("descricao") String descricao);
 
 }

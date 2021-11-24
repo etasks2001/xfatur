@@ -13,7 +13,7 @@ public interface TributacaoRepository extends JpaRepository<Tributacao, String> 
     @Query("select t.id from Tributacao t where t.descricao = :descricao")
     String findIdByDescricao(@Param("descricao") String descricao);
 
-    @Query("select t from Tributacao t where t.descricao like %:descricao% order by t.descricao")
+    @Query("select t from Tributacao t where t.descricao like %:descricao% order by t.descricao asc")
     List<Tributacao> findByDescricao(@Param("descricao") String descricao);
 
 }
