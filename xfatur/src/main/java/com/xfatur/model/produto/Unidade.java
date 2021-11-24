@@ -33,10 +33,6 @@ public class Unidade {
 	return id;
     }
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
-
     public String getAbreviacao() {
 	return abreviacao;
     }

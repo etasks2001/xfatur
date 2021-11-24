@@ -29,6 +29,7 @@ import com.xfatur.exception.ProdutoIdNotFoundException;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
+import com.xfatur.model.produto.Tributacao;
 import com.xfatur.model.produto.Unidade;
 import com.xfatur.testutil.CreateModelTest;
 
@@ -49,6 +50,9 @@ class ProdutoServiceTest {
     @Autowired
     ProdutorService produtorService;
 
+    @Autowired
+    TributacaoService tributacaoService;
+    List<String> idsTributacao = new ArrayList<String>();
     List<Integer> idsClassificacaoFiscal = new ArrayList<Integer>();
     List<Integer> idsProduto = new ArrayList<Integer>();
     List<Integer> idsProdutor = new ArrayList<Integer>();
@@ -66,37 +70,10 @@ class ProdutoServiceTest {
 
     @BeforeAll
     void insert() {
-	CreateModelTest.produtorList().forEach(p -> {
-	    Integer id = produtorService.findByIdDescricao(p.getDescricao());
-	    if (id == null) {
-		Produtor saved = produtorService.save(p);
-		id = saved.getId();
-	    }
-
-	    idsProdutor.add(id);
-	});
-
-	CreateModelTest.unidadeList().forEach(u -> {
-	    Integer id = unidadeService.findIdByAbreviacao(u.getAbreviacao());
-	    if (id == null) {
-
-		Unidade save = unidadeService.save(u);
-		id = save.getId();
-	    }
-	    idsUnidade.add(id);
-
-	});
-
-	CreateModelTest.classificacaoFiscalList().forEach(classificacaoFiscal -> {
-
-	    Integer id = classificacaoFiscalService.findIdByDescricao(classificacaoFiscal.getDescricao());
-	    if (id == null) {
-		ClassificacaoFiscal saved = classificacaoFiscalService.save(classificacaoFiscal);
-		id = saved.getId();
-	    }
-	    idsClassificacaoFiscal.add(id);
-
-	});
+	CreateModelTest.produtorList().forEach(entity -> CreateModelTest.createAndIds(produtorService, entity, idsProdutor));
+	CreateModelTest.unidadeList().forEach(entity -> CreateModelTest.createAndIds(unidadeService, entity, idsUnidade));
+	CreateModelTest.classificacaoFiscalList().forEach(entity -> CreateModelTest.createAndIds(classificacaoFiscalService, entity, idsClassificacaoFiscal));
+	CreateModelTest.tributacaoList().forEach(entity -> CreateModelTest.createAndIds(tributacaoService, entity, idsTributacao));
     }
 
     @ParameterizedTest
@@ -106,14 +83,17 @@ class ProdutoServiceTest {
 	int produtor_id = CreateModelTest.getCodigoAleatorio(idsProdutor);
 	int unidade_id = CreateModelTest.getCodigoAleatorio(idsUnidade);
 	int classificacaoFiscal_id = CreateModelTest.getCodigoAleatorio(idsClassificacaoFiscal);
+	String tributacao_id = CreateModelTest.getCodigoAleatorio(idsTributacao);
 
 	Produtor produtor = produtorService.findById(produtor_id);
 	Unidade unidade = unidadeService.findById(unidade_id);
 	ClassificacaoFiscal classificacaoFiscal = classificacaoFiscalService.findById(classificacaoFiscal_id);
+	Tributacao tributacao = tributacaoService.findById(tributacao_id);
 
 	produto.setProdutor(produtor);
 	produto.setUnidade(unidade);
 	produto.setClassificacaoFiscal(classificacaoFiscal);
+	produto.setTributacao(tributacao);
 
 	Produto saved = produtoService.save(produto);
 
@@ -146,7 +126,7 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(saved.getAliquotaDeReducao(), Matchers.is(produto.getAliquotaDeReducao()));
 	MatcherAssert.assertThat(saved.getAdquiridoComST(), Matchers.is(produto.getAdquiridoComST()));
 	MatcherAssert.assertThat(saved.getReducaoICMS_id(), Matchers.is(produto.getReducaoICMS_id()));
-	MatcherAssert.assertThat(saved.getCodigoDeTributacao_id(), Matchers.is(produto.getCodigoDeTributacao_id()));
+	MatcherAssert.assertThat(saved.getTributacao(), Matchers.is(produto.getTributacao()));
 	MatcherAssert.assertThat(saved.getRegiaoProdutora_id(), Matchers.is(produto.getRegiaoProdutora_id()));
 	MatcherAssert.assertThat(saved.getLinhaDeProduto_id(), Matchers.is(produto.getLinhaDeProduto_id()));
 	MatcherAssert.assertThat(saved.getTipoDeValidade_id(), Matchers.is(produto.getTipoDeValidade_id()));

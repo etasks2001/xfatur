@@ -48,7 +48,9 @@ public class Produto {
     @JoinColumn(name = "classificacaofiscal_id")
     private ClassificacaoFiscal classificacaoFiscal;
 
-    private String codigoDeTributacao_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tributacao_id")
+    private Tributacao tributacao;
     private Integer regiaoProdutora_id;
     private Integer linhaDeProduto_id;
     private Integer pais_id;
@@ -227,10 +229,6 @@ public class Produto {
 	this.unidade = unidade;
     }
 
-    public String getCodigoDeTributacao_id() {
-	return codigoDeTributacao_id;
-    }
-
     public ClassificacaoFiscal getClassificacaoFiscal() {
 	return classificacaoFiscal;
     }
@@ -239,8 +237,12 @@ public class Produto {
 	this.classificacaoFiscal = classificacaoFiscal;
     }
 
-    public void setCodigoDeTributacao_id(String codigoDeTributacao_id) {
-	this.codigoDeTributacao_id = codigoDeTributacao_id;
+    public Tributacao getTributacao() {
+	return tributacao;
+    }
+
+    public void setTributacao(Tributacao tributacao) {
+	this.tributacao = tributacao;
     }
 
     public Integer getRegiaoProdutora_id() {

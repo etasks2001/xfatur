@@ -19,8 +19,16 @@ import com.xfatur.model.Representante;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
+import com.xfatur.model.produto.Tributacao;
 import com.xfatur.model.produto.Unidade;
 import com.xfatur.model.test.EnderecoCobranca;
+import com.xfatur.service.NaturezaJuridicaService;
+import com.xfatur.service.RamoAtividadeService;
+import com.xfatur.service.RepresentanteService;
+import com.xfatur.service.produto.ClassificacaoFiscalService;
+import com.xfatur.service.produto.ProdutorService;
+import com.xfatur.service.produto.TributacaoService;
+import com.xfatur.service.produto.UnidadeService;
 
 public class CreateModelTest {
 
@@ -298,7 +306,7 @@ public class CreateModelTest {
 	return Stream.of(CreateModelTest.createRepresentante1(), CreateModelTest.createRepresentante2());
     }
 
-    public static Integer getCodigoAleatorio(List<Integer> lista) {
+    public static <T> T getCodigoAleatorio(List<T> lista) {
 	Random rand = new Random();
 	int index = rand.nextInt((lista.size() - 0) + 1) + 0;
 	index = index >= lista.size() ? index = lista.size() - 1 : index;
@@ -427,7 +435,7 @@ public class CreateModelTest {
 	produto.setProdutor(null);
 	produto.setUnidade(null);
 	produto.setClassificacaoFiscal(null);
-	produto.setCodigoDeTributacao_id("12");
+	produto.setTributacao(null);
 	produto.setRegiaoProdutora_id(1);
 	produto.setLinhaDeProduto_id(1);
 	produto.setPais_id(1);
@@ -465,7 +473,7 @@ public class CreateModelTest {
 	produto.setProdutor(null);
 	produto.setUnidade(null);
 	produto.setClassificacaoFiscal(null);
-	produto.setCodigoDeTributacao_id("12");
+	produto.setTributacao(null);
 	produto.setRegiaoProdutora_id(1);
 	produto.setLinhaDeProduto_id(1);
 	produto.setPais_id(1);
@@ -586,4 +594,162 @@ public class CreateModelTest {
 
 	return classificacaoFiscal;
     }
+
+    public static Stream<Tributacao> tributacaoList() {
+	return Stream.of(
+
+		createTributacao1(), createTributacao2(), createTributacao3(), createTributacao4(), createTributacao5(), createTributacao6(), createTributacao7(), createTributacao8(),
+		createTributacao9(), createTributacao10(), createTributacao11());
+    }
+
+    private static Tributacao createTributacao11() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("90");
+	tributacao.setDescricao("OUTRAS");
+	return tributacao;
+    }
+
+    private static Tributacao createTributacao10() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("70");
+	tributacao.setDescricao("COM REDUÇÃO DE BASE DE CÁLCULO E COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
+	return tributacao;
+    }
+
+    private static Tributacao createTributacao9() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("60");
+	tributacao.setDescricao("ICMS COBRADO ANTERIORMENTE POR SUBSTITUIÇÃO TRIBUTÁRIA");
+	return tributacao;
+    }
+
+    private static Tributacao createTributacao8() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("51");
+	tributacao.setDescricao("DIFERIMENTO");
+	return tributacao;
+    }
+
+    private static Tributacao createTributacao7() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("50");
+	tributacao.setDescricao("SUSPENSÃO");
+	return tributacao;
+    }
+
+    private static Tributacao createTributacao6() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("41");
+	tributacao.setDescricao("NÃO TRIBUTADA");
+	return tributacao;
+    }
+
+    private static Tributacao createTributacao5() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("40");
+	tributacao.setDescricao("ISENTA");
+	return tributacao;
+    }
+
+    private static Tributacao createTributacao4() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("30");
+	tributacao.setDescricao("ISENTA OU NÃO TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
+	return tributacao;
+    }
+
+    private static Tributacao createTributacao3() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("20");
+	tributacao.setDescricao("COM REDUÇÃO DE BASE DE CÁLCULO");
+	return tributacao;
+    }
+
+    private static Tributacao createTributacao2() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("10");
+	tributacao.setDescricao("TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
+	return tributacao;
+    }
+
+    private static Tributacao createTributacao1() {
+	Tributacao tributacao = new Tributacao();
+	tributacao.setId("00");
+	tributacao.setDescricao("TRIBUTADA INTEGRALMENTE");
+
+	return tributacao;
+    }
+
+    public static void createAndIds(TributacaoService tributacaoService, Tributacao entity, List<String> ids) {
+	String id = tributacaoService.findIdByDescricao(entity.getDescricao());
+
+	if (id == null) {
+	    Tributacao saved = tributacaoService.save(entity);
+	    id = saved.getId();
+	}
+	ids.add(id);
+    }
+
+    public static void createAndIds(ClassificacaoFiscalService service, ClassificacaoFiscal entity, List<Integer> ids) {
+	Integer id = service.findIdByDescricao(entity.getDescricao());
+
+	if (id == null) {
+	    ClassificacaoFiscal saved = service.save(entity);
+	    id = saved.getId();
+	}
+	ids.add(id);
+    }
+
+    public static void createAndIds(ProdutorService produtorService, Produtor entity, List<Integer> idsProdutor) {
+	Integer id = produtorService.findByIdDescricao(entity.getDescricao());
+	if (id == null) {
+	    Produtor saved = produtorService.save(entity);
+	    id = saved.getId();
+	}
+
+	idsProdutor.add(id);
+    }
+
+    public static void createAndIds(UnidadeService unidadeService, Unidade entity, List<Integer> ids) {
+	Integer id = unidadeService.findIdByAbreviacao(entity.getAbreviacao());
+	if (id == null) {
+
+	    Unidade save = unidadeService.save(entity);
+	    id = save.getId();
+	}
+	ids.add(id);
+    }
+
+    public static void createAndIds(RamoAtividadeService service, RamoAtividade entity, List<Integer> ids) {
+	Integer id = service.findIdByDescricao(entity.getDescricao());
+
+	if (id == null) {
+	    RamoAtividade saved = service.save(entity);
+	    id = saved.getId();
+	}
+	ids.add(id);
+
+    }
+
+    public static void createAndIds(NaturezaJuridicaService service, NaturezaJuridica entity, List<Integer> ids) {
+	Integer id = service.findIdByDescricao(entity.getDescricao());
+
+	if (id == null) {
+	    NaturezaJuridica saved = service.save(entity);
+	    id = saved.getId();
+	}
+	ids.add(id);
+
+    }
+
+    public static void createAndIds(RepresentanteService service, Representante entity, List<Integer> ids) {
+	Integer id = service.findIdByCNPJCPF(entity.getCNPJCPF());
+
+	if (id == null) {
+	    Representante saved = service.save(entity);
+	    id = saved.getId();
+	}
+	ids.add(id);
+    }
+
 }

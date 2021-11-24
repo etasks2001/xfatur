@@ -28,56 +28,46 @@ import com.xfatur.testutil.CreateModelTest;
 class ClassificacaoFiscalServiceTest {
 
     @Autowired
-    ClassificacaoFiscalService classificacaoFiscalService;
+    ClassificacaoFiscalService service;
 
     List<Integer> ids = new ArrayList<Integer>();
 
     @AfterAll
     void delete() {
-	ids.forEach(id -> classificacaoFiscalService.deleteById(id));
+	ids.forEach(id -> service.deleteById(id));
     }
 
     @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.classificacaoFiscalList().forEach(classificacaoFiscal -> {
-	    Integer id = classificacaoFiscalService.findIdByDescricao(classificacaoFiscal.getDescricao());
-	    if (id == null) {
-		ClassificacaoFiscal saved = classificacaoFiscalService.save(classificacaoFiscal);
-
-		id = saved.getId();
-
-		classificacaoFiscal.setId(id);
-		MatcherAssert.assertThat(classificacaoFiscal.getId(), Matchers.is(saved.getId()));
-	    }
-
-	    ids.add(id);
-
-	});
+	CreateModelTest.classificacaoFiscalList().forEach(entiry -> CreateModelTest.createAndIds(service, entiry, ids));
     }
 
     @Test
     @Order(2)
     void test_update() {
-	ClassificacaoFiscal found = classificacaoFiscalService.findById(ids.get(0));
+	ClassificacaoFiscal found = service.findById(ids.get(0));
 
 	found.setDescricao(found.getDescricao() + " alterado");
 
-	classificacaoFiscalService.save(found);
+	service.save(found);
     }
 
     @Test
     @Order(3)
     void test_findById() {
-	ClassificacaoFiscal found = classificacaoFiscalService.findById(ids.get(0));
+	ClassificacaoFiscal found1 = service.findById(ids.get(0));
+	ClassificacaoFiscal found2 = service.findById(ids.get(0));
 
-	assertNotNull(found);
+	MatcherAssert.assertThat(found1.getNcm(), Matchers.is(found2.getNcm()));
+	assertNotNull(found1);
+	assertNotNull(found2);
     }
 
     @Test
     @Order(4)
     void test_findById_error() {
-	Exception exception = Assertions.assertThrows(ClassificacaoFiscalIdNotFoundException.class, () -> classificacaoFiscalService.findById(546456));
+	Exception exception = Assertions.assertThrows(ClassificacaoFiscalIdNotFoundException.class, () -> service.findById(546456));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código da Classificação Fiscal não encontrado."));
     }
@@ -85,16 +75,16 @@ class ClassificacaoFiscalServiceTest {
     @Test
     @Order(5)
     void test_findByDescricao() {
-	List<ClassificacaoFiscal> list = classificacaoFiscalService.findByDescricao("O");
+	List<ClassificacaoFiscal> classificacoesFiscais = service.findByDescricao("O");
 
-	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
+	MatcherAssert.assertThat(classificacoesFiscais.size(), Matchers.greaterThan(0));
 
     }
 
     @Test
     @Order(6)
     void test_findByDescricao_size_0() {
-	List<ClassificacaoFiscal> list = classificacaoFiscalService.findByDescricao("fdsafdaO");
+	List<ClassificacaoFiscal> list = service.findByDescricao("fdsafdaO");
 
 	MatcherAssert.assertThat(list.size(), Matchers.is(0));
 

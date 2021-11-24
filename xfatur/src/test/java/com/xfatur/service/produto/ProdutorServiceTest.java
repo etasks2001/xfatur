@@ -26,37 +26,25 @@ import com.xfatur.testutil.CreateModelTest;
 class ProdutorServiceTest {
 
     @Autowired
-    ProdutorService produtorService;
+    ProdutorService service;
 
     List<Integer> ids = new ArrayList<Integer>();
 
     @AfterAll
     void delete() {
-	ids.forEach(id -> produtorService.deleteById(id));
+	ids.forEach(id -> service.deleteById(id));
     }
 
     @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.produtorList().forEach(produtor -> {
-	    Integer id = produtorService.findByIdDescricao(produtor.getDescricao());
-	    if (id == null) {
-		Produtor saved = produtorService.save(produtor);
-
-		id = saved.getId();
-
-		produtor.setId(id);
-		MatcherAssert.assertThat(produtor.getId(), Matchers.is(saved.getId()));
-	    }
-
-	    ids.add(id);
-	});
+	CreateModelTest.produtorList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
     @Test
     @Order(2)
     void test_findByDescricao() {
-	List<Produtor> produtores = produtorService.findByDescricao("A");
+	List<Produtor> produtores = service.findByDescricao("A");
 
 	MatcherAssert.assertThat(produtores.size(), Matchers.greaterThan(0));
 
@@ -65,24 +53,24 @@ class ProdutorServiceTest {
     @Test
     @Order(3)
     void test_findByDescricao_retorna_vazio() {
-	List<Produtor> produtores = produtorService.findByDescricao("fdsafd");
+	List<Produtor> produtores = service.findByDescricao("fdsafd");
 	MatcherAssert.assertThat(produtores.size(), Matchers.is(0));
     }
 
     @Test
     @Order(4)
     void test_update() {
-	Produtor produtor = produtorService.findById(ids.get(0));
+	Produtor produtor = service.findById(ids.get(0));
 
 	produtor.setDescricao(produtor.getDescricao() + " alterado");
 
-	produtorService.save(produtor);
+	service.save(produtor);
     }
 
     @Test
     @Order(5)
     void test_findById_nao_encontrado() {
-	Exception exception = Assertions.assertThrows(ProdutorIdNotFoundException.class, () -> produtorService.findById(4567464));
+	Exception exception = Assertions.assertThrows(ProdutorIdNotFoundException.class, () -> service.findById(4567464));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código do Produtor não encontrado"));
 

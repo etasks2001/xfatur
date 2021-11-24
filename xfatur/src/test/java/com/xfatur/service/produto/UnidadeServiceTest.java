@@ -28,37 +28,25 @@ import com.xfatur.testutil.CreateModelTest;
 class UnidadeServiceTest {
 
     @Autowired
-    UnidadeService unidadeService;
+    UnidadeService service;
 
     List<Integer> ids = new ArrayList<Integer>();
 
     @AfterAll
     void delete() {
-	ids.forEach(id -> unidadeService.deleteById(id));
+	ids.forEach(id -> service.deleteById(id));
     }
 
     @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.unidadeList().forEach(unidade -> {
-	    Integer id = unidadeService.findIdByAbreviacao(unidade.getAbreviacao());
-	    if (id == null) {
-		Unidade saved = unidadeService.save(unidade);
-
-		id = saved.getId();
-
-		unidade.setId(id);
-		MatcherAssert.assertThat(unidade.getId(), Matchers.is(saved.getId()));
-	    }
-
-	    ids.add(id);
-	});
+	CreateModelTest.unidadeList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
     @Test
     @Order(2)
     void test_update() {
-	Unidade unidade = unidadeService.findById(ids.get(0));
+	Unidade unidade = service.findById(ids.get(0));
 
 	unidade.setDescricao(unidade.getDescricao() + " alterado");
 
@@ -67,7 +55,7 @@ class UnidadeServiceTest {
     @Test
     @Order(3)
     void test_findById() {
-	Unidade unidade = unidadeService.findById(ids.get(0));
+	Unidade unidade = service.findById(ids.get(0));
 
 	assertNotNull(unidade);
     }
@@ -75,7 +63,7 @@ class UnidadeServiceTest {
     @Test
     @Order(4)
     void test_findById_error() {
-	Exception exception = Assertions.assertThrows(UnidadeIdNotFoundException.class, () -> unidadeService.findById(4564));
+	Exception exception = Assertions.assertThrows(UnidadeIdNotFoundException.class, () -> service.findById(4564));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código da Unidade não encontrado"));
     }
@@ -83,7 +71,7 @@ class UnidadeServiceTest {
     @Test
     @Order(5)
     void test_findByDescricao() {
-	List<Unidade> unidades = unidadeService.findByDescricao("a");
+	List<Unidade> unidades = service.findByDescricao("a");
 
 	MatcherAssert.assertThat(unidades.size(), Matchers.greaterThan(0));
     }
@@ -91,7 +79,7 @@ class UnidadeServiceTest {
     @Test
     @Order(6)
     void test_findbyDescricao_is_0() {
-	List<Unidade> unidades = unidadeService.findByDescricao("afdsafda");
+	List<Unidade> unidades = service.findByDescricao("afdsafda");
 
 	MatcherAssert.assertThat(unidades.size(), Matchers.is(0));
     }

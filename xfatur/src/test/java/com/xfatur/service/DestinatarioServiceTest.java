@@ -82,36 +82,9 @@ class DestinatarioServiceTest {
 
     @BeforeAll
     void cadastrosAuxiliares() {
-	CreateModelTest.ramoAtividadeList().forEach(ra -> {
-	    Integer id = ramoAtividadeService.findIdByDescricao(ra.getDescricao());
-
-	    if (id == null) {
-		RamoAtividade saved = ramoAtividadeService.save(ra);
-		id = saved.getId();
-	    }
-	    idsRamoAtividade.add(id);
-	}
-
-	);
-	CreateModelTest.naturezaJuridicaList().forEach(nj -> {
-	    Integer id = naturezaJuridicaService.findIdByDescricao(nj.getDescricao());
-
-	    if (id == null) {
-		NaturezaJuridica saved = naturezaJuridicaService.save(nj);
-		id = saved.getId();
-	    }
-	    idsNaturezaJuridica.add(id);
-	});
-
-	CreateModelTest.representanteList().forEach(r -> {
-	    Integer id = representanteService.findIdByCNPJCPF(r.getCNPJCPF());
-
-	    if (id == null) {
-		Representante saved = representanteService.save(r);
-		id = saved.getId();
-	    }
-	    idsRepresentante.add(id);
-	});
+	CreateModelTest.ramoAtividadeList().forEach(entity -> CreateModelTest.createAndIds(ramoAtividadeService, entity, idsRamoAtividade));
+	CreateModelTest.naturezaJuridicaList().forEach(entity -> CreateModelTest.createAndIds(naturezaJuridicaService, entity, idsNaturezaJuridica));
+	CreateModelTest.representanteList().forEach(entity -> CreateModelTest.createAndIds(representanteService, entity, idsRepresentante));
     }
 
     @AfterAll
