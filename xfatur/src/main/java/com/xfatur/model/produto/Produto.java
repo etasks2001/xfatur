@@ -63,10 +63,19 @@ public class Produto {
     @JoinColumn(name = "tipovalidade_id")
     private TipoValidade tipoValidade;
 
-    private Integer marca_id;
-    private Integer origem_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "marca_id")
+    private Marca marca;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "origem_id")
+    private Origem origem;
+
     private String tipoProduto_id;
-    private Integer fundoCombatePobreza_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fundopobreza_id")
+    private FundoPobreza fundoPobreza;
     private String seloIPI_id;
 
     public Integer getId() {
@@ -285,36 +294,37 @@ public class Produto {
 	this.tipoValidade = tipoValidade;
     }
 
-    public Integer getMarca_id() {
-	return marca_id;
-    }
-
-    public void setMarca_id(Integer marca_id) {
-	this.marca_id = marca_id;
-    }
-
-    public Integer getOrigem_id() {
-	return origem_id;
-    }
-
-    public void setOrigem_id(Integer origem_id) {
-	this.origem_id = origem_id;
-    }
-
     public String getTipoProduto_id() {
 	return tipoProduto_id;
     }
 
     public void setTipoProduto_id(String tipoProduto_id) {
 	this.tipoProduto_id = tipoProduto_id;
+
     }
 
-    public Integer getFundoCombatePobreza_id() {
-	return fundoCombatePobreza_id;
+    public Marca getMarca() {
+	return marca;
     }
 
-    public void setFundoCombatePobreza_id(Integer fundoCombatePobreza_id) {
-	this.fundoCombatePobreza_id = fundoCombatePobreza_id;
+    public void setMarca(Marca marca) {
+	this.marca = marca;
+    }
+
+    public Origem getOrigem() {
+	return origem;
+    }
+
+    public void setOrigem(Origem origem) {
+	this.origem = origem;
+    }
+
+    public FundoPobreza getFundoPobreza() {
+	return fundoPobreza;
+    }
+
+    public void setFundoPobreza(FundoPobreza fundoPobreza) {
+	this.fundoPobreza = fundoPobreza;
     }
 
     public String getSeloIPI_id() {

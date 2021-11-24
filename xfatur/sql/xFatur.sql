@@ -208,6 +208,11 @@ drop table if exists nf;
 
 
 
+drop table if exists marca;
+drop table if exists origem;
+drop table if exists fundopobreza;
+
+
 drop table if exists tipovalidade;
 drop table if exists regiaoprodutora;
 drop table if exists tributacao;
@@ -370,6 +375,27 @@ create table enderecocobranca(
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
+create table fundopobreza(
+	id		serial not null,
+	descricao	varchar(80) not null,
+	primary key	(id),
+	unique 		(descricao)
+);
+create table origem(
+	id		int not null,
+	descricao	varchar(80) not null,
+	primary key	(id),
+	unique 		(descricao)
+);
+
+
+create table marca(
+	id		serial not null,
+	descricao	varchar(80) not null,
+	primary key	(id),
+	unique 		(descricao)
+);
+
 
 
 create table tipovalidade(
@@ -451,10 +477,10 @@ create table produto(
 	linhaDeproduto_id	int,
 	pais_id			int,
 	tipovalidade_id		int not null references tipovalidade,
-	marca_id		int,
-	origem_id		int,
+	marca_id		int not null references marca,
+	origem_id		int not null references origem,
 	tipoProduto_id		varchar(2),
-	fundoCombatePobreza_id	int,
+	fundopobreza_id		int not null references fundopobreza,
 	seloIPI_id		varchar(6),
 	primary key 		(id),
 	unique 			(codigoProduto)

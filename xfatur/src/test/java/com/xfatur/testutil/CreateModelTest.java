@@ -17,6 +17,9 @@ import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
 import com.xfatur.model.produto.ClassificacaoFiscal;
+import com.xfatur.model.produto.FundoPobreza;
+import com.xfatur.model.produto.Marca;
+import com.xfatur.model.produto.Origem;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
@@ -28,6 +31,9 @@ import com.xfatur.service.NaturezaJuridicaService;
 import com.xfatur.service.RamoAtividadeService;
 import com.xfatur.service.RepresentanteService;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
+import com.xfatur.service.produto.FundoPobrezaService;
+import com.xfatur.service.produto.MarcaService;
+import com.xfatur.service.produto.OrigemService;
 import com.xfatur.service.produto.ProdutorService;
 import com.xfatur.service.produto.RegiaoProdutoraService;
 import com.xfatur.service.produto.TipoValidadeService;
@@ -444,10 +450,10 @@ public class CreateModelTest {
 	produto.setLinhaDeProduto_id(1);
 	produto.setPais_id(1);
 	produto.setTipoValidade(null);
-	produto.setMarca_id(1);
-	produto.setOrigem_id(1);
+	produto.setMarca(null);
+	produto.setOrigem(null);
 	produto.setTipoProduto_id("11");
-	produto.setFundoCombatePobreza_id(1);
+	produto.setFundoPobreza(null);
 	produto.setSeloIPI_id("123456");
 
 	return produto;
@@ -482,10 +488,10 @@ public class CreateModelTest {
 	produto.setLinhaDeProduto_id(1);
 	produto.setPais_id(1);
 	produto.setTipoValidade(null);
-	produto.setMarca_id(1);
-	produto.setOrigem_id(1);
+	produto.setMarca(null);
+	produto.setOrigem(null);
 	produto.setTipoProduto_id("11");
-	produto.setFundoCombatePobreza_id(1);
+	produto.setFundoPobreza(null);
 	produto.setSeloIPI_id("123456");
 
 	return produto;
@@ -842,6 +848,126 @@ public class CreateModelTest {
 	Integer id = service.findByIdDescricao(entity.getDescricao());
 	if (id == null) {
 	    TipoValidade saved = service.save(entity);
+	    id = saved.getId();
+	}
+
+	ids.add(id);
+    }
+
+    public static Stream<FundoPobreza> fundoPobrezaList() {
+	return Stream.of(createFundoPobreza1());
+    }
+
+    private static FundoPobreza createFundoPobreza1() {
+	FundoPobreza fundoPobreza = new FundoPobreza();
+	fundoPobreza.setDescricao("SEM FCP");
+	return fundoPobreza;
+    }
+
+    public static void createAndIds(FundoPobrezaService service, FundoPobreza entity, List<Integer> ids) {
+	Integer id = service.findIdByDescricao(entity.getDescricao());
+
+	if (id == null) {
+	    FundoPobreza saved = service.save(entity);
+	    id = saved.getId();
+	}
+	ids.add(id);
+    }
+
+    public static Stream<Marca> marcaList() {
+
+	return Stream.of(createMarca1(), createMarca2(), createMarca3(), createMarca4(), createMarca5());
+    }
+
+    private static Marca createMarca1() {
+	Marca marca = new Marca();
+	marca.setDescricao("SEM MARCA");
+	return marca;
+    }
+
+    private static Marca createMarca2() {
+	Marca marca = new Marca();
+	marca.setDescricao("DOCE DE LEITE");
+	return marca;
+    }
+
+    private static Marca createMarca3() {
+	Marca marca = new Marca();
+	marca.setDescricao("LEITE CONDENSADO");
+	return marca;
+    }
+
+    private static Marca createMarca4() {
+	Marca marca = new Marca();
+	marca.setDescricao("DOCE DE AMORA");
+	return marca;
+    }
+
+    private static Marca createMarca5() {
+	Marca marca = new Marca();
+	marca.setDescricao("CALDO DE LIMAO");
+	return marca;
+    }
+
+    public static void createAndIds(MarcaService service, Marca entity, List<Integer> ids) {
+	Integer id = service.findIdByDescricao(entity.getDescricao());
+	if (id == null) {
+	    Marca saved = service.save(entity);
+	    id = saved.getId();
+	}
+
+	ids.add(id);
+    }
+
+    public static Stream<Origem> origemList() {
+
+	return Stream.of(createOrigem1(), createOrigem2(), createOrigem3(), createOrigem4(), createOrigem5());
+    }
+
+    private static Origem createOrigem1() {
+	Origem origem = new Origem();
+	origem.setId(0);
+	origem.setDescricao("NACIONAL");
+
+	return origem;
+    }
+
+    private static Origem createOrigem2() {
+	Origem origem = new Origem();
+	origem.setId(1);
+	origem.setDescricao("ESTRANGEIRA-IMPORT. DIRETA");
+
+	return origem;
+    }
+
+    private static Origem createOrigem3() {
+	Origem origem = new Origem();
+	origem.setId(2);
+	origem.setDescricao("ESTRANGEIRA-ADQ.MERCADO INTERNO");
+
+	return origem;
+    }
+
+    private static Origem createOrigem4() {
+	Origem origem = new Origem();
+	origem.setId(6);
+	origem.setDescricao("(LISTA CAMEX) ESTRANGEIRA-IMPORT. DIRETA");
+
+	return origem;
+    }
+
+    private static Origem createOrigem5() {
+	Origem origem = new Origem();
+	origem.setId(7);
+	origem.setDescricao("(LISTA CAMEX) ESTRANGEIRA-ADQ.MERCADO INTERNO");
+
+	return origem;
+    }
+
+    public static void createAndIds(OrigemService service, Origem entity, List<Integer> ids) {
+	Integer id = service.findIdByDescricao(entity.getDescricao());
+	if (id == null) {
+	    Origem saved = service.save(entity);
 	    id = saved.getId();
 	}
 

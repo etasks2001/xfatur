@@ -27,6 +27,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
 import com.xfatur.model.produto.ClassificacaoFiscal;
+import com.xfatur.model.produto.FundoPobreza;
+import com.xfatur.model.produto.Marca;
+import com.xfatur.model.produto.Origem;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
@@ -54,10 +57,21 @@ class ProdutoServiceTest {
 
     @Autowired
     TributacaoService tributacaoService;
+
     @Autowired
     RegiaoProdutoraService regiaoProdutoraService;
+
     @Autowired
     TipoValidadeService tipoValidadeService;
+
+    @Autowired
+    FundoPobrezaService fundoPobrezaService;
+
+    @Autowired
+    OrigemService origemService;
+
+    @Autowired
+    MarcaService marcaService;
 
     List<String> idsTributacao = new ArrayList<String>();
     List<Integer> idsClassificacaoFiscal = new ArrayList<Integer>();
@@ -66,6 +80,9 @@ class ProdutoServiceTest {
     List<Integer> idsUnidade = new ArrayList<Integer>();
     List<Integer> idsRegiaoProdutora = new ArrayList<Integer>();
     List<Integer> idsTipoValidade = new ArrayList<Integer>();
+    List<Integer> idsFundoPobreza = new ArrayList<Integer>();
+    List<Integer> idsOrigem = new ArrayList<Integer>();
+    List<Integer> idsMarca = new ArrayList<Integer>();
 
     Stream<Produto> model() {
 	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2());
@@ -85,6 +102,10 @@ class ProdutoServiceTest {
 	CreateModelTest.tributacaoList().forEach(entity -> CreateModelTest.createAndIds(tributacaoService, entity, idsTributacao));
 	CreateModelTest.regiaoProdutoraList().forEach(entity -> CreateModelTest.createAndIds(regiaoProdutoraService, entity, idsRegiaoProdutora));
 	CreateModelTest.tipoValidadeList().forEach(entity -> CreateModelTest.createAndIds(tipoValidadeService, entity, idsTipoValidade));
+
+	CreateModelTest.fundoPobrezaList().forEach(entity -> CreateModelTest.createAndIds(fundoPobrezaService, entity, idsFundoPobreza));
+	CreateModelTest.origemList().forEach(entity -> CreateModelTest.createAndIds(origemService, entity, idsOrigem));
+	CreateModelTest.marcaList().forEach(entity -> CreateModelTest.createAndIds(marcaService, entity, idsMarca));
     }
 
     @ParameterizedTest
@@ -97,6 +118,9 @@ class ProdutoServiceTest {
 	String tributacao_id = CreateModelTest.getCodigoAleatorio(idsTributacao);
 	int regiaoProdutora_id = CreateModelTest.getCodigoAleatorio(idsRegiaoProdutora);
 	int tipoValidade_id = CreateModelTest.getCodigoAleatorio(idsTipoValidade);
+	int fundoPobreza_id = CreateModelTest.getCodigoAleatorio(idsFundoPobreza);
+	int marca_id = CreateModelTest.getCodigoAleatorio(idsMarca);
+	int origem_id = CreateModelTest.getCodigoAleatorio(idsOrigem);
 
 	Produtor produtor = produtorService.findById(produtor_id);
 	Unidade unidade = unidadeService.findById(unidade_id);
@@ -105,12 +129,19 @@ class ProdutoServiceTest {
 	RegiaoProdutora regiaoProdutora = regiaoProdutoraService.findById(regiaoProdutora_id);
 	TipoValidade tipoValidade = tipoValidadeService.findById(tipoValidade_id);
 
+	FundoPobreza fundoPobreza = fundoPobrezaService.findById(fundoPobreza_id);
+	Marca marca = marcaService.findById(marca_id);
+	Origem origem = origemService.findById(origem_id);
+
 	produto.setProdutor(produtor);
 	produto.setUnidade(unidade);
 	produto.setClassificacaoFiscal(classificacaoFiscal);
 	produto.setTributacao(tributacao);
 	produto.setRegiaoProdutora(regiaoProdutora);
 	produto.setTipoValidade(tipoValidade);
+	produto.setFundoPobreza(fundoPobreza);
+	produto.setOrigem(origem);
+	produto.setMarca(marca);
 
 	Produto saved = produtoService.save(produto);
 
@@ -134,7 +165,7 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(saved.getUnidade(), Matchers.is(produto.getUnidade()));
 	MatcherAssert.assertThat(saved.getCest(), Matchers.is(produto.getCest()));
 	MatcherAssert.assertThat(saved.getClassificacaoFiscal(), Matchers.is(produto.getClassificacaoFiscal()));
-	MatcherAssert.assertThat(saved.getFundoCombatePobreza_id(), Matchers.is(produto.getFundoCombatePobreza_id()));
+	MatcherAssert.assertThat(saved.getFundoPobreza(), Matchers.is(produto.getFundoPobreza()));
 	MatcherAssert.assertThat(saved.getUnidadeDetalhada(), Matchers.is(produto.getUnidadeDetalhada()));
 	MatcherAssert.assertThat(saved.getGraduacaoAlcoolica(), Matchers.is(produto.getGraduacaoAlcoolica()));
 	MatcherAssert.assertThat(saved.getCodigoDeBarras(), Matchers.is(produto.getCodigoDeBarras()));
@@ -149,8 +180,8 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(saved.getTipoValidade(), Matchers.is(produto.getTipoValidade()));
 	MatcherAssert.assertThat(saved.getTipoProduto_id(), Matchers.is(produto.getTipoProduto_id()));
 	MatcherAssert.assertThat(saved.getPais_id(), Matchers.is(produto.getPais_id()));
-	MatcherAssert.assertThat(saved.getMarca_id(), Matchers.is(produto.getMarca_id()));
-	MatcherAssert.assertThat(saved.getOrigem_id(), Matchers.is(produto.getOrigem_id()));
+	MatcherAssert.assertThat(saved.getMarca(), Matchers.is(produto.getMarca()));
+	MatcherAssert.assertThat(saved.getOrigem(), Matchers.is(produto.getOrigem()));
 	MatcherAssert.assertThat(saved.getSeloIPI_id(), Matchers.is(produto.getSeloIPI_id()));
 
     }
