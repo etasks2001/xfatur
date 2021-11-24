@@ -23,6 +23,8 @@ import com.xfatur.model.produto.Origem;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
+import com.xfatur.model.produto.Tipo;
+import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.model.produto.Tributacao;
 import com.xfatur.model.produto.Unidade;
@@ -36,6 +38,8 @@ import com.xfatur.service.produto.MarcaService;
 import com.xfatur.service.produto.OrigemService;
 import com.xfatur.service.produto.ProdutorService;
 import com.xfatur.service.produto.RegiaoProdutoraService;
+import com.xfatur.service.produto.TipoSeloService;
+import com.xfatur.service.produto.TipoService;
 import com.xfatur.service.produto.TipoValidadeService;
 import com.xfatur.service.produto.TributacaoService;
 import com.xfatur.service.produto.UnidadeService;
@@ -452,9 +456,9 @@ public class CreateModelTest {
 	produto.setTipoValidade(null);
 	produto.setMarca(null);
 	produto.setOrigem(null);
-	produto.setTipoProduto_id("11");
+	produto.setTipo(null);
 	produto.setFundoPobreza(null);
-	produto.setSeloIPI_id("123456");
+	produto.setTipoSelo(null);
 
 	return produto;
     }
@@ -490,9 +494,9 @@ public class CreateModelTest {
 	produto.setTipoValidade(null);
 	produto.setMarca(null);
 	produto.setOrigem(null);
-	produto.setTipoProduto_id("11");
+	produto.setTipo(null);
 	produto.setFundoPobreza(null);
-	produto.setSeloIPI_id("123456");
+	produto.setTipoSelo(null);
 
 	return produto;
     }
@@ -968,6 +972,161 @@ public class CreateModelTest {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
 	    Origem saved = service.save(entity);
+	    id = saved.getId();
+	}
+
+	ids.add(id);
+    }
+
+    public static Stream<Tipo> tipoList() {
+	return Stream.of(createTipo1(), createTipo2(), createTipo3(), createTipo4(), createTipo5(), createTipo6(), createTipo7(), createTipo8(), createTipo9(), createTipo10(), createTipo11(),
+		createTipo12());
+    }
+
+    private static Tipo createTipo12() {
+	Tipo tipo = new Tipo();
+	tipo.setId("99");
+	tipo.setDescricao("OUTRAS");
+	return tipo;
+    }
+
+    private static Tipo createTipo11() {
+	Tipo tipo = new Tipo();
+	tipo.setId("10");
+	tipo.setDescricao("OUTROS INSUMOS");
+	return tipo;
+    }
+
+    private static Tipo createTipo10() {
+	Tipo tipo = new Tipo();
+	tipo.setId("09");
+	tipo.setDescricao("SERVIÇOS");
+	return tipo;
+    }
+
+    private static Tipo createTipo9() {
+	Tipo tipo = new Tipo();
+	tipo.setId("08");
+	tipo.setDescricao("ATIVO IMOBILIZADO");
+	return tipo;
+    }
+
+    private static Tipo createTipo8() {
+	Tipo tipo = new Tipo();
+	tipo.setId("07");
+	tipo.setDescricao("MATERIAL DE USO E CONSUMO");
+	return tipo;
+    }
+
+    private static Tipo createTipo7() {
+	Tipo tipo = new Tipo();
+	tipo.setId("06");
+	tipo.setDescricao("PRODUTO INTERMEDIÁRIO");
+	return tipo;
+    }
+
+    private static Tipo createTipo6() {
+	Tipo tipo = new Tipo();
+	tipo.setId("05");
+	tipo.setDescricao("SUBPRODUTO");
+	return tipo;
+    }
+
+    private static Tipo createTipo5() {
+	Tipo tipo = new Tipo();
+	tipo.setId("04");
+	tipo.setDescricao("PRODUTO ACABADO");
+	return tipo;
+    }
+
+    private static Tipo createTipo4() {
+	Tipo tipo = new Tipo();
+	tipo.setId("03");
+	tipo.setDescricao("PRODUTO EM PROCESSO");
+	return tipo;
+    }
+
+    private static Tipo createTipo3() {
+	Tipo tipo = new Tipo();
+	tipo.setId("02");
+	tipo.setDescricao("EMBALAGEM");
+	return tipo;
+    }
+
+    private static Tipo createTipo2() {
+	Tipo tipo = new Tipo();
+	tipo.setId("01");
+	tipo.setDescricao("MATÉRIA-PRIMA");
+	return tipo;
+    }
+
+    private static Tipo createTipo1() {
+	Tipo tipo = new Tipo();
+	tipo.setId("00");
+	tipo.setDescricao("MERCADORIA PARA REVENDA");
+	return tipo;
+    }
+
+    public static void createAndIds(TipoService service, Tipo entity, List<String> ids) {
+	String id = service.findIdByDescricao(entity.getDescricao());
+	if (id == null) {
+	    Tipo saved = service.save(entity);
+	    id = saved.getId();
+	}
+
+	ids.add(id);
+    }
+
+    public static Stream<TipoSelo> tipoSeloList() {
+	return Stream.of(createTipoSelo1(), createTipoSelo2(), createTipoSelo3(), createTipoSelo4(), createTipoSelo5(), createTipoSelo6());
+    }
+
+    private static TipoSelo createTipoSelo6() {
+	TipoSelo tipoSelo = new TipoSelo();
+	tipoSelo.setId("971012");
+	tipoSelo.setDescricao("971012-Nacional p/Exp.-Tipo3-Verde Escuro combinado c/marrom");
+	return tipoSelo;
+    }
+
+    private static TipoSelo createTipoSelo5() {
+	TipoSelo tipoSelo = new TipoSelo();
+	tipoSelo.setId("971011");
+	tipoSelo.setDescricao("971011-Nacional p/Exp.-Tipo2-Verde Escuro combinado c/marrom");
+	return tipoSelo;
+    }
+
+    private static TipoSelo createTipoSelo4() {
+	TipoSelo tipoSelo = new TipoSelo();
+	tipoSelo.setId("971010");
+	tipoSelo.setDescricao("971010-Nacional p/Exp.-Tipo1-Verde Escuro combinado c/marrom");
+	return tipoSelo;
+    }
+
+    private static TipoSelo createTipoSelo3() {
+	TipoSelo tipoSelo = new TipoSelo();
+	tipoSelo.setId("971001");
+	tipoSelo.setDescricao("971001-Nacional-Verde combinado com marrom");
+	return tipoSelo;
+    }
+
+    private static TipoSelo createTipoSelo2() {
+	TipoSelo tipoSelo = new TipoSelo();
+	tipoSelo.setId("861009");
+	tipoSelo.setDescricao("861009-Estrangeiro - Vermelho combinado com azul");
+	return tipoSelo;
+    }
+
+    private static TipoSelo createTipoSelo1() {
+	TipoSelo tipoSelo = new TipoSelo();
+	tipoSelo.setId("100000");
+	tipoSelo.setDescricao("SEM SELO");
+	return tipoSelo;
+    }
+
+    public static void createAndIds(TipoSeloService service, TipoSelo entity, List<String> ids) {
+	String id = service.findIdByDescricao(entity.getDescricao());
+	if (id == null) {
+	    TipoSelo saved = service.save(entity);
 	    id = saved.getId();
 	}
 

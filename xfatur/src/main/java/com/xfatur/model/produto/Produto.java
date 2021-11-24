@@ -71,12 +71,17 @@ public class Produto {
     @JoinColumn(name = "origem_id")
     private Origem origem;
 
-    private String tipoProduto_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipo_id")
+    private Tipo tipo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fundopobreza_id")
     private FundoPobreza fundoPobreza;
-    private String seloIPI_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tiposelo_id")
+    private TipoSelo tipoSelo;
 
     public Integer getId() {
 	return id;
@@ -294,15 +299,6 @@ public class Produto {
 	this.tipoValidade = tipoValidade;
     }
 
-    public String getTipoProduto_id() {
-	return tipoProduto_id;
-    }
-
-    public void setTipoProduto_id(String tipoProduto_id) {
-	this.tipoProduto_id = tipoProduto_id;
-
-    }
-
     public Marca getMarca() {
 	return marca;
     }
@@ -327,11 +323,20 @@ public class Produto {
 	this.fundoPobreza = fundoPobreza;
     }
 
-    public String getSeloIPI_id() {
-	return seloIPI_id;
+    public Tipo getTipo() {
+	return tipo;
     }
 
-    public void setSeloIPI_id(String seloIPI_id) {
-	this.seloIPI_id = seloIPI_id;
+    public void setTipo(Tipo tipo) {
+	this.tipo = tipo;
     }
+
+    public TipoSelo getTipoSelo() {
+	return tipoSelo;
+    }
+
+    public void setTipoSelo(TipoSelo tipoSelo) {
+	this.tipoSelo = tipoSelo;
+    }
+
 }
