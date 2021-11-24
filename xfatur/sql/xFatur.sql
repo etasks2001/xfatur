@@ -163,6 +163,7 @@ select * from enderecoretirada;
 select * from enderecocobranca;
 
 
+select * from tipovalidade order by id;
 select * from tributacao order by id;
 select * from classificacaofiscal;
 select * from unidade;
@@ -207,7 +208,7 @@ drop table if exists nf;
 
 
 
-
+drop table if exists tipovalidade;
 drop table if exists regiaoprodutora;
 drop table if exists tributacao;
 drop table if exists classificacaofiscal;
@@ -371,6 +372,14 @@ create table enderecocobranca(
 
 
 
+create table tipovalidade(
+	id		serial not null,
+	descricao	varchar(80) not null,
+	primary key	(id),
+	unique 		(descricao)
+);
+
+
 create table regiaoprodutora(
 	id		serial not null,
 	descricao	varchar(80) not null,
@@ -441,7 +450,7 @@ create table produto(
 	regiaoprodutora_id	int not null references regiaoprodutora,
 	linhaDeproduto_id	int,
 	pais_id			int,
-	tipoDeValidade_id	int,
+	tipovalidade_id		int not null references tipovalidade,
 	marca_id		int,
 	origem_id		int,
 	tipoProduto_id		varchar(2),
