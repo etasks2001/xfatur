@@ -56,8 +56,13 @@ public class Produto {
     @JoinColumn(name = "regiaoprodutora_id")
     private RegiaoProdutora regiaoProdutora;
 
-    private Integer linhaDeProduto_id;
-    private Integer pais_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "linha_id")
+    private Linha linha;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pais_id")
+    private Pais pais;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipovalidade_id")
@@ -275,20 +280,20 @@ public class Produto {
 	this.regiaoProdutora = regiaoProdutora;
     }
 
-    public Integer getLinhaDeProduto_id() {
-	return linhaDeProduto_id;
+    public Linha getLinha() {
+	return linha;
     }
 
-    public void setLinhaDeProduto_id(Integer linhaDeProduto_id) {
-	this.linhaDeProduto_id = linhaDeProduto_id;
+    public void setLinha(Linha linha) {
+	this.linha = linha;
     }
 
-    public Integer getPais_id() {
-	return pais_id;
+    public Pais getPais() {
+	return pais;
     }
 
-    public void setPais_id(Integer pais_id) {
-	this.pais_id = pais_id;
+    public void setPais(Pais pais) {
+	this.pais = pais;
     }
 
     public TipoValidade getTipoValidade() {

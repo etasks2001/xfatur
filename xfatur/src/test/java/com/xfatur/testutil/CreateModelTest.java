@@ -18,8 +18,10 @@ import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.FundoPobreza;
+import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
+import com.xfatur.model.produto.Pais;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
@@ -34,8 +36,10 @@ import com.xfatur.service.RamoAtividadeService;
 import com.xfatur.service.RepresentanteService;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
 import com.xfatur.service.produto.FundoPobrezaService;
+import com.xfatur.service.produto.LinhaService;
 import com.xfatur.service.produto.MarcaService;
 import com.xfatur.service.produto.OrigemService;
+import com.xfatur.service.produto.PaisService;
 import com.xfatur.service.produto.ProdutorService;
 import com.xfatur.service.produto.RegiaoProdutoraService;
 import com.xfatur.service.produto.TipoSeloService;
@@ -451,8 +455,8 @@ public class CreateModelTest {
 	produto.setClassificacaoFiscal(null);
 	produto.setTributacao(null);
 	produto.setRegiaoProdutora(null);
-	produto.setLinhaDeProduto_id(1);
-	produto.setPais_id(1);
+	produto.setLinha(null);
+	produto.setPais(null);
 	produto.setTipoValidade(null);
 	produto.setMarca(null);
 	produto.setOrigem(null);
@@ -489,8 +493,8 @@ public class CreateModelTest {
 	produto.setClassificacaoFiscal(null);
 	produto.setTributacao(null);
 	produto.setRegiaoProdutora(null);
-	produto.setLinhaDeProduto_id(1);
-	produto.setPais_id(1);
+	produto.setLinha(null);
+	produto.setPais(null);
 	produto.setTipoValidade(null);
 	produto.setMarca(null);
 	produto.setOrigem(null);
@@ -1133,4 +1137,117 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
+    public static Stream<Pais> paisList() {
+	return Stream.of(createPais1(), createPais2(), createPais3(), createPais4(), createPais5());
+
+    }
+
+    private static Pais createPais1() {
+	Pais pais = new Pais();
+	pais.setNome("BRASIL");
+	pais.setOrigem("BRASILEIRA");
+	pais.setCodigoBacen("1058");
+	pais.setSigla("BR");
+	return pais;
+    }
+
+    private static Pais createPais2() {
+	Pais pais = new Pais();
+	pais.setNome("GRÉCIA");
+	pais.setOrigem("GREGA");
+	pais.setCodigoBacen("3018");
+	pais.setSigla("GR");
+	return pais;
+    }
+
+    private static Pais createPais3() {
+	Pais pais = new Pais();
+	pais.setNome("HOLANDA");
+	pais.setOrigem("HOLANDESA");
+	pais.setCodigoBacen("5738");
+	pais.setSigla("HO");
+	return pais;
+    }
+
+    private static Pais createPais4() {
+	Pais pais = new Pais();
+	pais.setNome("HUNGRIA");
+	pais.setOrigem("HÚNGARA");
+	pais.setCodigoBacen("3557");
+	pais.setSigla("HU");
+	return pais;
+    }
+
+    private static Pais createPais5() {
+	Pais pais = new Pais();
+	pais.setNome("ÍNDIA");
+	pais.setOrigem("INDIANA");
+	pais.setCodigoBacen("3611");
+	pais.setSigla("ID");
+	return pais;
+    }
+
+    public static Stream<Linha> linhaList() {
+	return Stream.of(createLinha1(), createLinha2(), createLinha3(), createLinha4(), createLinha5());
+    }
+
+    private static Linha createLinha1() {
+	Linha linha = new Linha();
+	linha.setDescricao("AMENDOIN");
+	linha.setOrdem(1);
+	linha.setTipo("COM");
+	return linha;
+    }
+
+    private static Linha createLinha2() {
+	Linha linha = new Linha();
+	linha.setDescricao("ARROZ");
+	linha.setOrdem(2);
+	linha.setTipo("ALI");
+	return linha;
+    }
+
+    private static Linha createLinha3() {
+	Linha linha = new Linha();
+	linha.setDescricao("NOS MOSCADA");
+	linha.setOrdem(3);
+	linha.setTipo("CER");
+	return linha;
+    }
+
+    private static Linha createLinha4() {
+	Linha linha = new Linha();
+	linha.setDescricao("GELEIA");
+	linha.setOrdem(4);
+	linha.setTipo("GEL");
+	return linha;
+    }
+
+    private static Linha createLinha5() {
+	Linha linha = new Linha();
+	linha.setDescricao("ALCOOL");
+	linha.setOrdem(5);
+	linha.setTipo("LIM");
+	return linha;
+    }
+
+    public static void createAndIds(LinhaService service, Linha entity, List<Integer> ids) {
+	Integer id = service.findIdByDescricao(entity.getDescricao());
+	if (id == null) {
+	    Linha saved = service.save(entity);
+	    id = saved.getId();
+	}
+
+	ids.add(id);
+    }
+
+    public static void createAndIds(PaisService service, Pais entity, List<Integer> ids) {
+	Integer id = service.findIdByCodigoBacen(entity.getCodigoBacen());
+	if (id == null) {
+	    Pais saved = service.save(entity);
+	    id = saved.getId();
+	}
+
+	ids.add(id);
+    }
 }

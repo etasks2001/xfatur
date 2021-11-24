@@ -207,6 +207,8 @@ drop table if exists serie;
 drop table if exists nf;
 
 
+drop table if exists linha;
+drop table if exists pais;
 
 drop table if exists marca;
 drop table if exists origem;
@@ -377,6 +379,30 @@ create table enderecocobranca(
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
+
+create table linha(
+	id 		serial not null,
+	descricao 	varchar(80) not null, 
+	tipo 		varchar(3) not null,
+	ordem 		int not null,
+	primary key	(id),
+	unique		(descricao)
+	
+);
+
+
+create table pais(
+	id 		serial not null,
+	nome 		varchar(80) not null, 
+	sigla		varchar(2) not null,
+	origem		varchar(60) not null, 
+	codigobacen	varchar(4) not null,
+	primary key	(id),
+	unique		(codigobacen)
+	
+
+);
+
 create table tiposelo(
 	id		varchar(6) not null,
 	descricao	varchar(80) not null,
@@ -488,8 +514,8 @@ create table produto(
 	classificacaoFiscal_id	int not null references classificacaofiscal,
 	tributacao_id		varchar(2) not null references tributacao,
 	regiaoprodutora_id	int not null references regiaoprodutora,
-	linhaDeproduto_id	int,
-	pais_id			int,
+	linha_id		int not null references linha,
+	pais_id			int not null references pais,
 	tipovalidade_id		int not null references tipovalidade,
 	marca_id		int not null references marca,
 	origem_id		int not null references origem,

@@ -28,8 +28,10 @@ import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.FundoPobreza;
+import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
+import com.xfatur.model.produto.Pais;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
@@ -78,6 +80,10 @@ class ProdutoServiceTest {
     TipoService tipoService;
     @Autowired
     TipoSeloService tipoSeloService;
+    @Autowired
+    LinhaService linhaService;
+    @Autowired
+    PaisService paisService;
 
     List<String> idsTributacao = new ArrayList<String>();
     List<Integer> idsClassificacaoFiscal = new ArrayList<Integer>();
@@ -91,6 +97,8 @@ class ProdutoServiceTest {
     List<Integer> idsMarca = new ArrayList<Integer>();
     List<String> idsTipo = new ArrayList<String>();
     List<String> idsTipoSelo = new ArrayList<String>();
+    List<Integer> idsLinha = new ArrayList<Integer>();
+    List<Integer> idsPais = new ArrayList<Integer>();
 
     Stream<Produto> model() {
 	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2());
@@ -117,6 +125,9 @@ class ProdutoServiceTest {
 
 	CreateModelTest.tipoList().forEach(entity -> CreateModelTest.createAndIds(tipoService, entity, idsTipo));
 	CreateModelTest.tipoSeloList().forEach(entity -> CreateModelTest.createAndIds(tipoSeloService, entity, idsTipoSelo));
+
+	CreateModelTest.linhaList().forEach(entity -> CreateModelTest.createAndIds(linhaService, entity, idsLinha));
+	CreateModelTest.paisList().forEach(entity -> CreateModelTest.createAndIds(paisService, entity, idsPais));
     }
 
     @ParameterizedTest
@@ -134,6 +145,8 @@ class ProdutoServiceTest {
 	int origem_id = CreateModelTest.getCodigoAleatorio(idsOrigem);
 	String tipo_id = CreateModelTest.getCodigoAleatorio(idsTipo);
 	String tipoSelo_id = CreateModelTest.getCodigoAleatorio(idsTipoSelo);
+	int linha_id = CreateModelTest.getCodigoAleatorio(idsLinha);
+	int pais_id = CreateModelTest.getCodigoAleatorio(idsPais);
 
 	Produtor produtor = produtorService.findById(produtor_id);
 	Unidade unidade = unidadeService.findById(unidade_id);
@@ -146,6 +159,8 @@ class ProdutoServiceTest {
 	Origem origem = origemService.findById(origem_id);
 	Tipo tipo = tipoService.findById(tipo_id);
 	TipoSelo tipoSelo = tipoSeloService.findById(tipoSelo_id);
+	Linha linha = linhaService.findById(linha_id);
+	Pais pais = paisService.findById(pais_id);
 
 	produto.setProdutor(produtor);
 	produto.setUnidade(unidade);
@@ -158,6 +173,8 @@ class ProdutoServiceTest {
 	produto.setOrigem(origem);
 	produto.setTipo(tipo);
 	produto.setTipoSelo(tipoSelo);
+	produto.setLinha(linha);
+	produto.setPais(pais);
 
 	Produto saved = produtoService.save(produto);
 
@@ -192,10 +209,10 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(saved.getReducaoICMS_id(), Matchers.is(produto.getReducaoICMS_id()));
 	MatcherAssert.assertThat(saved.getTributacao(), Matchers.is(produto.getTributacao()));
 	MatcherAssert.assertThat(saved.getRegiaoProdutora(), Matchers.is(produto.getRegiaoProdutora()));
-	MatcherAssert.assertThat(saved.getLinhaDeProduto_id(), Matchers.is(produto.getLinhaDeProduto_id()));
+	MatcherAssert.assertThat(saved.getLinha(), Matchers.is(produto.getLinha()));
 	MatcherAssert.assertThat(saved.getTipoValidade(), Matchers.is(produto.getTipoValidade()));
 	MatcherAssert.assertThat(saved.getTipo(), Matchers.is(produto.getTipo()));
-	MatcherAssert.assertThat(saved.getPais_id(), Matchers.is(produto.getPais_id()));
+	MatcherAssert.assertThat(saved.getPais(), Matchers.is(produto.getPais()));
 	MatcherAssert.assertThat(saved.getMarca(), Matchers.is(produto.getMarca()));
 	MatcherAssert.assertThat(saved.getOrigem(), Matchers.is(produto.getOrigem()));
 	MatcherAssert.assertThat(saved.getTipoSelo(), Matchers.is(produto.getTipoSelo()));
