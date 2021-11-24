@@ -127,7 +127,7 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(saved.getAdquiridoComST(), Matchers.is(produto.getAdquiridoComST()));
 	MatcherAssert.assertThat(saved.getReducaoICMS_id(), Matchers.is(produto.getReducaoICMS_id()));
 	MatcherAssert.assertThat(saved.getTributacao(), Matchers.is(produto.getTributacao()));
-	MatcherAssert.assertThat(saved.getRegiaoProdutora_id(), Matchers.is(produto.getRegiaoProdutora_id()));
+	MatcherAssert.assertThat(saved.getRegiaoProdutora(), Matchers.is(produto.getRegiaoProdutora()));
 	MatcherAssert.assertThat(saved.getLinhaDeProduto_id(), Matchers.is(produto.getLinhaDeProduto_id()));
 	MatcherAssert.assertThat(saved.getTipoDeValidade_id(), Matchers.is(produto.getTipoDeValidade_id()));
 	MatcherAssert.assertThat(saved.getTipoProduto_id(), Matchers.is(produto.getTipoProduto_id()));

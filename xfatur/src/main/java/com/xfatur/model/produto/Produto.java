@@ -51,7 +51,11 @@ public class Produto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tributacao_id")
     private Tributacao tributacao;
-    private Integer regiaoProdutora_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "regiaoprodutora_id")
+    private RegiaoProdutora regiaoProdutora;
+
     private Integer linhaDeProduto_id;
     private Integer pais_id;
     private Integer tipoDeValidade_id;
@@ -245,12 +249,12 @@ public class Produto {
 	this.tributacao = tributacao;
     }
 
-    public Integer getRegiaoProdutora_id() {
-	return regiaoProdutora_id;
+    public RegiaoProdutora getRegiaoProdutora() {
+	return regiaoProdutora;
     }
 
-    public void setRegiaoProdutora_id(Integer regiaoProdutora_id) {
-	this.regiaoProdutora_id = regiaoProdutora_id;
+    public void setRegiaoProdutora(RegiaoProdutora regiaoProdutora) {
+	this.regiaoProdutora = regiaoProdutora;
     }
 
     public Integer getLinhaDeProduto_id() {

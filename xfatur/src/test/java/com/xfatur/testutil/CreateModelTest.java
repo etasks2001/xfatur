@@ -436,7 +436,7 @@ public class CreateModelTest {
 	produto.setUnidade(null);
 	produto.setClassificacaoFiscal(null);
 	produto.setTributacao(null);
-	produto.setRegiaoProdutora_id(1);
+	produto.setRegiaoProdutora(null);
 	produto.setLinhaDeProduto_id(1);
 	produto.setPais_id(1);
 	produto.setTipoDeValidade_id(1);
@@ -474,7 +474,7 @@ public class CreateModelTest {
 	produto.setUnidade(null);
 	produto.setClassificacaoFiscal(null);
 	produto.setTributacao(null);
-	produto.setRegiaoProdutora_id(1);
+	produto.setRegiaoProdutora(null);
 	produto.setLinhaDeProduto_id(1);
 	produto.setPais_id(1);
 	produto.setTipoDeValidade_id(1);
