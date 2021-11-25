@@ -163,6 +163,8 @@ select * from enderecoretirada;
 select * from enderecocobranca;
 
 
+
+
 select * from tipovalidade order by id;
 select * from tributacao order by id;
 select * from classificacaofiscal;
@@ -578,12 +580,16 @@ create table produto(
 /*---------------------------------------------------------------------------------------------------------------------------*/
 
 create table estoquemensal(
+	id 			serial not null,
 	produto_id 		int not null references produto,
-	quantidadeinicial 	int not null default 0 constraint __quantidade_positiva__ check(quantidadeinicial >= 0),
+	quantidadeinicial 	int not null default 0 constraint __quantidade_inicial_positiva__ check(quantidadeinicial >= 0),
 	mes 			int not null constraint __mes_entre_1_e_12__ check (mes>=1 and mes<=12),
 	ano 			int not null constraint __ano_maior_que_0__ check (ano >0),
 	custounitario 		decimal not null default 0 constraint __custo_unitario_positivo__ check(custounitario >= 0),
+	primary key		(id),
 	constraint __produto_mes_ano_ja_cadastrado__ unique (produto_id, mes, ano)
+	
+	
 );
 
 
