@@ -48,21 +48,21 @@ public class ProdutoService {
 	throw new ProdutoCodigoNotFoundException("Código do Produto não encontrado");
     }
 
-    public void inserirEstoque(Integer id, Integer quantidade) {
-	repository.inserirEstoque(id, quantidade);
+    public void entradaEstoque(Integer id, Integer quantidade) {
+	repository.entradaEstoque(id, quantidade);
     }
 
-    public void inserirReservado(Integer id, Integer quantidade) {
-	repository.inserirReservado(id, quantidade);
+    public void entradaReservado(Integer id, Integer quantidade) {
+	repository.entradaReservado(id, quantidade);
     }
 
-    public void baixarEstoque(Integer id, Integer quantidade) {
-	repository.baixarEstoque(id, quantidade);
+    public void saidaEstoque(Integer id, Integer quantidade) {
+	repository.saidaEstoque(id, quantidade);
 
     }
 
-    public void baixarReservado(Integer id, Integer quantidade) {
-	repository.baixarReservado(id, quantidade);
+    public void saidaReservado(Integer id, Integer quantidade) {
+	repository.saidaReservado(id, quantidade);
 
     }
 

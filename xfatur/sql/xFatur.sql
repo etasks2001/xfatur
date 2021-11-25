@@ -177,6 +177,17 @@ select * from produto;
 
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+
+
+
+
+
+
+
+
+
+
 select * from information_schema.table_constraints;
 
 
@@ -193,6 +204,36 @@ begin
 	raise info '%','----------------------------------------------------------------------------------';
 end;
 $$;
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*
+create function check_estoque(p_input int)
+  returns boolean
+as
+$$
+declare
+  l_allowed text[] := array['Marine', 'Terrestrial'];
+begin
+  if p_input = any(l_allowed) then 
+    return true;
+  end if;
+  raise 'The only allowed values are: %', array_to_string(l_allowed, ', ');
+end;
+$$
+language plpgsql
+immutable;
+
+
+*/
+
+
+
+
+
+
+
+
+
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 drop table if exists emitente;
@@ -215,6 +256,8 @@ drop table if exists origem;
 drop table if exists fundopobreza;
 
 
+
+drop table if exists estoquemensal;
 drop table if exists tipo;
 drop table if exists tiposelo;
 drop table if exists tipovalidade;
@@ -380,6 +423,8 @@ create table enderecocobranca(
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
 
+
+
 create table linha(
 	id 		serial not null,
 	descricao 	varchar(80) not null, 
@@ -506,6 +551,8 @@ create table produto(
 	aliquotaIPI		decimal default 0,
 	adquiridoComST		boolean,
 	cest			varchar(7) not null,
+	estoque			int not null default 0 constraint __estoque_insuficiente__ check(estoque >= 0),
+	reservado		int not null default 0 constraint __reservado_insuficiente__ check(reservado >= 0),
 	reducaoICMS_id		int,
 	iva_id			int,
 	
@@ -525,6 +572,18 @@ create table produto(
 	primary key 		(id),
 	unique 			(codigoProduto)
 	
+);
+
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+create table estoquemensal(
+	produto_id 		int not null references produto,
+	quantidadeinicial 	int not null default 0 constraint __quantidade_positiva__ check(quantidadeinicial >= 0),
+	mes 			int not null constraint __mes_entre_1_e_12__ check (mes>=1 and mes<=12),
+	ano 			int not null constraint __ano_maior_que_0__ check (ano >0),
+	custounitario 		decimal not null default 0 constraint __custo_unitario_positivo__ check(custounitario >= 0),
+	constraint __produto_mes_ano_ja_cadastrado__ unique (produto_id, mes, ano)
 );
 
 

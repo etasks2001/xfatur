@@ -297,7 +297,7 @@ class ProdutoServiceTest {
 
     @Test
     @Order(9)
-    void test_inserir_estoque() {
+    void test_entrada_estoque() {
 	Integer id = idsProduto.get(0);
 
 	Produto produto = produtoService.findById(id);
@@ -306,7 +306,7 @@ class ProdutoServiceTest {
 
 	Integer quantidadeEntrada = 4514;
 
-	produtoService.inserirEstoque(id, quantidadeEntrada);
+	produtoService.entradaEstoque(id, quantidadeEntrada);
 
 	produto = produtoService.findById(id);
 	MatcherAssert.assertThat(produto.getEstoque(), Matchers.is(quantidadeEntrada + estoqueAnterior));
@@ -315,14 +315,14 @@ class ProdutoServiceTest {
 
     @Test
     @Order(10)
-    void test_inserir_reservado() {
+    void test_entrada_reservado() {
 	Integer id = idsProduto.get(1);
 	Produto produto = produtoService.findById(id);
 	Integer reservadoAnterior = produto.getReservado();
 
 	Integer quantidadeEntrada = 359;
 
-	produtoService.inserirReservado(id, quantidadeEntrada);
+	produtoService.entradaReservado(id, quantidadeEntrada);
 
 	produto = produtoService.findById(id);
 	MatcherAssert.assertThat(produto.getReservado(), Matchers.is(quantidadeEntrada + reservadoAnterior));
@@ -331,37 +331,37 @@ class ProdutoServiceTest {
 
     @Test
     @Order(11)
-    void test_baixar_estoque() {
+    void test_saida_estoque() {
 	Integer id = idsProduto.get(0);
 	Produto produto = produtoService.findById(id);
-	Integer estoque = produto.getEstoque();
+	Integer estoqueAnterior = produto.getEstoque();
 
-	Integer quantidade = 14;
+	Integer quantidadeSaida = 14;
 
-	produtoService.baixarEstoque(id, quantidade);
+	produtoService.saidaEstoque(id, quantidadeSaida);
 
 	produto = produtoService.findById(id);
 	Integer estoqueAtual = produto.getEstoque();
 
-	MatcherAssert.assertThat(estoqueAtual, Matchers.is(estoque - quantidade));
+	MatcherAssert.assertThat(estoqueAtual, Matchers.is(estoqueAnterior - quantidadeSaida));
 
     }
 
     @Test
     @Order(12)
-    void test_baixar_reservado() {
+    void test_saida_reservado() {
 	Integer id = idsProduto.get(1);
 	Produto produto = produtoService.findById(id);
-	Integer reservado = produto.getReservado();
+	Integer reservadoAnterior = produto.getReservado();
 
-	Integer quantidade = 59;
+	Integer quantidadeSaida = 59;
 
-	produtoService.baixarReservado(id, quantidade);
+	produtoService.saidaReservado(id, quantidadeSaida);
 
 	produto = produtoService.findById(id);
 	Integer reservadoAtual = produto.getReservado();
 
-	MatcherAssert.assertThat(reservadoAtual, Matchers.is(reservado - quantidade));
+	MatcherAssert.assertThat(reservadoAtual, Matchers.is(reservadoAnterior - quantidadeSaida));
 
     }
 
