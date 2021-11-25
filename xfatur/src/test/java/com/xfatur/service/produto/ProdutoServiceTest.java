@@ -25,7 +25,9 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
+import com.xfatur.exception.ProdutoEstoqueInsuficienteException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
+import com.xfatur.exception.ProdutoReservadoInsuficienteException;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.FundoPobreza;
 import com.xfatur.model.produto.Linha;
@@ -182,8 +184,6 @@ class ProdutoServiceTest {
 	saved = produtoService.save(produto);
 
 	idsProduto.add(saved.getId());
-
-	System.out.println("incluido:" + saved.getId());
 
 	produto.setId(saved.getId());
 
@@ -344,7 +344,6 @@ class ProdutoServiceTest {
 	Integer estoqueAtual = produto.getEstoque();
 
 	MatcherAssert.assertThat(estoqueAtual, Matchers.is(estoqueAnterior - quantidadeSaida));
-
     }
 
     @Test
@@ -362,7 +361,26 @@ class ProdutoServiceTest {
 	Integer reservadoAtual = produto.getReservado();
 
 	MatcherAssert.assertThat(reservadoAtual, Matchers.is(reservadoAnterior - quantidadeSaida));
+    }
 
+    @Test
+    @Order(13)
+    void test_saida_estoque_saldo_insuficiente() {
+	Integer id = idsProduto.get(0);
+
+	Exception exception = Assertions.assertThrows(ProdutoEstoqueInsuficienteException.class, () -> produtoService.saidaEstoque(id, 1000000));
+
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Estoque insuficiente"));
+    }
+
+    @Test
+    @Order(14)
+    void test_saida_reservado_saldo_insuficiente() {
+	Integer id = idsProduto.get(1);
+
+	Exception exception = Assertions.assertThrows(ProdutoReservadoInsuficienteException.class, () -> produtoService.saidaReservado(id, 100000000));
+
+	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Reservado insuficiente"));
     }
 
     @AfterAll
@@ -370,5 +388,4 @@ class ProdutoServiceTest {
 	idsProduto.forEach(id -> produtoService.deleteById(id));
 	idsProdutor.forEach(id -> produtorService.deleteById(id));
     }
-
 }

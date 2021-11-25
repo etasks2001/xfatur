@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
+import com.xfatur.exception.ProdutoEstoqueInsuficienteException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
+import com.xfatur.exception.ProdutoReservadoInsuficienteException;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.repository.produto.ProdutoRepository;
+import com.xfatur.util.Util;
 
 @Service
 public class ProdutoService {
@@ -57,13 +60,20 @@ public class ProdutoService {
     }
 
     public void saidaEstoque(Integer id, Integer quantidade) {
-	repository.saidaEstoque(id, quantidade);
-
+	try {
+	    repository.saidaEstoque(id, quantidade);
+	} catch (Exception e) {
+	    throw new ProdutoEstoqueInsuficienteException(Util.extractContraintMessage(e));
+	}
     }
 
     public void saidaReservado(Integer id, Integer quantidade) {
-	repository.saidaReservado(id, quantidade);
+	try {
+	    repository.saidaReservado(id, quantidade);
+	} catch (Exception e) {
 
+	    throw new ProdutoReservadoInsuficienteException(Util.extractContraintMessage(e));
+	}
     }
 
     public Integer findIdByCodigoProduto(String codigoProduto) {
