@@ -448,6 +448,8 @@ public class CreateModelTest {
 	produto.setAliquotaIPI(new BigDecimal("12"));
 	produto.setAdquiridoComST(Boolean.FALSE);
 	produto.setCest("123457");
+	produto.setEstoque(1111);
+	produto.setReservado(2222);
 	produto.setReducaoICMS_id(1);
 	produto.setIva_id(1);
 	produto.setProdutor(null);
@@ -486,6 +488,8 @@ public class CreateModelTest {
 	produto.setAliquotaIPI(new BigDecimal("12"));
 	produto.setAdquiridoComST(Boolean.TRUE);
 	produto.setCest("123457");
+	produto.setEstoque(3333);
+	produto.setReservado(4444);
 	produto.setReducaoICMS_id(1);
 	produto.setIva_id(1);
 	produto.setProdutor(null);

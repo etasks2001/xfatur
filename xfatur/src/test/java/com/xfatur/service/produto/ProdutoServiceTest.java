@@ -104,12 +104,6 @@ class ProdutoServiceTest {
 	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2());
     }
 
-    @AfterAll
-    void delete() {
-	idsProduto.forEach(id -> produtoService.deleteById(id));
-	idsProdutor.forEach(id -> produtorService.deleteById(id));
-    }
-
     @BeforeAll
     void insert() {
 	CreateModelTest.produtorList().forEach(entity -> CreateModelTest.createAndIds(produtorService, entity, idsProdutor));
@@ -134,6 +128,14 @@ class ProdutoServiceTest {
     @MethodSource("model")
     @Order(1)
     void test_save(Produto produto) {
+	Integer id = produtoService.findIdByCodigoProduto(produto.getCodigoProduto());
+
+	if (id != null) {
+
+	    idsProduto.add(id);
+	    return;
+	}
+
 	int produtor_id = CreateModelTest.getCodigoAleatorio(idsProdutor);
 	int unidade_id = CreateModelTest.getCodigoAleatorio(idsUnidade);
 	int classificacaoFiscal_id = CreateModelTest.getCodigoAleatorio(idsClassificacaoFiscal);
@@ -176,7 +178,8 @@ class ProdutoServiceTest {
 	produto.setLinha(linha);
 	produto.setPais(pais);
 
-	Produto saved = produtoService.save(produto);
+	Produto saved = null;
+	saved = produtoService.save(produto);
 
 	idsProduto.add(saved.getId());
 
@@ -197,6 +200,9 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(saved.getProdutor(), Matchers.is(produto.getProdutor()));
 	MatcherAssert.assertThat(saved.getUnidade(), Matchers.is(produto.getUnidade()));
 	MatcherAssert.assertThat(saved.getCest(), Matchers.is(produto.getCest()));
+	MatcherAssert.assertThat(saved.getEstoque(), Matchers.is(produto.getEstoque()));
+	MatcherAssert.assertThat(saved.getReservado(), Matchers.is(produto.getReservado()));
+
 	MatcherAssert.assertThat(saved.getClassificacaoFiscal(), Matchers.is(produto.getClassificacaoFiscal()));
 	MatcherAssert.assertThat(saved.getFundoPobreza(), Matchers.is(produto.getFundoPobreza()));
 	MatcherAssert.assertThat(saved.getUnidadeDetalhada(), Matchers.is(produto.getUnidadeDetalhada()));
@@ -287,6 +293,82 @@ class ProdutoServiceTest {
 	Exception exception = Assertions.assertThrows(ProdutoCodigoNotFoundException.class, () -> produtoService.findByCodigoProduto("fdasfsder"));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código do Produto não encontrado"));
+    }
+
+    @Test
+    @Order(9)
+    void test_inserir_estoque() {
+	Integer id = idsProduto.get(0);
+
+	Produto produto = produtoService.findById(id);
+
+	Integer estoqueAnterior = produto.getEstoque();
+
+	Integer quantidadeEntrada = 4514;
+
+	produtoService.inserirEstoque(id, quantidadeEntrada);
+
+	produto = produtoService.findById(id);
+	MatcherAssert.assertThat(produto.getEstoque(), Matchers.is(quantidadeEntrada + estoqueAnterior));
 
     }
+
+    @Test
+    @Order(10)
+    void test_inserir_reservado() {
+	Integer id = idsProduto.get(1);
+	Produto produto = produtoService.findById(id);
+	Integer reservadoAnterior = produto.getReservado();
+
+	Integer quantidadeEntrada = 359;
+
+	produtoService.inserirReservado(id, quantidadeEntrada);
+
+	produto = produtoService.findById(id);
+	MatcherAssert.assertThat(produto.getReservado(), Matchers.is(quantidadeEntrada + reservadoAnterior));
+
+    }
+
+    @Test
+    @Order(11)
+    void test_baixar_estoque() {
+	Integer id = idsProduto.get(0);
+	Produto produto = produtoService.findById(id);
+	Integer estoque = produto.getEstoque();
+
+	Integer quantidade = 14;
+
+	produtoService.baixarEstoque(id, quantidade);
+
+	produto = produtoService.findById(id);
+	Integer estoqueAtual = produto.getEstoque();
+
+	MatcherAssert.assertThat(estoqueAtual, Matchers.is(estoque - quantidade));
+
+    }
+
+    @Test
+    @Order(12)
+    void test_baixar_reservado() {
+	Integer id = idsProduto.get(1);
+	Produto produto = produtoService.findById(id);
+	Integer reservado = produto.getReservado();
+
+	Integer quantidade = 59;
+
+	produtoService.baixarReservado(id, quantidade);
+
+	produto = produtoService.findById(id);
+	Integer reservadoAtual = produto.getReservado();
+
+	MatcherAssert.assertThat(reservadoAtual, Matchers.is(reservado - quantidade));
+
+    }
+
+    @AfterAll
+    void delete() {
+	idsProduto.forEach(id -> produtoService.deleteById(id));
+	idsProdutor.forEach(id -> produtorService.deleteById(id));
+    }
+
 }

@@ -2,6 +2,7 @@ package com.xfatur.model.produto;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,12 @@ public class Produto {
     private BigDecimal aliquotaIPI;
     private Boolean adquiridoComST;
     private String cest;
+
+    @Column(insertable = false, updatable = false)
+    private Integer estoque;
+
+    @Column(insertable = false, updatable = false)
+    private Integer reservado;
 
     private Integer reducaoICMS_id;
     private Integer iva_id;
@@ -342,6 +349,22 @@ public class Produto {
 
     public void setTipoSelo(TipoSelo tipoSelo) {
 	this.tipoSelo = tipoSelo;
+    }
+
+    public Integer getEstoque() {
+	return estoque;
+    }
+
+    public void setEstoque(Integer estoque) {
+	this.estoque = estoque;
+    }
+
+    public Integer getReservado() {
+	return reservado;
+    }
+
+    public void setReservado(Integer reservado) {
+	this.reservado = reservado;
     }
 
 }
