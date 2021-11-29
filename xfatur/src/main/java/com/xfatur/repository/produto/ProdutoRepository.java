@@ -16,9 +16,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     @Query("select p from Produto p where p.descricao like %:descricao% order by p.descricao asc")
     List<Produto> buscaPorDescricao(@Param("descricao") String descricao);
 
-    @Query("select p.id from Produto p where p.codigoProduto = :codigoProduto")
-    Integer findIdByCodigoProduto(@Param("codigoProduto") String codigoProduto);
-
     Produto findByCodigoProduto(String codigoProduto);
 
     @Modifying

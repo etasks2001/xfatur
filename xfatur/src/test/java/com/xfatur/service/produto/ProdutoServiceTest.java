@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -17,8 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -28,201 +25,69 @@ import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoEstoqueInsuficienteException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
 import com.xfatur.exception.ProdutoReservadoInsuficienteException;
-import com.xfatur.model.produto.ClassificacaoFiscal;
-import com.xfatur.model.produto.FundoPobreza;
-import com.xfatur.model.produto.Linha;
-import com.xfatur.model.produto.Marca;
-import com.xfatur.model.produto.Origem;
-import com.xfatur.model.produto.Pais;
 import com.xfatur.model.produto.Produto;
-import com.xfatur.model.produto.Produtor;
-import com.xfatur.model.produto.RegiaoProdutora;
-import com.xfatur.model.produto.Tipo;
-import com.xfatur.model.produto.TipoSelo;
-import com.xfatur.model.produto.TipoValidade;
-import com.xfatur.model.produto.Tributacao;
-import com.xfatur.model.produto.Unidade;
-import com.xfatur.testutil.CreateModelTest;
+import com.xfatur.testutil.UtilCreateProduto;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 class ProdutoServiceTest {
-
     @Autowired
-    ClassificacaoFiscalService classificacaoFiscalService;
-
-    @Autowired
-    UnidadeService unidadeService;
-
+    UtilCreateProduto utilCreateProduto;
     @Autowired
     ProdutoService produtoService;
-
-    @Autowired
-    ProdutorService produtorService;
-
-    @Autowired
-    TributacaoService tributacaoService;
-
-    @Autowired
-    RegiaoProdutoraService regiaoProdutoraService;
-
-    @Autowired
-    TipoValidadeService tipoValidadeService;
-
-    @Autowired
-    FundoPobrezaService fundoPobrezaService;
-
-    @Autowired
-    OrigemService origemService;
-
-    @Autowired
-    MarcaService marcaService;
-    @Autowired
-    TipoService tipoService;
-    @Autowired
-    TipoSeloService tipoSeloService;
-    @Autowired
-    LinhaService linhaService;
-    @Autowired
-    PaisService paisService;
-
-    List<String> idsTributacao = new ArrayList<String>();
-    List<Integer> idsClassificacaoFiscal = new ArrayList<Integer>();
     List<Integer> idsProduto = new ArrayList<Integer>();
-    List<Integer> idsProdutor = new ArrayList<Integer>();
-    List<Integer> idsUnidade = new ArrayList<Integer>();
-    List<Integer> idsRegiaoProdutora = new ArrayList<Integer>();
-    List<Integer> idsTipoValidade = new ArrayList<Integer>();
-    List<Integer> idsFundoPobreza = new ArrayList<Integer>();
-    List<Integer> idsOrigem = new ArrayList<Integer>();
-    List<Integer> idsMarca = new ArrayList<Integer>();
-    List<String> idsTipo = new ArrayList<String>();
-    List<String> idsTipoSelo = new ArrayList<String>();
-    List<Integer> idsLinha = new ArrayList<Integer>();
-    List<Integer> idsPais = new ArrayList<Integer>();
-
-    Stream<Produto> model() {
-	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2());
-    }
 
     @BeforeAll
     void insert() {
-	CreateModelTest.produtorList().forEach(entity -> CreateModelTest.createAndIds(produtorService, entity, idsProdutor));
-	CreateModelTest.unidadeList().forEach(entity -> CreateModelTest.createAndIds(unidadeService, entity, idsUnidade));
-	CreateModelTest.classificacaoFiscalList().forEach(entity -> CreateModelTest.createAndIds(classificacaoFiscalService, entity, idsClassificacaoFiscal));
-	CreateModelTest.tributacaoList().forEach(entity -> CreateModelTest.createAndIds(tributacaoService, entity, idsTributacao));
-	CreateModelTest.regiaoProdutoraList().forEach(entity -> CreateModelTest.createAndIds(regiaoProdutoraService, entity, idsRegiaoProdutora));
-	CreateModelTest.tipoValidadeList().forEach(entity -> CreateModelTest.createAndIds(tipoValidadeService, entity, idsTipoValidade));
-
-	CreateModelTest.fundoPobrezaList().forEach(entity -> CreateModelTest.createAndIds(fundoPobrezaService, entity, idsFundoPobreza));
-	CreateModelTest.origemList().forEach(entity -> CreateModelTest.createAndIds(origemService, entity, idsOrigem));
-	CreateModelTest.marcaList().forEach(entity -> CreateModelTest.createAndIds(marcaService, entity, idsMarca));
-
-	CreateModelTest.tipoList().forEach(entity -> CreateModelTest.createAndIds(tipoService, entity, idsTipo));
-	CreateModelTest.tipoSeloList().forEach(entity -> CreateModelTest.createAndIds(tipoSeloService, entity, idsTipoSelo));
-
-	CreateModelTest.linhaList().forEach(entity -> CreateModelTest.createAndIds(linhaService, entity, idsLinha));
-	CreateModelTest.paisList().forEach(entity -> CreateModelTest.createAndIds(paisService, entity, idsPais));
+	idsProduto = utilCreateProduto.getIdsProduto();
     }
 
-    @ParameterizedTest
-    @MethodSource("model")
+    @Test
     @Order(1)
-    void test_save(Produto produto) {
-	Integer id = produtoService.findIdByCodigoProduto(produto.getCodigoProduto());
+    @Transactional
+    void test_save() {
+	Integer id = idsProduto.get(0);
+	Produto produto1 = produtoService.findById(id);
+	Produto produto2 = produtoService.findById(produto1.getId());
 
-	if (id != null) {
+	MatcherAssert.assertThat(produto1.getId(), Matchers.is(produto2.getId()));
+	MatcherAssert.assertThat(produto1.getCodigoProduto(), Matchers.is(produto2.getCodigoProduto()));
+	MatcherAssert.assertThat(produto1.getDescricao(), Matchers.is(produto2.getDescricao()));
+	MatcherAssert.assertThat(produto1.getPesoLiquido(), Matchers.is(produto2.getPesoLiquido()));
+	MatcherAssert.assertThat(produto1.getPesoBruto(), Matchers.is(produto2.getPesoBruto()));
+	MatcherAssert.assertThat(produto1.getPesoDaCaixa(), Matchers.is(produto2.getPesoDaCaixa()));
+	MatcherAssert.assertThat(produto1.getIpiUnitario(), Matchers.is(produto2.getIpiUnitario()));
+	MatcherAssert.assertThat(produto1.getIsentoICMS(), Matchers.is(produto2.getIsentoICMS()));
+	MatcherAssert.assertThat(produto1.getAliquotaIPI(), Matchers.is(produto2.getAliquotaIPI()));
+	MatcherAssert.assertThat(produto1.getIva_id(), Matchers.is(produto2.getIva_id()));
 
-	    idsProduto.add(id);
-	    return;
-	}
+	MatcherAssert.assertThat(produto1.getProdutor(), Matchers.is(produto2.getProdutor()));
+	MatcherAssert.assertThat(produto1.getUnidade(), Matchers.is(produto2.getUnidade()));
+	MatcherAssert.assertThat(produto1.getCest(), Matchers.is(produto2.getCest()));
+	MatcherAssert.assertThat(produto1.getEstoque(), Matchers.is(produto2.getEstoque()));
+	MatcherAssert.assertThat(produto1.getReservado(), Matchers.is(produto2.getReservado()));
 
-	int produtor_id = CreateModelTest.getCodigoAleatorio(idsProdutor);
-	int unidade_id = CreateModelTest.getCodigoAleatorio(idsUnidade);
-	int classificacaoFiscal_id = CreateModelTest.getCodigoAleatorio(idsClassificacaoFiscal);
-	String tributacao_id = CreateModelTest.getCodigoAleatorio(idsTributacao);
-	int regiaoProdutora_id = CreateModelTest.getCodigoAleatorio(idsRegiaoProdutora);
-	int tipoValidade_id = CreateModelTest.getCodigoAleatorio(idsTipoValidade);
-	int fundoPobreza_id = CreateModelTest.getCodigoAleatorio(idsFundoPobreza);
-	int marca_id = CreateModelTest.getCodigoAleatorio(idsMarca);
-	int origem_id = CreateModelTest.getCodigoAleatorio(idsOrigem);
-	String tipo_id = CreateModelTest.getCodigoAleatorio(idsTipo);
-	String tipoSelo_id = CreateModelTest.getCodigoAleatorio(idsTipoSelo);
-	int linha_id = CreateModelTest.getCodigoAleatorio(idsLinha);
-	int pais_id = CreateModelTest.getCodigoAleatorio(idsPais);
+	MatcherAssert.assertThat(produto1.getClassificacaoFiscal(), Matchers.is(produto2.getClassificacaoFiscal()));
+	MatcherAssert.assertThat(produto1.getFundoPobreza(), Matchers.is(produto2.getFundoPobreza()));
+	MatcherAssert.assertThat(produto1.getUnidadeDetalhada(), Matchers.is(produto2.getUnidadeDetalhada()));
+	MatcherAssert.assertThat(produto1.getGraduacaoAlcoolica(), Matchers.is(produto2.getGraduacaoAlcoolica()));
+	MatcherAssert.assertThat(produto1.getCodigoDeBarras(), Matchers.is(produto2.getCodigoDeBarras()));
+	MatcherAssert.assertThat(produto1.getLarguraDaCaixa(), Matchers.is(produto2.getLarguraDaCaixa()));
+	MatcherAssert.assertThat(produto1.getComprimentoDaCaixa(), Matchers.is(produto2.getComprimentoDaCaixa()));
+	MatcherAssert.assertThat(produto1.getAliquotaDeReducao(), Matchers.is(produto2.getAliquotaDeReducao()));
+	MatcherAssert.assertThat(produto1.getAdquiridoComST(), Matchers.is(produto2.getAdquiridoComST()));
+	MatcherAssert.assertThat(produto1.getReducaoICMS_id(), Matchers.is(produto2.getReducaoICMS_id()));
 
-	Produtor produtor = produtorService.findById(produtor_id);
-	Unidade unidade = unidadeService.findById(unidade_id);
-	ClassificacaoFiscal classificacaoFiscal = classificacaoFiscalService.findById(classificacaoFiscal_id);
-	Tributacao tributacao = tributacaoService.findById(tributacao_id);
-	RegiaoProdutora regiaoProdutora = regiaoProdutoraService.findById(regiaoProdutora_id);
-	TipoValidade tipoValidade = tipoValidadeService.findById(tipoValidade_id);
-	FundoPobreza fundoPobreza = fundoPobrezaService.findById(fundoPobreza_id);
-	Marca marca = marcaService.findById(marca_id);
-	Origem origem = origemService.findById(origem_id);
-	Tipo tipo = tipoService.findById(tipo_id);
-	TipoSelo tipoSelo = tipoSeloService.findById(tipoSelo_id);
-	Linha linha = linhaService.findById(linha_id);
-	Pais pais = paisService.findById(pais_id);
-
-	produto.setProdutor(produtor);
-	produto.setUnidade(unidade);
-	produto.setClassificacaoFiscal(classificacaoFiscal);
-	produto.setTributacao(tributacao);
-	produto.setRegiaoProdutora(regiaoProdutora);
-	produto.setTipoValidade(tipoValidade);
-	produto.setFundoPobreza(fundoPobreza);
-	produto.setMarca(marca);
-	produto.setOrigem(origem);
-	produto.setTipo(tipo);
-	produto.setTipoSelo(tipoSelo);
-	produto.setLinha(linha);
-	produto.setPais(pais);
-
-	Produto saved = null;
-	saved = produtoService.save(produto);
-
-	idsProduto.add(saved.getId());
-
-	produto.setId(saved.getId());
-
-	MatcherAssert.assertThat(saved.getId(), Matchers.is(produto.getId()));
-	MatcherAssert.assertThat(saved.getCodigoProduto(), Matchers.is(produto.getCodigoProduto()));
-	MatcherAssert.assertThat(saved.getDescricao(), Matchers.is(produto.getDescricao()));
-	MatcherAssert.assertThat(saved.getPesoLiquido(), Matchers.is(produto.getPesoLiquido()));
-	MatcherAssert.assertThat(saved.getPesoBruto(), Matchers.is(produto.getPesoBruto()));
-	MatcherAssert.assertThat(saved.getPesoDaCaixa(), Matchers.is(produto.getPesoDaCaixa()));
-	MatcherAssert.assertThat(saved.getIpiUnitario(), Matchers.is(produto.getIpiUnitario()));
-	MatcherAssert.assertThat(saved.getIsentoICMS(), Matchers.is(produto.getIsentoICMS()));
-	MatcherAssert.assertThat(saved.getAliquotaIPI(), Matchers.is(produto.getAliquotaIPI()));
-	MatcherAssert.assertThat(saved.getIva_id(), Matchers.is(produto.getIva_id()));
-	MatcherAssert.assertThat(saved.getProdutor(), Matchers.is(produto.getProdutor()));
-	MatcherAssert.assertThat(saved.getUnidade(), Matchers.is(produto.getUnidade()));
-	MatcherAssert.assertThat(saved.getCest(), Matchers.is(produto.getCest()));
-	MatcherAssert.assertThat(saved.getEstoque(), Matchers.is(produto.getEstoque()));
-	MatcherAssert.assertThat(saved.getReservado(), Matchers.is(produto.getReservado()));
-
-	MatcherAssert.assertThat(saved.getClassificacaoFiscal(), Matchers.is(produto.getClassificacaoFiscal()));
-	MatcherAssert.assertThat(saved.getFundoPobreza(), Matchers.is(produto.getFundoPobreza()));
-	MatcherAssert.assertThat(saved.getUnidadeDetalhada(), Matchers.is(produto.getUnidadeDetalhada()));
-	MatcherAssert.assertThat(saved.getGraduacaoAlcoolica(), Matchers.is(produto.getGraduacaoAlcoolica()));
-	MatcherAssert.assertThat(saved.getCodigoDeBarras(), Matchers.is(produto.getCodigoDeBarras()));
-	MatcherAssert.assertThat(saved.getLarguraDaCaixa(), Matchers.is(produto.getLarguraDaCaixa()));
-	MatcherAssert.assertThat(saved.getComprimentoDaCaixa(), Matchers.is(produto.getComprimentoDaCaixa()));
-	MatcherAssert.assertThat(saved.getAliquotaDeReducao(), Matchers.is(produto.getAliquotaDeReducao()));
-	MatcherAssert.assertThat(saved.getAdquiridoComST(), Matchers.is(produto.getAdquiridoComST()));
-	MatcherAssert.assertThat(saved.getReducaoICMS_id(), Matchers.is(produto.getReducaoICMS_id()));
-	MatcherAssert.assertThat(saved.getTributacao(), Matchers.is(produto.getTributacao()));
-	MatcherAssert.assertThat(saved.getRegiaoProdutora(), Matchers.is(produto.getRegiaoProdutora()));
-	MatcherAssert.assertThat(saved.getLinha(), Matchers.is(produto.getLinha()));
-	MatcherAssert.assertThat(saved.getTipoValidade(), Matchers.is(produto.getTipoValidade()));
-	MatcherAssert.assertThat(saved.getTipo(), Matchers.is(produto.getTipo()));
-	MatcherAssert.assertThat(saved.getPais(), Matchers.is(produto.getPais()));
-	MatcherAssert.assertThat(saved.getMarca(), Matchers.is(produto.getMarca()));
-	MatcherAssert.assertThat(saved.getOrigem(), Matchers.is(produto.getOrigem()));
-	MatcherAssert.assertThat(saved.getTipoSelo(), Matchers.is(produto.getTipoSelo()));
-
+	MatcherAssert.assertThat(produto1.getTributacao(), Matchers.is(produto2.getTributacao()));
+	MatcherAssert.assertThat(produto1.getRegiaoProdutora(), Matchers.is(produto2.getRegiaoProdutora()));
+	MatcherAssert.assertThat(produto1.getLinha(), Matchers.is(produto2.getLinha()));
+	MatcherAssert.assertThat(produto1.getTipoValidade(), Matchers.is(produto2.getTipoValidade()));
+	MatcherAssert.assertThat(produto1.getTipo(), Matchers.is(produto2.getTipo()));
+	MatcherAssert.assertThat(produto1.getPais(), Matchers.is(produto2.getPais()));
+	MatcherAssert.assertThat(produto1.getMarca(), Matchers.is(produto2.getMarca()));
+	MatcherAssert.assertThat(produto1.getOrigem(), Matchers.is(produto2.getOrigem()));
+	MatcherAssert.assertThat(produto1.getTipoSelo(), Matchers.is(produto2.getTipoSelo()));
     }
 
     @Test
@@ -385,7 +250,6 @@ class ProdutoServiceTest {
 
     @AfterAll
     void delete() {
-	idsProduto.forEach(id -> produtoService.deleteById(id));
-	idsProdutor.forEach(id -> produtorService.deleteById(id));
+	utilCreateProduto.clear();
     }
 }

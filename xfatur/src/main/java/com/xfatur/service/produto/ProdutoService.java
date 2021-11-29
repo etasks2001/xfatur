@@ -76,7 +76,4 @@ public class ProdutoService {
 	}
     }
 
-    public Integer findIdByCodigoProduto(String codigoProduto) {
-	return repository.findIdByCodigoProduto(codigoProduto);
-    }
 }

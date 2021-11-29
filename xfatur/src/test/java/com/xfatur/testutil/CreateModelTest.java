@@ -509,6 +509,86 @@ public class CreateModelTest {
 	return produto;
     }
 
+    public static Produto createProduto3() {
+	Produto produto = new Produto();
+
+	produto.setCodigoProduto("111.11.001");
+	produto.setDescricao("GELEIA");
+	produto.setUnidadeDetalhada("114456");
+	produto.setGraduacaoAlcoolica("10%");
+	produto.setPesoLiquido(new BigDecimal("10.12"));
+	produto.setPesoBruto(new BigDecimal("15.12"));
+	produto.setCodigoDeBarras("01234567891234");
+	produto.setPesoDaCaixa(new BigDecimal("154.12"));
+	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
+	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
+	produto.setIpiUnitario(new BigDecimal("10.12"));
+	produto.setAliquotaDeReducao(Boolean.TRUE);
+	produto.setIsentoICMS(Boolean.TRUE);
+	produto.setAliquotaIPI(new BigDecimal("12"));
+	produto.setAdquiridoComST(Boolean.TRUE);
+	produto.setCest("123457");
+	produto.setEstoque(3333);
+	produto.setReservado(4444);
+	produto.setReducaoICMS_id(1);
+	produto.setIva_id(1);
+	produto.setProdutor(null);
+	produto.setUnidade(null);
+	produto.setClassificacaoFiscal(null);
+	produto.setTributacao(null);
+	produto.setRegiaoProdutora(null);
+	produto.setLinha(null);
+	produto.setPais(null);
+	produto.setTipoValidade(null);
+	produto.setMarca(null);
+	produto.setOrigem(null);
+	produto.setTipo(null);
+	produto.setFundoPobreza(null);
+	produto.setTipoSelo(null);
+
+	return produto;
+    }
+
+    public static Produto createProduto4() {
+	Produto produto = new Produto();
+
+	produto.setCodigoProduto("999.11.001");
+	produto.setDescricao("FEIJÃO");
+	produto.setUnidadeDetalhada("114456");
+	produto.setGraduacaoAlcoolica("10%");
+	produto.setPesoLiquido(new BigDecimal("10.12"));
+	produto.setPesoBruto(new BigDecimal("15.12"));
+	produto.setCodigoDeBarras("01234567891234");
+	produto.setPesoDaCaixa(new BigDecimal("154.12"));
+	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
+	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
+	produto.setIpiUnitario(new BigDecimal("10.12"));
+	produto.setAliquotaDeReducao(Boolean.TRUE);
+	produto.setIsentoICMS(Boolean.TRUE);
+	produto.setAliquotaIPI(new BigDecimal("12"));
+	produto.setAdquiridoComST(Boolean.TRUE);
+	produto.setCest("123457");
+	produto.setEstoque(3333);
+	produto.setReservado(4444);
+	produto.setReducaoICMS_id(1);
+	produto.setIva_id(1);
+	produto.setProdutor(null);
+	produto.setUnidade(null);
+	produto.setClassificacaoFiscal(null);
+	produto.setTributacao(null);
+	produto.setRegiaoProdutora(null);
+	produto.setLinha(null);
+	produto.setPais(null);
+	produto.setTipoValidade(null);
+	produto.setMarca(null);
+	produto.setOrigem(null);
+	produto.setTipo(null);
+	produto.setFundoPobreza(null);
+	produto.setTipoSelo(null);
+
+	return produto;
+    }
+
     public static Stream<Produtor> produtorList() {
 	return Stream.of(createProdutor1(), createProdutor2(), createProdutor3());
     }
@@ -1253,5 +1333,9 @@ public class CreateModelTest {
 	}
 
 	ids.add(id);
+    }
+
+    public static Stream<Produto> produtoList() {
+	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2(), CreateModelTest.createProduto3(), CreateModelTest.createProduto4());
     }
 }
