@@ -12,7 +12,6 @@ import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
 import com.xfatur.model.produto.Pais;
-import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
 import com.xfatur.model.produto.Tipo;
@@ -81,26 +80,10 @@ public class UtilCreateProduto {
     private List<Integer> idsLinha = new ArrayList<Integer>();
     private List<Integer> idsPais = new ArrayList<Integer>();
 
-    public List<Integer> getIdsProduto() {
+    public void insert() {
+
+	gravarTabelas();
 	CreateModelTest.produtoList().forEach(produto -> {
-
-	    CreateModelTest.produtorList().forEach(entity -> CreateModelTest.createAndIds(produtorService, entity, idsProdutor));
-	    CreateModelTest.unidadeList().forEach(entity -> CreateModelTest.createAndIds(unidadeService, entity, idsUnidade));
-	    CreateModelTest.classificacaoFiscalList().forEach(entity -> CreateModelTest.createAndIds(classificacaoFiscalService, entity, idsClassificacaoFiscal));
-	    CreateModelTest.tributacaoList().forEach(entity -> CreateModelTest.createAndIds(tributacaoService, entity, idsTributacao));
-	    CreateModelTest.regiaoProdutoraList().forEach(entity -> CreateModelTest.createAndIds(regiaoProdutoraService, entity, idsRegiaoProdutora));
-	    CreateModelTest.tipoValidadeList().forEach(entity -> CreateModelTest.createAndIds(tipoValidadeService, entity, idsTipoValidade));
-
-	    CreateModelTest.fundoPobrezaList().forEach(entity -> CreateModelTest.createAndIds(fundoPobrezaService, entity, idsFundoPobreza));
-	    CreateModelTest.origemList().forEach(entity -> CreateModelTest.createAndIds(origemService, entity, idsOrigem));
-	    CreateModelTest.marcaList().forEach(entity -> CreateModelTest.createAndIds(marcaService, entity, idsMarca));
-
-	    CreateModelTest.tipoList().forEach(entity -> CreateModelTest.createAndIds(tipoService, entity, idsTipo));
-	    CreateModelTest.tipoSeloList().forEach(entity -> CreateModelTest.createAndIds(tipoSeloService, entity, idsTipoSelo));
-
-	    CreateModelTest.linhaList().forEach(entity -> CreateModelTest.createAndIds(linhaService, entity, idsLinha));
-	    CreateModelTest.paisList().forEach(entity -> CreateModelTest.createAndIds(paisService, entity, idsPais));
-
 	    int produtor_id = CreateModelTest.getCodigoAleatorio(idsProdutor);
 	    int unidade_id = CreateModelTest.getCodigoAleatorio(idsUnidade);
 	    int classificacaoFiscal_id = CreateModelTest.getCodigoAleatorio(idsClassificacaoFiscal);
@@ -143,15 +126,53 @@ public class UtilCreateProduto {
 	    produto.setLinha(linha);
 	    produto.setPais(pais);
 
-	    Produto saved = null;
-	    saved = produtoService.save(produto);
+	    produtoService.save(produto);
+	    System.out.println("saved: " + produto.getId());
 
-	    idsProduto.add(saved.getId());
+	    idsProduto.add(produto.getId());
+
 	});
+    }
+
+    public List<Integer> getIdsProduto() {
 	return idsProduto;
+    }
+
+    private void gravarTabelas() {
+	CreateModelTest.produtorList().forEach(entity -> CreateModelTest.createAndIds(produtorService, entity, idsProdutor));
+	CreateModelTest.unidadeList().forEach(entity -> CreateModelTest.createAndIds(unidadeService, entity, idsUnidade));
+	CreateModelTest.classificacaoFiscalList().forEach(entity -> CreateModelTest.createAndIds(classificacaoFiscalService, entity, idsClassificacaoFiscal));
+	CreateModelTest.tributacaoList().forEach(entity -> CreateModelTest.createAndIds(tributacaoService, entity, idsTributacao));
+	CreateModelTest.regiaoProdutoraList().forEach(entity -> CreateModelTest.createAndIds(regiaoProdutoraService, entity, idsRegiaoProdutora));
+	CreateModelTest.tipoValidadeList().forEach(entity -> CreateModelTest.createAndIds(tipoValidadeService, entity, idsTipoValidade));
+
+	CreateModelTest.fundoPobrezaList().forEach(entity -> CreateModelTest.createAndIds(fundoPobrezaService, entity, idsFundoPobreza));
+	CreateModelTest.origemList().forEach(entity -> CreateModelTest.createAndIds(origemService, entity, idsOrigem));
+	CreateModelTest.marcaList().forEach(entity -> CreateModelTest.createAndIds(marcaService, entity, idsMarca));
+
+	CreateModelTest.tipoList().forEach(entity -> CreateModelTest.createAndIds(tipoService, entity, idsTipo));
+	CreateModelTest.tipoSeloList().forEach(entity -> CreateModelTest.createAndIds(tipoSeloService, entity, idsTipoSelo));
+
+	CreateModelTest.linhaList().forEach(entity -> CreateModelTest.createAndIds(linhaService, entity, idsLinha));
+	CreateModelTest.paisList().forEach(entity -> CreateModelTest.createAndIds(paisService, entity, idsPais));
     }
 
     public void clear() {
 	idsProduto.forEach(id -> produtoService.deleteById(id));
+
+	idsTributacao = new ArrayList<String>();
+	idsClassificacaoFiscal = new ArrayList<Integer>();
+	idsProduto = new ArrayList<Integer>();
+	idsProdutor = new ArrayList<Integer>();
+	idsUnidade = new ArrayList<Integer>();
+	idsRegiaoProdutora = new ArrayList<Integer>();
+	idsTipoValidade = new ArrayList<Integer>();
+	idsFundoPobreza = new ArrayList<Integer>();
+	idsOrigem = new ArrayList<Integer>();
+	idsMarca = new ArrayList<Integer>();
+	idsTipo = new ArrayList<String>();
+	idsTipoSelo = new ArrayList<String>();
+	idsLinha = new ArrayList<Integer>();
+	idsPais = new ArrayList<Integer>();
     }
 }

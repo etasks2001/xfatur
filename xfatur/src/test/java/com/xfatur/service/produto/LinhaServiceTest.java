@@ -66,8 +66,8 @@ class LinhaServiceTest {
 	MatcherAssert.assertThat(linha1.getTipo(), Matchers.is(linha2.getTipo()));
 	MatcherAssert.assertThat(linha1.getOrdem(), Matchers.is(linha2.getOrdem()));
 
-	linha1.setDescricao(linha1.getDescricao() + " alterado");
-	linha2.setDescricao(linha2.getDescricao() + " alterado");
+	linha1.setDescricao(linha1.getDescricao());
+	linha2.setDescricao(linha2.getDescricao());
 
 	service.save(linha1);
 	service.save(linha2);

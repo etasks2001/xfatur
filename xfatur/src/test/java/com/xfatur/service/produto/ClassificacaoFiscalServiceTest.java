@@ -48,7 +48,7 @@ class ClassificacaoFiscalServiceTest {
     void test_update() {
 	ClassificacaoFiscal found = service.findById(ids.get(0));
 
-	found.setDescricao(found.getDescricao() + " alterado");
+	found.setDescricao(found.getDescricao());
 
 	service.save(found);
     }

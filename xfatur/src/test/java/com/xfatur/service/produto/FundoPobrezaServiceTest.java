@@ -62,7 +62,7 @@ class FundoPobrezaServiceTest {
     void test_update() {
 	FundoPobreza fundoPobreza = service.findById(ids.get(0));
 
-	fundoPobreza.setDescricao(fundoPobreza.getDescricao() + " alterado");
+	fundoPobreza.setDescricao(fundoPobreza.getDescricao());
 
 	service.save(fundoPobreza);
     }

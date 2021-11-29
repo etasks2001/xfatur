@@ -63,7 +63,7 @@ class TipoValidadeServiceTest {
     void test_update() {
 	TipoValidade tipoValidade = service.findById(ids.get(0));
 
-	tipoValidade.setDescricao(tipoValidade.getDescricao() + " alterado");
+	tipoValidade.setDescricao(tipoValidade.getDescricao());
 
 	service.save(tipoValidade);
     }

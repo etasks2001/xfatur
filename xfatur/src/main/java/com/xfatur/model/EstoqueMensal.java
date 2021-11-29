@@ -4,22 +4,26 @@ import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.xfatur.model.produto.Produto;
 
 @Entity
-@IdClass(EstoqueMensalId.class)
+@Table(uniqueConstraints = { @UniqueConstraint(name = "unique_produto", columnNames = { "mes", "ano", "produto_id" }) })
 public class EstoqueMensal {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private Integer mes;
-    @Id
     private Integer ano;
-    @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produto_id")
     private Produto produto;
@@ -67,4 +71,7 @@ public class EstoqueMensal {
 	this.produto = produto;
     }
 
+    public Integer getId() {
+	return id;
+    }
 }

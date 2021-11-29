@@ -62,7 +62,7 @@ class RegiaoProdutoraServiceTest {
     void test_update() {
 	RegiaoProdutora regiaoProdutora = service.findById(ids.get(0));
 
-	regiaoProdutora.setDescricao(regiaoProdutora.getDescricao() + " alterado");
+	regiaoProdutora.setDescricao(regiaoProdutora.getDescricao());
 
 	service.save(regiaoProdutora);
     }

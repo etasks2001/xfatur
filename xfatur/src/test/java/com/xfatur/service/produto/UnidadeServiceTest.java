@@ -32,11 +32,6 @@ class UnidadeServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    @AfterAll
-    void delete() {
-	ids.forEach(id -> service.deleteById(id));
-    }
-
     @Test
     @Order(1)
     void test_save() {
@@ -83,4 +78,10 @@ class UnidadeServiceTest {
 
 	MatcherAssert.assertThat(unidades.size(), Matchers.is(0));
     }
+
+    @AfterAll
+    void delete() {
+//	ids.forEach(id -> service.deleteById(id));
+    }
+
 }

@@ -43,6 +43,7 @@ public class ProdutoService {
     }
 
     public Produto findByCodigoProduto(String codigoProduto) {
+
 	Produto found = repository.findByCodigoProduto(codigoProduto);
 	if (found != null) {
 	    return found;

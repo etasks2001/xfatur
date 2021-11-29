@@ -3,7 +3,6 @@ package com.xfatur.model.produto;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -100,7 +99,7 @@ public class Produto {
     @JoinColumn(name = "tiposelo_id")
     private TipoSelo tipoSelo;
 
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "produto")
     private List<EstoqueMensal> estoqueMensal;
 
     public Integer getId() {
