@@ -74,4 +74,5 @@ public class EstoqueMensal {
     public Integer getId() {
 	return id;
     }
+
 }

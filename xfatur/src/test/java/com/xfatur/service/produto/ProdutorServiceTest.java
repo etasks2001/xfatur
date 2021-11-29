@@ -30,11 +30,6 @@ class ProdutorServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    @AfterAll
-    void delete() {
-	ids.forEach(id -> service.deleteById(id));
-    }
-
     @Test
     @Order(1)
     void test_save() {
@@ -74,6 +69,11 @@ class ProdutorServiceTest {
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código do Produtor não encontrado"));
 
+    }
+
+    @AfterAll
+    void delete() {
+	ids.forEach(id -> service.deleteById(id));
     }
 
 }

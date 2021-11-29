@@ -81,7 +81,7 @@ class UnidadeServiceTest {
 
     @AfterAll
     void delete() {
-//	ids.forEach(id -> service.deleteById(id));
+	ids.forEach(id -> service.deleteById(id));
     }
 
 }

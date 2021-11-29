@@ -3,13 +3,13 @@ package com.xfatur.service.produto;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -19,6 +19,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoEstoqueInsuficienteException;
@@ -37,71 +38,64 @@ class ProdutoServiceTest {
     ProdutoService produtoService;
     List<Integer> idsProduto = new ArrayList<Integer>();
 
-    @Test
-    @Order(1)
-    void test_save() {
+    @BeforeAll
+    void insert() {
+	idsProduto = utilCreateProduto.insert();
 
-	utilCreateProduto.insert();
-
-	idsProduto = utilCreateProduto.getIdsProduto();
-
-	System.out.println("Arrays: " + Arrays.toString(idsProduto.toArray()));
-	Integer id = idsProduto.get(0);
-	Produto produto1 = produtoService.findById(id);
-	Produto produto2 = produtoService.findById(produto1.getId());
-
-	MatcherAssert.assertThat(produto1.getId(), Matchers.is(produto2.getId()));
-	MatcherAssert.assertThat(produto1.getCodigoProduto(), Matchers.is(produto2.getCodigoProduto()));
-	MatcherAssert.assertThat(produto1.getDescricao(), Matchers.is(produto2.getDescricao()));
-	MatcherAssert.assertThat(produto1.getPesoLiquido(), Matchers.is(produto2.getPesoLiquido()));
-	MatcherAssert.assertThat(produto1.getPesoBruto(), Matchers.is(produto2.getPesoBruto()));
-	MatcherAssert.assertThat(produto1.getPesoDaCaixa(), Matchers.is(produto2.getPesoDaCaixa()));
-	MatcherAssert.assertThat(produto1.getIpiUnitario(), Matchers.is(produto2.getIpiUnitario()));
-	MatcherAssert.assertThat(produto1.getIsentoICMS(), Matchers.is(produto2.getIsentoICMS()));
-	MatcherAssert.assertThat(produto1.getAliquotaIPI(), Matchers.is(produto2.getAliquotaIPI()));
-	MatcherAssert.assertThat(produto1.getIva_id(), Matchers.is(produto2.getIva_id()));
-
-	MatcherAssert.assertThat(produto1.getCest(), Matchers.is(produto2.getCest()));
-	MatcherAssert.assertThat(produto1.getEstoque(), Matchers.is(produto2.getEstoque()));
-	MatcherAssert.assertThat(produto1.getReservado(), Matchers.is(produto2.getReservado()));
-
-	MatcherAssert.assertThat(produto1.getUnidadeDetalhada(), Matchers.is(produto2.getUnidadeDetalhada()));
-	MatcherAssert.assertThat(produto1.getGraduacaoAlcoolica(), Matchers.is(produto2.getGraduacaoAlcoolica()));
-	MatcherAssert.assertThat(produto1.getCodigoDeBarras(), Matchers.is(produto2.getCodigoDeBarras()));
-	MatcherAssert.assertThat(produto1.getLarguraDaCaixa(), Matchers.is(produto2.getLarguraDaCaixa()));
-	MatcherAssert.assertThat(produto1.getComprimentoDaCaixa(), Matchers.is(produto2.getComprimentoDaCaixa()));
-	MatcherAssert.assertThat(produto1.getAliquotaDeReducao(), Matchers.is(produto2.getAliquotaDeReducao()));
-	MatcherAssert.assertThat(produto1.getAdquiridoComST(), Matchers.is(produto2.getAdquiridoComST()));
-	MatcherAssert.assertThat(produto1.getReducaoICMS_id(), Matchers.is(produto2.getReducaoICMS_id()));
-
-//	MatcherAssert.assertThat(produto1.getFundoPobreza(), Matchers.is(produto2.getFundoPobreza()));
-//	MatcherAssert.assertThat(produto1.getClassificacaoFiscal(), Matchers.is(produto2.getClassificacaoFiscal()));
-//	MatcherAssert.assertThat(produto1.getUnidade(), Matchers.is(produto2.getUnidade()));
-//	MatcherAssert.assertThat(produto1.getProdutor(), Matchers.is(produto2.getProdutor()));
-//	MatcherAssert.assertThat(produto1.getTributacao(), Matchers.is(produto2.getTributacao()));
-//	MatcherAssert.assertThat(produto1.getRegiaoProdutora(), Matchers.is(produto2.getRegiaoProdutora()));
-//	MatcherAssert.assertThat(produto1.getLinha(), Matchers.is(produto2.getLinha()));
-//	MatcherAssert.assertThat(produto1.getTipoValidade(), Matchers.is(produto2.getTipoValidade()));
-//	MatcherAssert.assertThat(produto1.getTipo(), Matchers.is(produto2.getTipo()));
-//	MatcherAssert.assertThat(produto1.getPais(), Matchers.is(produto2.getPais()));
-//	MatcherAssert.assertThat(produto1.getMarca(), Matchers.is(produto2.getMarca()));
-//	MatcherAssert.assertThat(produto1.getOrigem(), Matchers.is(produto2.getOrigem()));
-//	MatcherAssert.assertThat(produto1.getTipoSelo(), Matchers.is(produto2.getTipoSelo()));
     }
 
     @Test
-    @Order(2)
+    @Order(1)
+    @Transactional
     void test_findById() {
 	idsProduto.forEach(id -> {
-	    Produto found = produtoService.findById(id);
-	    assertNotNull(found);
+	    Produto produto1 = produtoService.findById(id);
+	    Produto produto2 = produtoService.findById(id);
+
+	    MatcherAssert.assertThat(produto1.getId(), Matchers.is(produto2.getId()));
+	    MatcherAssert.assertThat(produto1.getCodigoProduto(), Matchers.is(produto2.getCodigoProduto()));
+	    MatcherAssert.assertThat(produto1.getDescricao(), Matchers.is(produto2.getDescricao()));
+	    MatcherAssert.assertThat(produto1.getPesoLiquido(), Matchers.is(produto2.getPesoLiquido()));
+	    MatcherAssert.assertThat(produto1.getPesoBruto(), Matchers.is(produto2.getPesoBruto()));
+	    MatcherAssert.assertThat(produto1.getPesoDaCaixa(), Matchers.is(produto2.getPesoDaCaixa()));
+	    MatcherAssert.assertThat(produto1.getIpiUnitario(), Matchers.is(produto2.getIpiUnitario()));
+	    MatcherAssert.assertThat(produto1.getIsentoICMS(), Matchers.is(produto2.getIsentoICMS()));
+	    MatcherAssert.assertThat(produto1.getAliquotaIPI(), Matchers.is(produto2.getAliquotaIPI()));
+	    MatcherAssert.assertThat(produto1.getIva_id(), Matchers.is(produto2.getIva_id()));
+
+	    MatcherAssert.assertThat(produto1.getCest(), Matchers.is(produto2.getCest()));
+	    MatcherAssert.assertThat(produto1.getEstoque(), Matchers.is(produto2.getEstoque()));
+	    MatcherAssert.assertThat(produto1.getReservado(), Matchers.is(produto2.getReservado()));
+
+	    MatcherAssert.assertThat(produto1.getUnidadeDetalhada(), Matchers.is(produto2.getUnidadeDetalhada()));
+	    MatcherAssert.assertThat(produto1.getGraduacaoAlcoolica(), Matchers.is(produto2.getGraduacaoAlcoolica()));
+	    MatcherAssert.assertThat(produto1.getCodigoDeBarras(), Matchers.is(produto2.getCodigoDeBarras()));
+	    MatcherAssert.assertThat(produto1.getLarguraDaCaixa(), Matchers.is(produto2.getLarguraDaCaixa()));
+	    MatcherAssert.assertThat(produto1.getComprimentoDaCaixa(), Matchers.is(produto2.getComprimentoDaCaixa()));
+	    MatcherAssert.assertThat(produto1.getAliquotaDeReducao(), Matchers.is(produto2.getAliquotaDeReducao()));
+	    MatcherAssert.assertThat(produto1.getAdquiridoComST(), Matchers.is(produto2.getAdquiridoComST()));
+	    MatcherAssert.assertThat(produto1.getReducaoICMS_id(), Matchers.is(produto2.getReducaoICMS_id()));
+
+	    MatcherAssert.assertThat(produto1.getProdutor(), Matchers.is(produto2.getProdutor()));
+	    MatcherAssert.assertThat(produto1.getUnidade(), Matchers.is(produto2.getUnidade()));
+	    MatcherAssert.assertThat(produto1.getClassificacaoFiscal(), Matchers.is(produto2.getClassificacaoFiscal()));
+	    MatcherAssert.assertThat(produto1.getTributacao(), Matchers.is(produto2.getTributacao()));
+	    MatcherAssert.assertThat(produto1.getRegiaoProdutora(), Matchers.is(produto2.getRegiaoProdutora()));
+	    MatcherAssert.assertThat(produto1.getLinha(), Matchers.is(produto2.getLinha()));
+	    MatcherAssert.assertThat(produto1.getPais(), Matchers.is(produto2.getPais()));
+	    MatcherAssert.assertThat(produto1.getTipoValidade(), Matchers.is(produto2.getTipoValidade()));
+	    MatcherAssert.assertThat(produto1.getMarca(), Matchers.is(produto2.getMarca()));
+	    MatcherAssert.assertThat(produto1.getOrigem(), Matchers.is(produto2.getOrigem()));
+	    MatcherAssert.assertThat(produto1.getFundoPobreza(), Matchers.is(produto2.getFundoPobreza()));
+	    MatcherAssert.assertThat(produto1.getTipo(), Matchers.is(produto2.getTipo()));
+	    MatcherAssert.assertThat(produto1.getTipoSelo(), Matchers.is(produto2.getTipoSelo()));
 
 	});
 
     }
 
     @Test
-    @Order(3)
+    @Order(2)
     void test_findById_error() {
 
 	Exception exception = Assertions.assertThrows(ProdutoIdNotFoundException.class, () -> produtoService.findById(456789));
@@ -110,7 +104,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(4)
+    @Order(3)
     void test_update() {
 	idsProduto.forEach(id -> {
 	    Produto found = produtoService.findById(id);
@@ -122,7 +116,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     void test_buscaPorDescricao() {
 	List<Produto> produtos = produtoService.buscaPorDescricao("A");
 
@@ -131,7 +125,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(6)
+    @Order(5)
     void test_buscaPorDescricao_nao_encontrado() {
 	List<Produto> produtos = produtoService.buscaPorDescricao("fdsaa");
 
@@ -140,7 +134,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(7)
+    @Order(6)
     void test_buscaPorCodigoProduto() {
 	idsProduto.forEach(id -> {
 	    Produto found = produtoService.findById(id);
@@ -150,7 +144,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(8)
+    @Order(7)
     void test_buscaPorCodigoProduto_error() {
 
 	Exception exception = Assertions.assertThrows(ProdutoCodigoNotFoundException.class, () -> produtoService.findByCodigoProduto("fdasfsder"));
@@ -159,7 +153,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(9)
+    @Order(8)
     void test_entrada_estoque() {
 	Integer id = idsProduto.get(0);
 
@@ -177,7 +171,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(10)
+    @Order(9)
     void test_entrada_reservado() {
 	Integer id = idsProduto.get(1);
 	Produto produto = produtoService.findById(id);
@@ -193,7 +187,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(11)
+    @Order(10)
     void test_saida_estoque() {
 	Integer id = idsProduto.get(0);
 	Produto produto = produtoService.findById(id);
@@ -210,7 +204,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(12)
+    @Order(11)
     void test_saida_reservado() {
 	Integer id = idsProduto.get(1);
 	Produto produto = produtoService.findById(id);
@@ -227,7 +221,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(13)
+    @Order(12)
     void test_saida_estoque_saldo_insuficiente() {
 	Integer id = idsProduto.get(0);
 
@@ -237,7 +231,7 @@ class ProdutoServiceTest {
     }
 
     @Test
-    @Order(14)
+    @Order(13)
     void test_saida_reservado_saldo_insuficiente() {
 	Integer id = idsProduto.get(1);
 

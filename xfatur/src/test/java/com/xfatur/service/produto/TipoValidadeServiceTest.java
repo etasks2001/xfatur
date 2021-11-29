@@ -30,11 +30,6 @@ class TipoValidadeServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    @AfterAll
-    void delete() {
-	ids.forEach(id -> service.deleteById(id));
-    }
-
     @Test
     @Order(1)
     void test_save() {
@@ -75,6 +70,11 @@ class TipoValidadeServiceTest {
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código do Tipo de Validade não encontrado"));
 
+    }
+
+    @AfterAll
+    void delete() {
+	ids.forEach(id -> service.deleteById(id));
     }
 
 }

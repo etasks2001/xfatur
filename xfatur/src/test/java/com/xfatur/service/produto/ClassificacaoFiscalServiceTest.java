@@ -32,11 +32,6 @@ class ClassificacaoFiscalServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    @AfterAll
-    void delete() {
-	ids.forEach(id -> service.deleteById(id));
-    }
-
     @Test
     @Order(1)
     void test_save() {
@@ -89,4 +84,10 @@ class ClassificacaoFiscalServiceTest {
 	MatcherAssert.assertThat(list.size(), Matchers.is(0));
 
     }
+
+    @AfterAll
+    void delete() {
+	ids.forEach(id -> service.deleteById(id));
+    }
+
 }

@@ -30,11 +30,6 @@ class RegiaoProdutoraServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    @AfterAll
-    void delete() {
-	ids.forEach(id -> service.deleteById(id));
-    }
-
     @Test
     @Order(1)
     void test_save() {
@@ -73,7 +68,11 @@ class RegiaoProdutoraServiceTest {
 	Exception exception = Assertions.assertThrows(RegiaoProdutoraIdNotFoundException.class, () -> service.findById(4567464));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código da Região Produtora não encontrado"));
+    }
 
+    @AfterAll
+    void delete() {
+	ids.forEach(id -> service.deleteById(id));
     }
 
 }

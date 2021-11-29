@@ -10,6 +10,7 @@ import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
 import com.xfatur.model.EnderecoEntrega;
 import com.xfatur.model.EnderecoRetirada;
+import com.xfatur.model.EstoqueMensal;
 import com.xfatur.model.IndIEDest;
 import com.xfatur.model.Local;
 import com.xfatur.model.NaturezaJuridica;
@@ -1338,4 +1339,46 @@ public class CreateModelTest {
     public static Stream<Produto> produtoList() {
 	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2(), CreateModelTest.createProduto3(), CreateModelTest.createProduto4());
     }
+
+    public static Stream<EstoqueMensal> estoqueMensalList() {
+
+	return Stream.of(createEstoqueMensal1(), createEstoqueMensal2(), createEstoqueMensal3(), createEstoqueMensal4());
+    }
+
+    private static EstoqueMensal createEstoqueMensal1() {
+	EstoqueMensal estoqueMensal = new EstoqueMensal();
+	estoqueMensal.setAno(2001);
+	estoqueMensal.setMes(1);
+	estoqueMensal.setQuantidadeInicial(151);
+	estoqueMensal.setCustoUnitario(new BigDecimal("154.44"));
+	return estoqueMensal;
+    }
+
+    private static EstoqueMensal createEstoqueMensal2() {
+	EstoqueMensal estoqueMensal = new EstoqueMensal();
+	estoqueMensal.setAno(2001);
+	estoqueMensal.setMes(1);
+	estoqueMensal.setQuantidadeInicial(263);
+	estoqueMensal.setCustoUnitario(new BigDecimal("308.88"));
+	return estoqueMensal;
+    }
+
+    private static EstoqueMensal createEstoqueMensal3() {
+	EstoqueMensal estoqueMensal = new EstoqueMensal();
+	estoqueMensal.setAno(2001);
+	estoqueMensal.setMes(1);
+	estoqueMensal.setQuantidadeInicial(374);
+	estoqueMensal.setCustoUnitario(new BigDecimal("316.99"));
+	return estoqueMensal;
+    }
+
+    private static EstoqueMensal createEstoqueMensal4() {
+	EstoqueMensal estoqueMensal = new EstoqueMensal();
+	estoqueMensal.setAno(2001);
+	estoqueMensal.setMes(1);
+	estoqueMensal.setQuantidadeInicial(485);
+	estoqueMensal.setCustoUnitario(new BigDecimal("732"));
+	return estoqueMensal;
+    }
+
 }

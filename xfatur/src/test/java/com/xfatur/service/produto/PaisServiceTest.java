@@ -30,11 +30,6 @@ class PaisServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    @AfterAll
-    void delete() {
-	ids.forEach(id -> service.deleteById(id));
-    }
-
     @Test
     @Order(1)
     void test_save() {
@@ -80,6 +75,11 @@ class PaisServiceTest {
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código do Pais não encontrado"));
 
+    }
+
+    @AfterAll
+    void delete() {
+	ids.forEach(id -> service.deleteById(id));
     }
 
 }

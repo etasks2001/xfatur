@@ -30,11 +30,6 @@ class LinhaServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    @AfterAll
-    void delete() {
-	ids.forEach(id -> service.deleteById(id));
-    }
-
     @Test
     @Order(1)
     void test_save() {
@@ -80,6 +75,11 @@ class LinhaServiceTest {
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código da Linha não encontrado"));
 
+    }
+
+    @AfterAll
+    void delete() {
+	ids.forEach(id -> service.deleteById(id));
     }
 
 }

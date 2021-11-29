@@ -10,6 +10,11 @@ public class Util {
 	StringBuilder sb = new StringBuilder(e.getMessage());
 
 	final int beginIndex = sb.indexOf(START_MARQUER) + 3;
+
+	if (beginIndex < 0) {
+	    return e.getMessage();
+	}
+
 	sb.delete(0, beginIndex);
 
 	final int endIndex = sb.indexOf(END_MARQUER);

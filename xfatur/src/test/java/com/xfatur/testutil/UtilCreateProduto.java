@@ -80,7 +80,7 @@ public class UtilCreateProduto {
     private List<Integer> idsLinha = new ArrayList<Integer>();
     private List<Integer> idsPais = new ArrayList<Integer>();
 
-    public void insert() {
+    public List<Integer> insert() {
 
 	gravarTabelas();
 	CreateModelTest.produtoList().forEach(produto -> {
@@ -132,10 +132,7 @@ public class UtilCreateProduto {
 	    idsProduto.add(produto.getId());
 
 	});
-    }
-
-    public List<Integer> getIdsProduto() {
-	return idsProduto;
+	return (List<Integer>) idsProduto;
     }
 
     private void gravarTabelas() {
@@ -159,7 +156,6 @@ public class UtilCreateProduto {
 
     public void clear() {
 	idsProduto.forEach(id -> produtoService.deleteById(id));
-
 	idsTributacao = new ArrayList<String>();
 	idsClassificacaoFiscal = new ArrayList<Integer>();
 	idsProduto = new ArrayList<Integer>();

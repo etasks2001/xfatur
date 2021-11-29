@@ -72,7 +72,6 @@ public class ProdutoService {
 	try {
 	    repository.saidaReservado(id, quantidade);
 	} catch (Exception e) {
-
 	    throw new ProdutoReservadoInsuficienteException(Util.extractContraintMessage(e));
 	}
     }

@@ -30,11 +30,6 @@ class TipoSeloServiceTest {
 
     List<String> ids = new ArrayList<String>();
 
-    @AfterAll
-    void delete() {
-	ids.forEach(id -> service.deleteById(id));
-    }
-
     @Test
     @Order(1)
     void test_save() {
@@ -78,6 +73,11 @@ class TipoSeloServiceTest {
 
 	MatcherAssert.assertThat(tributacoes.size(), Matchers.is(0));
 
+    }
+
+    @AfterAll
+    void delete() {
+	ids.forEach(id -> service.deleteById(id));
     }
 
 }
