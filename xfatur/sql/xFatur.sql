@@ -164,13 +164,20 @@ select * from enderecocobranca;
 
 
 
+select * from  marca;
+select * from  origem;
+select * from  fundopobreza;
+select * from  tipo;
+select * from  tiposelo;
+select * from  tipovalidade;
+select * from  regiaoprodutora;
+select * from  tributacao;
+select * from  classificacaofiscal;
+select * from  unidade;
+select * from  produtor;
+select * from  linha;
+select * from  produto;
 
-select * from tipovalidade order by id;
-select * from tributacao order by id;
-select * from classificacaofiscal;
-select * from unidade;
-select * from produtor;
-select * from produto;
 
 
 
@@ -253,13 +260,11 @@ drop table if exists nf;
 drop table if exists linha;
 drop table if exists pais;
 
+drop table if exists estoquemensal;
+
 drop table if exists marca;
 drop table if exists origem;
 drop table if exists fundopobreza;
-
-
-
-drop table if exists estoquemensal;
 drop table if exists tipo;
 drop table if exists tiposelo;
 drop table if exists tipovalidade;
@@ -588,8 +593,6 @@ create table estoquemensal(
 	custounitario 		decimal not null default 0 constraint __custo_unitario_positivo__ check(custounitario >= 0),
 	primary key		(id),
 	constraint __produto_mes_ano_ja_cadastrado__ unique (produto_id, mes, ano)
-	
-	
 );
 
 
