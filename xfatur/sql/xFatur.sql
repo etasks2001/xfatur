@@ -179,6 +179,7 @@ select * from  linha;
 select * from  produto;
 
 
+select * from estoquemensal;
 
 
 
@@ -592,7 +593,7 @@ create table estoquemensal(
 	ano 			int not null constraint __ano_maior_que_0__ check (ano >0),
 	custounitario 		decimal not null default 0 constraint __custo_unitario_positivo__ check(custounitario >= 0),
 	primary key		(id),
-	constraint __produto_mes_ano_ja_cadastrado__ unique (produto_id, mes, ano)
+	constraint __produto_mes_e_ano_ja_cadastrado__ unique (produto_id, mes, ano)
 );
 
 
