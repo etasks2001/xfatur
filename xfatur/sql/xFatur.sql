@@ -181,6 +181,9 @@ select * from  produto;
 
 select * from estoquemensal;
 
+select * from listapreco lp inner join listaprecoitem lpi on lp.id = lpi.listapreco_id;
+
+
 
 
 
