@@ -2,7 +2,8 @@ package com.xfatur.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class ListaPreco {
     private BigDecimal desconto28dias;
 
     @OneToMany(mappedBy = "listaPreco", cascade = CascadeType.ALL)
-    private List<ListaPrecoItem> listaPrecoItem;
+    private Map<Integer, ListaPrecoItem> listaPrecoItem = new HashMap<Integer, ListaPrecoItem>();
 
     public Integer getId() {
 	return id;
@@ -101,12 +102,8 @@ public class ListaPreco {
 	this.desconto28dias = desconto28dias;
     }
 
-    public List<ListaPrecoItem> getListaPrecoItem() {
-	return listaPrecoItem;
-    }
-
-    public void setListaPrecoItem(List<ListaPrecoItem> listaPrecoItem) {
-	this.listaPrecoItem = listaPrecoItem;
+    public void addItem(ListaPrecoItem item) {
+	listaPrecoItem.put(item.getProduto().getId(), item);
     }
 
 }
