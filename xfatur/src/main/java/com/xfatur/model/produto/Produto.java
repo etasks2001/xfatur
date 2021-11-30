@@ -14,8 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.xfatur.model.EstoqueMensal;
-import com.xfatur.model.ListaPrecoItem;
 import com.xfatur.model.Selo;
+import com.xfatur.model.preco.Item;
 
 @Entity
 public class Produto {
@@ -108,7 +108,7 @@ public class Produto {
     private List<Selo> selos;
 
     @OneToMany(mappedBy = "produto")
-    private List<ListaPrecoItem> listaPrecoItem;
+    private List<Item> itens;
 
     public Integer getId() {
 	return id;
@@ -377,5 +377,4 @@ public class Produto {
     public void setReservado(Integer reservado) {
 	this.reservado = reservado;
     }
-
 }

@@ -641,7 +641,9 @@ create table listaprecoitem(
 	destacar 	boolean default false,
 	produto_id 	int not null references produto,
 	listapreco_id 	int not null references listapreco,
-	constraint __ja_cadastrado__ unique(id, produto_id)
+	constraint __ja_cadastrado__ unique(id, produto_id),
+	primary key	(id)
+	
 );
 
 

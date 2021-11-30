@@ -1,4 +1,4 @@
-package com.xfatur.model;
+package com.xfatur.model.preco;
 
 import java.math.BigDecimal;
 
@@ -9,11 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.xfatur.model.produto.Produto;
 
 @Entity
-public class ListaPrecoItem {
+@Table(name = "ListaPrecoItem")
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +30,7 @@ public class ListaPrecoItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "listapreco_id")
-    private ListaPreco listaPreco;
+    private Lista lista;
 
     public Integer getId() {
 	return id;
@@ -70,12 +72,7 @@ public class ListaPrecoItem {
 	this.produto = produto;
     }
 
-    public ListaPreco getListaPreco() {
-	return listaPreco;
+    public void setLista(Lista lista) {
+	this.lista = lista;
     }
-
-    public void setListaPreco(ListaPreco listaPreco) {
-	this.listaPreco = listaPreco;
-    }
-
 }
