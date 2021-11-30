@@ -1,6 +1,8 @@
 package com.xfatur.testutil;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
@@ -17,6 +19,7 @@ import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
+import com.xfatur.model.Selo;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.FundoPobreza;
 import com.xfatur.model.produto.Linha;
@@ -1379,6 +1382,46 @@ public class CreateModelTest {
 	estoqueMensal.setQuantidadeInicial(485);
 	estoqueMensal.setCustoUnitario(new BigDecimal("732"));
 	return estoqueMensal;
+    }
+
+    public static Stream<Selo> seloList() {
+	return Stream.of(createSelo1(), createSelo2(), createSelo3());
+    }
+
+    private static Selo createSelo1() {
+	Selo selo = new Selo();
+	selo.setNumeroGuia("259/98");
+	selo.setDataGuia(LocalDate.parse("04/11/1998", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+	selo.setNumeroInicial("28446664");
+	selo.setNumeroFinal("28447863");
+	selo.setSubstituicao(Boolean.FALSE);
+	selo.setObservacao("");
+	selo.setCodigoSelo("643715");
+	return selo;
+    }
+
+    private static Selo createSelo2() {
+	Selo selo = new Selo();
+	selo.setNumeroGuia("044/02");
+	selo.setDataGuia(LocalDate.parse("14/03/2002", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+	selo.setNumeroInicial("01429663");
+	selo.setNumeroFinal("01430862");
+	selo.setSubstituicao(Boolean.FALSE);
+	selo.setObservacao("");
+	selo.setCodigoSelo("863715");
+	return selo;
+    }
+
+    private static Selo createSelo3() {
+	Selo selo = new Selo();
+	selo.setNumeroGuia("145/02");
+	selo.setDataGuia(LocalDate.parse("22/11/2002", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+	selo.setNumeroInicial("23126140");
+	selo.setNumeroFinal("23157870");
+	selo.setSubstituicao(Boolean.FALSE);
+	selo.setObservacao("");
+	selo.setCodigoSelo("863715");
+	return selo;
     }
 
 }
