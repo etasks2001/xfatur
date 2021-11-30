@@ -185,6 +185,9 @@ select * from estoquemensal;
 
 
 
+
+
+
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
@@ -276,6 +279,10 @@ drop table if exists unidade;
 drop table if exists produtor;
 drop table if exists produto;
 
+drop table if exists selo;
+
+drop table if exists listaprecoitem;
+drop table if exists listapreco;
 
 
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
@@ -598,10 +605,44 @@ create table estoquemensal(
 
 
 
+create table selo(
+	id 		serial not null,
+	numeroguia 	varchar(6) not null,
+	dataguia 	date not null,
+	numeroinicial 	varchar(15) not null,
+	numerofinal 	varchar(15) not null, 
+	substituicao 	boolean default false,
+	observacao 	varchar(60),
+	codigoselo 	varchar(10),
+	produto_id 	int not null references produto,
+	primary key	(id),
+	constraint __selo_ja_cadastrado__ unique (produto_id, numeroguia)
+);
+
+create table listapreco(
+	id 			serial not null,
+	codigo 			varchar(5) not null,
+	data 			date not null default now(),
+	tipo 			varchar(1) not null,
+	descricao 		varchar(70) not null,
+	descontoatacado		decimal,
+	descontovista 		decimal,
+	desconto21dias 		decimal,
+	desconto28dias 		decimal,
+	primary key 		(id)
+	
 
 
-
-
+);
+create table listaprecoitem(
+	id 		serial not null, 
+	precounitario 	decimal not null constraint __preco_untario_maior_que_zero__ check(precounitario>0),
+	tipo 		varchar(5), 
+	destacar 	boolean default false,
+	produto_id 	int not null references produto,
+	listapreco_id 	int not null references listapreco,
+	constraint __ja_cadastrado__ unique(id, produto_id)
+);
 
 
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
