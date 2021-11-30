@@ -40,7 +40,7 @@ class ProdutoServiceTest {
 
     @BeforeAll
     void insert() {
-	idsProduto = utilCreateProduto.insert();
+	idsProduto = utilCreateProduto.idsProduto();
 
     }
 

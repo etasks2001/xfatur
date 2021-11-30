@@ -80,7 +80,7 @@ public class UtilCreateProduto {
     private List<Integer> idsLinha = new ArrayList<Integer>();
     private List<Integer> idsPais = new ArrayList<Integer>();
 
-    public List<Integer> insert() {
+    public List<Integer> idsProduto() {
 
 	gravarTabelas();
 	CreateModelTest.produtoList().forEach(produto -> {

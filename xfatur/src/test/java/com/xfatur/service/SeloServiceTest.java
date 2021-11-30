@@ -51,7 +51,7 @@ class SeloServiceTest {
 
     @BeforeAll
     void insert_produto() {
-	idsProduto = utilCreateProduto.insert();
+	idsProduto = utilCreateProduto.idsProduto();
     }
 
     @Test
