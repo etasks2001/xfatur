@@ -1,0 +1,7 @@
+.btnmenu {
+    opacity: 0.83;
+}
+
+.btnmenu:hover {
+    opacity: 1;
+}
