@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html 
-	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-	layout:decorate="~{layout}" 
-	>
+	layout:decorate="~{layout}"
+>
 <head>
 <meta charset="UTF-8" />
 </head>
 <body>
-
-
-
-	<section class="container-fluid" layout:fragment="corpo">
-		cadastros
-	</section>
-
-
-
+	<main layout:fragment="corpo">
+			<aside class="text-white bg-dark">
+				<nav class="sidebar sidebar-open">
+					<a href="/classificacaofiscal" class="nav-link text-white">Classificação Fiscal</a>
+					<a href="#" class="nav-link text-white">Orders</a>
+					<a href="#" class="nav-link text-white">Products</a>
+					<a href="#" class="nav-link text-white">Customers</a>
+				</nav>
+			</aside>
+			<section class="layout-content">
+				<div class="conteudo" layout:fragment="cadastro"></div>
+			</section>
+	</main>
 </body>
 </html>

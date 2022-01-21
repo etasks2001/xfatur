@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{/cadastro/cadastro}"
+>
+<head>
+</head>
+<body>
+
+<form class="row m-2" action="salvar" layout:fragment="cadastro" th:object="${classificacaoFiscal}">
+
+	<input type="hidden" th:field="*{id}">
+	<div class="row mb-1">
+		<label class="col-1 col-form-label" for="ncm">NCM</label>
+	    <div class="col-sm-3">
+			<input class="form-control" type="text" th:field="*{ncm}"  />
+		</div>
+	</div>
+	
+	<div class="row"	>
+		<label class="col-1 col-form-label" for="descricao">Descrição</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" th:field="*{descricao}">
+		</div>
+	</div>
+</form>
+
+
+
+</body>
+</html>

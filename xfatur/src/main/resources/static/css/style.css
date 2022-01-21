@@ -1,7 +1,35 @@
+
+
+html, body {
+	height: 100%;
+}
+
+main {
+    display: flex;
+    min-height: calc(100vh - 52px);
+    overflow: hidden;
+}
+
+
+.sidebar.sidebar-open {
+    width: 200px;
+}
+
+.layout-content {
+    width: 100%;
+    padding-top: 0;
+}
+
+.conteudo{
+    height: 100%;
+    margin:10px;
+    
+}
 .btnmenu {
-    opacity: 0.83;
+    opacity: 1;
 }
 
 .btnmenu:hover {
-    opacity: 1;
+    opacity: 0.83;
+    
 }

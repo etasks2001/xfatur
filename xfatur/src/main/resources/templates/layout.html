@@ -18,19 +18,19 @@
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body class="containers">
-	<nav class="navbar navbar-expand border border-info" style="background-color: #caf0f0">
+	<header class="navbar navbar-expand sticky-top border border-secondary p-0 bg-dark bg-gradient">
 	  <div class="container-fluid">
-	      <a class="navbar-brand text-white rounded p-2 btnmenu" href="/" style="background-color: #390099; font-family: Inter,sans-serif;hover"><span class="fas fa-home"></span> Empresa</a>
+	      <a class="navbar-brand text-white border border-secondary rounded col-md-2 col-lg-2 me-0 px-3 btnmenu" href="/" style="background-color: #390099; font-family: Inter,sans-serif"><span class="fas fa-home"></span> Franco Suissa</a>
 	      <div layout:fragment="menu"></div>
-	      <form class="navbar">
+	      <form class="navbar p-1">
 	      	<span class="alert alert-light m-1 p-1">Usuário: email@gmail.com</span>
-	        <button class="btn btn-success" type="submit" style="font-family: Inter,sans-serif;"><i class="fas fa-sign-out-alt"></i> Sair</button>
+	        <button class="btn btn-success  m-1 p-1" type="submit" style="font-family: Inter,sans-serif;"><i class="fas fa-sign-out-alt"></i> Sair</button>
 	      </form>
 	  </div>
-	</nav>
+	</header>
 
 	<section layout:fragment="corpo">		
 		<div>conteudo principal das páginas</div>
-	</section>		
+	</section>
 </body>
 </html>
