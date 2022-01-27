@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html
-	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" 
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-	layout:decorate="~{/cadastro/cadastro}"
+	layout:decorate="~{/cadastro/cadastro}" 
 >
 <head>
 </head>
 <body>
 
-<form class="row m-2" action="salvar" layout:fragment="cadastro" th:object="${classificacaoFiscal}">
+<form class="row m-2 justify-content-xm-center" action="salvar" layout:fragment="cadastro" th:object="${classificacaoFiscal}">
 
 	<input type="hidden" th:field="*{id}">
 	<div class="row mb-1">
-		<label class="col-1 col-form-label" for="ncm">NCM</label>
-	    <div class="col-sm-3">
-			<input class="form-control" type="text" th:field="*{ncm}"  />
+		<label class="col-sm-auto col-form-label col-form-label-sm" for="ncm">NCM</label>
+	    <div class="col-sm-1">
+			<input class="form-control form-control-sm" type="text" th:field="*{ncm}" />
 		</div>
 	</div>
 	
 	<div class="row"	>
-		<label class="col-1 col-form-label" for="descricao">Descrição</label>
+		<label class="col-sm-auto col-form-label col-form-label-sm" for="descricao">Descrição</label>
 		<div class="col-sm-5">
-			<input class="form-control" type="text" th:field="*{descricao}">
+			<input class="form-control form-control-sm" type="text" th:field="*{descricao}">
 		</div>
 	</div>
+	
+	<div class="row m-2">
+		<div th:replace="~{/cadastro/botoes}"></div>
+	</div>
 </form>
-
-
-
 </body>
 </html>
