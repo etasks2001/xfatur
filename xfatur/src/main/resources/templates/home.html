@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html 
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 	layout:decorate="~{layout}" 
 	>
 <head>
@@ -10,16 +8,13 @@
 <body>
 
       <div class="navbar-nav me-auto mb-1 mb-lg-0" layout:fragment="menu">
-          <a class="nav-link text-white border border-secondary m-1 rounded btnmenu" href="/nfe" style="background-color:#9e0059;font-family: Inter,sans-serif;"><span class="fas fa-file-invoice"></span> Nota Fiscal</a>
-          <a class="nav-link text-white border border-secondary m-1 rounded btnmenu" href="/duplicata" style="background-color: #9e0059;font-family: Inter,sans-serif;"><span class="fas fa-barcode"></span> Duplicatas</a>
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu" href="/listapreco" style="background-color: #9e0059;font-family: Inter,sans-serif;"><span class="fas fa-book"></span> Lista de Preços</a>
-          
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu" href="/cadastros" style="background-color:#ff0054;font-family: Inter,sans-serif;"><span class="fab fa-wpforms"></span> Cadastros</a>
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu" href="/estoque" style="background-color: #ff0054;font-family: Inter,sans-serif;"><span class="fas fa-pallet"></span> Estoque</a>
-          
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu" href="/escrituracao" style="background-color: #ff5400;font-family: Inter,sans-serif;"><span class="fas fa-clipboard-list"></span> Escrituração</a>
-          
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu" href="/relatorios" style="background-color: #ffbd00; font-family: Inter,sans-serif;"><span class="far fa-chart-bar"></span> Relatórios</a>
+          <a class=" grupo-1" href="/nfe"><span class="fas fa-file-invoice"></span> [(#{home.menu.notafiscal})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-1" href="/duplicata"><span class="fas fa-barcode"></span> [(#{home.menu.duplicatas})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-1" href="/listapreco"><span class="fas fa-book"></span> [(#{home.menu.listadeprecos})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-2" href="/cadastros"><span class="fab fa-wpforms"></span> [(#{home.menu.cadastros})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-2" href="/estoque"><span class="fas fa-pallet"></span> [(#{home.menu.estoque})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-3" href="/escrituracao"><span class="fas fa-clipboard-list"></span> [(#{home.menu.escrituracao})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-4" href="/relatorios" ><span class="far fa-chart-bar"></span> [(#{home.menu.relatorios})]</a>
       </div>
 
 

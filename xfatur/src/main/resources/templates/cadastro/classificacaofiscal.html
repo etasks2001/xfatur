@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" 
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 	layout:decorate="~{/cadastro/cadastro}" 
 >
 
@@ -17,11 +14,11 @@
 <form class="classificacaofiscal" action="salvar" layout:fragment="cadastro" th:object="${classificacaoFiscal}">
 
 	<input type="hidden" th:field="*{id}">
-		<label th:classappend=#{classificacaofical.ncm} class="col-form-label col-form-label-sm" for="ncm" th:label="#{classificacaofical.ncm}">CM</label>
+		<label class="col-form-label col-form-label-sm" for="ncm" th:text="#{ncm.lbl}"></label>
 			<input class="input form-control form-control-sm" type="text" th:field="*{ncm}" />
 	
-		<label class="lbl col-form-label col-form-label-sm" for="descricao">Descrição</label>
-			<input class="input form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}">
+		<label class="col-form-label col-form-label-sm" for="descricao" th:text="#{ncm.text}"></label>
+			<input class="input form-control form-control-sm" type="text" th:maxlength="#{ncm.maxlength}" th:field="*{descricao}">
 	
 	
 		<div th:replace="~{/cadastro/botoes}"></div>
