@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html
-	layout:decorate="~{/cadastro/cadastro}" 
+	layout:decorate="~{/cadastro/cadastro}"
+	xmlns:th="http://www.thymeleaf.org" 
 >
 
 
@@ -14,11 +15,11 @@
 <form class="classificacaofiscal" action="salvar" layout:fragment="cadastro" th:object="${classificacaoFiscal}">
 
 	<input type="hidden" th:field="*{id}">
-		<label class="col-form-label col-form-label-sm" for="ncm" th:text="#{ncm.lbl}"></label>
-			<input class="input form-control form-control-sm" type="text" th:field="*{ncm}" />
+		<label th:classappend="#{label-class}" for="ncm" th:text="#{classfiscal.ncm.label}"></label>
+		<input th:classappend="#{input-class}" type="text" th:field="*{ncm}" th:maxlength="#{classfiscal.ncm.lenght}" />
 	
-		<label class="col-form-label col-form-label-sm" for="descricao" th:text="#{ncm.text}"></label>
-			<input class="input form-control form-control-sm" type="text" th:maxlength="#{ncm.maxlength}" th:field="*{descricao}">
+		<label th:classappend="#{label-class}" for="descricao" th:text="#{classfiscal.descricao.label}"></label>
+		<input th:classappend="#{input-class}" type="text" th:maxlength="#{classfiscal.descricao.length}" th:field="*{descricao}">
 	
 	
 		<div th:replace="~{/cadastro/botoes}"></div>
