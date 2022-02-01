@@ -3,11 +3,14 @@ package com.xfatur.model.produto;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class ClassificacaoFiscal {
@@ -15,7 +18,14 @@ public class ClassificacaoFiscal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotBlank
+    @Column(nullable = false, unique = true)
     private String ncm;
+
+    @NotBlank
+    @Size(min = 3, max = 80)
+    @Column(nullable = false, unique = true)
     private String descricao;
 
     @OneToMany(mappedBy = "classificacaoFiscal", cascade = CascadeType.ALL)

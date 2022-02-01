@@ -1,33 +1,19 @@
+@import "/css/classificacaofiscal.css";
 
-.cadastro-section{
+section form{
+    grid-gap: 2px;
+    margin: 2px;
+    
+    padding: 5px;
+}
+
+.cadastro-section {
     width: 100%;
 }
 
-.classificacaofiscal {
-    display: grid;
-    grid-template-columns: 82px 80px 500px;
-    grid-template-areas:
-    "label input"
-    "label input input" ;
-    
-    
-    grid-gap: 3px;
-    margin: 10px;
-    background-color: lightgray;
-    padding: 2px;
-}
-
-.grid-template-botoes {
+.barra-botoes {
     display: grid;
     grid-template-columns: 90px 90px;
     grid-gap: 5px;
-    
+    grid-area: botoes;
 }
-
-
-
-
-
-
-
-
