@@ -4,20 +4,21 @@
     grid-template-columns: 65px 116px 550px;
     grid-template-areas: 
     "label-ncm input-ncm ."
-    ". errorNCM errorNCM"
+    ". error_ncm error_ncm"
     "label-descricao input-descricao input-descricao"
-    ". errorDescricao errorDescricao"
+    ". error_descricao error_descricao"
     ". botoes botoes"
     ;
 }
 
-.errorDescricao{
-    grid-area:errorDescricao;
-    
+#error_descricao{
+    grid-area: error_descricao;
 }
-.errorNCM{
-    grid-area:errorNCM;
+
+#error_ncm{
+    grid-area: error_ncm;
 }
+
 .label-ncm {
     grid-area: label-ncm;
 }

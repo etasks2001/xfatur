@@ -5,12 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.ClassificacaoFiscalIdNotFoundException;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.repository.produto.ClassificacaoFiscalRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class ClassificacaoFiscalService {
 
     @Autowired
@@ -20,6 +22,7 @@ public class ClassificacaoFiscalService {
 	repository.deleteById(id);
     }
 
+    @Transactional(readOnly = false)
     public ClassificacaoFiscal save(ClassificacaoFiscal classificacaoFiscal) {
 	return repository.save(classificacaoFiscal);
     }

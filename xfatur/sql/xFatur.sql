@@ -525,7 +525,7 @@ create table tributacao(
 );
 create table classificacaofiscal(
 	id		serial not null,
-	ncm		varchar(8) not null,
+	ncm		varchar(9) not null,
 	descricao	varchar(80) not null,
 	primary key	(id),
 	unique 		(descricao)

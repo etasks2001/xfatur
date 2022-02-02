@@ -1,8 +1,5 @@
-
 @import "/css/forms.css";
 @import "/css/home.css";
-
-
 
 html, body {
 	height: 100%;
@@ -13,7 +10,6 @@ main {
     min-height: calc(100vh - 52px);
     overflow: hidden;
 }
-
 
 .sidebar.sidebar-open {
     width: 200px;

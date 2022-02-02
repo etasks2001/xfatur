@@ -28,11 +28,12 @@ public class ClassificacaoFiscalController {
     @PostMapping("/salvar")
     public String salvar(@Valid ClassificacaoFiscal classificacaoFiscal, BindingResult result) {
 	if (result.hasErrors()) {
-	    return "/cadastro/classificacaofiscal";
+	    return "cadastro/classificacaofiscal";
 	}
 
 	service.save(classificacaoFiscal);
-	return "redirect:/cadastro/classificacaofiscal";
+
+	return "redirect:/classificacaofiscal";
     }
 
 }

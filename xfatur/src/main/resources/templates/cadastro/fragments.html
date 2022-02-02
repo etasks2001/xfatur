@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html>
-<head>
-
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
 <body>
 	<div class="barra-botoes" th:fragment="botoes">
 		<button type="submit" class="btn btn-primary">Gravar</button>
 		<button type="button" class="btn btn-info">Pesquisar</button>
+	</div>
+
+	<div th:fragment="erro(nome)" class="invalid-feedback" th:id="${'error_'+'__${nome}__'}">
+		<span th:errors="*{__${nome}__}"></span>
 	</div>
 </body>
 </html>

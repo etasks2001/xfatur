@@ -1,7 +1,7 @@
 @import "/css/classificacaofiscal.css";
 
-section form{
-    grid-gap: 2px;
+section form .cadastro{
+    grid-gap: 3px;
     margin: 2px;
     
     padding: 5px;
