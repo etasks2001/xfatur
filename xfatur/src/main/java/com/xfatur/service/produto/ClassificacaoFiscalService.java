@@ -45,4 +45,9 @@ public class ClassificacaoFiscalService {
 
     }
 
+    public Integer existsDescricao(String descricao) {
+	return repository.existsDescricao(descricao);
+
+    }
+
 }

@@ -16,4 +16,7 @@ public interface ClassificacaoFiscalRepository extends JpaRepository<Classificac
     @Query("select cf from ClassificacaoFiscal cf where cf.descricao like %:descricao% order by cf.descricao")
     List<ClassificacaoFiscal> findByDescricao(@Param("descricao") String descricao);
 
+    @Query("select count(cf) from ClassificacaoFiscal cf where cf.descricao = :descricao")
+    Integer existsDescricao(@Param("descricao") String descricao);
+
 }
