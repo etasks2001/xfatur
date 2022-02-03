@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
 import com.xfatur.exception.ClassificacaoFiscalIdNotFoundException;
+import com.xfatur.mappers.ClassificacaoFiscalMapper;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.repository.produto.ClassificacaoFiscalRepository;
 
@@ -18,8 +20,16 @@ public class ClassificacaoFiscalService {
     @Autowired
     private ClassificacaoFiscalRepository repository;
 
+    @Autowired
+    private ClassificacaoFiscalMapper mapper;
+
     public void deleteById(Integer id) {
 	repository.deleteById(id);
+    }
+
+    @Transactional(readOnly = false)
+    public ClassificacaoFiscal save(ClassificacaoFiscalDTO dto) {
+	return repository.save(mapper.toModel(dto));
     }
 
     @Transactional(readOnly = false)

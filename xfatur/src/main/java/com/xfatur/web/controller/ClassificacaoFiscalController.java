@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
 
@@ -26,7 +27,7 @@ public class ClassificacaoFiscalController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(@Valid ClassificacaoFiscal classificacaoFiscal, BindingResult result) {
+    public String salvar(@Valid ClassificacaoFiscalDTO classificacaoFiscal, BindingResult result) {
 	if (result.hasErrors()) {
 	    return "cadastro/classificacaofiscal";
 	}

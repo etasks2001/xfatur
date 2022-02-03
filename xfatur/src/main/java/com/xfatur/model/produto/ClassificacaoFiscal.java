@@ -9,9 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Entity
 public class ClassificacaoFiscal {
@@ -20,13 +17,9 @@ public class ClassificacaoFiscal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
-    @Pattern(regexp = "^\\d{4}[\\.]\\d{4}$", message = "Deve corresponder a 9999.9999")
     @Column(nullable = false, unique = true)
     private String ncm;
 
-    @NotBlank
-    @Size(min = 3, max = 80)
     @Column(nullable = false, unique = true)
     private String descricao;
 

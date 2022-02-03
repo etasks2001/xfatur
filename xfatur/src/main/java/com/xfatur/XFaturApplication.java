@@ -8,6 +8,7 @@ public class XFaturApplication {
 
     public static void main(String[] args) {
 	SpringApplication.run(XFaturApplication.class, args);
+
     }
 
 }
