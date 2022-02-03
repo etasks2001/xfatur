@@ -1,0 +1,3 @@
+https://projectlombok.org/setup/eclipse
+
+https://medium.com/collabcode/projeto-lombok-escrevendo-menos-c%C3%B3digo-em-java-8fc87b379209

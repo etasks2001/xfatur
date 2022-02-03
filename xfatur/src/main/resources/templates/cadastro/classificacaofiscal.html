@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<form method="POST"  th:action="${classificacaoFiscal.id == null} ? @{/classificacaofiscal/salvar} : @{/classificacaofiscal/editar}"  layout:fragment="cadastro" th:object="${classificacaoFiscal}">
+<form method="POST"  th:action="${classificacaoFiscalDTO.id == null} ? @{/classificacaofiscal/salvar} : @{/classificacaofiscal/editar}"  layout:fragment="cadastro" th:object="${classificacaoFiscalDTO}">
 
 	<div class="cadastro classificacaofiscal">
 		<input type="hidden" th:field="*{id}">

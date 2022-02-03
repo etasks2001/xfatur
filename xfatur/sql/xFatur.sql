@@ -528,6 +528,7 @@ create table classificacaofiscal(
 	ncm		varchar(9) not null,
 	descricao	varchar(80) not null,
 	primary key	(id),
+	unique 		(ncm),
 	unique 		(descricao)
 );
 create table unidade(

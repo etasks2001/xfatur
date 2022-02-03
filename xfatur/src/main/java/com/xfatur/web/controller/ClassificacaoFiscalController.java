@@ -10,31 +10,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
-import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
 
 @Controller
 @RequestMapping("classificacaofiscal")
 public class ClassificacaoFiscalController {
 
-    @Autowired
-    private ClassificacaoFiscalService service;
+	@Autowired
+	private ClassificacaoFiscalService service;
 
-    @GetMapping
-    public String openForm(ClassificacaoFiscal classificacaoFiscal) {
+	@GetMapping("form")
+	public String openForm(ClassificacaoFiscalDTO dto) {
 
-	return "/cadastro/classificacaofiscal";
-    }
-
-    @PostMapping("/salvar")
-    public String salvar(@Valid ClassificacaoFiscalDTO classificacaoFiscal, BindingResult result) {
-	if (result.hasErrors()) {
-	    return "cadastro/classificacaofiscal";
+		return "/cadastro/classificacaofiscal";
 	}
 
-	service.save(classificacaoFiscal);
+	@PostMapping("salvar")
+	public String salvar(@Valid ClassificacaoFiscalDTO classificacaoFiscal, BindingResult result) {
+		if (result.hasErrors()) {
+			return "cadastro/classificacaofiscal";
+		}
 
-	return "redirect:/classificacaofiscal";
-    }
+		service.save(classificacaoFiscal);
+
+		return "redirect:/classificacaofiscal/form";
+	}
 
 }
