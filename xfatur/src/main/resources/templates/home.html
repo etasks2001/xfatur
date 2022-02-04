@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html 
-	layout:decorate="~{layout}" 
+	layout:decorate="~{layout}"
+	xmlns:th="http://www.thymeleaf.org" 
 	>
 <head>
 	<meta charset="UTF-8" />
@@ -8,13 +9,13 @@
 <body>
 
       <div class="navbar-nav me-auto mb-1 mb-lg-0" layout:fragment="menu">
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-1" href="/nfe"><span class="fas fa-file-invoice"></span> [(#{home.menu.notafiscal})]</a>
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-1" href="/duplicata"><span class="fas fa-barcode"></span> [(#{home.menu.duplicatas})]</a>
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-1" href="/listapreco"><span class="fas fa-book"></span> [(#{home.menu.listadeprecos})]</a>
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-2" href="/cadastros"><span class="fab fa-wpforms"></span> [(#{home.menu.cadastros})]</a>
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-2" href="/estoque"><span class="fas fa-pallet"></span> [(#{home.menu.estoque})]</a>
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-3" href="/escrituracao"><span class="fas fa-clipboard-list"></span> [(#{home.menu.escrituracao})]</a>
-          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-4" href="/relatorios" ><span class="far fa-chart-bar"></span> [(#{home.menu.relatorios})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-1" th:href="@{/nfe}"><span class="fas fa-file-invoice"></span> [(#{home.menu.notafiscal})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-1" th:href="@{/duplicata}"><span class="fas fa-barcode"></span> [(#{home.menu.duplicatas})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-1" th:href="@{/listapreco}"><span class="fas fa-book"></span> [(#{home.menu.listadeprecos})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-2" th:href="@{/cadastros}"><span class="fab fa-wpforms"></span> [(#{home.menu.cadastros})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-2" th:href="@{/estoque}"><span class="fas fa-pallet"></span> [(#{home.menu.estoque})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-3" th:href="@{/escrituracao}"><span class="fas fa-clipboard-list"></span> [(#{home.menu.escrituracao})]</a>
+          <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-4" th:href="@{/relatorios}" ><span class="far fa-chart-bar"></span> [(#{home.menu.relatorios})]</a>
       </div>
 
 
