@@ -1,4 +1,4 @@
-@import "/css/classificacaofiscal.css";
+@import url("../css/classificacaofiscal.css");
 
 section form .cadastro{
     grid-gap: 3px;
