@@ -60,9 +60,8 @@ public class ClassificacaoFiscalService {
 
 	}
 
-	public Boolean hasNcm(String trim) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean hasNcm(String ncm) {
+		return repository.hasNcm(ncm);
 	}
 
 }
