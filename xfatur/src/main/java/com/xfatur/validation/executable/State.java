@@ -1,12 +1,12 @@
-package com.xfatur.validators;
+package com.xfatur.validation.executable;
 
-public enum Result {
+public enum State {
 
 	VALID(Boolean.TRUE), INVALID(Boolean.FALSE);
 
 	private Boolean value;
 
-	private Result(Boolean value) {
+	private State(Boolean value) {
 		this.value = value;
 	}
 
