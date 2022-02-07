@@ -38,5 +38,4 @@ public class ClassificacaoFiscalController {
 
 	return "redirect:/classificacaofiscal/form";
     }
-
 }
