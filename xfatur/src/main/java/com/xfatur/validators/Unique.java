@@ -12,13 +12,13 @@ import javax.validation.Payload;
 @Documented
 @Target({ ElementType.ANNOTATION_TYPE, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = { ClassificacaoFiscalDescricao.class, ClassificacaoFiscalNcm.class })
+@Constraint(validatedBy = { UniqueValidator.class })
 public @interface Unique {
-	String message() default "Já existe";
+	String message() default "";
 
 	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};
 
-//    Class<? extends NameExistenceChecker> nameExistenceChecker();
+	Class<? extends UniqueConstraint> uniqueConstraint();
 }
