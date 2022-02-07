@@ -45,5 +45,4 @@ public class ClassificacaoFiscalDTO {
     public void setId(Integer id) {
 	this.id = id;
     }
-
 }

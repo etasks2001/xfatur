@@ -14,7 +14,6 @@ public class DescricaoClassificacaoFiscalUnique implements UniqueConstraint {
 
     @Override
     public boolean has(String descricao) {
-
 	Boolean has = service.hasDescricao(descricao.trim());
 
 	if (has) {

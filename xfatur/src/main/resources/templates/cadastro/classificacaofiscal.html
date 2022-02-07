@@ -16,7 +16,7 @@
 	<div class="cadastro classificacaofiscal">
 		<input type="hidden" th:field="*{id}">
 		<label class="label-ncm col-form-label col-form-label-sm" for="ncm">NCM</label>
-		<input  class="input-ncm form-control form-control-sm" type="text" maxlength="9" th:field="*{ncm}" th:classappend="${#fields.hasErrors('ncm')} ? 'is-invalid' : ''" />
+		<input autofocus class="input-ncm form-control form-control-sm" type="text" maxlength="9" th:field="*{ncm}" th:classappend="${#fields.hasErrors('ncm')} ? 'is-invalid' : ''" />
 		
 		<div  th:replace="~{cadastro/fragments.html :: erro('ncm')}"></div>
 
