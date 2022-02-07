@@ -3,12 +3,25 @@
 <head></head>
 <body>
 	<div class="barra-botoes" th:fragment="botoes">
-		<button type="submit" class="btn btn-primary">Gravar</button>
-		<button type="button" class="btn btn-info">Pesquisar</button>
+		<button type="submit" class="btn btn-primary submit">Gravar</button>
+		<button type="button" class="btn btn-info search">Pesquisar</button>
 	</div>
 
 	<div th:fragment="erro(nome)" class="invalid-feedback" th:id="${'error_'+'__${nome}__'}">
 		<span th:errors="*{__${nome}__}"></span>
 	</div>
+
+	<div th:fragment="alert-success" th:if="${success != null}" >
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong th:text="${success}"></strong>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
 </body>
 </html>
