@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<form method="POST"  th:action="${classificacaoFiscalDTO.id == null} ? @{/classificacaofiscal/salvar} : @{/classificacaofiscal/editar}"  layout:fragment="cadastro" th:object="${classificacaoFiscalDTO}">
+<form method="POST"  th:action="${classificacaoFiscalDTO.id == null} ? @{/classificacaofiscal/salvar} : @{/classificacaofiscal/editar}"  layout:fragment="principal" th:object="${classificacaoFiscalDTO}">
 	<div th:replace="cadastro/fragments :: alert-success"></div>
 	<div class="cadastro classificacaofiscal">
 		<input type="hidden" th:field="*{id}">
