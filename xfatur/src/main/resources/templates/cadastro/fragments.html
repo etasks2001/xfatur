@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head></head>
 <body>
-	<div class="barra-botoes" th:fragment="botoes">
+	<div class="barra-botoes" th:fragment="botoes(cad)">
 		<button type="submit" class="btn btn-primary submit">Gravar</button>
-		<a type="button" class="btn btn-info search" th:href="@{/cadastro/pesquisar}">Pesquisar</a>
+		<a type="button" class="btn btn-info search" th:href="@{/cadastro/pesquisar+'/'+#strings.replace( ${cad},'cadastro/','')  }">Pesquisar</a>
 	</div>
 
 	<div th:fragment="erro(nome)" class="invalid-feedback" th:id="${'error_'+'__${nome}__'}">

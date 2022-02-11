@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/cadastro/cadastro}">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{/cadastro/cadastro}">
 <head>
 <meta charset="UTF-8" />
 <title>Insert title here</title>
@@ -12,6 +16,12 @@
 				<button class="btn btn-primary mt-1">Localizar</button>
 			</form>
 		</div>
+		<div>[[${#execInfo.templateName}]]</div>
+		<div>[[${#execInfo.templateMode}]]</div>
+		<div>[[${#execInfo.processedTemplateName}]]</div>
+		<div>[[${#execInfo.processedTemplateMode}]]</div>
+		<div>[[${#execInfo.templateNames}]]</div>
+		<div>[[${#execInfo.templateStack}]]</div>
 		<table id="table_search" class="display table">
 			<thead class="thread-dark">
 				<tr>
