@@ -3,15 +3,15 @@ $(document).ready(function(){
 		processing:true,
 		serverSide:true,
 		responsive:true,
-		lengthMenu:[10,15,20,25],
+		lengthMenu:[5,15,10],
 		ajax:{
-			url:"",
+			url:"/cadastro/pesquisar/datatables",
 			data:"data"
-		}
+		},
 	columns:[
 		{data:'id'},
 		{data:'ncm'},
-		{data:'descricao'}
+		{data:'descricao'},
 		
 		
 	]

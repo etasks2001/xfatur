@@ -14,7 +14,9 @@ let onblur = function(e) {
 
 	input.classList.remove("is-invalid");
 
-	errorfield.innerHTML = "";
+	if (errorfield) {
+		errorfield.innerHTML = "";
+	}
 	console.log(input.id);
 
 }

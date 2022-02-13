@@ -24,12 +24,12 @@
 		<div  th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
 		
 	
-		<div th:replace="~{/cadastro/fragments.html :: botoes(${#execInfo.processedTemplateName})}"></div>
+		<div th:replace="~{/cadastro/fragments.html :: botoes(${#execInfo.processedTemplateName.replace('/cadastro/','')})}"></div>
 		
 		
 	</div>
 	<div>
-		<div>[[${#execInfo.processedTemplateName}]]</div>
+		<div>[(${#execInfo.processedTemplateName})]</div>
 	
 	</div>
 </form>

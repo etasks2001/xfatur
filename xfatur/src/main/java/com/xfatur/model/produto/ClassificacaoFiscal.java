@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ClassificacaoFiscal {
 
@@ -23,6 +25,7 @@ public class ClassificacaoFiscal {
 	@Column(nullable = false, unique = true)
 	private String descricao;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "classificacaoFiscal", cascade = CascadeType.ALL)
 	private List<Produto> produtos;
 
