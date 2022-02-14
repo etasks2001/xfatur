@@ -24,76 +24,92 @@ import com.xfatur.service.produto.ClassificacaoFiscalService;
 @Controller
 @RequestMapping("cadastro")
 public class CadastroPesquisaController {
-	private String[] cols = new String[] { "id", "ncm", "descricao" };
+    private String[] cols = new String[] { "id", "ncm", "descricao" };
 
-	@Autowired
-	private ClassificacaoFiscalService service;
+    @Autowired
+    private ClassificacaoFiscalService service;
 
-	@GetMapping("pesquisar/{cadastro}")
-	public String openForm(@PathVariable("cadastro") String cadastro, ModelMap model) {
+    @GetMapping("pesquisar/{cadastro}")
+    public String openForm(@PathVariable("cadastro") String cadastro, ModelMap model) {
 
-		model.addAttribute("cadastro", cadastro);
+	model.addAttribute("cadastro", cadastro);
 
-		System.out.println(cadastro);
+	System.out.println(cadastro);
 
-		return "/cadastro/pesquisa";
+	return "/cadastro/pesquisa";
 
+    }
+
+    @GetMapping("/pesquisar/datatables")
+    public ResponseEntity<?> datatables(HttpServletRequest request) {
+	Map<String, Object> data = execute(service, request);
+	return ResponseEntity.ok(data);
+    }
+
+    public Map<String, Object> execute(ClassificacaoFiscalService service, HttpServletRequest request) {
+
+	int start = Integer.parseInt(request.getParameter("start"));
+	int length = Integer.parseInt(request.getParameter("length"));
+	int draw = Integer.parseInt(request.getParameter("draw"));
+	int current = currentPage(start, length);
+	String column = columnName(request);
+	Sort.Direction direction = orderBy(request);
+	String search = searchBy(request);
+
+	Pageable pageable = PageRequest.of(current, length, direction, column);
+
+	Page<ClassificacaoFiscal> page = queryBy(search, service, pageable, column);
+
+	Map<String, Object> json = new LinkedHashMap<String, Object>();
+
+	json.put("draw", draw);
+	json.put("recordsTotal", page.getTotalElements());
+	json.put("recordsFiltered", page.getTotalElements());
+	json.put("data", page.getContent());
+
+	return json;
+
+    }
+
+    private String searchBy(HttpServletRequest request) {
+	String parameter = request.getParameter("search[value]");
+	if (parameter.isEmpty()) {
+	    return "";
 	}
 
-	@GetMapping("/pesquisar/datatables")
-	public ResponseEntity<?> datatables(HttpServletRequest request) {
-		Map<String, Object> data = execute(service, request);
-		return ResponseEntity.ok(data);
-	}
+	return parameter.toUpperCase();
+    }
 
-	public Map<String, Object> execute(ClassificacaoFiscalService service, HttpServletRequest request) {
+    private Page<ClassificacaoFiscal> queryBy(String search, ClassificacaoFiscalService repository, Pageable pageable, String column) {
 
-		int start = Integer.parseInt(request.getParameter("start"));
-		int length = Integer.parseInt(request.getParameter("length"));
-		int draw = Integer.parseInt(request.getParameter("draw"));
-		int current = currentPage(start, length);
-		String column = columnName(request);
-		Sort.Direction direction = orderBy(request);
-
-		Pageable pageable = PageRequest.of(current, length, direction, column);
-
-		Page<ClassificacaoFiscal> page = queryBy(service, pageable);
-
-		Map<String, Object> json = new LinkedHashMap<String, Object>();
-		json.put("draw", draw);
-		json.put("recordsTotal", page.getTotalElements());
-		json.put("recordsFiltered", page.getTotalElements());
-		json.put("data", page.getContent());
-
-		return json;
+	if (column.equals("ncm")) {
+	    return repository.findByNcm(search, pageable);
 
 	}
+	return repository.findByDescricao(search, pageable);
 
-	private Page<ClassificacaoFiscal> queryBy(ClassificacaoFiscalService service2, Pageable pageable) {
+    }
 
-		return service.findAll(pageable);
+    private Direction orderBy(HttpServletRequest request) {
+	String order = request.getParameter("order[0][dir]");
+	Sort.Direction sort = Sort.Direction.ASC;
+
+	if (order.equalsIgnoreCase("desc")) {
+	    sort = Sort.Direction.DESC;
 	}
 
-	private Direction orderBy(HttpServletRequest request) {
-		String order = request.getParameter("order[0][dir]");
-		Sort.Direction sort = Sort.Direction.ASC;
+	return sort;
+    }
 
-		if (order.equalsIgnoreCase("desc")) {
-			sort = Sort.Direction.DESC;
-		}
+    private String columnName(HttpServletRequest request) {
+	int iCol = Integer.parseInt(request.getParameter("order[0][column]"));
+	return cols[iCol];
+    }
 
-		return sort;
-	}
-
-	private String columnName(HttpServletRequest request) {
-		int iCol = Integer.parseInt(request.getParameter("order[0][column]"));
-		return cols[iCol];
-	}
-
-	private int currentPage(int start, int length) {
-		// - 1 | 2 | 3
-		// 0-9|10-19|20-29
-		return start / length;
-	}
+    private int currentPage(int start, int length) {
+	// - 1 | 2 | 3
+	// 0-9|10-19|20-29
+	return start / length;
+    }
 
 }

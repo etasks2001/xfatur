@@ -19,55 +19,63 @@ import com.xfatur.repository.produto.ClassificacaoFiscalRepository;
 @Transactional(readOnly = true)
 public class ClassificacaoFiscalService {
 
-	@Autowired
-	private ClassificacaoFiscalRepository repository;
+    @Autowired
+    private ClassificacaoFiscalRepository repository;
 
-	@Autowired
-	private ClassificacaoFiscalMapper mapper;
+    @Autowired
+    private ClassificacaoFiscalMapper mapper;
 
-	public void deleteById(Integer id) {
-		repository.deleteById(id);
+    public void deleteById(Integer id) {
+	repository.deleteById(id);
+    }
+
+    @Transactional(readOnly = false)
+    public ClassificacaoFiscal save(ClassificacaoFiscalDTO dto) {
+	return repository.save(mapper.toModel(dto));
+    }
+
+    @Transactional(readOnly = false)
+    public ClassificacaoFiscal save(ClassificacaoFiscal classificacaoFiscal) {
+	return repository.save(classificacaoFiscal);
+    }
+
+    public Integer findIdByDescricao(String descricao) {
+	return repository.findIdByDescricao(descricao);
+    }
+
+    public ClassificacaoFiscal findById(Integer id) {
+	Optional<ClassificacaoFiscal> found = repository.findById(id);
+	if (found.isPresent()) {
+	    return found.get();
 	}
+	throw new ClassificacaoFiscalIdNotFoundException("Código da Classificação Fiscal não encontrado.");
 
-	@Transactional(readOnly = false)
-	public ClassificacaoFiscal save(ClassificacaoFiscalDTO dto) {
-		return repository.save(mapper.toModel(dto));
-	}
+    }
 
-	@Transactional(readOnly = false)
-	public ClassificacaoFiscal save(ClassificacaoFiscal classificacaoFiscal) {
-		return repository.save(classificacaoFiscal);
-	}
+    public List<ClassificacaoFiscal> findByDescricao(String descricao) {
+	return repository.findByDescricao(descricao);
 
-	public Integer findIdByDescricao(String descricao) {
-		return repository.findIdByDescricao(descricao);
-	}
+    }
 
-	public ClassificacaoFiscal findById(Integer id) {
-		Optional<ClassificacaoFiscal> found = repository.findById(id);
-		if (found.isPresent()) {
-			return found.get();
-		}
-		throw new ClassificacaoFiscalIdNotFoundException("Código da Classificação Fiscal não encontrado.");
+    public Boolean hasDescricao(String descricao) {
+	return repository.hasDescricao(descricao);
 
-	}
+    }
 
-	public List<ClassificacaoFiscal> findByDescricao(String descricao) {
-		return repository.findByDescricao(descricao);
+    public Boolean hasNcm(String ncm) {
+	return repository.hasNcm(ncm);
+    }
 
-	}
+    public Page<ClassificacaoFiscal> findAll(Pageable pageable) {
+	return repository.findAll(pageable);
+    }
 
-	public Boolean hasDescricao(String descricao) {
-		return repository.hasDescricao(descricao);
+    public Page<ClassificacaoFiscal> findByDescricao(String search, Pageable pageable) {
+	return repository.findByDescricao(search, pageable);
+    }
 
-	}
-
-	public Boolean hasNcm(String ncm) {
-		return repository.hasNcm(ncm);
-	}
-
-	public Page<ClassificacaoFiscal> findAll(Pageable pageable) {
-		return repository.findAll(pageable);
-	}
+    public Page<ClassificacaoFiscal> findByNcm(String search, Pageable pageable) {
+	return repository.findByNcm(search, pageable);
+    }
 
 }
