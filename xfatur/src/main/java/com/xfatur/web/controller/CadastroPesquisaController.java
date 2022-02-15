@@ -81,12 +81,19 @@ public class CadastroPesquisaController {
     }
 
     private Page<ClassificacaoFiscal> queryBy(String search, ClassificacaoFiscalService repository, Pageable pageable, String column) {
+	System.out.println(column);
+
+	if (search.trim().length() == 0) {
+	    return Page.empty();
+
+	}
 
 	if (column.equals("ncm")) {
 	    return repository.findByNcm(search, pageable);
-
+	} else if (column.equals("descricao")) {
+	    return repository.findByDescricao(search, pageable);
 	}
-	return repository.findByDescricao(search, pageable);
+	return Page.empty();
 
     }
 

@@ -1,45 +1,42 @@
 <!DOCTYPE html>
-<html 
-	xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:th="http://www.thymeleaf.org" 
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-	layout:decorate="~{/cadastro/cadastro}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/cadastro/cadastro}">
 <head>
 <meta charset="UTF-8" />
 <title>Insert title here</title>
 </head>
 <body>
 	<div class="corpo" layout:fragment="principal">
-	
-	<header class="h5 mb-0 alert alert-secondary p-0 pb-1 ps-1 pt-1 " th:text="#{pesquisa.__${cadastro}__.legenda}"></header>
-		<div class="container-fluid p-1 ms-1">
-			<form action="" method="GET" class="p-1 col-4 ">
+
+		<header class="h5 mb-2 alert alert-secondary p-0 pb-1 ps-1 pt-1 " th:text="#{pesquisa.__${cadastro}__.legenda}"></header>
+<!-- 		<div class="container-fluid p-1 ms-1">
+			<form id="busca" action="" method="GET" class="p-1 col-4 ">
 				<input class="form-control form-control-sm mb-1" autofocus type="text" />
 				<button class="btn btn-primary mt-1">Localizar</button>
 			</form>
 		</div>
-		<table id="table_search" class="m-2 display table nowrap">
-			<thead class="thread-dark">
-				<tr>
-					<th>Id</th>
-					<th>NCM</th>
-					<th>Descrição</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Row 1 Data 1</td>
-					<td>Row 1 Data 2</td>
-					<td>Row 1 Data 3</td>
-				</tr>
-				<tr>
-					<td>Row 2 Data 1</td>
-					<td>Row 2 Data 2</td>
-					<td>Row 2 Data 3</td>
-				</tr>
-			</tbody>
-		</table>
-		
+ -->		<div id="tabela" style="margin:10px">
+			<table id="table_search" class="display cell-border dataTable" style="width:100%">
+				<thead class="thread-dark">
+					<tr>
+						<th>Id</th>
+						<th>NCM</th>
+						<th>Descrição</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Row 1 Data 1</td>
+						<td>Row 1 Data 2</td>
+						<td>Row 1 Data 3</td>
+					</tr>
+					<tr>
+						<td>Row 2 Data 1</td>
+						<td>Row 2 Data 2</td>
+						<td>Row 2 Data 3</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
