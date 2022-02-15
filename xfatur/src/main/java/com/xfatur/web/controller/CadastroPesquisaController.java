@@ -2,6 +2,7 @@ package com.xfatur.web.controller;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -47,6 +48,13 @@ public class CadastroPesquisaController {
     }
 
     public Map<String, Object> execute(ClassificacaoFiscalService service, HttpServletRequest request) {
+
+	Map<String, String[]> parameterMap = request.getParameterMap();
+
+	Set<String> keySet = parameterMap.keySet();
+	for (String key : keySet) {
+	    System.out.println(key + ":" + request.getParameter(key));
+	}
 
 	int start = Integer.parseInt(request.getParameter("start"));
 	int length = Integer.parseInt(request.getParameter("length"));

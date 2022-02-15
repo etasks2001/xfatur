@@ -24,10 +24,10 @@ public interface ClassificacaoFiscalRepository extends JpaRepository<Classificac
     @Query("select count(cf)>0 from ClassificacaoFiscal cf where cf.ncm = :ncm")
     Boolean hasNcm(@Param("ncm") String ncm);
 
-    @Query("select cf from ClassificacaoFiscal cf where cf.descricao like %:search% order by cf.descricao")
+    @Query("select cf from ClassificacaoFiscal cf where cf.descricao like %:search%")
     Page<ClassificacaoFiscal> findByDescricao(@Param("search") String search, Pageable pageable);
 
-    @Query("select cf from ClassificacaoFiscal cf where cf.ncm like %:search% order by cf.descricao")
+    @Query("select cf from ClassificacaoFiscal cf where cf.ncm like %:search%")
     Page<ClassificacaoFiscal> findByNcm(@Param("search") String search, Pageable pageable);
 
 }
