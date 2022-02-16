@@ -17,7 +17,7 @@ $(document).ready(function(){
 	let cad = document.getElementById('cad');
 	
 	if(cad){
-		let name = cad.dataset.name;
+		let cadname = cad.dataset.name;
 		console.log(name);
 		let columns =cad.dataset.columns.split(',');
 		for(let i = 0; i<columns.length;i++){
@@ -47,7 +47,7 @@ $(document).ready(function(){
 			ajax:{
 				url:"/cadastro/pesquisar/datatables",
 				data:{
-					name:name				
+					cadname:cadname				
 				},
 					
 				
