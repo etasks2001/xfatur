@@ -15,42 +15,47 @@ $(document).ready(function(){
 	}; 
 	
 	let cad = document.getElementById('cad');
-	if(cad){
-		
-	let columns =cad.dataset.columns.split(',');
-	for(let i = 0; i<columns.length;i++){
-		columns[i]={data:columns[i]};
-	}
-	let columndefault =cad.dataset.columndefault.split(',');
-	columndefault[0] = Number(columndefault[0]);
-	let orderablefalse = cad.dataset.orderablefalse.split('');
-	for(let i =0;i<orderablefalse.length;i++){
-		orderablefalse[i]={ orderable: false, targets: Number(orderablefalse[i]) };
-	}
 	
-	$("#table_search").DataTable({
-		language: languageConfig,
-        scrollX: true,
-        style:'compact',
-        search: {
-            return:true
-        },
-        deferRender:true,
-		searching:true,
-		processing:true,
-		serverSide:true,
-		responsive:true,
-		lengthMenu:[10,15],
-		order:columndefault,
-		ajax:{
-			url:"/cadastro/pesquisar/datatables",
-			data:"data"
-		},
-		columnDefs: orderablefalse,
-	        dom: 'Qlfrtip',
-
-	columns:columns
-	});
+	if(cad){
+		let name = cad.dataset.name;
+		console.log(name);
+		let columns =cad.dataset.columns.split(',');
+		for(let i = 0; i<columns.length;i++){
+			columns[i]={data:columns[i]};
+		}
+		let columndefault =cad.dataset.columndefault.split(',');
+		columndefault[0] = Number(columndefault[0]);
+		let orderablefalse = cad.dataset.orderablefalse.split('');
+		for(let i =0;i<orderablefalse.length;i++){
+			orderablefalse[i]={ orderable: false, targets: Number(orderablefalse[i]) };
+		}
+		
+		$("#table_search").DataTable({
+			language: languageConfig,
+	        scrollX: true,
+	        style:'compact',
+	        search: {
+	            return:true
+	        },
+	        deferRender:true,
+			searching:true,
+			processing:true,
+			serverSide:true,
+			responsive:true,
+			lengthMenu:[10,15],
+			order:columndefault,
+			ajax:{
+				url:"/cadastro/pesquisar/datatables",
+				data:{
+					name:name				
+				},
+					
+				
+			},
+			columnDefs: orderablefalse,
+		        dom: 'Qlfrtip',
+	
+		columns:columns
+		});
 	}
-
 });

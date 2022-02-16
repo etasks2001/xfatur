@@ -14,10 +14,11 @@ import com.xfatur.exception.ClassificacaoFiscalIdNotFoundException;
 import com.xfatur.mappers.ClassificacaoFiscalMapper;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.repository.produto.ClassificacaoFiscalRepository;
+import com.xfatur.service.Servico;
 
-@Service
+@Service(value = "classificacaofiscalservice")
 @Transactional(readOnly = true)
-public class ClassificacaoFiscalService {
+public class ClassificacaoFiscalService implements Servico {
 
     @Autowired
     private ClassificacaoFiscalRepository repository;

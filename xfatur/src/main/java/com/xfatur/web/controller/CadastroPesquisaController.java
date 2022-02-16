@@ -2,10 +2,10 @@ package com.xfatur.web.controller;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xfatur.model.produto.ClassificacaoFiscal;
-import com.xfatur.service.produto.ClassificacaoFiscalService;
+import com.xfatur.repository.pesquisa.QueryBy;
 
 @Controller
 @RequestMapping("cadastro")
@@ -28,33 +28,25 @@ public class CadastroPesquisaController {
     private String[] cols = new String[] { "id", "ncm", "descricao" };
 
     @Autowired
-    private ClassificacaoFiscalService service;
+    private BeanFactory beanFactory;
 
     @GetMapping("pesquisar/{cadastro}")
     public String openForm(@PathVariable("cadastro") String cadastro, ModelMap model) {
-
 	model.addAttribute("cadastro", cadastro);
 
-	System.out.println(cadastro);
-
 	return "/cadastro/pesquisa";
-
     }
 
     @GetMapping("/pesquisar/datatables")
     public ResponseEntity<?> datatables(HttpServletRequest request) {
-	Map<String, Object> data = execute(service, request);
+	Map<String, Object> data = execute(request);
+
 	return ResponseEntity.ok(data);
     }
 
-    public Map<String, Object> execute(ClassificacaoFiscalService service, HttpServletRequest request) {
-
-	Map<String, String[]> parameterMap = request.getParameterMap();
-
-	Set<String> keySet = parameterMap.keySet();
-	for (String key : keySet) {
-	    System.out.println(key + ":" + request.getParameter(key));
-	}
+    public Map<String, Object> execute(HttpServletRequest request) {
+	String name = request.getParameter("name");
+	QueryBy queryBy = beanFactory.getBean(name, QueryBy.class);
 
 	int start = Integer.parseInt(request.getParameter("start"));
 	int length = Integer.parseInt(request.getParameter("length"));
@@ -66,7 +58,7 @@ public class CadastroPesquisaController {
 
 	Pageable pageable = PageRequest.of(current, length, direction, column);
 
-	Page<ClassificacaoFiscal> page = queryBy(search, service, pageable, column);
+	Page<ClassificacaoFiscal> page = queryBy.execute(search, pageable, column);
 
 	Map<String, Object> json = new LinkedHashMap<String, Object>();
 
@@ -86,23 +78,6 @@ public class CadastroPesquisaController {
 	}
 
 	return parameter.toUpperCase();
-    }
-
-    private Page<ClassificacaoFiscal> queryBy(String search, ClassificacaoFiscalService repository, Pageable pageable, String column) {
-	System.out.println(column);
-
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-
-	}
-
-	if (column.equals("ncm")) {
-	    return repository.findByNcm(search, pageable);
-	} else if (column.equals("descricao")) {
-	    return repository.findByDescricao(search, pageable);
-	}
-	return Page.empty();
-
     }
 
     private Direction orderBy(HttpServletRequest request) {

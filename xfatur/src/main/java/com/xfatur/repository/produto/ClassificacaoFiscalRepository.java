@@ -29,5 +29,4 @@ public interface ClassificacaoFiscalRepository extends JpaRepository<Classificac
 
     @Query("select cf from ClassificacaoFiscal cf where cf.ncm like %:search%")
     Page<ClassificacaoFiscal> findByNcm(@Param("search") String search, Pageable pageable);
-
 }
