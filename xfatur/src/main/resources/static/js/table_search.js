@@ -1,7 +1,3 @@
-
-
-
-
 $(document).ready(function(){
 	let languageConfig={
 			emptyTable: 'Sem dados',
@@ -19,6 +15,8 @@ $(document).ready(function(){
 	}; 
 	
 	let cad = document.getElementById('cad');
+	if(cad){
+		
 	let columns =cad.dataset.columns.split(',');
 	for(let i = 0; i<columns.length;i++){
 		columns[i]={data:columns[i]};
@@ -53,4 +51,6 @@ $(document).ready(function(){
 
 	columns:columns
 	});
+	}
+
 });
