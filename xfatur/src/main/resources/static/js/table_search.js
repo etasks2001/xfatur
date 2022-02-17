@@ -18,22 +18,44 @@ $(document).ready(function(){
 	
 	if(cad){
 		let cadname = cad.dataset.name;
-		console.log(name);
-		let columns =cad.dataset.columns.split(',');
+		let columns = cad.dataset.columns.split(',');
+		let columndefault = cad.dataset.columndefault.split(',');
+		let titles = cad.dataset.titles.split(',');
+		let orderable = cad.dataset.orderable.split(',');
+		let columnDefs = [];
+		
 		for(let i = 0; i<columns.length;i++){
-			columns[i]={data:columns[i]};
+			columnDefs.push({
+						data:columns[i],
+						title:titles[i],
+						targets:i,
+						orderable: orderable[i].toLowerCase() == 'true'
+					}
+			);
 		}
-		let columndefault =cad.dataset.columndefault.split(',');
+		
+		
+		
+		columnDefs.push({orderable : false, data : 'id', "render" : function(id) {
+			return `<a class="btn btn-success btn-sm btn-block" href="/${cadname}/editar/${id}" role="button"><i class="fas fa-edit"></i></a>`;}});
+		
+		columnDefs.push({orderable : false,	data : 'id', "render" : function(id) {
+            return `<a class="btn btn-danger btn-sm btn-block" href="/${cadname}/excluir/${id}" role="button" data-toggle="modal" data-target="#confirm-modal"><i class="fas fa-times-circle"></i></a>`;}});
+		
+		
+		
 		columndefault[0] = Number(columndefault[0]);
-		let orderablefalse = cad.dataset.orderablefalse.split('');
-		for(let i =0;i<orderablefalse.length;i++){
-			orderablefalse[i]={ orderable: false, targets: Number(orderablefalse[i]) };
-		}
+		
+		
 		
 		$("#table_search").DataTable({
 			language: languageConfig,
 	        scrollX: true,
 	        style:'compact',
+
+	        
+	        columns:columnDefs,
+
 	        search: {
 	            return:true
 	        },
@@ -49,13 +71,8 @@ $(document).ready(function(){
 				data:{
 					cadname:cadname				
 				},
-					
-				
 			},
-			columnDefs: orderablefalse,
-		        dom: 'Qlfrtip',
-	
-		columns:columns
+	        dom: 'Qlfrtip',
 		});
 	}
 });
