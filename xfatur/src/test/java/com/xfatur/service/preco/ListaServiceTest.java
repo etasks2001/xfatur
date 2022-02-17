@@ -11,29 +11,20 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.ListaPrecoIdNotFoundException;
 import com.xfatur.model.preco.Item;
 import com.xfatur.model.preco.Lista;
 import com.xfatur.model.produto.Produto;
-import com.xfatur.service.preco.ItemService;
-import com.xfatur.service.preco.ListaService;
 import com.xfatur.service.produto.ProdutoService;
 import com.xfatur.testutil.UtilCreateProduto;
 
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-@TestInstance(Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
+//@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+////@TestInstance(Lifecycle.PER_CLASS)
+////@TestMethodOrder(OrderAnnotation.class)
 
 class ListaServiceTest {
 
@@ -57,7 +48,7 @@ class ListaServiceTest {
 	idsProduto = utilCreateProduto.idsProduto();
     }
 
-    @Test
+    // @Test
     @Order(1)
     void test_save() {
 	Lista listaPreco = new Lista();
@@ -110,7 +101,7 @@ class ListaServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(2)
     @Transactional
     void test_findById() {
@@ -140,7 +131,7 @@ class ListaServiceTest {
 	});
     }
 
-    @Test
+    // @Test
     @Order(3)
     void test_findById_error() {
 	Exception exception = Assertions.assertThrows(ListaPrecoIdNotFoundException.class, () -> listaService.findById(415646));
@@ -148,7 +139,7 @@ class ListaServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Lista não encontrada"));
     }
 
-    @Test
+    // @Test
     @Order(4)
     void test_update() {
 	Lista lista = listaService.findById(idsLista.get(0));

@@ -10,15 +10,8 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
@@ -28,9 +21,9 @@ import com.xfatur.exception.ProdutoReservadoInsuficienteException;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.testutil.UtilCreateProduto;
 
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-@TestInstance(Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
+//@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+////@TestInstance(Lifecycle.PER_CLASS)
+////@TestMethodOrder(OrderAnnotation.class)
 class ProdutoServiceTest {
     @Autowired
     UtilCreateProduto utilCreateProduto;
@@ -44,7 +37,7 @@ class ProdutoServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(1)
     @Transactional
     void test_findById() {
@@ -94,7 +87,7 @@ class ProdutoServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(2)
     void test_findById_error() {
 
@@ -103,7 +96,7 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Produto não encontrado."));
     }
 
-    @Test
+    // @Test
     @Order(3)
     void test_update() {
 	idsProduto.forEach(id -> {
@@ -115,7 +108,7 @@ class ProdutoServiceTest {
 	});
     }
 
-    @Test
+    // @Test
     @Order(4)
     void test_buscaPorDescricao() {
 	List<Produto> produtos = produtoService.buscaPorDescricao("A");
@@ -124,7 +117,7 @@ class ProdutoServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(5)
     void test_buscaPorDescricao_nao_encontrado() {
 	List<Produto> produtos = produtoService.buscaPorDescricao("fdsaa");
@@ -133,7 +126,7 @@ class ProdutoServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(6)
     void test_buscaPorCodigoProduto() {
 	idsProduto.forEach(id -> {
@@ -143,7 +136,7 @@ class ProdutoServiceTest {
 	});
     }
 
-    @Test
+    // @Test
     @Order(7)
     void test_buscaPorCodigoProduto_error() {
 
@@ -152,7 +145,7 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código do Produto não encontrado"));
     }
 
-    @Test
+    // @Test
     @Order(8)
     void test_entrada_estoque() {
 	Integer id = idsProduto.get(0);
@@ -170,7 +163,7 @@ class ProdutoServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(9)
     void test_entrada_reservado() {
 	Integer id = idsProduto.get(1);
@@ -186,7 +179,7 @@ class ProdutoServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(10)
     void test_saida_estoque() {
 	Integer id = idsProduto.get(0);
@@ -203,7 +196,7 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(estoqueAtual, Matchers.is(estoqueAnterior - quantidadeSaida));
     }
 
-    @Test
+    // @Test
     @Order(11)
     void test_saida_reservado() {
 	Integer id = idsProduto.get(1);
@@ -220,7 +213,7 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(reservadoAtual, Matchers.is(reservadoAnterior - quantidadeSaida));
     }
 
-    @Test
+    // @Test
     @Order(12)
     void test_saida_estoque_saldo_insuficiente() {
 	Integer id = idsProduto.get(0);
@@ -230,7 +223,7 @@ class ProdutoServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Estoque insuficiente"));
     }
 
-    @Test
+    // @Test
     @Order(13)
     void test_saida_reservado_saldo_insuficiente() {
 	Integer id = idsProduto.get(1);

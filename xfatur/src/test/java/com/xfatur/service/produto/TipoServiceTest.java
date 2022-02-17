@@ -7,22 +7,16 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.xfatur.exception.TipoIdNotFoundException;
 import com.xfatur.model.produto.Tipo;
 import com.xfatur.testutil.CreateModelTest;
 
-@SpringBootTest
-@TestInstance(Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
+//@SpringBootTest
+////@TestInstance(Lifecycle.PER_CLASS)
+////@TestMethodOrder(OrderAnnotation.class)
 class TipoServiceTest {
 
     @Autowired
@@ -30,13 +24,13 @@ class TipoServiceTest {
 
     List<String> ids = new ArrayList<String>();
 
-    @Test
+    // @Test
     @Order(1)
     void test_save() {
 	CreateModelTest.tipoList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
-    @Test
+    // @Test
     @Order(2)
     void update() {
 	ids.forEach(id -> {
@@ -50,14 +44,14 @@ class TipoServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(3)
     void test_findById_error() {
 	Exception exception = Assertions.assertThrows(TipoIdNotFoundException.class, () -> service.findById("45678979"));
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código do Tipo não encontrado"));
     }
 
-    @Test
+    // @Test
     @Order(4)
     void test_findByDescricao() {
 
@@ -66,7 +60,7 @@ class TipoServiceTest {
 	MatcherAssert.assertThat(tributacoes.size(), Matchers.greaterThan(0));
     }
 
-    @Test
+    // @Test
     @Order(5)
     void test_findByDescricao_size_0() {
 	List<Tipo> tributacoes = service.findByDescricao("787897");

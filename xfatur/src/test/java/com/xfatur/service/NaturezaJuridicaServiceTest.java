@@ -12,26 +12,17 @@ import java.util.stream.Stream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import com.xfatur.exception.NaturezaJuridicaException;
 import com.xfatur.exception.NaturezaJuridicaIdNotFoundException;
 import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.testutil.CreateModelTest;
 
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-@TestInstance(Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
+//@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+////@TestInstance(Lifecycle.PER_CLASS)
+////@TestMethodOrder(OrderAnnotation.class)
 class NaturezaJuridicaServiceTest {
     @Autowired
     NaturezaJuridicaService service;
@@ -43,15 +34,15 @@ class NaturezaJuridicaServiceTest {
 		CreateModelTest.createNaturezaJuridica5());
     }
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(1)
+//    @ParameterizedTest
+//    @MethodSource("model")
+//    @Order(1)
     void test_save(NaturezaJuridica naturezaJuridica) {
 	NaturezaJuridica saved = service.save(naturezaJuridica);
 	ids.add(saved.getId());
     }
 
-    @Test
+    // @Test
     @Order(2)
     void test_update() {
 	ids.forEach(id -> {
@@ -61,9 +52,9 @@ class NaturezaJuridicaServiceTest {
 	});
     }
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(3)
+//    @ParameterizedTest
+//    @MethodSource("model")
+//    @Order(3)
     void test_save_ja_cadastrado(NaturezaJuridica naturezaJuridica) {
 	naturezaJuridica.setDescricao(naturezaJuridica.getDescricao() + " alterado");
 
@@ -72,7 +63,7 @@ class NaturezaJuridicaServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Descrição já cadastrada"));
     }
 
-    @Test
+    // @Test
     @Order(4)
     void test_buscaPorDescricao() {
 	List<NaturezaJuridica> list = this.service.buscaPorDescricao("M");
@@ -80,7 +71,7 @@ class NaturezaJuridicaServiceTest {
 	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
     }
 
-    @Test
+    // @Test
     @Order(5)
     void test_buscaPorDescricao_nao_encontrado() {
 	List<NaturezaJuridica> list = this.service.buscaPorDescricao("fdasdfdasdf");
@@ -88,7 +79,7 @@ class NaturezaJuridicaServiceTest {
 	MatcherAssert.assertThat(list.size(), Matchers.is(0));
     }
 
-    @Test
+    // @Test
     @Order(6)
     void test_findById() {
 	ids.forEach(id -> {
@@ -97,7 +88,7 @@ class NaturezaJuridicaServiceTest {
 	});
     }
 
-    @Test
+    // @Test
     @Order(7)
     void test_findById_nao_encontrado() {
 	Exception exception = Assertions.assertThrows(NaturezaJuridicaIdNotFoundException.class, () -> this.service.findById(15446));
@@ -105,7 +96,7 @@ class NaturezaJuridicaServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Natureza Jurídica não encontrada"));
     }
 
-    @Test
+    // @Test
     @Order(8)
     void delete() {
 	ids.forEach(id -> {
@@ -115,7 +106,7 @@ class NaturezaJuridicaServiceTest {
 	});
     }
 
-    @Test
+    // @Test
     @Order(9)
     void delete_nao_encontrado() {
 	Boolean result = this.service.delete(454);

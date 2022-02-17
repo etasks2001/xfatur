@@ -4,21 +4,15 @@ import java.util.Date;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.xfatur.model.test.License;
 import com.xfatur.model.test.Person;
 
-@SpringBootTest
-@TestInstance(Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
+//@SpringBootTest
+////@TestInstance(Lifecycle.PER_CLASS)
+////@TestMethodOrder(OrderAnnotation.class)
 class LicenseRepositoryTest {
     @BeforeEach
     void mark_start() {
@@ -37,7 +31,7 @@ class LicenseRepositoryTest {
     @Autowired
     PersonRepository personRepository;
 
-    @Test
+    // @Test
     @Order(1)
     void test_create_from_license() {
 	License license = new License();
@@ -56,7 +50,7 @@ class LicenseRepositoryTest {
 	personRepository.save(person);
     }
 
-    @Test
+    // @Test
     @Order(2)
     void test_create_from_person() {
 
@@ -77,7 +71,7 @@ class LicenseRepositoryTest {
 
     }
 
-    @Test
+    // @Test
     @Order(3)
     void test_update() {
 	Person person = personRepository.findById(1).get();

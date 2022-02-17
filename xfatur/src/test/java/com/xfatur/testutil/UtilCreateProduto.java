@@ -6,7 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.model.produto.ClassificacaoFiscal;
+import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
+import com.xfatur.mappers.ClassificacaoFiscalMapper;
 import com.xfatur.model.produto.FundoPobreza;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
@@ -64,6 +65,8 @@ public class UtilCreateProduto {
     private LinhaService linhaService;
     @Autowired
     private PaisService paisService;
+    @Autowired
+    private ClassificacaoFiscalMapper mapper;
 
     private List<String> idsTributacao = new ArrayList<String>();
     private List<Integer> idsClassificacaoFiscal = new ArrayList<Integer>();
@@ -100,7 +103,7 @@ public class UtilCreateProduto {
 
 	    Produtor produtor = produtorService.findById(produtor_id);
 	    Unidade unidade = unidadeService.findById(unidade_id);
-	    ClassificacaoFiscal classificacaoFiscal = classificacaoFiscalService.findById(classificacaoFiscal_id);
+	    ClassificacaoFiscalDTO classificacaoFiscal = classificacaoFiscalService.findById(classificacaoFiscal_id);
 	    Tributacao tributacao = tributacaoService.findById(tributacao_id);
 	    RegiaoProdutora regiaoProdutora = regiaoProdutoraService.findById(regiaoProdutora_id);
 	    TipoValidade tipoValidade = tipoValidadeService.findById(tipoValidade_id);
@@ -114,7 +117,7 @@ public class UtilCreateProduto {
 
 	    produto.setProdutor(produtor);
 	    produto.setUnidade(unidade);
-	    produto.setClassificacaoFiscal(classificacaoFiscal);
+	    produto.setClassificacaoFiscal(mapper.toModel(classificacaoFiscal));
 	    produto.setTributacao(tributacao);
 	    produto.setRegiaoProdutora(regiaoProdutora);
 	    produto.setTipoValidade(tipoValidade);

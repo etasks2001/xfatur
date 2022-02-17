@@ -7,22 +7,16 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.xfatur.exception.MarcaIdNotFoundException;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.testutil.CreateModelTest;
 
-@SpringBootTest
-@TestInstance(Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
+//@SpringBootTest
+////@TestInstance(Lifecycle.PER_CLASS)
+////@TestMethodOrder(OrderAnnotation.class)
 class MarcaServiceTest {
 
     @Autowired
@@ -30,13 +24,13 @@ class MarcaServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    @Test
+    // @Test
     @Order(1)
     void test_save() {
 	CreateModelTest.marcaList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
-    @Test
+    // @Test
     @Order(2)
     void test_findByDescricao() {
 	List<Marca> marca = service.findByDescricao("A");
@@ -45,14 +39,14 @@ class MarcaServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(3)
     void test_findByDescricao_retorna_vazio() {
 	List<Marca> marca = service.findByDescricao("fdsafd");
 	MatcherAssert.assertThat(marca.size(), Matchers.is(0));
     }
 
-    @Test
+    // @Test
     @Order(4)
     void test_update() {
 	Marca marca = service.findById(ids.get(0));
@@ -62,7 +56,7 @@ class MarcaServiceTest {
 	service.save(marca);
     }
 
-    @Test
+    // @Test
     @Order(5)
     void test_findById_nao_encontrado() {
 	Exception exception = Assertions.assertThrows(MarcaIdNotFoundException.class, () -> service.findById(4567464));

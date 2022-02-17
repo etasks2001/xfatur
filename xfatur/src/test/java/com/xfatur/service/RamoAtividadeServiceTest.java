@@ -12,26 +12,17 @@ import java.util.stream.Stream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import com.xfatur.exception.RamoAtividadeDescricaoException;
 import com.xfatur.exception.RamoAtividadeIdNotFoundException;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.testutil.CreateModelTest;
 
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-@TestInstance(Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
+//@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+////@TestInstance(Lifecycle.PER_CLASS)
+////@TestMethodOrder(OrderAnnotation.class)
 class RamoAtividadeServiceTest {
     @Autowired
     RamoAtividadeService service;
@@ -44,9 +35,9 @@ class RamoAtividadeServiceTest {
 
     }
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(1)
+//    @ParameterizedTest
+//    @MethodSource("model")
+//    @Order(1)
     void test_save(RamoAtividade ra) {
 	Integer id = service.findIdByDescricao(ra.getDescricao());
 
@@ -57,7 +48,7 @@ class RamoAtividadeServiceTest {
 	ids.add(id);
     }
 
-    @Test
+    // @Test
     @Order(2)
     void test_update() {
 	ids.forEach(id -> {
@@ -67,9 +58,9 @@ class RamoAtividadeServiceTest {
 	});
     }
 
-    @ParameterizedTest
-    @MethodSource("model")
-    @Order(3)
+//    @ParameterizedTest
+//    @MethodSource("model")
+//    @Order(3)
     void test_save_ja_cadastrado(RamoAtividade ramoAtividade) {
 	ramoAtividade.setDescricao(ramoAtividade.getDescricao() + " alterado");
 
@@ -78,7 +69,7 @@ class RamoAtividadeServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Descrição já cadastrada"));
     }
 
-    @Test
+    // @Test
     @Order(4)
     void test_buscaPorDescricao() {
 	List<RamoAtividade> list = this.service.buscaPorDescricao("M");
@@ -86,7 +77,7 @@ class RamoAtividadeServiceTest {
 	MatcherAssert.assertThat(list.size(), Matchers.greaterThan(0));
     }
 
-    @Test
+    // @Test
     @Order(5)
     void test_buscaPorDescricao_nao_encontradao() {
 	List<RamoAtividade> list = this.service.buscaPorDescricao("fdasrfsdare");
@@ -94,7 +85,7 @@ class RamoAtividadeServiceTest {
 	MatcherAssert.assertThat(list.size(), Matchers.is(0));
     }
 
-    @Test
+    // @Test
     @Order(6)
     void test_findById() {
 	ids.forEach(id -> {
@@ -103,7 +94,7 @@ class RamoAtividadeServiceTest {
 	});
     }
 
-    @Test
+    // @Test
     @Order(7)
     void test_findById_nao_encontrado() {
 	Exception exception = Assertions.assertThrows(RamoAtividadeIdNotFoundException.class, () -> this.service.findById(100));
@@ -111,7 +102,7 @@ class RamoAtividadeServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Ramo de Atividade não encontrado"));
     }
 
-    @Test
+    // @Test
     @Order(8)
     void delete() {
 	ids.forEach(id -> {
@@ -121,7 +112,7 @@ class RamoAtividadeServiceTest {
 	});
     }
 
-    @Test
+    // @Test
     @Order(9)
     void delete_nao_encontrado() {
 	Boolean result = this.service.delete(454);

@@ -17,7 +17,7 @@ $(document).ready(function(){
 	let cad = document.getElementById('cad');
 	
 	if(cad){
-		let cadname = cad.dataset.name;
+		let cadname = cad.dataset.cadname;
 		let columns = cad.dataset.columns.split(',');
 		let columndefault = cad.dataset.columndefault.split(',');
 		let titles = cad.dataset.titles.split(',');

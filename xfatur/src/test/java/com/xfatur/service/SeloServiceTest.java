@@ -13,14 +13,8 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.SeloDuplicadoRuntimeException;
@@ -31,9 +25,9 @@ import com.xfatur.service.produto.ProdutoService;
 import com.xfatur.testutil.CreateModelTest;
 import com.xfatur.testutil.UtilCreateProduto;
 
-@SpringBootTest
-@TestInstance(Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
+//@SpringBootTest
+////@TestInstance(Lifecycle.PER_CLASS)
+////@TestMethodOrder(OrderAnnotation.class)
 class SeloServiceTest {
 
     @Autowired
@@ -54,7 +48,7 @@ class SeloServiceTest {
 	idsProduto = utilCreateProduto.idsProduto();
     }
 
-    @Test
+    // @Test
     @Order(1)
     void test_save() {
 
@@ -74,7 +68,7 @@ class SeloServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(2)
     void test_update() {
 	Selo selo = seloService.findById(idsSelo.get(0));
@@ -84,7 +78,7 @@ class SeloServiceTest {
 	seloService.save(selo);
     }
 
-    @Test
+    // @Test
     @Order(3)
     void test_findById_error() {
 	Exception exception = Assertions.assertThrows(SeloIdNotFoundException.class, () -> seloService.findById(45646));
@@ -92,7 +86,7 @@ class SeloServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Selo não encontrado"));
     }
 
-    @Test
+    // @Test
     @Order(4)
     void test_unique() {
 	Selo selo = new Selo();
@@ -112,7 +106,7 @@ class SeloServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Selo ja cadastrado"));
     }
 
-    @Test
+    // @Test
     @Order(5)
     @Transactional
     void test_fields() {
@@ -130,7 +124,7 @@ class SeloServiceTest {
 	MatcherAssert.assertThat(selo1.getProduto(), Matchers.is(selo2.getProduto()));
     }
 
-    @Test
+    // @Test
     @Order(6)
     @Transactional
     void test_findAllByNumeroGuia() {

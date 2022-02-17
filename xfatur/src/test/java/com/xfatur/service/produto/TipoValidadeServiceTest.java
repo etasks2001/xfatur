@@ -7,22 +7,16 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.xfatur.exception.TipoValidadeIdNotFoundException;
 import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.testutil.CreateModelTest;
 
-@SpringBootTest
-@TestInstance(Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
+//@SpringBootTest
+////@TestInstance(Lifecycle.PER_CLASS)
+////@TestMethodOrder(OrderAnnotation.class)
 class TipoValidadeServiceTest {
 
     @Autowired
@@ -30,14 +24,14 @@ class TipoValidadeServiceTest {
 
     List<Integer> ids = new ArrayList<Integer>();
 
-    @Test
+    // @Test
     @Order(1)
     void test_save() {
 	CreateModelTest.tipoValidadeList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
 
     }
 
-    @Test
+    // @Test
     @Order(2)
     void test_findByDescricao() {
 	List<TipoValidade> tipoValidade = service.findByDescricao("A");
@@ -46,14 +40,14 @@ class TipoValidadeServiceTest {
 
     }
 
-    @Test
+    // @Test
     @Order(3)
     void test_findByDescricao_retorna_vazio() {
 	List<TipoValidade> tipoValidade = service.findByDescricao("fdsafd");
 	MatcherAssert.assertThat(tipoValidade.size(), Matchers.is(0));
     }
 
-    @Test
+    // @Test
     @Order(4)
     void test_update() {
 	TipoValidade tipoValidade = service.findById(ids.get(0));
@@ -63,7 +57,7 @@ class TipoValidadeServiceTest {
 	service.save(tipoValidade);
     }
 
-    @Test
+    // @Test
     @Order(5)
     void test_findById_nao_encontrado() {
 	Exception exception = Assertions.assertThrows(TipoValidadeIdNotFoundException.class, () -> service.findById(4567464));

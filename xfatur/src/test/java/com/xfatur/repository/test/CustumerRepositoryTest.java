@@ -2,28 +2,22 @@ package com.xfatur.repository.test;
 
 import java.util.Set;
 
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.model.test.Customer;
 import com.xfatur.model.test.PhoneNumber;
 
-@SpringBootTest
-@TestInstance(Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
+//@SpringBootTest
+////@TestInstance(Lifecycle.PER_CLASS)
+////@TestMethodOrder(OrderAnnotation.class)
 class CustumerRepositoryTest {
 
     @Autowired
     CustomerRepository repository;
 
-    @Test
+    // //@Test
     @Order(1)
     void test_cria_customer() {
 	Customer customer = new Customer();
@@ -43,7 +37,7 @@ class CustumerRepositoryTest {
 	repository.save(customer);
     }
 
-    @Test
+    // //@Test
     @Transactional
     @Order(2)
     void test_load_customer() {
@@ -57,7 +51,7 @@ class CustumerRepositoryTest {
 	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 
-    @Test
+//    //@Test
     @Transactional
     @Order(3)
     void test_update_customer() {
@@ -90,7 +84,7 @@ class CustumerRepositoryTest {
 	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 //
-//	@Test
+//	//@Test
 //	void test_delete() {
 //		repository.deleteById(1);
 //	}

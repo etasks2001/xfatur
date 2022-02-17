@@ -44,10 +44,10 @@ public class ClassificacaoFiscalService implements Servico {
 	return repository.findIdByDescricao(descricao);
     }
 
-    public ClassificacaoFiscal findById(Integer id) {
+    public ClassificacaoFiscalDTO findById(Integer id) {
 	Optional<ClassificacaoFiscal> found = repository.findById(id);
 	if (found.isPresent()) {
-	    return found.get();
+	    return mapper.toDto(found.get());
 	}
 	throw new ClassificacaoFiscalIdNotFoundException("Código da Classificação Fiscal não encontrado.");
 
