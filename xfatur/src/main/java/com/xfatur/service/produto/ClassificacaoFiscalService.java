@@ -9,9 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
 import com.xfatur.exception.ClassificacaoFiscalIdNotFoundException;
-import com.xfatur.mappers.ClassificacaoFiscalMapper;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.repository.produto.ClassificacaoFiscalRepository;
 import com.xfatur.service.Servico;
@@ -23,16 +21,9 @@ public class ClassificacaoFiscalService implements Servico {
     @Autowired
     private ClassificacaoFiscalRepository repository;
 
-    @Autowired
-    private ClassificacaoFiscalMapper mapper;
-
     public void deleteById(Integer id) {
-	repository.deleteById(id);
-    }
 
-    @Transactional(readOnly = false)
-    public ClassificacaoFiscal save(ClassificacaoFiscalDTO dto) {
-	return repository.save(mapper.toModel(dto));
+	repository.deleteById(id);
     }
 
     @Transactional(readOnly = false)
@@ -44,27 +35,35 @@ public class ClassificacaoFiscalService implements Servico {
 	return repository.findIdByDescricao(descricao);
     }
 
-    public ClassificacaoFiscalDTO findById(Integer id) {
+    public ClassificacaoFiscal findById(Integer id) {
 	Optional<ClassificacaoFiscal> found = repository.findById(id);
 	if (found.isPresent()) {
-	    return mapper.toDto(found.get());
+	    return found.get();
 	}
 	throw new ClassificacaoFiscalIdNotFoundException("Código da Classificação Fiscal não encontrado.");
 
     }
 
     public List<ClassificacaoFiscal> findByDescricao(String descricao) {
+
 	return repository.findByDescricao(descricao);
 
     }
 
     public Boolean hasDescricao(String descricao) {
 	return repository.hasDescricao(descricao);
+    }
 
+    public Boolean hasDescricaoNotFromId(String descricao, Integer id) {
+	return repository.hasDescricaoNotFromId(descricao, id);
     }
 
     public Boolean hasNcm(String ncm) {
 	return repository.hasNcm(ncm);
+    }
+
+    public Boolean hasNcmNotFromId(String ncm, Integer id) {
+	return repository.hasNcmNotFromId(ncm, id);
     }
 
     public Page<ClassificacaoFiscal> findAll(Pageable pageable) {
@@ -77,6 +76,12 @@ public class ClassificacaoFiscalService implements Servico {
 
     public Page<ClassificacaoFiscal> findByNcm(String search, Pageable pageable) {
 	return repository.findByNcm(search, pageable);
+    }
+
+    @Transactional(readOnly = false)
+    public void update(ClassificacaoFiscal model) {
+	repository.update(model.getId(), model.getNcm(), model.getDescricao());
+
     }
 
 }

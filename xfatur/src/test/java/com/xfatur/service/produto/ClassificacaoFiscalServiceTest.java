@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
 import com.xfatur.exception.ClassificacaoFiscalIdNotFoundException;
 import com.xfatur.mappers.ClassificacaoFiscalMapper;
 import com.xfatur.model.produto.ClassificacaoFiscal;
@@ -39,11 +38,9 @@ class ClassificacaoFiscalServiceTest {
     // @Test
     @Order(3)
     void test_findById() {
-	ClassificacaoFiscalDTO f1 = service.findById(ids.get(0));
-	ClassificacaoFiscalDTO f2 = service.findById(ids.get(0));
 
-	ClassificacaoFiscal found1 = mapper.toModel(f1);
-	ClassificacaoFiscal found2 = mapper.toModel(f2);
+	ClassificacaoFiscal found1 = service.findById(ids.get(0));
+	ClassificacaoFiscal found2 = service.findById(ids.get(0));
 
 	MatcherAssert.assertThat(found1.getNcm(), Matchers.is(found2.getNcm()));
 	assertNotNull(found1);
