@@ -23,7 +23,14 @@ $(document).ready(function(){
 		let titles = cad.dataset.titles.split(',');
 		let orderable = cad.dataset.orderable.split(',');
 		let columnDefs = [];
+
 		
+		columnDefs.push({title:' ', width: "10px", orderable : false, data : 'id', "render" : function(id) {
+			return `<a class="btn btn-success btn-sm btn-block" href="/${cadname}/editar/${id}" role="button"><i class="fas fa-edit"></i></a>`;}});
+		
+		columnDefs.push({title:' ', width: "10px", orderable : false,	data : 'id', "render" : function(id) {
+            return `<a class="btn btn-danger btn-sm btn-block" href="/${cadname}/excluir/${id}" role="button" data-toggle="modal" data-target="#confirm-modal"><i class="fas fa-times-circle"></i></a>`;}});
+
 		for(let i = 0; i<columns.length;i++){
 			columnDefs.push({
 						data:columns[i],
@@ -36,13 +43,6 @@ $(document).ready(function(){
 		
 		
 		
-		columnDefs.push({orderable : false, data : 'id', "render" : function(id) {
-			return `<a class="btn btn-success btn-sm btn-block" href="/${cadname}/editar/${id}" role="button"><i class="fas fa-edit"></i></a>`;}});
-		
-		columnDefs.push({orderable : false,	data : 'id', "render" : function(id) {
-            return `<a class="btn btn-danger btn-sm btn-block" href="/${cadname}/excluir/${id}" role="button" data-toggle="modal" data-target="#confirm-modal"><i class="fas fa-times-circle"></i></a>`;}});
-		
-		
 		
 		columndefault[0] = Number(columndefault[0]);
 		
@@ -52,10 +52,7 @@ $(document).ready(function(){
 			language: languageConfig,
 	        scrollX: true,
 	        style:'compact',
-
-	        
 	        columns:columnDefs,
-
 	        search: {
 	            return:true
 	        },
