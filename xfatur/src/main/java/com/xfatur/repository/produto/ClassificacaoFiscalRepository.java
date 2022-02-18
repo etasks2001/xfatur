@@ -32,10 +32,10 @@ public interface ClassificacaoFiscalRepository extends JpaRepository<Classificac
 	Page<ClassificacaoFiscal> findByNcm(@Param("search") String search, Pageable pageable);
 
 	@Query("select count(cf)>0 from ClassificacaoFiscal cf where cf.descricao = :descricao and cf.id <>:id")
-	Boolean hasDescricaoNotFromId(String descricao, Integer id);
+	Boolean hasDescricao(String descricao, Integer id);
 
 	@Query("select count(cf)>0 from ClassificacaoFiscal cf where cf.ncm = :ncm and cf.id<> :id")
-	Boolean hasNcmNotFromId(String ncm, Integer id);
+	Boolean hasNcm(String ncm, Integer id);
 
 	@Modifying
 	@Query("update ClassificacaoFiscal cf set cf.ncm = :ncm, cf.descricao = :descricao  where cf.id = :id")

@@ -55,16 +55,16 @@ public class ClassificacaoFiscalService implements Servico {
 		return repository.hasDescricao(descricao);
 	}
 
-	public Boolean hasDescricaoNotFromId(String descricao, Integer id) {
-		return repository.hasDescricaoNotFromId(descricao, id);
+	public Boolean hasDescricao(String descricao, Integer id) {
+		return repository.hasDescricao(descricao, id);
 	}
 
 	public Boolean hasNcm(String ncm) {
 		return repository.hasNcm(ncm);
 	}
 
-	public Boolean hasNcmNotFromId(String ncm, Integer id) {
-		return repository.hasNcmNotFromId(ncm, id);
+	public Boolean hasNcm(String ncm, Integer id) {
+		return repository.hasNcm(ncm, id);
 	}
 
 	public Page<ClassificacaoFiscal> findAll(Pageable pageable) {

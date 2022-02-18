@@ -22,50 +22,50 @@ import com.xfatur.service.produto.ClassificacaoFiscalService;
 @RequestMapping("classificacaofiscal")
 public class ClassificacaoFiscalController {
 
-	@Autowired
-	private ClassificacaoFiscalService service;
-	@Autowired
-	private ClassificacaoFiscalMapper mapper;
+    @Autowired
+    private ClassificacaoFiscalService service;
+    @Autowired
+    private ClassificacaoFiscalMapper mapper;
 
-	@GetMapping("form")
-	public String openForm(ClassificacaoFiscalDTO dto) {
+    @GetMapping("form")
+    public String openForm(ClassificacaoFiscalDTO dto) {
 
-		return "/cadastro/classificacaofiscal";
+	return "/cadastro/classificacaofiscal";
+    }
+
+    @PostMapping("salvar")
+    public String salvar(@Valid ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
+	if (result.hasErrors()) {
+	    return "cadastro/classificacaofiscal";
 	}
 
-	@PostMapping("salvar")
-	public String salvar(@Valid ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
-		if (result.hasErrors()) {
-			return "cadastro/classificacaofiscal";
-		}
+	service.save(mapper.toModel(dto));
 
-		service.save(mapper.toModel(dto));
+	attr.addFlashAttribute("success", "Classificação fiscal incluída.");
 
-		attr.addFlashAttribute("success", "Classificação fiscal incluída.");
+	return "redirect:/classificacaofiscal/form";
+    }
 
-		return "redirect:/classificacaofiscal/form";
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Integer id) {
+	ClassificacaoFiscal entity = service.findById(id);
+	ClassificacaoFiscalDTO dto = mapper.toDto(entity);
+
+	return new ModelAndView("/cadastro/classificacaofiscal", "classificacaoFiscalDTO", dto);
+    }
+
+    @PostMapping("alterar")
+    public String alterar(@ModelAttribute ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
+
+	if (result.hasErrors()) {
+	    return "cadastro/classificacaofiscal";
 	}
 
-	@GetMapping("/editar/{id}")
-	public ModelAndView editar(@PathVariable("id") Integer id) {
-		ClassificacaoFiscal entity = service.findById(id);
-		ClassificacaoFiscalDTO dto = mapper.toDto(entity);
+	service.update(dto);
 
-		return new ModelAndView("/cadastro/classificacaofiscal", "classificacaoFiscalDTO", dto);
-	}
+	attr.addFlashAttribute("success", "Classificação fiscal alterada.");
 
-	@PostMapping("alterar")
-	public String alterar(@ModelAttribute ClassificacaoFiscalDTO dto, RedirectAttributes attr) {
-
-//	if (result.hasErrors()) {
-//	    return "cadastro/classificacaofiscal";
-//	}
-
-		service.update(dto);
-
-		attr.addFlashAttribute("success", "Classificação fiscal alterada.");
-
-		return "redirect:/classificacaofiscal/form";
-	}
+	return "redirect:/classificacaofiscal/form";
+    }
 
 }
