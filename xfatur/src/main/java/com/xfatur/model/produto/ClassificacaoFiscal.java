@@ -49,4 +49,9 @@ public class ClassificacaoFiscal {
 		this.descricao = descricao;
 	}
 
+	@Override
+	public String toString() {
+		return "ClassificacaoFiscal [id=" + id + ", ncm=" + ncm + ", descricao=" + descricao + "]";
+	}
+
 }

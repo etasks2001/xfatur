@@ -8,8 +8,8 @@ import com.xfatur.model.produto.ClassificacaoFiscal;
 @Mapper(componentModel = "spring")
 public interface ClassificacaoFiscalMapper {
 
-    ClassificacaoFiscal toModel(ClassificacaoFiscalDTO dto);
+	ClassificacaoFiscal toModel(ClassificacaoFiscalDTO dto);
 
-    ClassificacaoFiscalDTO toDto(ClassificacaoFiscal model);
+	ClassificacaoFiscalDTO toDto(ClassificacaoFiscal model);
 
 }

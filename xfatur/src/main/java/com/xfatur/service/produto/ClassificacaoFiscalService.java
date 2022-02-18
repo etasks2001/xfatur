@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
 import com.xfatur.exception.ClassificacaoFiscalIdNotFoundException;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.repository.produto.ClassificacaoFiscalRepository;
@@ -18,70 +19,70 @@ import com.xfatur.service.Servico;
 @Transactional(readOnly = true)
 public class ClassificacaoFiscalService implements Servico {
 
-    @Autowired
-    private ClassificacaoFiscalRepository repository;
+	@Autowired
+	private ClassificacaoFiscalRepository repository;
 
-    public void deleteById(Integer id) {
+	public void deleteById(Integer id) {
 
-	repository.deleteById(id);
-    }
-
-    @Transactional(readOnly = false)
-    public ClassificacaoFiscal save(ClassificacaoFiscal classificacaoFiscal) {
-	return repository.save(classificacaoFiscal);
-    }
-
-    public Integer findIdByDescricao(String descricao) {
-	return repository.findIdByDescricao(descricao);
-    }
-
-    public ClassificacaoFiscal findById(Integer id) {
-	Optional<ClassificacaoFiscal> found = repository.findById(id);
-	if (found.isPresent()) {
-	    return found.get();
+		repository.deleteById(id);
 	}
-	throw new ClassificacaoFiscalIdNotFoundException("Código da Classificação Fiscal não encontrado.");
 
-    }
+	@Transactional(readOnly = false)
+	public ClassificacaoFiscal save(ClassificacaoFiscal classificacaoFiscal) {
+		return repository.save(classificacaoFiscal);
+	}
 
-    public List<ClassificacaoFiscal> findByDescricao(String descricao) {
+	public Integer findIdByDescricao(String descricao) {
+		return repository.findIdByDescricao(descricao);
+	}
 
-	return repository.findByDescricao(descricao);
+	public ClassificacaoFiscal findById(Integer id) {
+		Optional<ClassificacaoFiscal> found = repository.findById(id);
+		if (found.isPresent()) {
+			return found.get();
+		}
+		throw new ClassificacaoFiscalIdNotFoundException("Código da Classificação Fiscal não encontrado.");
 
-    }
+	}
 
-    public Boolean hasDescricao(String descricao) {
-	return repository.hasDescricao(descricao);
-    }
+	public List<ClassificacaoFiscal> findByDescricao(String descricao) {
 
-    public Boolean hasDescricaoNotFromId(String descricao, Integer id) {
-	return repository.hasDescricaoNotFromId(descricao, id);
-    }
+		return repository.findByDescricao(descricao);
 
-    public Boolean hasNcm(String ncm) {
-	return repository.hasNcm(ncm);
-    }
+	}
 
-    public Boolean hasNcmNotFromId(String ncm, Integer id) {
-	return repository.hasNcmNotFromId(ncm, id);
-    }
+	public Boolean hasDescricao(String descricao) {
+		return repository.hasDescricao(descricao);
+	}
 
-    public Page<ClassificacaoFiscal> findAll(Pageable pageable) {
-	return repository.findAll(pageable);
-    }
+	public Boolean hasDescricaoNotFromId(String descricao, Integer id) {
+		return repository.hasDescricaoNotFromId(descricao, id);
+	}
 
-    public Page<ClassificacaoFiscal> findByDescricao(String search, Pageable pageable) {
-	return repository.findByDescricao(search, pageable);
-    }
+	public Boolean hasNcm(String ncm) {
+		return repository.hasNcm(ncm);
+	}
 
-    public Page<ClassificacaoFiscal> findByNcm(String search, Pageable pageable) {
-	return repository.findByNcm(search, pageable);
-    }
+	public Boolean hasNcmNotFromId(String ncm, Integer id) {
+		return repository.hasNcmNotFromId(ncm, id);
+	}
 
-    @Transactional(readOnly = false)
-    public void update(ClassificacaoFiscal model) {
-	repository.update(model.getId(), model.getNcm(), model.getDescricao());
+	public Page<ClassificacaoFiscal> findAll(Pageable pageable) {
+		return repository.findAll(pageable);
+	}
 
-    }
+	public Page<ClassificacaoFiscal> findByDescricao(String search, Pageable pageable) {
+		return repository.findByDescricao(search, pageable);
+	}
+
+	public Page<ClassificacaoFiscal> findByNcm(String search, Pageable pageable) {
+		return repository.findByNcm(search, pageable);
+	}
+
+	@Transactional(readOnly = false)
+	public void update(ClassificacaoFiscalDTO dto) {
+
+		repository.update(dto.getId(), dto.getNcm(), dto.getDescricao());
+	}
 
 }
