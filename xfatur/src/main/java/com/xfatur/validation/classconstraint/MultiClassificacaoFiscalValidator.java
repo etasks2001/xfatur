@@ -37,12 +37,12 @@ public class MultiClassificacaoFiscalValidator implements ConstraintValidator<Cl
 	    hasDescricao = service.hasDescricao(descricao);
 	    hasNcm = service.hasNcm(ncm);
 	} else {
-	    hasDescricao = service.hasDescricao(descricao, id);
+	    hasDescricao = service.hasDescricao(id, descricao);
 	    hasNcm = service.hasNcm(ncm, id);
 	}
 
 	if (hasDescricao) {
-	    setMessage(context, "Descrição já cadastrada......", "descricao");
+	    setMessage(context, "Descrição já cadastrada.", "descricao");
 	}
 
 	if (hasNcm) {
@@ -58,5 +58,4 @@ public class MultiClassificacaoFiscalValidator implements ConstraintValidator<Cl
     private void setMessage(ConstraintValidatorContext context, String messageTemplate, String propertyName) {
 	context.buildConstraintViolationWithTemplate(messageTemplate).addPropertyNode(propertyName).addConstraintViolation();
     }
-
 }
