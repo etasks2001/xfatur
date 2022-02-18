@@ -12,8 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.xfatur.exception.ClassificacaoFiscalIdNotFoundException;
-import com.xfatur.mappers.ClassificacaoFiscalMapper;
+import com.xfatur.mappers.ModelMapper;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.testutil.CreateModelTest;
 
@@ -22,7 +21,7 @@ import com.xfatur.testutil.CreateModelTest;
 ////@TestMethodOrder(OrderAnnotation.class)
 class ClassificacaoFiscalServiceTest {
     @Autowired
-    private ClassificacaoFiscalMapper mapper;
+    private ModelMapper mapper;
 
     @Autowired
     ClassificacaoFiscalService service;
@@ -50,7 +49,7 @@ class ClassificacaoFiscalServiceTest {
     // @Test
     @Order(4)
     void test_findById_error() {
-	Exception exception = Assertions.assertThrows(ClassificacaoFiscalIdNotFoundException.class, () -> service.findById(546456));
+	Exception exception = Assertions.assertThrows(RuntimeException.class, () -> service.findById(546456));
 
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código da Classificação Fiscal não encontrado."));
     }

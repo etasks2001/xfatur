@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.exception.MarcaIdNotFoundException;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.repository.produto.MarcaRepository;
@@ -39,6 +43,24 @@ public class MarcaService {
 
     public List<Marca> findByDescricao(String descricao) {
 	return repository.findByDescricao(descricao);
+    }
+
+    @Transactional
+    public void update(MarcaDTO dto) {
+	repository.update(dto.getId(), dto.getDescricao());
+
+    }
+
+    public Page<Marca> findByDescricao(String search, Pageable pageable) {
+	return repository.findByDescricao(search, pageable);
+    }
+
+    public Boolean hasDescricao(String descricao) {
+	return repository.hasDescricao(descricao);
+    }
+
+    public Boolean hasDescricao(Integer id, String descricao) {
+	return repository.hasDescricao(id, descricao);
     }
 
 }

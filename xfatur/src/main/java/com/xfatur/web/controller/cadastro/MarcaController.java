@@ -12,56 +12,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
+import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.mappers.ModelMapper;
-import com.xfatur.service.produto.ClassificacaoFiscalService;
+import com.xfatur.service.produto.MarcaService;
 
 @Controller
-@RequestMapping("classificacaofiscal")
-public class ClassificacaoFiscalController {
+@RequestMapping("marca")
+public class MarcaController {
 
     @Autowired
-    private ClassificacaoFiscalService service;
+    private MarcaService service;
     @Autowired
     private ModelMapper mapper;
 
     @GetMapping("form")
-    public String openForm(ClassificacaoFiscalDTO dto) {
+    public String openForm(MarcaDTO dto) {
 
-	return "/cadastro/classificacaofiscal";
+	return "/cadastro/marca";
     }
 
     @PostMapping("salvar")
-    public String salvar(@Valid ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
+    public String salvar(@Valid MarcaDTO dto, BindingResult result, RedirectAttributes attr) {
 	if (result.hasErrors()) {
-	    return "cadastro/classificacaofiscal";
+	    return "cadastro/marca";
 	}
 
 	service.save(mapper.toModel(dto));
 
-	attr.addFlashAttribute("success", "Classificação fiscal incluída.");
+	attr.addFlashAttribute("success", "Marca incluída.");
 
-	return "redirect:/classificacaofiscal/form";
+	return "redirect:/marca/form";
     }
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Integer id) {
-	ClassificacaoFiscalDTO dto = mapper.toDto(service.findById(id));
+	MarcaDTO dto = mapper.toDto(service.findById(id));
 
-	return new ModelAndView("/cadastro/classificacaofiscal", "classificacaoFiscalDTO", dto);
+	return new ModelAndView("/cadastro/marca", "marcaDTO", dto);
     }
 
     @PostMapping("alterar")
-    public String alterar(@Valid ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
+    public String alterar(@Valid MarcaDTO dto, BindingResult result, RedirectAttributes attr) {
 
 	if (result.hasErrors()) {
-	    return "cadastro/classificacaofiscal";
+	    return "cadastro/marca";
 	}
 
 	service.update(dto);
 
-	attr.addFlashAttribute("success", "Classificação fiscal alterada.");
+	attr.addFlashAttribute("success", "Marca alterada.");
 
-	return "redirect:/classificacaofiscal/form";
+	return "redirect:/marca/form";
     }
 }

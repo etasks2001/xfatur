@@ -1,0 +1,28 @@
+.marca {
+    display: grid;
+    grid-template-rows:auto auto auto auto auto;
+    grid-template-columns: 65px 116px 550px;
+    grid-template-areas: 
+    "label-descricao input-descricao input-descricao"
+    ". error_descricao error_descricao"
+    ". botoes botoes"
+    ;
+}
+
+#error_descricao{
+    grid-area: error_descricao;
+}
+
+
+
+.input-ncm {
+    grid-area: input-ncm;
+}
+
+.label-descricao {
+    grid-area: label-descricao;
+}
+
+.input-descricao {
+    grid-area: input-descricao;
+}

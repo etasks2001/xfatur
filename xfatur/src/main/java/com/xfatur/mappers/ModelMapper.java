@@ -3,13 +3,19 @@ package com.xfatur.mappers;
 import org.mapstruct.Mapper;
 
 import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
+import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.model.produto.ClassificacaoFiscal;
+import com.xfatur.model.produto.Marca;
 
 @Mapper(componentModel = "spring")
-public interface ClassificacaoFiscalMapper {
+public interface ModelMapper {
 
-	ClassificacaoFiscal toModel(ClassificacaoFiscalDTO dto);
+    ClassificacaoFiscal toModel(ClassificacaoFiscalDTO dto);
 
-	ClassificacaoFiscalDTO toDto(ClassificacaoFiscal model);
+    ClassificacaoFiscalDTO toDto(ClassificacaoFiscal model);
+
+    Marca toModel(MarcaDTO dto);
+
+    MarcaDTO toDto(Marca model);
 
 }

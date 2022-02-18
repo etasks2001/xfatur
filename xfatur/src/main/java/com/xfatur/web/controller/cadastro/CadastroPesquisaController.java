@@ -1,4 +1,4 @@
-package com.xfatur.web.controller;
+package com.xfatur.web.controller.cadastro;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

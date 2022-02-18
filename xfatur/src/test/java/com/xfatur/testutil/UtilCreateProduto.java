@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.mappers.ClassificacaoFiscalMapper;
+import com.xfatur.mappers.ModelMapper;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.FundoPobreza;
 import com.xfatur.model.produto.Linha;
@@ -66,7 +66,7 @@ public class UtilCreateProduto {
     @Autowired
     private PaisService paisService;
     @Autowired
-    private ClassificacaoFiscalMapper mapper;
+    private ModelMapper mapper;
 
     private List<String> idsTributacao = new ArrayList<String>();
     private List<Integer> idsClassificacaoFiscal = new ArrayList<Integer>();

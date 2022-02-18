@@ -5,11 +5,12 @@ import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
-import com.xfatur.validation.classconstraint.ClassificacaoFiscalAnnotation;
+import com.xfatur.dto.DTO;
+import com.xfatur.validation.multi.annotation.MultiClassificacaoFiscalAnnotation;
 
 @Component
-@ClassificacaoFiscalAnnotation
-public class ClassificacaoFiscalDTO {
+@MultiClassificacaoFiscalAnnotation(dto = ClassificacaoFiscalDTO.class)
+public class ClassificacaoFiscalDTO implements DTO {
 
     private Integer id;
 
@@ -43,11 +44,6 @@ public class ClassificacaoFiscalDTO {
 
     public void setId(Integer id) {
 	this.id = id;
-    }
-
-    @Override
-    public String toString() {
-	return "ClassificacaoFiscalDTO [id=" + id + ", ncm=" + ncm + ", descricao=" + descricao + "]";
     }
 
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
-import com.xfatur.exception.ClassificacaoFiscalIdNotFoundException;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.repository.produto.ClassificacaoFiscalRepository;
 import com.xfatur.service.Servico;
@@ -41,7 +40,7 @@ public class ClassificacaoFiscalService implements Servico {
 	if (found.isPresent()) {
 	    return found.get();
 	}
-	throw new ClassificacaoFiscalIdNotFoundException("Código da Classificação Fiscal não encontrado.");
+	throw new RuntimeException("Código da Classificação Fiscal não encontrado.");
 
     }
 

@@ -5,53 +5,45 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
-import com.xfatur.service.produto.ClassificacaoFiscalService;
+import com.xfatur.dto.produto.MarcaDTO;
+import com.xfatur.service.produto.MarcaService;
 import com.xfatur.validation.executable.State;
-import com.xfatur.validation.multi.annotation.MultiClassificacaoFiscalAnnotation;
+import com.xfatur.validation.multi.annotation.MultiMarcaAnnotation;
 
-public class MultiClassificacaoFiscalValidator implements ConstraintValidator<MultiClassificacaoFiscalAnnotation, ClassificacaoFiscalDTO> {
+public class MultiMarcaValidator implements ConstraintValidator<MultiMarcaAnnotation, MarcaDTO> {
 
     @Autowired
-    private ClassificacaoFiscalService service;
+    private MarcaService service;
 
     @Override
-    public void initialize(MultiClassificacaoFiscalAnnotation constraintAnnotation) {
+    public void initialize(MultiMarcaAnnotation constraintAnnotation) {
 
     }
 
     @Override
-    public boolean isValid(ClassificacaoFiscalDTO dto, ConstraintValidatorContext context) {
+    public boolean isValid(MarcaDTO dto, ConstraintValidatorContext context) {
 	context.disableDefaultConstraintViolation();
 
-	if (!(dto instanceof ClassificacaoFiscalDTO)) {
+	if (!(dto instanceof MarcaDTO)) {
 	    throw new IllegalArgumentException("@ClassificacaoFiscalAnnotation é aplicado em somente ClassificacaoFiscal");
 	}
 
 	Boolean hasDescricao = null;
-	Boolean hasNcm = null;
 
 	Integer id = dto.getId();
 	String descricao = dto.getDescricao().trim();
-	String ncm = dto.getNcm().trim();
 
 	if (id == null) {
 	    hasDescricao = service.hasDescricao(descricao);
-	    hasNcm = service.hasNcm(ncm);
 	} else {
 	    hasDescricao = service.hasDescricao(id, descricao);
-	    hasNcm = service.hasNcm(ncm, id);
 	}
 
 	if (hasDescricao) {
-	    setMessage(context, "Descrição já cadastrada.", "descricao");
+	    setMessage(context, "Marca já cadastrada.", "descricao");
 	}
 
-	if (hasNcm) {
-	    setMessage(context, "NCM já cadastrado.", "ncm");
-	}
-
-	if (hasNcm || hasDescricao) {
+	if (hasDescricao) {
 	    return State.INVALID.getValue();
 	}
 	return State.VALID.getValue();

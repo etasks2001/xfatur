@@ -9,12 +9,12 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 import com.xfatur.dto.DTO;
-import com.xfatur.validation.multi.validator.MultiClassificacaoFiscalValidator;
+import com.xfatur.validation.multi.validator.MultiMarcaValidator;
 
-@Constraint(validatedBy = MultiClassificacaoFiscalValidator.class)
+@Constraint(validatedBy = MultiMarcaValidator.class)
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MultiClassificacaoFiscalAnnotation {
+public @interface MultiMarcaAnnotation {
     String message() default "";
 
     Class<?>[] groups() default {};
