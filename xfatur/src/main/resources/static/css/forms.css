@@ -1,5 +1,6 @@
 @import url("../css/classificacaofiscal.css");
 @import url("../css/marca.css");
+@import url("../css/origem.css");
 
 section form .cadastro{
     grid-gap: 3px;

@@ -1,15 +1,17 @@
-.marca {
+.origem {
     display: grid;
     grid-template-rows:auto auto auto auto auto;
     grid-template-columns: 65px 116px 550px;
     grid-template-areas: 
+    "label-id input-id ."
+    ". error_id error_id"
     "label-descricao input-descricao input-descricao"
     ". error_descricao error_descricao"
     ". botoes botoes"
     ;
 }
 
-#error_id{
+#error_descricao{
     grid-area: error_descricao;
 }
 
@@ -22,3 +24,15 @@
 }
 
 
+
+#error_id{
+    grid-area: error_id;
+}
+
+.label-id {
+    grid-area: label-id;
+}
+
+.input-id {
+    grid-area: input-id;
+}
