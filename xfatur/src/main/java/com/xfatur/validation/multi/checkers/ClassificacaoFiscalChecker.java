@@ -26,13 +26,8 @@ public class ClassificacaoFiscalChecker implements Checker {
 		String descricao = cf.getDescricao().trim();
 		String ncm = cf.getNcm().trim();
 
-		if (id == null) {
-			hasDescricao = service.hasDescricao(descricao);
-			hasNcm = service.hasNcm(ncm);
-		} else {
-			hasDescricao = service.hasDescricao(id, descricao);
-			hasNcm = service.hasNcm(ncm, id);
-		}
+		hasDescricao = service.hasDescricao(id, descricao);
+		hasNcm = service.hasNcm(ncm, id);
 
 		if (hasDescricao) {
 			validator.setMessage(context, "Descrição já cadastrada.", "descricao");

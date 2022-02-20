@@ -12,23 +12,20 @@ import org.springframework.data.repository.query.Param;
 import com.xfatur.model.produto.Marca;
 
 public interface MarcaRepository extends JpaRepository<Marca, Integer> {
-    @Query("select m.id from Marca m where m.descricao=:descricao")
-    Integer findIdByDescricao(@Param("descricao") String descricao);
+	@Query("select m.id from Marca m where m.descricao=:descricao")
+	Integer findIdByDescricao(@Param("descricao") String descricao);
 
-    @Query("select m from Marca m where m.descricao like %:descricao% order by m.descricao asc")
-    List<Marca> findByDescricao(@Param("descricao") String descricao);
+	@Query("select m from Marca m where m.descricao like %:descricao% order by m.descricao asc")
+	List<Marca> findByDescricao(@Param("descricao") String descricao);
 
-    @Modifying
-    @Query("update Marca m set m.descricao =:descricao where m.id=:id ")
-    void update(@Param("id") Integer id, @Param("descricao") String descricao);
+	@Modifying
+	@Query("update Marca m set m.descricao =:descricao where m.id=:id ")
+	void update(@Param("id") Integer id, @Param("descricao") String descricao);
 
-    @Query("select m from Marca m where m.descricao like %:search%")
-    Page<Marca> findByDescricao(String search, Pageable pageable);
+	@Query("select m from Marca m where m.descricao like %:search%")
+	Page<Marca> findByDescricao(String search, Pageable pageable);
 
-    @Query("select count(m)>0 from Marca m where m.descricao = :descricao")
-    Boolean hasDescricao(@Param("descricao") String descricao);
-
-    @Query("select count(m)>0 from Marca m where m.descricao = :descricao and m.id <>:id")
-    Boolean hasDescricao(@Param("id") Integer id, @Param("descricao") String descricao);
+	@Query("select count(m)>0 from Marca m where m.descricao = :descricao and (:id is null or m.id <>:id)")
+	Boolean hasDescricao(@Param("id") Integer id, @Param("descricao") String descricao);
 
 }

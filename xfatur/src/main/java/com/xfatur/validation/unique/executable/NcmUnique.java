@@ -9,16 +9,16 @@ import com.xfatur.validation.unique.UniqueConstraint;
 @Component
 public class NcmUnique implements UniqueConstraint {
 
-    @Autowired
-    private ClassificacaoFiscalService service;
+	@Autowired
+	private ClassificacaoFiscalService service;
 
-    @Override
-    public boolean has(String ncm) {
-	Boolean has = service.hasNcm(ncm.trim());
-
-	if (has) {
-	    return State.INVALID.getValue();
+	@Override
+	public boolean has(String ncm) {
+//	Boolean has = service.hasNcm(ncm.trim());
+//
+//		if (has) {
+//			return State.INVALID.getValue();
+//		}
+		return State.VALID.getValue();
 	}
-	return State.VALID.getValue();
-    }
 }

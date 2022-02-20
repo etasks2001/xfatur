@@ -55,10 +55,6 @@ public class MarcaService {
 		return repository.findByDescricao(search, pageable);
 	}
 
-	public Boolean hasDescricao(String descricao) {
-		return repository.hasDescricao(descricao);
-	}
-
 	public Boolean hasDescricao(Integer id, String descricao) {
 		return repository.hasDescricao(id, descricao);
 	}

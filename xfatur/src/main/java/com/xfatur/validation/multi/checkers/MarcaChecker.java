@@ -24,11 +24,7 @@ public class MarcaChecker implements Checker {
 		Integer id = marca.getId();
 		String descricao = marca.getDescricao().trim();
 
-		if (id == null) {
-			hasDescricao = service.hasDescricao(descricao);
-		} else {
-			hasDescricao = service.hasDescricao(id, descricao);
-		}
+		hasDescricao = service.hasDescricao(id, descricao);
 
 		if (hasDescricao) {
 			validator.setMessage(context, "Marca já cadastrada.", "descricao");
