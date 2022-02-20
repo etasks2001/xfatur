@@ -12,61 +12,60 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.RegiaoProdutoraIdNotFoundException;
 import com.xfatur.model.produto.RegiaoProdutora;
-import com.xfatur.testutil.CreateModelTest;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
 ////@TestMethodOrder(OrderAnnotation.class)
 class RegiaoProdutoraServiceTest {
 
-    @Autowired
-    RegiaoProdutoraService service;
+	@Autowired
+	RegiaoProdutoraService service;
 
-    List<Integer> ids = new ArrayList<Integer>();
+	List<Integer> ids = new ArrayList<Integer>();
 
-    // @Test
-    @Order(1)
-    void test_save() {
-	CreateModelTest.regiaoProdutoraList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
-    }
+	// @Test
+	@Order(1)
+	void test_save() {
+//		CreateModelTest.regiaoProdutoraList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
+	}
 
-    // @Test
-    @Order(2)
-    void test_findByDescricao() {
-	List<RegiaoProdutora> regiaoProdutora = service.findByDescricao("A");
+	// @Test
+	@Order(2)
+	void test_findByDescricao() {
+//	List<RegiaoProdutora> regiaoProdutora = service.findByDescricao("A");
+//
+//	MatcherAssert.assertThat(regiaoProdutora.size(), Matchers.greaterThan(0));
+//
+	}
 
-	MatcherAssert.assertThat(regiaoProdutora.size(), Matchers.greaterThan(0));
+	// @Test
+	@Order(3)
+	void test_findByDescricao_retorna_vazio() {
+//		List<RegiaoProdutora> regiaoProdutora = service.findByDescricao("fdsafd");
+//		MatcherAssert.assertThat(regiaoProdutora.size(), Matchers.is(0));
+	}
 
-    }
+	// @Test
+	@Order(4)
+	void test_update() {
+		RegiaoProdutora regiaoProdutora = service.findById(ids.get(0));
 
-    // @Test
-    @Order(3)
-    void test_findByDescricao_retorna_vazio() {
-	List<RegiaoProdutora> regiaoProdutora = service.findByDescricao("fdsafd");
-	MatcherAssert.assertThat(regiaoProdutora.size(), Matchers.is(0));
-    }
+		regiaoProdutora.setDescricao(regiaoProdutora.getDescricao());
 
-    // @Test
-    @Order(4)
-    void test_update() {
-	RegiaoProdutora regiaoProdutora = service.findById(ids.get(0));
+		service.save(regiaoProdutora);
+	}
 
-	regiaoProdutora.setDescricao(regiaoProdutora.getDescricao());
+	// @Test
+	@Order(5)
+	void test_findById_nao_encontrado() {
+		Exception exception = Assertions.assertThrows(RegiaoProdutoraIdNotFoundException.class, () -> service.findById(4567464));
 
-	service.save(regiaoProdutora);
-    }
+		MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código da Região Produtora não encontrado"));
+	}
 
-    // @Test
-    @Order(5)
-    void test_findById_nao_encontrado() {
-	Exception exception = Assertions.assertThrows(RegiaoProdutoraIdNotFoundException.class, () -> service.findById(4567464));
-
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código da Região Produtora não encontrado"));
-    }
-
-    @AfterAll
-    void delete() {
-	ids.forEach(id -> service.deleteById(id));
-    }
+	@AfterAll
+	void delete() {
+		ids.forEach(id -> service.deleteById(id));
+	}
 
 }

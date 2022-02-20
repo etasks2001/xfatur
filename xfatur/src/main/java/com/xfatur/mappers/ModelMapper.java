@@ -5,9 +5,11 @@ import org.mapstruct.Mapper;
 import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
 import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.dto.produto.OrigemDTO;
+import com.xfatur.dto.produto.RegiaoProdutoraDTO;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
+import com.xfatur.model.produto.RegiaoProdutora;
 
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
@@ -23,5 +25,9 @@ public interface ModelMapper {
 	Origem toModel(OrigemDTO dto);
 
 	OrigemDTO toDto(Origem model);
+
+	RegiaoProdutora toModel(RegiaoProdutoraDTO dto);
+
+	RegiaoProdutoraDTO toDto(RegiaoProdutora model);
 
 }
