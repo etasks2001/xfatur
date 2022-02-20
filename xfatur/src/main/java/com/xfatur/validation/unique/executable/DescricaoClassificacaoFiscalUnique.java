@@ -1,20 +1,20 @@
-package com.xfatur.validation.executable;
+package com.xfatur.validation.unique.executable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.xfatur.service.produto.ClassificacaoFiscalService;
-import com.xfatur.validation.UniqueConstraint;
+import com.xfatur.validation.unique.UniqueConstraint;
 
 @Component
-public class NcmUnique implements UniqueConstraint {
+public class DescricaoClassificacaoFiscalUnique implements UniqueConstraint {
 
     @Autowired
     private ClassificacaoFiscalService service;
 
     @Override
-    public boolean has(String ncm) {
-	Boolean has = service.hasNcm(ncm.trim());
+    public boolean has(String descricao) {
+	Boolean has = service.hasDescricao(descricao.trim());
 
 	if (has) {
 	    return State.INVALID.getValue();

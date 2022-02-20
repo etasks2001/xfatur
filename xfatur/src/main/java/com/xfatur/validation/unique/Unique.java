@@ -1,5 +1,6 @@
-package com.xfatur.validation.multi.annotation;
+package com.xfatur.validation.unique;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -8,18 +9,16 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import com.xfatur.dto.DTO;
-import com.xfatur.validation.multi.validator.MultiClassificacaoFiscalValidator;
-
-@Constraint(validatedBy = MultiClassificacaoFiscalValidator.class)
-@Target(ElementType.TYPE)
+@Documented
+@Target({ ElementType.ANNOTATION_TYPE, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MultiClassificacaoFiscalAnnotation {
+@Constraint(validatedBy = { UniqueValidator.class })
+public @interface Unique {
     String message() default "";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
-    Class<? extends DTO> dto();
+    Class<? extends UniqueConstraint> uniqueConstraint();
 }

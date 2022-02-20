@@ -17,50 +17,50 @@ import com.xfatur.repository.produto.MarcaRepository;
 @Service
 public class MarcaService {
 
-    @Autowired
-    private MarcaRepository repository;
+	@Autowired
+	private MarcaRepository repository;
 
-    public void deleteById(Integer id) {
-	repository.deleteById(id);
-    }
-
-    public Integer findIdByDescricao(String descricao) {
-	return repository.findIdByDescricao(descricao);
-    }
-
-    public Marca save(Marca marca) {
-	return repository.save(marca);
-    }
-
-    public Marca findById(int id) {
-	Optional<Marca> marca = repository.findById(id);
-	if (marca.isPresent()) {
-	    return marca.get();
+	public void deleteById(Integer id) {
+		repository.deleteById(id);
 	}
 
-	throw new MarcaIdNotFoundException("Código da Marca não encontrado");
-    }
+	public Integer findIdByDescricao(String descricao) {
+		return repository.findIdByDescricao(descricao);
+	}
 
-    public List<Marca> findByDescricao(String descricao) {
-	return repository.findByDescricao(descricao);
-    }
+	public Marca save(Marca marca) {
+		return repository.save(marca);
+	}
 
-    @Transactional
-    public void update(MarcaDTO dto) {
-	repository.update(dto.getId(), dto.getDescricao());
+	public Marca findById(int id) {
+		Optional<Marca> marca = repository.findById(id);
+		if (marca.isPresent()) {
+			return marca.get();
+		}
 
-    }
+		throw new MarcaIdNotFoundException("Código da Marca não encontrado");
+	}
 
-    public Page<Marca> findByDescricao(String search, Pageable pageable) {
-	return repository.findByDescricao(search, pageable);
-    }
+	public List<Marca> findByDescricao(String descricao) {
+		return repository.findByDescricao(descricao);
+	}
 
-    public Boolean hasDescricao(String descricao) {
-	return repository.hasDescricao(descricao);
-    }
+	@Transactional
+	public void update(MarcaDTO dto) {
+		repository.update(dto.getId(), dto.getDescricao());
 
-    public Boolean hasDescricao(Integer id, String descricao) {
-	return repository.hasDescricao(id, descricao);
-    }
+	}
+
+	public Page<Marca> findByDescricao(String search, Pageable pageable) {
+		return repository.findByDescricao(search, pageable);
+	}
+
+	public Boolean hasDescricao(String descricao) {
+		return repository.hasDescricao(descricao);
+	}
+
+	public Boolean hasDescricao(Integer id, String descricao) {
+		return repository.hasDescricao(id, descricao);
+	}
 
 }

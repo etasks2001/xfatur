@@ -1,4 +1,4 @@
-package com.xfatur.validation.executable;
+package com.xfatur.validation.unique.executable;
 
 public enum State {
 
