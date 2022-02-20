@@ -11,7 +11,7 @@ import com.xfatur.service.produto.OrigemService;
 @Component(value = "origemqueryby")
 public class OrigemQueryBy implements QueryBy<Origem> {
 
-	private static final String[] COLUMNS = new String[] { "id", "descricao" };
+	private static final String[] COLUMNS = new String[] { "id", "codigo", "descricao" };
 
 	@Autowired
 	private OrigemService service;

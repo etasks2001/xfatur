@@ -13,8 +13,10 @@ import com.xfatur.validation.multi.checkers.OrigemChecker;
 @MultiFielValidate(checker = OrigemChecker.class)
 public class OrigemDTO implements DTO {
 
-	@Pattern(regexp = "\\d{4}", message = "Deve corresponder de 0 a 9")
 	private Integer id;
+
+	@Pattern(regexp = "^[0-9].*", message = "Deve corresponder de 0 a 9")
+	private String codigo;
 
 	@Size(min = 3, max = 80)
 	private String descricao;
@@ -33,6 +35,14 @@ public class OrigemDTO implements DTO {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 }

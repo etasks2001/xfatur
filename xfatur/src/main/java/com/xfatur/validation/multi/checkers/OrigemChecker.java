@@ -20,14 +20,15 @@ public class OrigemChecker implements Checker {
 	public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
 		OrigemDTO origem = (OrigemDTO) dto;
 		Boolean hasDescricao = null;
-		Boolean hasId = null;
+		Boolean hasCodigo = null;
 
 		Integer id = origem.getId();
+		String codigo = origem.getCodigo();
 		String descricao = origem.getDescricao().trim();
 
-		hasId = service.hasId(id);
-		if (hasId) {
-			validator.setMessage(context, "Código já cadastrado.", "id");
+		hasCodigo = service.hasCodigo(id, codigo);
+		if (hasCodigo) {
+			validator.setMessage(context, "Código já cadastrado.", "codigo");
 		}
 
 		hasDescricao = service.hasDescricao(id, descricao);
@@ -36,7 +37,7 @@ public class OrigemChecker implements Checker {
 			validator.setMessage(context, "Origem já cadastrada.", "descricao");
 		}
 
-		if (hasId || hasDescricao) {
+		if (hasCodigo || hasDescricao) {
 			return State.INVALID.getValue();
 
 		}

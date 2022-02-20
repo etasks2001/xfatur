@@ -19,11 +19,11 @@ public interface OrigemRepository extends JpaRepository<Origem, Integer> {
 	@Query("select count(o)>0 from Origem o where o.descricao = :descricao and (:id is null or o.id <>:id)")
 	Boolean hasDescricao(Integer id, String descricao);
 
-	@Query("select count(o)>0 from Origem o where o.id = :id")
-	Boolean hasId(Integer id);
+	@Query("select count(o)>0 from Origem o where o.codigo = :codigo and (:id is null or o.id <> :id)")
+	Boolean hasCodigo(Integer id, String codigo);
 
 	@Modifying
-	@Query("update Origem o set o.descricao =:descricao where o.id=:id ")
-	void update(Integer id, String descricao);
+	@Query("update Origem o set o.codigo=:codigo, o.descricao = :descricao where o.id=:id ")
+	void update(@Param("id") Integer id, @Param("codigo") String codigo, @Param("descricao") String descricao);
 
 }

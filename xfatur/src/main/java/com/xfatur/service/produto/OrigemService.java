@@ -47,17 +47,16 @@ public class OrigemService {
 	}
 
 	public Boolean hasDescricao(Integer id, String descricao) {
-
 		return repository.hasDescricao(id, descricao);
 	}
 
-	public Boolean hasId(Integer id) {
-		return repository.hasId(id);
+	public Boolean hasCodigo(Integer id, String codigo) {
+		return repository.hasCodigo(id, codigo);
 	}
 
 	@Transactional(readOnly = false)
 	public void update(@Valid OrigemDTO dto) {
-		repository.update(dto.getId(), dto.getDescricao());
+		repository.update(dto.getId(), dto.getCodigo(), dto.getDescricao());
 
 	}
 

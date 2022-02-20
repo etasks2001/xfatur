@@ -485,9 +485,11 @@ create table fundopobreza(
 	unique 		(descricao)
 );
 create table origem(
-	id		int not null,
+	id		serial not null,
+	codigo		varchar(1) not null,
 	descricao	varchar(80) not null,
 	primary key	(id),
+	unique 		(codigo),
 	unique 		(descricao)
 );
 

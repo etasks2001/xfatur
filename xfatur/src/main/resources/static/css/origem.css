@@ -3,8 +3,8 @@
     grid-template-rows:auto auto auto auto auto;
     grid-template-columns: 65px 116px 550px;
     grid-template-areas: 
-    "label-id input-id ."
-    ". error_id error_id"
+    "label-codigo input-codigo ."
+    ". error_codigo error_codigo"
     "label-descricao input-descricao input-descricao"
     ". error_descricao error_descricao"
     ". botoes botoes"
@@ -25,14 +25,14 @@
 
 
 
-#error_id{
-    grid-area: error_id;
+#error_codigo{
+    grid-area: error_codigo;
 }
 
-.label-id {
-    grid-area: label-id;
+.label-codigo {
+    grid-area: label-codigo;
 }
 
-.input-id {
-    grid-area: input-id;
+.input-codigo {
+    grid-area: input-codigo;
 }
