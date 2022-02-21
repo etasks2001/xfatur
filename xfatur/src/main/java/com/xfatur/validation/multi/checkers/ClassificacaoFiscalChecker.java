@@ -14,32 +14,33 @@ import com.xfatur.validation.unique.executable.State;
 @Component
 public class ClassificacaoFiscalChecker implements Checker {
 
-	@Autowired
-	private ClassificacaoFiscalService service;
+    @Autowired
+    private ClassificacaoFiscalService service;
 
-	public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
-		ClassificacaoFiscalDTO cf = (ClassificacaoFiscalDTO) dto;
-		Boolean hasDescricao = null;
-		Boolean hasNcm = null;
+    public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
+	ClassificacaoFiscalDTO cf = (ClassificacaoFiscalDTO) dto;
 
-		Integer id = cf.getId();
-		String descricao = cf.getDescricao().trim();
-		String ncm = cf.getNcm().trim();
+	Boolean hasDescricao = null;
+	Boolean hasNcm = null;
 
-		hasDescricao = service.hasDescricao(id, descricao);
-		hasNcm = service.hasNcm(ncm, id);
+	Integer id = cf.getId();
+	String descricao = cf.getDescricao().trim();
+	String ncm = cf.getNcm().trim();
 
-		if (hasDescricao) {
-			validator.setMessage(context, "Descrição já cadastrada.", "descricao");
-		}
+	hasDescricao = service.hasDescricao(id, descricao);
+	hasNcm = service.hasNcm(id, ncm);
 
-		if (hasNcm) {
-			validator.setMessage(context, "NCM já cadastrado.", "ncm");
-		}
-
-		if (hasNcm || hasDescricao) {
-			return State.INVALID.getValue();
-		}
-		return State.VALID.getValue();
+	if (hasDescricao) {
+	    validator.setMessage(context, "Descrição já cadastrada.", "descricao");
 	}
+
+	if (hasNcm) {
+	    validator.setMessage(context, "NCM já cadastrado.", "ncm");
+	}
+
+	if (hasNcm || hasDescricao) {
+	    return State.INVALID.getValue();
+	}
+	return State.VALID.getValue();
+    }
 }

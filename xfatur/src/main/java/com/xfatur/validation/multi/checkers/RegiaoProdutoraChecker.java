@@ -14,23 +14,23 @@ import com.xfatur.validation.unique.executable.State;
 @Component
 public class RegiaoProdutoraChecker implements Checker {
 
-	@Autowired
-	private RegiaoProdutoraService service;
+    @Autowired
+    private RegiaoProdutoraService service;
 
-	public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
-		RegiaoProdutoraDTO regiaoProdutora = (RegiaoProdutoraDTO) dto;
-		Boolean hasDescricao = null;
+    public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
+	RegiaoProdutoraDTO regiaoProdutora = (RegiaoProdutoraDTO) dto;
+	Boolean hasDescricao = null;
 
-		Integer id = regiaoProdutora.getId();
-		String descricao = regiaoProdutora.getDescricao().trim();
+	Integer id = regiaoProdutora.getId();
+	String descricao = regiaoProdutora.getDescricao().trim();
 
-		hasDescricao = service.hasDescricao(id, descricao);
+	hasDescricao = service.hasDescricao(id, descricao);
 
-		if (hasDescricao) {
-			validator.setMessage(context, "Regiao Produtora já cadastrada.", "descricao");
-			return State.INVALID.getValue();
-		}
-
-		return State.VALID.getValue();
+	if (hasDescricao) {
+	    validator.setMessage(context, "Regiao Produtora já cadastrada.", "descricao");
+	    return State.INVALID.getValue();
 	}
+
+	return State.VALID.getValue();
+    }
 }
