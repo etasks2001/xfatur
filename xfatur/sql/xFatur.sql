@@ -467,9 +467,11 @@ create table pais(
 );
 
 create table tiposelo(
-	id		varchar(6) not null,
+	id		serial not null,
+	codigo		varchar(6) not null,
 	descricao	varchar(80) not null,
 	primary key	(id),
+	unique 		(codigo),
 	unique 		(descricao)
 );
 create table tipo(
@@ -591,7 +593,7 @@ create table produto(
 	origem_id		int not null references origem,
 	tipo_id			int not null references tipo,
 	fundopobreza_id		int not null references fundopobreza,
-	tiposelo_id		varchar(6) not null references tiposelo,
+	tiposelo_id		int not null references tiposelo,
 	primary key 		(id),
 	unique 			(codigoProduto)
 	
