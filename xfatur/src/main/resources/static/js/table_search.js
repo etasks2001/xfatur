@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	
+	
 	let languageConfig={
 			emptyTable: 'Sem dados',
 		    loadingRecords: "Carregando...",
@@ -70,6 +72,14 @@ $(document).ready(function(){
 				},
 			},
 	        dom: 'Qlfrtip',
+	        initComplete: function () {
+	        	  $('#table_search_filter label input').focus();
+	        	}
 		});
 	}
+	
+	
+	
+	
+	
 });
