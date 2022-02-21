@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoEstoqueInsuficienteException;
@@ -15,11 +16,13 @@ import com.xfatur.repository.produto.ProdutoRepository;
 import com.xfatur.util.Util;
 
 @Service
+@Transactional(readOnly = true)
 public class ProdutoService {
 
     @Autowired
     private ProdutoRepository repository;
 
+    @Transactional(readOnly = false)
     public Produto save(Produto produto) {
 	return repository.save(produto);
     }

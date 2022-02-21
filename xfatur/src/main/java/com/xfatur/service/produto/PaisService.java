@@ -5,12 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.PaisIdNotFoundException;
 import com.xfatur.model.produto.Pais;
 import com.xfatur.repository.produto.PaisRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class PaisService {
 
     @Autowired
@@ -24,6 +26,7 @@ public class PaisService {
 	return repository.findIdByCodigoBacen(codigoBacen);
     }
 
+    @Transactional(readOnly = false)
     public Pais save(Pais pais) {
 	return repository.save(pais);
     }

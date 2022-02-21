@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.EstoqueMensalDuplicadoRuntimeException;
 import com.xfatur.exception.EstoqueMensalIdNotFoundException;
@@ -13,11 +14,13 @@ import com.xfatur.repository.EstoqueMensalRepository;
 import com.xfatur.util.Util;
 
 @Service
+@Transactional(readOnly = true)
 public class EstoqueMensalService {
 
     @Autowired
     private EstoqueMensalRepository repository;
 
+    @Transactional(readOnly = false)
     public EstoqueMensal save(EstoqueMensal estoqueMensal) {
 	try {
 	    return repository.save(estoqueMensal);

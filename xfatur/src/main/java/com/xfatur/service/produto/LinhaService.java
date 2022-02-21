@@ -5,12 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.LinhaIdNotFoundException;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.repository.produto.LinhaRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class LinhaService {
 
     @Autowired
@@ -24,6 +26,7 @@ public class LinhaService {
 	return repository.findIdByDescricao(descricao);
     }
 
+    @Transactional(readOnly = false)
     public Linha save(Linha linha) {
 	return repository.save(linha);
     }

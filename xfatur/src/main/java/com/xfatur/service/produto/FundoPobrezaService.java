@@ -5,12 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.FundoPobrezaIdNotFoundException;
 import com.xfatur.model.produto.FundoPobreza;
 import com.xfatur.repository.produto.FundoPobrezaRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class FundoPobrezaService {
 
     @Autowired
@@ -24,6 +26,7 @@ public class FundoPobrezaService {
 	return repository.findIdByDescricao(descricao);
     }
 
+    @Transactional(readOnly = false)
     public FundoPobreza save(FundoPobreza fundoPobreza) {
 	return repository.save(fundoPobreza);
     }

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.SeloDuplicadoRuntimeException;
 import com.xfatur.exception.SeloIdNotFoundException;
@@ -13,11 +14,13 @@ import com.xfatur.repository.SeloRepository;
 import com.xfatur.util.Util;
 
 @Service
+@Transactional(readOnly = true)
 public class SeloService {
 
     @Autowired
     private SeloRepository repository;
 
+    @Transactional(readOnly = false)
     public Selo save(Selo selo) {
 	try {
 	    return repository.save(selo);

@@ -14,6 +14,7 @@ import com.xfatur.model.produto.Produtor;
 import com.xfatur.repository.produto.ProdutorRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class ProdutorService {
 
     @Autowired
@@ -27,6 +28,7 @@ public class ProdutorService {
 	return repository.findByIdDescricao(descricao);
     }
 
+    @Transactional(readOnly = false)
     public Produtor save(Produtor produtor) {
 	return repository.save(produtor);
     }

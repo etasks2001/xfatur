@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.DestinatarioCNPJCPFExistException;
 import com.xfatur.exception.DestinatarioIdNotFoundException;
@@ -13,11 +13,12 @@ import com.xfatur.model.Destinatario;
 import com.xfatur.repository.DestinatarioRepository;
 
 @Service
-@Scope
+@Transactional(readOnly = true)
 public class DestinatarioService {
     @Autowired
     private DestinatarioRepository repository;
 
+    @Transactional(readOnly = false)
     public Destinatario save(Destinatario destinatario) {
 
 	try {

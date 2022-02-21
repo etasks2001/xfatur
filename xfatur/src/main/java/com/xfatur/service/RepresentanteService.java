@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.RepresentanteException;
 import com.xfatur.exception.RepresentanteIdNotFoundException;
@@ -14,11 +15,13 @@ import com.xfatur.model.Representante;
 import com.xfatur.repository.RepresentanteRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class RepresentanteService {
 
     @Autowired
     private RepresentanteRepository repository;
 
+    @Transactional(readOnly = false)
     public Representante save(Representante representante) {
 	try {
 	    Representante saved = repository.save(representante);

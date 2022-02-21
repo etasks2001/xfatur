@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.NaturezaJuridicaException;
 import com.xfatur.exception.NaturezaJuridicaIdNotFoundException;
@@ -13,11 +14,13 @@ import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.repository.NaturezaJuridicaRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class NaturezaJuridicaService {
 
     @Autowired
     private NaturezaJuridicaRepository repository;
 
+    @Transactional(readOnly = false)
     public NaturezaJuridica save(NaturezaJuridica naturezaJuridica) {
 	try {
 	    NaturezaJuridica saved = repository.save(naturezaJuridica);

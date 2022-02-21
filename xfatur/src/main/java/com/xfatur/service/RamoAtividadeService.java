@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.RamoAtividadeDescricaoException;
 import com.xfatur.exception.RamoAtividadeIdNotFoundException;
@@ -13,11 +14,13 @@ import com.xfatur.model.RamoAtividade;
 import com.xfatur.repository.RamoAtividadeRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class RamoAtividadeService {
 
     @Autowired
     private RamoAtividadeRepository repository;
 
+    @Transactional(readOnly = false)
     public RamoAtividade save(RamoAtividade ramoAtividade) {
 	try {
 	    RamoAtividade saved = repository.save(ramoAtividade);

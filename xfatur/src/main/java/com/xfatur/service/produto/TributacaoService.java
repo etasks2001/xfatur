@@ -5,16 +5,19 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.TributacaoIdNotFoundException;
 import com.xfatur.model.produto.Tributacao;
 import com.xfatur.repository.produto.TributacaoRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class TributacaoService {
     @Autowired
     private TributacaoRepository repository;
 
+    @Transactional(readOnly = false)
     public Tributacao save(Tributacao tributacao) {
 	return repository.save(tributacao);
     }

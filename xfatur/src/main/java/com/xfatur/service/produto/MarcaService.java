@@ -15,48 +15,50 @@ import com.xfatur.model.produto.Marca;
 import com.xfatur.repository.produto.MarcaRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class MarcaService {
 
-	@Autowired
-	private MarcaRepository repository;
+    @Autowired
+    private MarcaRepository repository;
 
-	public void deleteById(Integer id) {
-		repository.deleteById(id);
+    public void deleteById(Integer id) {
+	repository.deleteById(id);
+    }
+
+    public Integer findIdByDescricao(String descricao) {
+	return repository.findIdByDescricao(descricao);
+    }
+
+    @Transactional(readOnly = false)
+    public Marca save(Marca marca) {
+	return repository.save(marca);
+    }
+
+    public Marca findById(int id) {
+	Optional<Marca> marca = repository.findById(id);
+	if (marca.isPresent()) {
+	    return marca.get();
 	}
 
-	public Integer findIdByDescricao(String descricao) {
-		return repository.findIdByDescricao(descricao);
-	}
+	throw new MarcaIdNotFoundException("Código da Marca não encontrado");
+    }
 
-	public Marca save(Marca marca) {
-		return repository.save(marca);
-	}
+    public List<Marca> findByDescricao(String descricao) {
+	return repository.findByDescricao(descricao);
+    }
 
-	public Marca findById(int id) {
-		Optional<Marca> marca = repository.findById(id);
-		if (marca.isPresent()) {
-			return marca.get();
-		}
+    @Transactional
+    public void update(MarcaDTO dto) {
+	repository.update(dto.getId(), dto.getDescricao());
 
-		throw new MarcaIdNotFoundException("Código da Marca não encontrado");
-	}
+    }
 
-	public List<Marca> findByDescricao(String descricao) {
-		return repository.findByDescricao(descricao);
-	}
+    public Page<Marca> findByDescricao(String search, Pageable pageable) {
+	return repository.findByDescricao(search, pageable);
+    }
 
-	@Transactional
-	public void update(MarcaDTO dto) {
-		repository.update(dto.getId(), dto.getDescricao());
-
-	}
-
-	public Page<Marca> findByDescricao(String search, Pageable pageable) {
-		return repository.findByDescricao(search, pageable);
-	}
-
-	public Boolean hasDescricao(Integer id, String descricao) {
-		return repository.hasDescricao(id, descricao);
-	}
+    public Boolean hasDescricao(Integer id, String descricao) {
+	return repository.hasDescricao(id, descricao);
+    }
 
 }

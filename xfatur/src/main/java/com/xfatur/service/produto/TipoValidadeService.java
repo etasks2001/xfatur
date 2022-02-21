@@ -5,12 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.TipoValidadeIdNotFoundException;
 import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.repository.produto.TipoValidadeRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class TipoValidadeService {
 
     @Autowired
@@ -24,6 +26,7 @@ public class TipoValidadeService {
 	return repository.findByIdDescricao(descricao);
     }
 
+    @Transactional(readOnly = false)
     public TipoValidade save(TipoValidade regiaoProdutora) {
 	return repository.save(regiaoProdutora);
     }

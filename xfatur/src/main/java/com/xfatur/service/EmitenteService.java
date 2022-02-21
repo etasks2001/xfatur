@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.EmitenteException;
 import com.xfatur.exception.EmitenteIdNotFoundException;
@@ -14,6 +15,7 @@ import com.xfatur.model.Emitente;
 import com.xfatur.repository.EmitenteRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class EmitenteService {
 
     @Autowired
@@ -27,6 +29,7 @@ public class EmitenteService {
 	throw new EmitenteIdNotFoundException("Emitente Não encontrado");
     }
 
+    @Transactional(readOnly = false)
     public Emitente save(Emitente emitente) {
 	try {
 	    Emitente saved = repository.save(emitente);

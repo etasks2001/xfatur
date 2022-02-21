@@ -5,12 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.UnidadeIdNotFoundException;
 import com.xfatur.model.produto.Unidade;
 import com.xfatur.repository.produto.UnidadeRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class UnidadeService {
 
     @Autowired
@@ -28,6 +30,7 @@ public class UnidadeService {
 	return repository.findIdByAbreviacao(abreviacao);
     }
 
+    @Transactional(readOnly = false)
     public Unidade save(Unidade unidade) {
 	return repository.save(unidade);
     }

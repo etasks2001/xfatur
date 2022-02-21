@@ -5,16 +5,19 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.TipoSeloIdNotFoundException;
 import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.repository.produto.TipoSeloRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class TipoSeloService {
     @Autowired
     private TipoSeloRepository repository;
 
+    @Transactional(readOnly = false)
     public TipoSelo save(TipoSelo tributacao) {
 	return repository.save(tributacao);
     }
