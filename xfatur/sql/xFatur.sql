@@ -473,9 +473,11 @@ create table tiposelo(
 	unique 		(descricao)
 );
 create table tipo(
-	id		varchar(2) not null,
+	id		serial not null,
+	codigo		varchar(2) not null,
 	descricao	varchar(80) not null,
 	primary key	(id),
+	unique 		(codigo),
 	unique 		(descricao)
 );
 create table fundopobreza(
@@ -587,7 +589,7 @@ create table produto(
 	tipovalidade_id		int not null references tipovalidade,
 	marca_id		int not null references marca,
 	origem_id		int not null references origem,
-	tipo_id			varchar(2) not null references tipo,
+	tipo_id			int not null references tipo,
 	fundopobreza_id		int not null references fundopobreza,
 	tiposelo_id		varchar(6) not null references tiposelo,
 	primary key 		(id),
