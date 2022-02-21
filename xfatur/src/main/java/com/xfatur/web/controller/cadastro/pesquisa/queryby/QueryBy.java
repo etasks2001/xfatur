@@ -1,4 +1,4 @@
-package com.xfatur.repository.pesquisa;
+package com.xfatur.web.controller.cadastro.pesquisa.queryby;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

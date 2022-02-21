@@ -1,23 +1,22 @@
-package com.xfatur.repository.pesquisa;
+package com.xfatur.web.controller.cadastro.pesquisa.queryby;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.model.produto.Origem;
-import com.xfatur.service.produto.OrigemService;
+import com.xfatur.model.produto.RegiaoProdutora;
+import com.xfatur.service.produto.RegiaoProdutoraService;
 
-@Component(value = "origemqueryby")
-public class OrigemQueryBy implements QueryBy<Origem> {
+@Component(value = "regiaoprodutoraqueryby")
+public class RegiaoProdutoraQueryBy implements QueryBy<RegiaoProdutora> {
 
-	private static final String[] COLUMNS = new String[] { "id", "codigo", "descricao" };
-
+	private static final String[] COLUMNS = new String[] { "id", "descricao" };
 	@Autowired
-	private OrigemService service;
+	private RegiaoProdutoraService service;
 
 	@Override
-	public Page<Origem> execute(String search, Pageable pageable, String column) {
+	public Page<RegiaoProdutora> execute(String search, Pageable pageable, String column) {
 		if (search.trim().length() == 0) {
 			return Page.empty();
 		}
