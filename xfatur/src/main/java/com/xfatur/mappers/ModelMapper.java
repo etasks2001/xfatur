@@ -3,12 +3,14 @@ package com.xfatur.mappers;
 import org.mapstruct.Mapper;
 
 import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
+import com.xfatur.dto.produto.LinhaDTO;
 import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.dto.produto.OrigemDTO;
 import com.xfatur.dto.produto.ProdutorDTO;
 import com.xfatur.dto.produto.RegiaoProdutoraDTO;
 import com.xfatur.dto.produto.TipoDTO;
 import com.xfatur.model.produto.ClassificacaoFiscal;
+import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
 import com.xfatur.model.produto.Produtor;
@@ -41,5 +43,9 @@ public interface ModelMapper {
     Tipo toModel(TipoDTO dto);
 
     TipoDTO toDto(Tipo model);
+
+    Linha toModel(LinhaDTO dto);
+
+    LinhaDTO toDto(Linha model);
 
 }

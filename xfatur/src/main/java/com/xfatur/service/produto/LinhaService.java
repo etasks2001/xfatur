@@ -1,12 +1,14 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.LinhaDTO;
 import com.xfatur.exception.LinhaIdNotFoundException;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.repository.produto.LinhaRepository;
@@ -40,8 +42,16 @@ public class LinhaService {
 	throw new LinhaIdNotFoundException("Código da Linha não encontrado");
     }
 
-    public List<Linha> findByDescricao(String descricao) {
-	return repository.findByDescricao(descricao);
+    public Page<Linha> findByDescricao(String descricao, Pageable pageable) {
+	return repository.findByDescricao(descricao, pageable);
     }
 
+    @Transactional(readOnly = false)
+    public void update(LinhaDTO dto) {
+	repository.update(dto.getId(), dto.getDescricao(), dto.getTipo());
+    }
+
+    public Boolean hasDescricao(Integer id, String descricao) {
+	return repository.hasDescricao(id, descricao);
+    }
 }

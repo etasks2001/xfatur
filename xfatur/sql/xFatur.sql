@@ -447,7 +447,7 @@ create table linha(
 	id 		serial not null,
 	descricao 	varchar(80) not null, 
 	tipo 		varchar(3) not null,
-	ordem 		int not null,
+	ordem 		int not null default 0,
 	primary key	(id),
 	unique		(descricao)
 	

@@ -33,17 +33,17 @@ class LinhaServiceTest {
     // @Test
     @Order(2)
     void test_findByDescricao() {
-	List<Linha> linha = service.findByDescricao("A");
-
-	MatcherAssert.assertThat(linha.size(), Matchers.greaterThan(0));
+//	List<Linha> linha = service.findByDescricao("A");
+//
+//	MatcherAssert.assertThat(linha.size(), Matchers.greaterThan(0));
 
     }
 
     // @Test
     @Order(3)
     void test_findByDescricao_retorna_vazio() {
-	List<Linha> linha = service.findByDescricao("fdsafd");
-	MatcherAssert.assertThat(linha.size(), Matchers.is(0));
+//	List<Linha> linha = service.findByDescricao("fdsafd");
+//	MatcherAssert.assertThat(linha.size(), Matchers.is(0));
     }
 
     // @Test

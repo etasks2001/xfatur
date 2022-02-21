@@ -15,7 +15,8 @@ public class Linha {
     private Integer id;
     private String descricao;
     private String tipo;
-    private Integer ordem;
+
+    private Integer ordem = 0;
 
     @OneToMany(mappedBy = "linha")
     List<Produto> produtos;
