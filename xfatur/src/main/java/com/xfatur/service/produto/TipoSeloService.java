@@ -22,15 +22,16 @@ public class TipoSeloService {
 	return repository.save(tributacao);
     }
 
-    public String findIdByDescricao(String descricao) {
+    public Integer findIdByDescricao(String descricao) {
 	return repository.findIdByDescricao(descricao);
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Integer id) {
 	repository.deleteById(id);
     }
 
-    public TipoSelo findById(String id) {
+    public TipoSelo findById(Integer id) {
+
 	Optional<TipoSelo> found = repository.findById(id);
 	if (found.isPresent()) {
 	    return found.get();

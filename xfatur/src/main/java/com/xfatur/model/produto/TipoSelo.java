@@ -4,25 +4,21 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
 public class TipoSelo {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String codigo;
     private String descricao;
 
     @OneToMany(mappedBy = "tipoSelo", cascade = CascadeType.ALL)
     private List<Produto> produtos;
-
-    public String getId() {
-	return id;
-    }
-
-    public void setId(String id) {
-	this.id = id;
-    }
 
     public String getDescricao() {
 	return descricao;
@@ -30,6 +26,22 @@ public class TipoSelo {
 
     public void setDescricao(String descricao) {
 	this.descricao = descricao;
+    }
+
+    public Integer getId() {
+	return id;
+    }
+
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
+    public String getCodigo() {
+	return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+	this.codigo = codigo;
     }
 
 }

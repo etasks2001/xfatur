@@ -1175,48 +1175,48 @@ public class CreateModelTest {
 
     private static TipoSelo createTipoSelo6() {
 	TipoSelo tipoSelo = new TipoSelo();
-	tipoSelo.setId("971012");
+	tipoSelo.setCodigo("971012");
 	tipoSelo.setDescricao("971012-Nacional p/Exp.-Tipo3-Verde Escuro combinado c/marrom");
 	return tipoSelo;
     }
 
     private static TipoSelo createTipoSelo5() {
 	TipoSelo tipoSelo = new TipoSelo();
-	tipoSelo.setId("971011");
+	tipoSelo.setCodigo("971011");
 	tipoSelo.setDescricao("971011-Nacional p/Exp.-Tipo2-Verde Escuro combinado c/marrom");
 	return tipoSelo;
     }
 
     private static TipoSelo createTipoSelo4() {
 	TipoSelo tipoSelo = new TipoSelo();
-	tipoSelo.setId("971010");
+	tipoSelo.setCodigo("971010");
 	tipoSelo.setDescricao("971010-Nacional p/Exp.-Tipo1-Verde Escuro combinado c/marrom");
 	return tipoSelo;
     }
 
     private static TipoSelo createTipoSelo3() {
 	TipoSelo tipoSelo = new TipoSelo();
-	tipoSelo.setId("971001");
+	tipoSelo.setCodigo("971001");
 	tipoSelo.setDescricao("971001-Nacional-Verde combinado com marrom");
 	return tipoSelo;
     }
 
     private static TipoSelo createTipoSelo2() {
 	TipoSelo tipoSelo = new TipoSelo();
-	tipoSelo.setId("861009");
+	tipoSelo.setCodigo("861009");
 	tipoSelo.setDescricao("861009-Estrangeiro - Vermelho combinado com azul");
 	return tipoSelo;
     }
 
     private static TipoSelo createTipoSelo1() {
 	TipoSelo tipoSelo = new TipoSelo();
-	tipoSelo.setId("100000");
+	tipoSelo.setCodigo("100000");
 	tipoSelo.setDescricao("SEM SELO");
 	return tipoSelo;
     }
 
-    public static void createAndIds(TipoSeloService service, TipoSelo entity, List<String> ids) {
-	String id = service.findIdByDescricao(entity.getDescricao());
+    public static void createAndIds(TipoSeloService service, TipoSelo entity, List<Integer> ids) {
+	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
 	    TipoSelo saved = service.save(entity);
 	    id = saved.getId();
