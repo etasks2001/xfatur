@@ -1077,90 +1077,90 @@ public class CreateModelTest {
 
     private static Tipo createTipo12() {
 	Tipo tipo = new Tipo();
-	tipo.setId("99");
+	tipo.setCodigo("99");
 	tipo.setDescricao("OUTRAS");
 	return tipo;
     }
 
     private static Tipo createTipo11() {
 	Tipo tipo = new Tipo();
-	tipo.setId("10");
+	tipo.setCodigo("10");
 	tipo.setDescricao("OUTROS INSUMOS");
 	return tipo;
     }
 
     private static Tipo createTipo10() {
 	Tipo tipo = new Tipo();
-	tipo.setId("09");
+	tipo.setCodigo("09");
 	tipo.setDescricao("SERVIÇOS");
 	return tipo;
     }
 
     private static Tipo createTipo9() {
 	Tipo tipo = new Tipo();
-	tipo.setId("08");
+	tipo.setCodigo("08");
 	tipo.setDescricao("ATIVO IMOBILIZADO");
 	return tipo;
     }
 
     private static Tipo createTipo8() {
 	Tipo tipo = new Tipo();
-	tipo.setId("07");
+	tipo.setCodigo("07");
 	tipo.setDescricao("MATERIAL DE USO E CONSUMO");
 	return tipo;
     }
 
     private static Tipo createTipo7() {
 	Tipo tipo = new Tipo();
-	tipo.setId("06");
+	tipo.setCodigo("06");
 	tipo.setDescricao("PRODUTO INTERMEDIÁRIO");
 	return tipo;
     }
 
     private static Tipo createTipo6() {
 	Tipo tipo = new Tipo();
-	tipo.setId("05");
+	tipo.setCodigo("05");
 	tipo.setDescricao("SUBPRODUTO");
 	return tipo;
     }
 
     private static Tipo createTipo5() {
 	Tipo tipo = new Tipo();
-	tipo.setId("04");
+	tipo.setCodigo("04");
 	tipo.setDescricao("PRODUTO ACABADO");
 	return tipo;
     }
 
     private static Tipo createTipo4() {
 	Tipo tipo = new Tipo();
-	tipo.setId("03");
+	tipo.setCodigo("03");
 	tipo.setDescricao("PRODUTO EM PROCESSO");
 	return tipo;
     }
 
     private static Tipo createTipo3() {
 	Tipo tipo = new Tipo();
-	tipo.setId("02");
+	tipo.setCodigo("02");
 	tipo.setDescricao("EMBALAGEM");
 	return tipo;
     }
 
     private static Tipo createTipo2() {
 	Tipo tipo = new Tipo();
-	tipo.setId("01");
+	tipo.setCodigo("01");
 	tipo.setDescricao("MATÉRIA-PRIMA");
 	return tipo;
     }
 
     private static Tipo createTipo1() {
 	Tipo tipo = new Tipo();
-	tipo.setId("00");
+	tipo.setCodigo("00");
 	tipo.setDescricao("MERCADORIA PARA REVENDA");
 	return tipo;
     }
 
-    public static void createAndIds(TipoService service, Tipo entity, List<String> ids) {
-	String id = service.findIdByDescricao(entity.getDescricao());
+    public static void createAndIds(TipoService service, Tipo entity, List<Integer> ids) {
+	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
 	    Tipo saved = service.save(entity);
 	    id = saved.getId();

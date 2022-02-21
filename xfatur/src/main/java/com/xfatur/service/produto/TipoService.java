@@ -19,15 +19,17 @@ public class TipoService {
 	return repository.save(tributacao);
     }
 
-    public String findIdByDescricao(String descricao) {
+    public Integer findIdByDescricao(String descricao) {
 	return repository.findIdByDescricao(descricao);
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Integer id) {
+
 	repository.deleteById(id);
+
     }
 
-    public Tipo findById(String id) {
+    public Tipo findById(Integer id) {
 	Optional<Tipo> found = repository.findById(id);
 	if (found.isPresent()) {
 	    return found.get();

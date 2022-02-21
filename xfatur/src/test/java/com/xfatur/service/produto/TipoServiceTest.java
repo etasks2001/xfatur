@@ -22,7 +22,7 @@ class TipoServiceTest {
     @Autowired
     TipoService service;
 
-    List<String> ids = new ArrayList<String>();
+    List<Integer> ids = new ArrayList<Integer>();
 
     // @Test
     @Order(1)
@@ -47,7 +47,7 @@ class TipoServiceTest {
     // @Test
     @Order(3)
     void test_findById_error() {
-	Exception exception = Assertions.assertThrows(TipoIdNotFoundException.class, () -> service.findById("45678979"));
+	Exception exception = Assertions.assertThrows(TipoIdNotFoundException.class, () -> service.findById(78));
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código do Tipo não encontrado"));
     }
 

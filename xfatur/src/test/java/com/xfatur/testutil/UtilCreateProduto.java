@@ -78,7 +78,7 @@ public class UtilCreateProduto {
     private List<Integer> idsFundoPobreza = new ArrayList<Integer>();
     private List<Integer> idsOrigem = new ArrayList<Integer>();
     private List<Integer> idsMarca = new ArrayList<Integer>();
-    private List<String> idsTipo = new ArrayList<String>();
+    private List<Integer> idsTipo = new ArrayList<Integer>();
     private List<String> idsTipoSelo = new ArrayList<String>();
     private List<Integer> idsLinha = new ArrayList<Integer>();
     private List<Integer> idsPais = new ArrayList<Integer>();
@@ -96,7 +96,7 @@ public class UtilCreateProduto {
 	    int fundoPobreza_id = CreateModelTest.getCodigoAleatorio(idsFundoPobreza);
 	    int marca_id = CreateModelTest.getCodigoAleatorio(idsMarca);
 	    int origem_id = CreateModelTest.getCodigoAleatorio(idsOrigem);
-	    String tipo_id = CreateModelTest.getCodigoAleatorio(idsTipo);
+	    Integer tipo_id = CreateModelTest.getCodigoAleatorio(idsTipo);
 	    String tipoSelo_id = CreateModelTest.getCodigoAleatorio(idsTipoSelo);
 	    int linha_id = CreateModelTest.getCodigoAleatorio(idsLinha);
 	    int pais_id = CreateModelTest.getCodigoAleatorio(idsPais);
@@ -169,7 +169,7 @@ public class UtilCreateProduto {
 	idsFundoPobreza = new ArrayList<Integer>();
 	idsOrigem = new ArrayList<Integer>();
 	idsMarca = new ArrayList<Integer>();
-	idsTipo = new ArrayList<String>();
+	idsTipo = new ArrayList<Integer>();
 	idsTipoSelo = new ArrayList<String>();
 	idsLinha = new ArrayList<Integer>();
 	idsPais = new ArrayList<Integer>();
