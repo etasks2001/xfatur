@@ -1,11 +1,14 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.ProdutorDTO;
 import com.xfatur.exception.ProdutorIdNotFoundException;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.repository.produto.ProdutorRepository;
@@ -37,8 +40,16 @@ public class ProdutorService {
 	throw new ProdutorIdNotFoundException("Código do Produtor não encontrado");
     }
 
-    public List<Produtor> findByDescricao(String descricao) {
-	return repository.findByDescricao(descricao);
+    public Page<Produtor> findByDescricao(String descricao, Pageable pageable) {
+	return repository.findByDescricao(descricao, pageable);
     }
 
+    public Boolean hasDescricao(Integer id, String descricao) {
+	return repository.hasDescricao(id, descricao);
+    }
+
+    @Transactional
+    public void update(ProdutorDTO dto) {
+	repository.update(dto.getId(), dto.getDescricao());
+    }
 }

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.ProdutorIdNotFoundException;
 import com.xfatur.model.produto.Produtor;
-import com.xfatur.testutil.CreateModelTest;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -27,23 +26,23 @@ class ProdutorServiceTest {
     // @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.produtorList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
+//	CreateModelTest.produtorList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
     // @Test
     @Order(2)
     void test_findByDescricao() {
-	List<Produtor> produtores = service.findByDescricao("A");
-
-	MatcherAssert.assertThat(produtores.size(), Matchers.greaterThan(0));
+//	List<Produtor> produtores = service.findByDescricao("A");
+//
+//	MatcherAssert.assertThat(produtores.size(), Matchers.greaterThan(0));
 
     }
 
     // @Test
     @Order(3)
     void test_findByDescricao_retorna_vazio() {
-	List<Produtor> produtores = service.findByDescricao("fdsafd");
-	MatcherAssert.assertThat(produtores.size(), Matchers.is(0));
+//	List<Produtor> produtores = service.findByDescricao("fdsafd");
+//	MatcherAssert.assertThat(produtores.size(), Matchers.is(0));
     }
 
     // @Test

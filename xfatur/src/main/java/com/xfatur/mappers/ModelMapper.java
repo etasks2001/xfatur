@@ -5,29 +5,35 @@ import org.mapstruct.Mapper;
 import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
 import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.dto.produto.OrigemDTO;
+import com.xfatur.dto.produto.ProdutorDTO;
 import com.xfatur.dto.produto.RegiaoProdutoraDTO;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
+import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
 
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
 
-	ClassificacaoFiscal toModel(ClassificacaoFiscalDTO dto);
+    ClassificacaoFiscal toModel(ClassificacaoFiscalDTO dto);
 
-	ClassificacaoFiscalDTO toDto(ClassificacaoFiscal model);
+    ClassificacaoFiscalDTO toDto(ClassificacaoFiscal model);
 
-	Marca toModel(MarcaDTO dto);
+    Marca toModel(MarcaDTO dto);
 
-	MarcaDTO toDto(Marca model);
+    MarcaDTO toDto(Marca model);
 
-	Origem toModel(OrigemDTO dto);
+    Origem toModel(OrigemDTO dto);
 
-	OrigemDTO toDto(Origem model);
+    OrigemDTO toDto(Origem model);
 
-	RegiaoProdutora toModel(RegiaoProdutoraDTO dto);
+    RegiaoProdutora toModel(RegiaoProdutoraDTO dto);
 
-	RegiaoProdutoraDTO toDto(RegiaoProdutora model);
+    RegiaoProdutoraDTO toDto(RegiaoProdutora model);
+
+    Produtor toModel(ProdutorDTO dto);
+
+    ProdutorDTO toDto(Produtor model);
 
 }

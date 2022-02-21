@@ -2,6 +2,7 @@
 @import url("../css/marca.css");
 @import url("../css/origem.css");
 @import url("../css/regiaoprodutora.css");
+@import url("../css/produtor.css");
 
 section form .cadastro{
     grid-gap: 3px;
