@@ -7,11 +7,13 @@ import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.dto.produto.OrigemDTO;
 import com.xfatur.dto.produto.ProdutorDTO;
 import com.xfatur.dto.produto.RegiaoProdutoraDTO;
+import com.xfatur.dto.produto.TipoDTO;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
+import com.xfatur.model.produto.Tipo;
 
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
@@ -35,5 +37,9 @@ public interface ModelMapper {
     Produtor toModel(ProdutorDTO dto);
 
     ProdutorDTO toDto(Produtor model);
+
+    Tipo toModel(TipoDTO dto);
+
+    TipoDTO toDto(Tipo model);
 
 }

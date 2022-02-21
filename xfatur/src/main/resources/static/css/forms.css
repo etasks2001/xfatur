@@ -3,6 +3,7 @@
 @import url("../css/origem.css");
 @import url("../css/regiaoprodutora.css");
 @import url("../css/produtor.css");
+@import url("../css/tipo.css");
 
 section form .cadastro{
     grid-gap: 3px;
