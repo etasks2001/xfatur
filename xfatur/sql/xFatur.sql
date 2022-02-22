@@ -459,6 +459,9 @@ create table pais(
 	origem		varchar(60) not null, 
 	codigobacen	varchar(4) not null,
 	primary key	(id),
+	unique		(nome),
+	unique		(sigla),
+	unique		(origem),
 	unique		(codigobacen)
 	
 
