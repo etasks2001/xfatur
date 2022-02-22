@@ -4,6 +4,11 @@ let uppercase = function() {
 	this.value = this.value.toUpperCase();
 	this.setSelectionRange(p, p);
 }
+let lowercase = function() {
+	let p = this.selectionStart;
+	this.value = this.value.toLowerCase();
+	this.setSelectionRange(p, p);
+}
 
 let onblur = function(e) {
 
@@ -29,6 +34,7 @@ window.onload = function() {
 		var im = new Inputmask("9999.9999");
 		im.mask(ncm_mask);
 	}
+	
 
 	let inputs = document.querySelectorAll("input");
 	if (inputs) {
@@ -37,4 +43,18 @@ window.onload = function() {
 			inputs[i].addEventListener("blur", onblur);
 		}
 	}
+	
+	
+	
+	
+	var abreviacao = document.getElementById("abreviacao");
+	
+	if (abreviacao) {
+		abreviacao.addEventListener("input", lowercase);
+	}
+
+	
+	
+	
+	
 }

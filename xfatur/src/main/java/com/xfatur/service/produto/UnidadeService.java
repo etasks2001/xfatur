@@ -1,12 +1,14 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.UnidadeDTO;
 import com.xfatur.exception.UnidadeIdNotFoundException;
 import com.xfatur.model.produto.Unidade;
 import com.xfatur.repository.produto.UnidadeRepository;
@@ -39,8 +41,29 @@ public class UnidadeService {
 	repository.deleteById(id);
     }
 
-    public List<Unidade> findByDescricao(String descricao) {
-	return repository.findByDescricao(descricao);
+    public Page<Unidade> findByDescricao(String descricao, Pageable pegeable) {
+	return repository.findByDescricao(descricao, pegeable);
+    }
+
+    public Boolean hasAbreviacao(Integer id, String abreviacao) {
+	return repository.hasAbreviacao(id, abreviacao);
+    }
+
+    public Boolean hasDescricao(Integer id, String descricao) {
+	return repository.hasDescricao(id, descricao);
+    }
+
+    public void updte(UnidadeDTO dto) {
+	repository.update(dto.getId(), dto.getDescricao(), dto.getAbreviacao());
+    }
+
+    public Page<Unidade> findByAbreviacao(String search, Pageable pageable) {
+	return repository.findByAbreviacao(search, pageable);
+    }
+
+    @Transactional(readOnly = false)
+    public void update(UnidadeDTO dto) {
+	repository.update(dto.getId(), dto.getDescricao(), dto.getAbreviacao());
     }
 
 }

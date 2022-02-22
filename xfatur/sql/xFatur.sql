@@ -535,6 +535,7 @@ create table unidade(
 	descricao 	varchar(80) not null,
 	abreviacao 	varchar(6) not null,
 	primary key 	(id),
+	unique 		(descricao),
 	unique 		(abreviacao)
 );
 

@@ -60,17 +60,17 @@ class UnidadeServiceTest {
     // @Test
     @Order(5)
     void test_findByDescricao() {
-	List<Unidade> unidades = service.findByDescricao("a");
-
-	MatcherAssert.assertThat(unidades.size(), Matchers.greaterThan(0));
+//	List<Unidade> unidades = service.findByDescricao("a");
+//
+//	MatcherAssert.assertThat(unidades.size(), Matchers.greaterThan(0));
     }
 
     // @Test
     @Order(6)
     void test_findbyDescricao_is_0() {
-	List<Unidade> unidades = service.findByDescricao("afdsafda");
-
-	MatcherAssert.assertThat(unidades.size(), Matchers.is(0));
+//	List<Unidade> unidades = service.findByDescricao("afdsafda");
+//
+//	MatcherAssert.assertThat(unidades.size(), Matchers.is(0));
     }
 
     @AfterAll
