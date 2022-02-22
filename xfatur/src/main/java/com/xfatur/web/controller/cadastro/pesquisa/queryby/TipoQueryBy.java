@@ -5,18 +5,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.model.produto.Tipo;
-import com.xfatur.service.produto.TipoService;
+import com.xfatur.model.produto.TipoItem;
+import com.xfatur.service.produto.TipoItemService;
 
 @Component(value = "tipoqueryby")
-public class TipoQueryBy implements QueryBy<Tipo> {
+public class TipoQueryBy implements QueryBy<TipoItem> {
 
     private static final String[] COLUMNS = new String[] { "id", "ncm", "descricao" };
     @Autowired
-    private TipoService service;
+    private TipoItemService service;
 
     @Override
-    public Page<Tipo> execute(String search, Pageable pageable, String column) {
+    public Page<TipoItem> execute(String search, Pageable pageable, String column) {
 	if (search.trim().length() == 0) {
 	    return Page.empty();
 	}

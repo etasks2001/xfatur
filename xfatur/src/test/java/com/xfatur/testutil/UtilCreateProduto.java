@@ -15,7 +15,7 @@ import com.xfatur.model.produto.Origem;
 import com.xfatur.model.produto.Pais;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
-import com.xfatur.model.produto.Tipo;
+import com.xfatur.model.produto.TipoItem;
 import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.model.produto.Tributacao;
@@ -30,7 +30,7 @@ import com.xfatur.service.produto.ProdutoService;
 import com.xfatur.service.produto.ProdutorService;
 import com.xfatur.service.produto.RegiaoProdutoraService;
 import com.xfatur.service.produto.TipoSeloService;
-import com.xfatur.service.produto.TipoService;
+import com.xfatur.service.produto.TipoItemService;
 import com.xfatur.service.produto.TipoValidadeService;
 import com.xfatur.service.produto.TributacaoService;
 import com.xfatur.service.produto.UnidadeService;
@@ -58,7 +58,7 @@ public class UtilCreateProduto {
     @Autowired
     private MarcaService marcaService;
     @Autowired
-    private TipoService tipoService;
+    private TipoItemService tipoService;
     @Autowired
     private TipoSeloService tipoSeloService;
     @Autowired
@@ -110,7 +110,7 @@ public class UtilCreateProduto {
 	    FundoPobreza fundoPobreza = fundoPobrezaService.findById(fundoPobreza_id);
 	    Marca marca = marcaService.findById(marca_id);
 	    Origem origem = origemService.findById(origem_id);
-	    Tipo tipo = tipoService.findById(tipo_id);
+	    TipoItem tipo = tipoService.findById(tipo_id);
 	    TipoSelo tipoSelo = tipoSeloService.findById(tipoSelo_id);
 	    Linha linha = linhaService.findById(linha_id);
 	    Pais pais = paisService.findById(pais_id);
@@ -124,7 +124,7 @@ public class UtilCreateProduto {
 	    produto.setFundoPobreza(fundoPobreza);
 	    produto.setMarca(marca);
 	    produto.setOrigem(origem);
-	    produto.setTipo(tipo);
+	    produto.setTipoItem(tipo);
 	    produto.setTipoSelo(tipoSelo);
 	    produto.setLinha(linha);
 	    produto.setPais(pais);

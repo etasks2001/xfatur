@@ -91,7 +91,7 @@ public class Produto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_id")
-    private Tipo tipo;
+    private TipoItem tipoItem;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fundopobreza_id")
@@ -346,12 +346,12 @@ public class Produto {
 	this.fundoPobreza = fundoPobreza;
     }
 
-    public Tipo getTipo() {
-	return tipo;
+    public TipoItem getTipoItem() {
+	return tipoItem;
     }
 
-    public void setTipo(Tipo tipo) {
-	this.tipo = tipo;
+    public void setTipoItem(TipoItem tipoItem) {
+	this.tipoItem = tipoItem;
     }
 
     public TipoSelo getTipoSelo() {

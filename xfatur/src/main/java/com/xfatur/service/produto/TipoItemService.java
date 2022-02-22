@@ -11,17 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.dto.produto.TipoDTO;
 import com.xfatur.exception.TipoIdNotFoundException;
-import com.xfatur.model.produto.Tipo;
-import com.xfatur.repository.produto.TipoRepository;
+import com.xfatur.model.produto.TipoItem;
+import com.xfatur.repository.produto.TipoItemRepository;
 
 @Service
 @Transactional(readOnly = true)
-public class TipoService {
+public class TipoItemService {
     @Autowired
-    private TipoRepository repository;
+    private TipoItemRepository repository;
 
     @Transactional(readOnly = false)
-    public Tipo save(Tipo tributacao) {
+    public TipoItem save(TipoItem tributacao) {
 	return repository.save(tributacao);
     }
 
@@ -35,16 +35,16 @@ public class TipoService {
 
     }
 
-    public Tipo findById(Integer id) {
-	Optional<Tipo> found = repository.findById(id);
+    public TipoItem findById(Integer id) {
+	Optional<TipoItem> found = repository.findById(id);
 	if (found.isPresent()) {
 	    return found.get();
 
 	}
-	throw new TipoIdNotFoundException("Código do Tipo não encontrado");
+	throw new TipoIdNotFoundException("Código do Tipo do Item não encontrado");
     }
 
-    public List<Tipo> findByDescricao(String descricao) {
+    public List<TipoItem> findByDescricao(String descricao) {
 	return repository.findByDescricao(descricao);
     }
 
@@ -56,18 +56,17 @@ public class TipoService {
 	return repository.hasCodigo(id, codigo);
     }
 
-    public Page<Tipo> findByCodigo(String search, Pageable pageable) {
+    public Page<TipoItem> findByCodigo(String search, Pageable pageable) {
 	return repository.findByCodigo(search, pageable);
     }
 
-    public Page<Tipo> findByDescricao(String search, Pageable pageable) {
+    public Page<TipoItem> findByDescricao(String search, Pageable pageable) {
 	return repository.findByDescricao(search, pageable);
     }
 
     @Transactional(readOnly = false)
     public void update(TipoDTO dto) {
 	repository.update(dto.getId(), dto.getCodigo(), dto.getDescricao());
-
     }
 
 }

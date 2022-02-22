@@ -10,14 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Tipo {
+public class TipoItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String codigo;
     private String descricao;
 
-    @OneToMany(mappedBy = "tipo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tipoItem", cascade = CascadeType.ALL)
     private List<Produto> produtos;
 
     public Integer getId() {

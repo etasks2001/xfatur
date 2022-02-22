@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.TipoIdNotFoundException;
-import com.xfatur.model.produto.Tipo;
+import com.xfatur.model.produto.TipoItem;
 import com.xfatur.testutil.CreateModelTest;
 
 //@SpringBootTest
@@ -20,7 +20,7 @@ import com.xfatur.testutil.CreateModelTest;
 class TipoServiceTest {
 
     @Autowired
-    TipoService service;
+    TipoItemService service;
 
     List<Integer> ids = new ArrayList<Integer>();
 
@@ -34,7 +34,7 @@ class TipoServiceTest {
     @Order(2)
     void update() {
 	ids.forEach(id -> {
-	    Tipo tipo = service.findById(id);
+	    TipoItem tipo = service.findById(id);
 
 	    tipo.setDescricao(tipo.getDescricao() + " A");
 
@@ -55,7 +55,7 @@ class TipoServiceTest {
     @Order(4)
     void test_findByDescricao() {
 
-	List<Tipo> tributacoes = service.findByDescricao("A");
+	List<TipoItem> tributacoes = service.findByDescricao("A");
 
 	MatcherAssert.assertThat(tributacoes.size(), Matchers.greaterThan(0));
     }
@@ -63,7 +63,7 @@ class TipoServiceTest {
     // @Test
     @Order(5)
     void test_findByDescricao_size_0() {
-	List<Tipo> tributacoes = service.findByDescricao("787897");
+	List<TipoItem> tributacoes = service.findByDescricao("787897");
 
 	MatcherAssert.assertThat(tributacoes.size(), Matchers.is(0));
 

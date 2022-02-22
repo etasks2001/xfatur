@@ -15,7 +15,7 @@ import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
-import com.xfatur.model.produto.Tipo;
+import com.xfatur.model.produto.TipoItem;
 
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
@@ -40,9 +40,9 @@ public interface ModelMapper {
 
     ProdutorDTO toDto(Produtor model);
 
-    Tipo toModel(TipoDTO dto);
+    TipoItem toModel(TipoDTO dto);
 
-    TipoDTO toDto(Tipo model);
+    TipoDTO toDto(TipoItem model);
 
     Linha toModel(LinhaDTO dto);
 

@@ -29,7 +29,7 @@ import com.xfatur.model.produto.Pais;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
-import com.xfatur.model.produto.Tipo;
+import com.xfatur.model.produto.TipoItem;
 import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.model.produto.Tributacao;
@@ -47,7 +47,7 @@ import com.xfatur.service.produto.PaisService;
 import com.xfatur.service.produto.ProdutorService;
 import com.xfatur.service.produto.RegiaoProdutoraService;
 import com.xfatur.service.produto.TipoSeloService;
-import com.xfatur.service.produto.TipoService;
+import com.xfatur.service.produto.TipoItemService;
 import com.xfatur.service.produto.TipoValidadeService;
 import com.xfatur.service.produto.TributacaoService;
 import com.xfatur.service.produto.UnidadeService;
@@ -466,7 +466,7 @@ public class CreateModelTest {
 	produto.setTipoValidade(null);
 	produto.setMarca(null);
 	produto.setOrigem(null);
-	produto.setTipo(null);
+	produto.setTipoItem(null);
 	produto.setFundoPobreza(null);
 	produto.setTipoSelo(null);
 
@@ -506,7 +506,7 @@ public class CreateModelTest {
 	produto.setTipoValidade(null);
 	produto.setMarca(null);
 	produto.setOrigem(null);
-	produto.setTipo(null);
+	produto.setTipoItem(null);
 	produto.setFundoPobreza(null);
 	produto.setTipoSelo(null);
 
@@ -546,7 +546,7 @@ public class CreateModelTest {
 	produto.setTipoValidade(null);
 	produto.setMarca(null);
 	produto.setOrigem(null);
-	produto.setTipo(null);
+	produto.setTipoItem(null);
 	produto.setFundoPobreza(null);
 	produto.setTipoSelo(null);
 
@@ -586,7 +586,7 @@ public class CreateModelTest {
 	produto.setTipoValidade(null);
 	produto.setMarca(null);
 	produto.setOrigem(null);
-	produto.setTipo(null);
+	produto.setTipoItem(null);
 	produto.setFundoPobreza(null);
 	produto.setTipoSelo(null);
 
@@ -1070,99 +1070,99 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<Tipo> tipoList() {
+    public static Stream<TipoItem> tipoList() {
 	return Stream.of(createTipo1(), createTipo2(), createTipo3(), createTipo4(), createTipo5(), createTipo6(), createTipo7(), createTipo8(), createTipo9(), createTipo10(), createTipo11(),
 		createTipo12());
     }
 
-    private static Tipo createTipo12() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo12() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("99");
 	tipo.setDescricao("OUTRAS");
 	return tipo;
     }
 
-    private static Tipo createTipo11() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo11() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("10");
 	tipo.setDescricao("OUTROS INSUMOS");
 	return tipo;
     }
 
-    private static Tipo createTipo10() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo10() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("09");
 	tipo.setDescricao("SERVIÇOS");
 	return tipo;
     }
 
-    private static Tipo createTipo9() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo9() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("08");
 	tipo.setDescricao("ATIVO IMOBILIZADO");
 	return tipo;
     }
 
-    private static Tipo createTipo8() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo8() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("07");
 	tipo.setDescricao("MATERIAL DE USO E CONSUMO");
 	return tipo;
     }
 
-    private static Tipo createTipo7() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo7() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("06");
 	tipo.setDescricao("PRODUTO INTERMEDIÁRIO");
 	return tipo;
     }
 
-    private static Tipo createTipo6() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo6() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("05");
 	tipo.setDescricao("SUBPRODUTO");
 	return tipo;
     }
 
-    private static Tipo createTipo5() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo5() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("04");
 	tipo.setDescricao("PRODUTO ACABADO");
 	return tipo;
     }
 
-    private static Tipo createTipo4() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo4() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("03");
 	tipo.setDescricao("PRODUTO EM PROCESSO");
 	return tipo;
     }
 
-    private static Tipo createTipo3() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo3() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("02");
 	tipo.setDescricao("EMBALAGEM");
 	return tipo;
     }
 
-    private static Tipo createTipo2() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo2() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("01");
 	tipo.setDescricao("MATÉRIA-PRIMA");
 	return tipo;
     }
 
-    private static Tipo createTipo1() {
-	Tipo tipo = new Tipo();
+    private static TipoItem createTipo1() {
+	TipoItem tipo = new TipoItem();
 	tipo.setCodigo("00");
 	tipo.setDescricao("MERCADORIA PARA REVENDA");
 	return tipo;
     }
 
-    public static void createAndIds(TipoService service, Tipo entity, List<Integer> ids) {
+    public static void createAndIds(TipoItemService service, TipoItem entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
-	    Tipo saved = service.save(entity);
+	    TipoItem saved = service.save(entity);
 	    id = saved.getId();
 	}
 

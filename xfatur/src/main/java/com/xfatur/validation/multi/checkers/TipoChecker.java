@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.xfatur.dto.DTO;
 import com.xfatur.dto.produto.TipoDTO;
-import com.xfatur.service.produto.TipoService;
+import com.xfatur.service.produto.TipoItemService;
 import com.xfatur.validation.multi.MultiFieldValidator;
 import com.xfatur.validation.unique.executable.State;
 
@@ -15,7 +15,7 @@ import com.xfatur.validation.unique.executable.State;
 public class TipoChecker implements Checker {
 
     @Autowired
-    private TipoService service;
+    private TipoItemService service;
 
     public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
 	TipoDTO cf = (TipoDTO) dto;

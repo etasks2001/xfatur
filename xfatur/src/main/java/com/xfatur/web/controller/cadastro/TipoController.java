@@ -14,14 +14,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xfatur.dto.produto.TipoDTO;
 import com.xfatur.mappers.ModelMapper;
-import com.xfatur.service.produto.TipoService;
+import com.xfatur.service.produto.TipoItemService;
 
 @Controller
 @RequestMapping("tipo")
 public class TipoController {
 
     @Autowired
-    private TipoService service;
+    private TipoItemService service;
     @Autowired
     private ModelMapper mapper;
 
