@@ -39,7 +39,7 @@ public class TributacaoController {
 
 	service.save(mapper.toModel(dto));
 
-	attr.addFlashAttribute("success", "Tributacao incluída.");
+	attr.addFlashAttribute("success", "Tributação incluída.");
 
 	return "redirect:/tributacao/form";
     }
@@ -60,7 +60,7 @@ public class TributacaoController {
 
 	service.update(dto);
 
-	attr.addFlashAttribute("success", "Tributacao alterada.");
+	attr.addFlashAttribute("success", "Tributação alterada.");
 
 	return "redirect:/tributacao/form";
     }

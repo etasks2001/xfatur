@@ -18,13 +18,13 @@ public class TipoItemChecker implements Checker {
     private TipoItemService service;
 
     public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
-	TipoItemDTO cf = (TipoItemDTO) dto;
+	TipoItemDTO tipoItem = (TipoItemDTO) dto;
 	Boolean hasDescricao = null;
 	Boolean hasCodigo = null;
 
-	Integer id = cf.getId();
-	String descricao = cf.getDescricao().trim();
-	String codigo = cf.getCodigo().trim();
+	Integer id = tipoItem.getId();
+	String descricao = tipoItem.getDescricao().trim();
+	String codigo = tipoItem.getCodigo().trim();
 
 	hasDescricao = service.hasDescricao(id, descricao);
 	hasCodigo = service.hasCodigo(id, codigo);

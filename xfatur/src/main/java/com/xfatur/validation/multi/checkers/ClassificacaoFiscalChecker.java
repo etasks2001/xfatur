@@ -18,14 +18,14 @@ public class ClassificacaoFiscalChecker implements Checker {
     private ClassificacaoFiscalService service;
 
     public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
-	ClassificacaoFiscalDTO cf = (ClassificacaoFiscalDTO) dto;
+	ClassificacaoFiscalDTO classificacaoFiscal = (ClassificacaoFiscalDTO) dto;
 
 	Boolean hasDescricao = null;
 	Boolean hasNcm = null;
 
-	Integer id = cf.getId();
-	String descricao = cf.getDescricao().trim();
-	String ncm = cf.getNcm().trim();
+	Integer id = classificacaoFiscal.getId();
+	String descricao = classificacaoFiscal.getDescricao().trim();
+	String ncm = classificacaoFiscal.getNcm().trim();
 
 	hasDescricao = service.hasDescricao(id, descricao);
 	hasNcm = service.hasNcm(id, ncm);
