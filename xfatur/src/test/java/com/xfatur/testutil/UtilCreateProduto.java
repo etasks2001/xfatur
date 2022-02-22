@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.xfatur.mappers.ModelMapper;
 import com.xfatur.model.produto.ClassificacaoFiscal;
-import com.xfatur.model.produto.FundoPobreza;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
@@ -21,7 +20,6 @@ import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.model.produto.Tributacao;
 import com.xfatur.model.produto.Unidade;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
-import com.xfatur.service.produto.FundoPobrezaService;
 import com.xfatur.service.produto.LinhaService;
 import com.xfatur.service.produto.MarcaService;
 import com.xfatur.service.produto.OrigemService;
@@ -51,8 +49,6 @@ public class UtilCreateProduto {
     private RegiaoProdutoraService regiaoProdutoraService;
     @Autowired
     private TipoValidadeService tipoValidadeService;
-    @Autowired
-    private FundoPobrezaService fundoPobrezaService;
     @Autowired
     private OrigemService origemService;
     @Autowired
@@ -107,7 +103,6 @@ public class UtilCreateProduto {
 	    Tributacao tributacao = tributacaoService.findById(tributacao_id);
 	    RegiaoProdutora regiaoProdutora = regiaoProdutoraService.findById(regiaoProdutora_id);
 	    TipoValidade tipoValidade = tipoValidadeService.findById(tipoValidade_id);
-	    FundoPobreza fundoPobreza = fundoPobrezaService.findById(fundoPobreza_id);
 	    Marca marca = marcaService.findById(marca_id);
 	    Origem origem = origemService.findById(origem_id);
 	    TipoItem tipo = tipoService.findById(tipo_id);
@@ -121,7 +116,6 @@ public class UtilCreateProduto {
 	    produto.setTributacao(tributacao);
 	    produto.setRegiaoProdutora(regiaoProdutora);
 	    produto.setTipoValidade(tipoValidade);
-	    produto.setFundoPobreza(fundoPobreza);
 	    produto.setMarca(marca);
 	    produto.setOrigem(origem);
 	    produto.setTipoItem(tipo);
@@ -146,7 +140,6 @@ public class UtilCreateProduto {
 	CreateModelTest.regiaoProdutoraList().forEach(entity -> CreateModelTest.createAndIds(regiaoProdutoraService, entity, idsRegiaoProdutora));
 	CreateModelTest.tipoValidadeList().forEach(entity -> CreateModelTest.createAndIds(tipoValidadeService, entity, idsTipoValidade));
 
-	CreateModelTest.fundoPobrezaList().forEach(entity -> CreateModelTest.createAndIds(fundoPobrezaService, entity, idsFundoPobreza));
 	CreateModelTest.origemList().forEach(entity -> CreateModelTest.createAndIds(origemService, entity, idsOrigem));
 	CreateModelTest.marcaList().forEach(entity -> CreateModelTest.createAndIds(marcaService, entity, idsMarca));
 

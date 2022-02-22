@@ -79,7 +79,6 @@ class ProdutoServiceTest {
 	    MatcherAssert.assertThat(produto1.getTipoValidade(), Matchers.is(produto2.getTipoValidade()));
 	    MatcherAssert.assertThat(produto1.getMarca(), Matchers.is(produto2.getMarca()));
 	    MatcherAssert.assertThat(produto1.getOrigem(), Matchers.is(produto2.getOrigem()));
-	    MatcherAssert.assertThat(produto1.getFundoPobreza(), Matchers.is(produto2.getFundoPobreza()));
 	    MatcherAssert.assertThat(produto1.getTipoItem(), Matchers.is(produto2.getTipoItem()));
 	    MatcherAssert.assertThat(produto1.getTipoSelo(), Matchers.is(produto2.getTipoSelo()));
 

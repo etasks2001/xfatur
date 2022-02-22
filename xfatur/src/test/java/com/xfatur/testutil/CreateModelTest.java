@@ -21,7 +21,6 @@ import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
 import com.xfatur.model.Selo;
 import com.xfatur.model.produto.ClassificacaoFiscal;
-import com.xfatur.model.produto.FundoPobreza;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
@@ -39,7 +38,6 @@ import com.xfatur.service.NaturezaJuridicaService;
 import com.xfatur.service.RamoAtividadeService;
 import com.xfatur.service.RepresentanteService;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
-import com.xfatur.service.produto.FundoPobrezaService;
 import com.xfatur.service.produto.LinhaService;
 import com.xfatur.service.produto.MarcaService;
 import com.xfatur.service.produto.OrigemService;
@@ -467,7 +465,6 @@ public class CreateModelTest {
 	produto.setMarca(null);
 	produto.setOrigem(null);
 	produto.setTipoItem(null);
-	produto.setFundoPobreza(null);
 	produto.setTipoSelo(null);
 
 	return produto;
@@ -507,7 +504,6 @@ public class CreateModelTest {
 	produto.setMarca(null);
 	produto.setOrigem(null);
 	produto.setTipoItem(null);
-	produto.setFundoPobreza(null);
 	produto.setTipoSelo(null);
 
 	return produto;
@@ -547,7 +543,6 @@ public class CreateModelTest {
 	produto.setMarca(null);
 	produto.setOrigem(null);
 	produto.setTipoItem(null);
-	produto.setFundoPobreza(null);
 	produto.setTipoSelo(null);
 
 	return produto;
@@ -587,7 +582,6 @@ public class CreateModelTest {
 	produto.setMarca(null);
 	produto.setOrigem(null);
 	produto.setTipoItem(null);
-	produto.setFundoPobreza(null);
 	produto.setTipoSelo(null);
 
 	return produto;
@@ -947,26 +941,6 @@ public class CreateModelTest {
 	    id = saved.getId();
 	}
 
-	ids.add(id);
-    }
-
-    public static Stream<FundoPobreza> fundoPobrezaList() {
-	return Stream.of(createFundoPobreza1());
-    }
-
-    private static FundoPobreza createFundoPobreza1() {
-	FundoPobreza fundoPobreza = new FundoPobreza();
-	fundoPobreza.setDescricao("SEM FCP");
-	return fundoPobreza;
-    }
-
-    public static void createAndIds(FundoPobrezaService service, FundoPobreza entity, List<Integer> ids) {
-	Integer id = service.findIdByDescricao(entity.getDescricao());
-
-	if (id == null) {
-	    FundoPobreza saved = service.save(entity);
-	    id = saved.getId();
-	}
 	ids.add(id);
     }
 

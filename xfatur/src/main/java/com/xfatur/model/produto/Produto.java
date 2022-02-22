@@ -94,10 +94,6 @@ public class Produto {
     private TipoItem tipoItem;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fundopobreza_id")
-    private FundoPobreza fundoPobreza;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tiposelo_id")
     private TipoSelo tipoSelo;
 
@@ -336,14 +332,6 @@ public class Produto {
 
     public void setOrigem(Origem origem) {
 	this.origem = origem;
-    }
-
-    public FundoPobreza getFundoPobreza() {
-	return fundoPobreza;
-    }
-
-    public void setFundoPobreza(FundoPobreza fundoPobreza) {
-	this.fundoPobreza = fundoPobreza;
     }
 
     public TipoItem getTipoItem() {

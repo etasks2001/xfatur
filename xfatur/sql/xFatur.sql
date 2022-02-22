@@ -166,7 +166,6 @@ select * from enderecocobranca;
 
 select * from  marca;
 select * from  origem;
-select * from  fundopobreza;
 select * from  tipoitem;
 select * from  tiposelo;
 select * from  tipovalidade;
@@ -271,7 +270,6 @@ drop table if exists estoquemensal;
 
 drop table if exists marca;
 drop table if exists origem;
-drop table if exists fundopobreza;
 drop table if exists tipoitem;
 drop table if exists tiposelo;
 drop table if exists tipovalidade;
@@ -482,12 +480,6 @@ create table tipoitem(
 	unique 		(codigo),
 	unique 		(descricao)
 );
-create table fundopobreza(
-	id		serial not null,
-	descricao	varchar(80) not null,
-	primary key	(id),
-	unique 		(descricao)
-);
 create table origem(
 	id		serial not null,
 	codigo		varchar(1) not null,
@@ -593,7 +585,6 @@ create table produto(
 	marca_id		int not null references marca,
 	origem_id		int not null references origem,
 	tipo_id			int not null references tipoitem,
-	fundopobreza_id		int not null references fundopobreza,
 	tiposelo_id		int not null references tiposelo,
 	primary key 		(id),
 	unique 			(codigoProduto)
