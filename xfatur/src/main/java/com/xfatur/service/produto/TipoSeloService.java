@@ -1,12 +1,14 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.TipoSeloDTO;
 import com.xfatur.exception.TipoSeloIdNotFoundException;
 import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.repository.produto.TipoSeloRepository;
@@ -40,8 +42,21 @@ public class TipoSeloService {
 	throw new TipoSeloIdNotFoundException("Código do Tipo de Selo não encontrado");
     }
 
-    public List<TipoSelo> findByDescricao(String descricao) {
-	return repository.findByDescricao(descricao);
+    public Page<TipoSelo> findByDescricao(String descricao, Pageable pageable) {
+	return repository.findByDescricao(descricao, pageable);
+    }
+
+    public Boolean hasCodigo(Integer id, String codigo) {
+	return repository.hasCodigo(id, codigo);
+    }
+
+    public Boolean hasDescricao(Integer id, String descricao) {
+	return repository.hasDescricao(id, descricao);
+    }
+
+    @Transactional(readOnly = false)
+    public void update(TipoSeloDTO dto) {
+	repository.update(dto.getId(), dto.getCodigo(), dto.getDescricao());
     }
 
 }

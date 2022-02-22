@@ -9,20 +9,20 @@
 </head>
 <body>
 
-<form method="POST" th:object="${origemDTO}"  th:action="${origemDTO.id == null} ? @{/origem/salvar} : @{/origem/alterar}"  layout:fragment="principal" >
+<form method="POST" th:object="${tipoSeloDTO}"  th:action="${tipoSeloDTO.id == null} ? @{/tiposelo/salvar} : @{/tiposelo/alterar}"  layout:fragment="principal" >
 	<div th:replace="cadastro/fragments :: alert-success"></div>
-	<div class="cadastro origem">
+	<div class="cadastro tiposelo">
 		<input type="hidden" th:field="*{id}">
 
 		<label class="label-codigo col-form-label col-form-label-sm" for="descricao">Código</label>
-		<input autofocus class="input-codigo form-control form-control-sm" type="text" maxlength="1" th:field="*{codigo}" th:classappend="${#fields.hasErrors('codigo')} ? 'is-invalid' : ''" >
+		<input autofocus class="input-codigo form-control form-control-sm" type="text" maxlength="6" th:field="*{codigo}" th:classappend="${#fields.hasErrors('codigo')} ? 'is-invalid' : ''" >
 		<div  th:replace="~{cadastro/fragments.html :: erro('codigo')}"></div>
 
 		<label class="label-descricao col-form-label col-form-label-sm" for="descricao">Descrição</label>
 		<input autofocus class="input-descricao form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''" >
 		<div  th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
 
-		<div th:replace="~{/cadastro/fragments.html :: botoes(${origemDTO.id == null} ? 'Gravar' : 'Alterar', ${ #execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())})}"></div>
+		<div th:replace="~{/cadastro/fragments.html :: botoes(${tipoSeloDTO.id == null} ? 'Gravar' : 'Alterar', ${ #execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())})}"></div>
 	</div>
 </form>
 </body>

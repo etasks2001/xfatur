@@ -3,8 +3,6 @@ package com.xfatur.service.produto;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,17 +51,17 @@ class TipoSeloServiceTest {
     @Order(4)
     void test_findByDescricao() {
 
-	List<TipoSelo> tributacoes = service.findByDescricao("A");
-
-	MatcherAssert.assertThat(tributacoes.size(), Matchers.greaterThan(0));
+//	List<TipoSelo> tributacoes = service.findByDescricao("A");
+//
+//	MatcherAssert.assertThat(tributacoes.size(), Matchers.greaterThan(0));
     }
 
     // @Test
     @Order(5)
     void test_findByDescricao_size_0() {
-	List<TipoSelo> tributacoes = service.findByDescricao("787897");
-
-	MatcherAssert.assertThat(tributacoes.size(), Matchers.is(0));
+//	List<TipoSelo> tributacoes = service.findByDescricao("787897");
+//
+//	MatcherAssert.assertThat(tributacoes.size(), Matchers.is(0));
 
     }
 
