@@ -1,12 +1,14 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.TributacaoDTO;
 import com.xfatur.exception.TributacaoIdNotFoundException;
 import com.xfatur.model.produto.Tributacao;
 import com.xfatur.repository.produto.TributacaoRepository;
@@ -22,15 +24,15 @@ public class TributacaoService {
 	return repository.save(tributacao);
     }
 
-    public String findIdByDescricao(String descricao) {
+    public Integer findIdByDescricao(String descricao) {
 	return repository.findIdByDescricao(descricao);
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Integer id) {
 	repository.deleteById(id);
     }
 
-    public Tributacao findById(String id) {
+    public Tributacao findById(Integer id) {
 	Optional<Tributacao> found = repository.findById(id);
 	if (found.isPresent()) {
 	    return found.get();
@@ -39,8 +41,21 @@ public class TributacaoService {
 	throw new TributacaoIdNotFoundException("Código da Tributação não encontrado");
     }
 
-    public List<Tributacao> findByDescricao(String descricao) {
-	return repository.findByDescricao(descricao);
+    public Page<Tributacao> findByDescricao(String descricao, Pageable pageabel) {
+	return repository.findByDescricao(descricao, pageabel);
+    }
+
+    public Boolean hasCodigo(Integer id, String codigo) {
+	return repository.hasCodigo(id, codigo);
+    }
+
+    public Boolean hasDescricao(Integer id, String descricao) {
+	return repository.hasDescricao(id, descricao);
+    }
+
+    @Transactional(readOnly = false)
+    public void update(TributacaoDTO dto) {
+	repository.update(dto.getId(), dto.getCodigo(), dto.getDescricao());
     }
 
 }

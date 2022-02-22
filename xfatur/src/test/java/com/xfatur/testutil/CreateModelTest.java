@@ -46,8 +46,8 @@ import com.xfatur.service.produto.OrigemService;
 import com.xfatur.service.produto.PaisService;
 import com.xfatur.service.produto.ProdutorService;
 import com.xfatur.service.produto.RegiaoProdutoraService;
-import com.xfatur.service.produto.TipoSeloService;
 import com.xfatur.service.produto.TipoItemService;
+import com.xfatur.service.produto.TipoSeloService;
 import com.xfatur.service.produto.TipoValidadeService;
 import com.xfatur.service.produto.TributacaoService;
 import com.xfatur.service.produto.UnidadeService;
@@ -710,84 +710,84 @@ public class CreateModelTest {
 
     private static Tributacao createTributacao11() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("90");
+	tributacao.setCodigo("90");
 	tributacao.setDescricao("OUTRAS");
 	return tributacao;
     }
 
     private static Tributacao createTributacao10() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("70");
+	tributacao.setCodigo("70");
 	tributacao.setDescricao("COM REDUÇÃO DE BASE DE CÁLCULO E COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
 	return tributacao;
     }
 
     private static Tributacao createTributacao9() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("60");
+	tributacao.setCodigo("60");
 	tributacao.setDescricao("ICMS COBRADO ANTERIORMENTE POR SUBSTITUIÇÃO TRIBUTÁRIA");
 	return tributacao;
     }
 
     private static Tributacao createTributacao8() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("51");
+	tributacao.setCodigo("51");
 	tributacao.setDescricao("DIFERIMENTO");
 	return tributacao;
     }
 
     private static Tributacao createTributacao7() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("50");
+	tributacao.setCodigo("50");
 	tributacao.setDescricao("SUSPENSÃO");
 	return tributacao;
     }
 
     private static Tributacao createTributacao6() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("41");
+	tributacao.setCodigo("41");
 	tributacao.setDescricao("NÃO TRIBUTADA");
 	return tributacao;
     }
 
     private static Tributacao createTributacao5() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("40");
+	tributacao.setCodigo("40");
 	tributacao.setDescricao("ISENTA");
 	return tributacao;
     }
 
     private static Tributacao createTributacao4() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("30");
+	tributacao.setCodigo("30");
 	tributacao.setDescricao("ISENTA OU NÃO TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
 	return tributacao;
     }
 
     private static Tributacao createTributacao3() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("20");
+	tributacao.setCodigo("20");
 	tributacao.setDescricao("COM REDUÇÃO DE BASE DE CÁLCULO");
 	return tributacao;
     }
 
     private static Tributacao createTributacao2() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("10");
+	tributacao.setCodigo("10");
 	tributacao.setDescricao("TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
 	return tributacao;
     }
 
     private static Tributacao createTributacao1() {
 	Tributacao tributacao = new Tributacao();
-	tributacao.setId("00");
+	tributacao.setCodigo("00");
 	tributacao.setDescricao("TRIBUTADA INTEGRALMENTE");
 
 	return tributacao;
     }
 
-    public static void createAndIds(TributacaoService service, Tributacao entity, List<String> ids) {
-	String id = service.findIdByDescricao(entity.getDescricao());
+    public static void createAndIds(TributacaoService service, Tributacao entity, List<Integer> ids) {
+	Integer id = service.findIdByDescricao(entity.getDescricao());
 
 	if (id == null) {
 	    Tributacao saved = service.save(entity);

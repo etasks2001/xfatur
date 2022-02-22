@@ -22,7 +22,7 @@ class TributacaoServiceTest {
     @Autowired
     TributacaoService service;
 
-    List<String> ids = new ArrayList<String>();
+    List<Integer> ids = new ArrayList<Integer>();
 
     // @Test
     @Order(1)
@@ -47,7 +47,7 @@ class TributacaoServiceTest {
     // @Test
     @Order(3)
     void test_findById_error() {
-	Exception exception = Assertions.assertThrows(TributacaoIdNotFoundException.class, () -> service.findById("45678979"));
+	Exception exception = Assertions.assertThrows(TributacaoIdNotFoundException.class, () -> service.findById(789));
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Código da Tributação não encontrado"));
     }
 
@@ -55,17 +55,17 @@ class TributacaoServiceTest {
     @Order(4)
     void test_findByDescricao() {
 
-	List<Tributacao> tributacoes = service.findByDescricao("A");
-
-	MatcherAssert.assertThat(tributacoes.size(), Matchers.greaterThan(0));
+//	List<Tributacao> tributacoes = service.findByDescricao("A");
+//
+//	MatcherAssert.assertThat(tributacoes.size(), Matchers.greaterThan(0));
     }
 
     // @Test
     @Order(5)
     void test_findByDescricao_size_0() {
-	List<Tributacao> tributacoes = service.findByDescricao("787897");
-
-	MatcherAssert.assertThat(tributacoes.size(), Matchers.is(0));
+//	List<Tributacao> tributacoes = service.findByDescricao("787897");
+//
+//	MatcherAssert.assertThat(tributacoes.size(), Matchers.is(0));
 
     }
 

@@ -6,6 +6,7 @@
 @import url("../css/tipoitem.css");
 @import url("../css/linha.css");
 @import url("../css/tiposelo.css");
+@import url("../css/tributacao.css");
 
 section form .cadastro{
     grid-gap: 3px;

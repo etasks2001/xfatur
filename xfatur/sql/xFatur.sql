@@ -524,7 +524,8 @@ create table regiaoprodutora(
 
 
 create table tributacao(
-	id		varchar(2) not null,
+	id		serial not null,
+	codigo		varchar(2) not null,
 	descricao	varchar(80) not null,
 	primary key	(id),
 	unique 		(descricao)
@@ -584,7 +585,7 @@ create table produto(
 	produtor_id		int not null references produtor,
 	unidade_id		int not null references unidade,
 	classificacaoFiscal_id	int not null references classificacaofiscal,
-	tributacao_id		varchar(2) not null references tributacao,
+	tributacao_id		int not null references tributacao,
 	regiaoprodutora_id	int not null references regiaoprodutora,
 	linha_id		int not null references linha,
 	pais_id			int not null references pais,

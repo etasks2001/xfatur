@@ -29,8 +29,8 @@ import com.xfatur.service.produto.PaisService;
 import com.xfatur.service.produto.ProdutoService;
 import com.xfatur.service.produto.ProdutorService;
 import com.xfatur.service.produto.RegiaoProdutoraService;
-import com.xfatur.service.produto.TipoSeloService;
 import com.xfatur.service.produto.TipoItemService;
+import com.xfatur.service.produto.TipoSeloService;
 import com.xfatur.service.produto.TipoValidadeService;
 import com.xfatur.service.produto.TributacaoService;
 import com.xfatur.service.produto.UnidadeService;
@@ -68,7 +68,7 @@ public class UtilCreateProduto {
     @Autowired
     private ModelMapper mapper;
 
-    private List<String> idsTributacao = new ArrayList<String>();
+    private List<Integer> idsTributacao = new ArrayList<Integer>();
     private List<Integer> idsClassificacaoFiscal = new ArrayList<Integer>();
     private List<Integer> idsProduto = new ArrayList<Integer>();
     private List<Integer> idsProdutor = new ArrayList<Integer>();
@@ -90,7 +90,7 @@ public class UtilCreateProduto {
 	    int produtor_id = CreateModelTest.getCodigoAleatorio(idsProdutor);
 	    int unidade_id = CreateModelTest.getCodigoAleatorio(idsUnidade);
 	    int classificacaoFiscal_id = CreateModelTest.getCodigoAleatorio(idsClassificacaoFiscal);
-	    String tributacao_id = CreateModelTest.getCodigoAleatorio(idsTributacao);
+	    int tributacao_id = CreateModelTest.getCodigoAleatorio(idsTributacao);
 	    int regiaoProdutora_id = CreateModelTest.getCodigoAleatorio(idsRegiaoProdutora);
 	    int tipoValidade_id = CreateModelTest.getCodigoAleatorio(idsTipoValidade);
 	    int fundoPobreza_id = CreateModelTest.getCodigoAleatorio(idsFundoPobreza);
@@ -159,7 +159,7 @@ public class UtilCreateProduto {
 
     public void clear() {
 	idsProduto.forEach(id -> produtoService.deleteById(id));
-	idsTributacao = new ArrayList<String>();
+	idsTributacao = new ArrayList<Integer>();
 	idsClassificacaoFiscal = new ArrayList<Integer>();
 	idsProduto = new ArrayList<Integer>();
 	idsProdutor = new ArrayList<Integer>();
