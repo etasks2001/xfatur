@@ -9,9 +9,9 @@
 </head>
 <body>
 
-<form method="POST" th:object="${tipoDTO}"  th:action="${tipoDTO.id == null} ? @{/tipo/salvar} : @{/tipo/alterar}"  layout:fragment="principal" >
+<form method="POST" th:object="${tipoItemDTO}"  th:action="${tipoItemDTO.id == null} ? @{/tipoitem/salvar} : @{/tipoitem/alterar}"  layout:fragment="principal" >
 	<div th:replace="cadastro/fragments :: alert-success"></div>
-	<div class="cadastro tipo">
+	<div class="cadastro tipoitem">
 		<input type="hidden" th:field="*{id}">
 		<label class="label-codigo col-form-label col-form-label-sm" for="codigo">Código</label>
 		<input autofocus class="input-codigo form-control form-control-sm" type="text" maxlength="2" th:field="*{codigo}" th:classappend="${#fields.hasErrors('codigo')} ? 'is-invalid' : ''" />
@@ -19,7 +19,7 @@
 		<label class="label-descricao col-form-label col-form-label-sm" for="descricao">Descrição</label>
 		<input class="input-descricao form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''" >
 		<div  th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
-		<div th:replace="~{/cadastro/fragments.html :: botoes(${tipoDTO.id == null} ? 'Gravar' : 'Alterar', ${ #execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())})}"></div>
+		<div th:replace="~{/cadastro/fragments.html :: botoes(${tipoItemDTO.id == null} ? 'Gravar' : 'Alterar', ${ #execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())})}"></div>
 	</div>
 </form>
 </body>

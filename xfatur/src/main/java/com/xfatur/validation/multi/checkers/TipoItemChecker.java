@@ -6,19 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.xfatur.dto.DTO;
-import com.xfatur.dto.produto.TipoDTO;
+import com.xfatur.dto.produto.TipoItemDTO;
 import com.xfatur.service.produto.TipoItemService;
 import com.xfatur.validation.multi.MultiFieldValidator;
 import com.xfatur.validation.unique.executable.State;
 
 @Component
-public class TipoChecker implements Checker {
+public class TipoItemChecker implements Checker {
 
     @Autowired
     private TipoItemService service;
 
     public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
-	TipoDTO cf = (TipoDTO) dto;
+	TipoItemDTO cf = (TipoItemDTO) dto;
 	Boolean hasDescricao = null;
 	Boolean hasCodigo = null;
 

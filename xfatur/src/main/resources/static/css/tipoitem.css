@@ -1,4 +1,4 @@
-.tipo {
+.tipoitem {
     display: grid;
     grid-template-rows:auto auto auto auto auto;
     grid-template-columns: 65px 116px 550px;

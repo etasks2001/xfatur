@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 
 import com.xfatur.dto.DTO;
 import com.xfatur.validation.multi.MultiFielValidate;
-import com.xfatur.validation.multi.checkers.TipoChecker;
+import com.xfatur.validation.multi.checkers.TipoItemChecker;
 
 @Component
-@MultiFielValidate(checker = TipoChecker.class)
-public class TipoDTO implements DTO {
+@MultiFielValidate(checker = TipoItemChecker.class)
+public class TipoItemDTO implements DTO {
 
     private Integer id;
 

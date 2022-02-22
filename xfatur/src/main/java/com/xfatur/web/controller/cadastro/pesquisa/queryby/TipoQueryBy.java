@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.xfatur.model.produto.TipoItem;
 import com.xfatur.service.produto.TipoItemService;
 
-@Component(value = "tipoqueryby")
+@Component(value = "tipoitemqueryby")
 public class TipoQueryBy implements QueryBy<TipoItem> {
 
     private static final String[] COLUMNS = new String[] { "id", "ncm", "descricao" };

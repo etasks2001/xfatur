@@ -8,7 +8,7 @@ import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.dto.produto.OrigemDTO;
 import com.xfatur.dto.produto.ProdutorDTO;
 import com.xfatur.dto.produto.RegiaoProdutoraDTO;
-import com.xfatur.dto.produto.TipoDTO;
+import com.xfatur.dto.produto.TipoItemDTO;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
@@ -40,9 +40,9 @@ public interface ModelMapper {
 
     ProdutorDTO toDto(Produtor model);
 
-    TipoItem toModel(TipoDTO dto);
+    TipoItem toModel(TipoItemDTO dto);
 
-    TipoDTO toDto(TipoItem model);
+    TipoItemDTO toDto(TipoItem model);
 
     Linha toModel(LinhaDTO dto);
 
