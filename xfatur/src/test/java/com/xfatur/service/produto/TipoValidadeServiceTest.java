@@ -34,17 +34,17 @@ class TipoValidadeServiceTest {
     // @Test
     @Order(2)
     void test_findByDescricao() {
-	List<TipoValidade> tipoValidade = service.findByDescricao("A");
-
-	MatcherAssert.assertThat(tipoValidade.size(), Matchers.greaterThan(0));
+//	List<TipoValidade> tipoValidade = service.findByDescricao("A");
+//
+//	MatcherAssert.assertThat(tipoValidade.size(), Matchers.greaterThan(0));
 
     }
 
     // @Test
     @Order(3)
     void test_findByDescricao_retorna_vazio() {
-	List<TipoValidade> tipoValidade = service.findByDescricao("fdsafd");
-	MatcherAssert.assertThat(tipoValidade.size(), Matchers.is(0));
+//	List<TipoValidade> tipoValidade = service.findByDescricao("fdsafd");
+//	MatcherAssert.assertThat(tipoValidade.size(), Matchers.is(0));
     }
 
     // @Test

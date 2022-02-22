@@ -1,12 +1,14 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.TipoValidadeDTO;
 import com.xfatur.exception.TipoValidadeIdNotFoundException;
 import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.repository.produto.TipoValidadeRepository;
@@ -40,8 +42,18 @@ public class TipoValidadeService {
 	throw new TipoValidadeIdNotFoundException("Código do Tipo de Validade não encontrado");
     }
 
-    public List<TipoValidade> findByDescricao(String descricao) {
-	return repository.findByDescricao(descricao);
+    public Page<TipoValidade> findByDescricao(String descricao, Pageable pageable) {
+	return repository.findByDescricao(descricao, pageable);
+    }
+
+    public Boolean hasDescricao(Integer id, String descricao) {
+	return repository.hasDescricao(id, descricao);
+    }
+
+    @Transactional(readOnly = false)
+    public void update(TipoValidadeDTO dto) {
+	repository.update(dto.getId(), dto.getDescricao());
+
     }
 
 }
