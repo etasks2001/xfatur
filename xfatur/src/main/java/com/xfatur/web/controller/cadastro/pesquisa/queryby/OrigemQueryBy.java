@@ -23,7 +23,7 @@ public class OrigemQueryBy implements QueryBy<Origem> {
 		}
 
 		if (column.equals("descricao")) {
-			return service.findByDescricao(search, pageable);
+			return service.findByNome(search, pageable);
 		}
 		return Page.empty();
 	}

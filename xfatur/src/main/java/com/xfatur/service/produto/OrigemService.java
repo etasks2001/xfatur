@@ -44,7 +44,7 @@ public class OrigemService {
 	throw new OrigemIdNotFoundException("Código da Origem não encontrado");
     }
 
-    public Page<Origem> findByDescricao(String descricao, Pageable pageable) {
+    public Page<Origem> findByNome(String descricao, Pageable pageable) {
 	return repository.findByDescricao(descricao, pageable);
     }
 

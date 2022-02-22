@@ -33,17 +33,17 @@ class PaisServiceTest {
     // @Test
     @Order(2)
     void test_findByDescricao() {
-	List<Pais> pais = service.findByDescricao("A");
-
-	MatcherAssert.assertThat(pais.size(), Matchers.greaterThan(0));
+//	List<Pais> pais = service.findByDescricao("A");
+//
+//	MatcherAssert.assertThat(pais.size(), Matchers.greaterThan(0));
 
     }
 
     // @Test
     @Order(3)
     void test_findByDescricao_retorna_vazio() {
-	List<Pais> pais = service.findByDescricao("fdsafd");
-	MatcherAssert.assertThat(pais.size(), Matchers.is(0));
+//	List<Pais> pais = service.findByDescricao("fdsafd");
+//	MatcherAssert.assertThat(pais.size(), Matchers.is(0));
     }
 
     // @Test

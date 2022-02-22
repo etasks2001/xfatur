@@ -1,0 +1,76 @@
+.pais {
+    display: grid;
+    grid-template-rows:auto auto auto auto auto auto auto auto auto;
+    grid-template-columns: 70px 116px 550px;
+    grid-template-areas: 
+    "label-nome input-nome input-nome"
+    ". error_nome error_nome"
+    
+    "label-sigla input-sigla ."
+    ". error_sigla error_sigla"
+    
+    "label-origem input-origem input-origem"
+    ". error_origem error_origem"
+    
+    "label-codigoBacen input-codigoBacen ."
+    ". error_codigoBacen error_codigoBacen"
+    
+    ". botoes botoes"
+    ;
+}
+
+
+
+
+#error_nome{
+    grid-area: error_nome;
+}
+
+.label-nome {
+    grid-area: label-nome;
+}
+
+.input-nome {
+    grid-area: input-nome;
+}
+
+
+
+
+
+#error_origem{
+    grid-area: error_origem;
+}
+
+.label-origem {
+    grid-area: label-origem;
+}
+
+.input-origem {
+    grid-area: input-origem;
+}
+
+#error_sigla{
+    grid-area: error_sigla;
+}
+
+.label-sigla {
+    grid-area: label-sigla;
+}
+
+.input-sigla {
+    grid-area: input-sigla;
+}
+
+
+#error_codigoBacen{
+    grid-area: error_codigoBacen;
+}
+
+.label-codigoBacen {
+    grid-area: label-codigoBacen;
+}
+
+.input-codigoBacen {
+    grid-area: input-codigoBacen;
+}

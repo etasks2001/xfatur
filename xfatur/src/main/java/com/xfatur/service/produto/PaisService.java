@@ -1,12 +1,14 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.PaisDTO;
 import com.xfatur.exception.PaisIdNotFoundException;
 import com.xfatur.model.produto.Pais;
 import com.xfatur.repository.produto.PaisRepository;
@@ -40,8 +42,29 @@ public class PaisService {
 	throw new PaisIdNotFoundException("Código do Pais não encontrado");
     }
 
-    public List<Pais> findByDescricao(String descricao) {
-	return repository.findByDescricao(descricao);
+    @Transactional(readOnly = false)
+    public void update(PaisDTO dto) {
+	repository.update(dto.getId(), dto.getNome(), dto.getSigla(), dto.getOrigem(), dto.getCodigoBacen());
+    }
+
+    public Boolean hasNome(Integer id, String nome) {
+	return repository.hasNome(id, nome);
+    }
+
+    public Boolean hasSigla(Integer id, String sigla) {
+	return repository.hasSigla(id, sigla);
+    }
+
+    public Boolean hasOrigem(Integer id, String origem) {
+	return repository.hasOrigem(id, origem);
+    }
+
+    public Boolean hasCodigoBacen(Integer id, String codigoBacen) {
+	return repository.hasCodigoBacen(id, codigoBacen);
+    }
+
+    public Page<Pais> findByNome(String search, Pageable pageable) {
+	return repository.findByNome(search, pageable);
     }
 
 }
