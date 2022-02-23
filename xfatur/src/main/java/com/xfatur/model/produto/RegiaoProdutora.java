@@ -31,4 +31,8 @@ public class RegiaoProdutora {
 	this.descricao = descricao;
     }
 
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
 }

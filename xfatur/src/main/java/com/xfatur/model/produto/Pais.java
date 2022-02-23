@@ -57,4 +57,8 @@ public class Pais {
 	this.codigoBacen = codigoBacen;
     }
 
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
 }

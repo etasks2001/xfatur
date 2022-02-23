@@ -32,4 +32,8 @@ public class Produtor {
 	this.descricao = descricao;
     }
 
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
 }

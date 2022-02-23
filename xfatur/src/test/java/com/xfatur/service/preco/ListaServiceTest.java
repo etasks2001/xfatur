@@ -11,8 +11,15 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.ListaPrecoIdNotFoundException;
@@ -22,10 +29,9 @@ import com.xfatur.model.produto.Produto;
 import com.xfatur.service.produto.ProdutoService;
 import com.xfatur.testutil.UtilCreateProduto;
 
-//@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-////@TestInstance(Lifecycle.PER_CLASS)
-////@TestMethodOrder(OrderAnnotation.class)
-
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@TestInstance(value = Lifecycle.PER_CLASS)
+@TestMethodOrder(OrderAnnotation.class)
 class ListaServiceTest {
 
     List<Integer> idsLista = new ArrayList<Integer>();
@@ -48,7 +54,7 @@ class ListaServiceTest {
 	idsProduto = utilCreateProduto.idsProduto();
     }
 
-    // @Test
+    @Test
     @Order(1)
     void test_save() {
 	Lista listaPreco = new Lista();
@@ -63,7 +69,11 @@ class ListaServiceTest {
 	listaPreco.setDesconto28Dias(new BigDecimal("5.55"));
 
 	Item Item1 = new Item();
-	Produto produto1 = produtoService.findById(idsProduto.get(0));
+//	Produto produto1 = produtoService.findById(idsProduto.get(0));
+
+	Produto produto1 = new Produto();
+	produto1.setId(1);
+
 	Item1.setProduto(produto1);
 	Item1.setPrecounitario(new BigDecimal("451.55"));
 	Item1.setTipo("111");
@@ -101,7 +111,7 @@ class ListaServiceTest {
 
     }
 
-    // @Test
+    @Test
     @Order(2)
     @Transactional
     void test_findById() {
@@ -131,7 +141,7 @@ class ListaServiceTest {
 	});
     }
 
-    // @Test
+    @Test
     @Order(3)
     void test_findById_error() {
 	Exception exception = Assertions.assertThrows(ListaPrecoIdNotFoundException.class, () -> listaService.findById(415646));
@@ -139,21 +149,19 @@ class ListaServiceTest {
 	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Lista não encontrada"));
     }
 
-    // @Test
+    @Test
     @Order(4)
     void test_update() {
 	Lista lista = listaService.findById(idsLista.get(0));
 	lista.setDesconto21Dias(new BigDecimal("154.555"));
 
 	listaService.save(lista);
-
     }
 
     @AfterAll
     void delete() {
 	idsLista.forEach(id -> listaService.deleteById(id));
 
-	utilCreateProduto.clear();
-
+//	utilCreateProduto.clear();
     }
 }

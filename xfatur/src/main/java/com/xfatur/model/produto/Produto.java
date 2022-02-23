@@ -365,4 +365,9 @@ public class Produto {
     public void setReservado(Integer reservado) {
 	this.reservado = reservado;
     }
+
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
 }

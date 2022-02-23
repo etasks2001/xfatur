@@ -27,6 +27,7 @@ public class ProdutoService {
 	return repository.save(produto);
     }
 
+    @Transactional(readOnly = false)
     public void deleteById(Integer id) {
 	repository.deleteById(id);
 
@@ -77,6 +78,10 @@ public class ProdutoService {
 	} catch (Exception e) {
 	    throw new ProdutoReservadoInsuficienteException(Util.extractContraintMessage(e));
 	}
+    }
+
+    public Integer findIdByCodigoProduto(String codigoProduto) {
+	return repository.findIdByCodigoProduto(codigoProduto);
     }
 
 }

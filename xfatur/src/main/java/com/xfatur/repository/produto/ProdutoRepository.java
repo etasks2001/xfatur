@@ -34,4 +34,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     @Query(nativeQuery = true, value = "update produto set reservado = reservado - :quantidade where id = :id")
     void saidaReservado(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
 
+    @Query("select p.id from Produto p where p.codigoProduto = :codigoProduto")
+    Integer findIdByCodigoProduto(@Param("codigoProduto") String codigoProduto);
+
 }

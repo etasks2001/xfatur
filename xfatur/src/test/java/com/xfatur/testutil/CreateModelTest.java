@@ -42,6 +42,7 @@ import com.xfatur.service.produto.LinhaService;
 import com.xfatur.service.produto.MarcaService;
 import com.xfatur.service.produto.OrigemService;
 import com.xfatur.service.produto.PaisService;
+import com.xfatur.service.produto.ProdutoService;
 import com.xfatur.service.produto.ProdutorService;
 import com.xfatur.service.produto.RegiaoProdutoraService;
 import com.xfatur.service.produto.TipoItemService;
@@ -800,6 +801,16 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
+    public static void createAndIds(ProdutoService service, Produto entity, List<Integer> ids) {
+	Integer id = service.findIdByCodigoProduto(entity.getCodigoProduto());
+
+	if (id == null) {
+	    Produto saved = service.save(entity);
+	    id = saved.getId();
+	}
+	ids.add(id);
+    }
+
     public static void createAndIds(ProdutorService service, Produtor entity, List<Integer> ids) {
 	Integer id = service.findByIdDescricao(entity.getDescricao());
 	if (id == null) {
@@ -997,6 +1008,7 @@ public class CreateModelTest {
     private static Origem createOrigem1() {
 	Origem origem = new Origem();
 	origem.setId(0);
+	origem.setCodigo("0");
 	origem.setDescricao("NACIONAL");
 
 	return origem;
@@ -1005,6 +1017,7 @@ public class CreateModelTest {
     private static Origem createOrigem2() {
 	Origem origem = new Origem();
 	origem.setId(1);
+	origem.setCodigo("1");
 	origem.setDescricao("ESTRANGEIRA-IMPORT. DIRETA");
 
 	return origem;
@@ -1013,6 +1026,7 @@ public class CreateModelTest {
     private static Origem createOrigem3() {
 	Origem origem = new Origem();
 	origem.setId(2);
+	origem.setCodigo("2");
 	origem.setDescricao("ESTRANGEIRA-ADQ.MERCADO INTERNO");
 
 	return origem;
@@ -1021,6 +1035,8 @@ public class CreateModelTest {
     private static Origem createOrigem4() {
 	Origem origem = new Origem();
 	origem.setId(6);
+	origem.setCodigo("3");
+
 	origem.setDescricao("(LISTA CAMEX) ESTRANGEIRA-IMPORT. DIRETA");
 
 	return origem;
@@ -1028,6 +1044,7 @@ public class CreateModelTest {
 
     private static Origem createOrigem5() {
 	Origem origem = new Origem();
+	origem.setCodigo("5");
 	origem.setId(7);
 	origem.setDescricao("(LISTA CAMEX) ESTRANGEIRA-ADQ.MERCADO INTERNO");
 

@@ -41,4 +41,8 @@ public class Unidade {
 	this.abreviacao = abreviacao;
     }
 
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
 }
