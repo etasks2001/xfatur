@@ -106,6 +106,13 @@ public class Produto {
     @OneToMany(mappedBy = "produto")
     private List<Item> itens;
 
+    public Produto(int id) {
+	this.id = id;
+    }
+
+    public Produto() {
+    }
+
     public Integer getId() {
 	return id;
     }
