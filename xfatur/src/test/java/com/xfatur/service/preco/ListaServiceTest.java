@@ -125,6 +125,9 @@ class ListaServiceTest {
 	    MatcherAssert.assertThat(listaPreco1.getData(), Matchers.is(listaPreco2.getData()));
 	    MatcherAssert.assertThat(listaPreco1.getTipo(), Matchers.is(listaPreco2.getTipo()));
 
+//	    List<Item> item = listaPreco1.getItens();
+//	    System.out.println(item.size());
+
 	    Item item1 = listaPreco1.getItens().get(0);
 	    Item item2 = listaPreco2.getItens().get(0);
 
