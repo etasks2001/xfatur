@@ -166,6 +166,9 @@ public class UtilCreateProduto {
 //	    idsProduto.add(produto.getId());
 
 	});
+	System.out.println("==============================================================================================");
+	System.out.println("gravados produtos para teste");
+	System.out.println("==============================================================================================");
 	return (List<Integer>) idsProduto;
     }
 

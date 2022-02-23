@@ -57,6 +57,9 @@ class ListaServiceTest {
     @Test
     @Order(1)
     void test_save() {
+	System.out.println("==============================================================================================");
+	System.out.println("Início dos testes Lista de preço");
+	System.out.println("----------------------------------------------------------------------------------------------");
 	Lista listaPreco = new Lista();
 
 	listaPreco.setCodigo("001/1");
@@ -70,9 +73,18 @@ class ListaServiceTest {
 
 	Item Item1 = new Item();
 //	Produto produto1 = produtoService.findById(idsProduto.get(0));
+//	Produto produto2 = produtoService.findById(idsProduto.get(1));
+//	Produto produto3 = produtoService.findById(idsProduto.get(2));
+//	Produto produto4 = produtoService.findById(idsProduto.get(3));
 
 	Produto produto1 = new Produto();
 	produto1.setId(1);
+	Produto produto2 = new Produto();
+	produto2.setId(2);
+	Produto produto3 = new Produto();
+	produto3.setId(3);
+	Produto produto4 = new Produto();
+	produto4.setId(4);
 
 	Item1.setProduto(produto1);
 	Item1.setPrecounitario(new BigDecimal("451.55"));
@@ -80,21 +92,18 @@ class ListaServiceTest {
 	Item1.setDestacar(Boolean.FALSE);
 
 	Item Item2 = new Item();
-	Produto produto2 = produtoService.findById(idsProduto.get(1));
 	Item2.setProduto(produto2);
 	Item2.setPrecounitario(new BigDecimal("451.55"));
 	Item2.setTipo("111");
 	Item2.setDestacar(Boolean.FALSE);
 
 	Item Item3 = new Item();
-	Produto produto3 = produtoService.findById(idsProduto.get(2));
 	Item3.setProduto(produto3);
 	Item3.setPrecounitario(new BigDecimal("451.55"));
 	Item3.setTipo("111");
 	Item3.setDestacar(Boolean.FALSE);
 
 	Item Item4 = new Item();
-	Produto produto4 = produtoService.findById(idsProduto.get(3));
 	Item4.setProduto(produto4);
 	Item4.setPrecounitario(new BigDecimal("451.55"));
 	Item4.setTipo("111");
@@ -160,8 +169,19 @@ class ListaServiceTest {
 
     @AfterAll
     void delete() {
+
+	System.out.println("==============================================================================================");
+	System.out.println("Início da exclusão da lista de preco");
+	System.out.println("----------------------------------------------------------------------------------------------");
 	idsLista.forEach(id -> listaService.deleteById(id));
+	System.out.println("----------------------------------------------------------------------------------------------");
+	System.out.println("Fim da exclusão da lista de preco");
+	System.out.println("==============================================================================================");
 
 //	utilCreateProduto.clear();
+	System.out.println("----------------------------------------------------------------------------------------------");
+	System.out.println("Fim dos testes Lista de preço");
+	System.out.println("==============================================================================================");
+
     }
 }
