@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
+import com.xfatur.mappers.ModelMapper;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.repository.produto.ClassificacaoFiscalRepository;
 import com.xfatur.service.Servico;
@@ -20,6 +21,9 @@ public class ClassificacaoFiscalService implements Servico {
 
     @Autowired
     private ClassificacaoFiscalRepository repository;
+
+    @Autowired
+    private ModelMapper mapper;
 
     public void deleteById(Integer id) {
 
@@ -62,8 +66,19 @@ public class ClassificacaoFiscalService implements Servico {
 	return repository.findAll(pageable);
     }
 
-    public Page<ClassificacaoFiscal> findByDescricao(String search, Pageable pageable) {
-	return repository.findByDescricao(search, pageable);
+    public Page<ClassificacaoFiscalDTO> findByDescricao(String search, Pageable pageable) {
+
+	Page<ClassificacaoFiscal> page = repository.findByDescricao(search, pageable);
+
+	Page<ClassificacaoFiscalDTO> dtoPage = page.map(this::convertToObjectDto);
+
+	return dtoPage;
+    }
+
+    private ClassificacaoFiscalDTO convertToObjectDto(ClassificacaoFiscal o) {
+
+	ClassificacaoFiscalDTO dto = mapper.toDto(o);
+	return dto;
     }
 
     public Page<ClassificacaoFiscal> findByNcm(String search, Pageable pageable) {

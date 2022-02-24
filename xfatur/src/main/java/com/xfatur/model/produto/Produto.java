@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xfatur.model.EstoqueMensal;
 import com.xfatur.model.Selo;
 import com.xfatur.model.preco.Item;
@@ -49,50 +50,62 @@ public class Produto {
     private Integer reducaoICMS_id;
     private Integer iva_id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produtor_id")
     private Produtor produtor;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unidade_id")
     private Unidade unidade;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "classificacaofiscal_id")
     private ClassificacaoFiscal classificacaoFiscal;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tributacao_id")
     private Tributacao tributacao;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "regiaoprodutora_id")
     private RegiaoProdutora regiaoProdutora;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "linha_id")
     private Linha linha;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pais_id")
     private Pais pais;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipovalidade_id")
     private TipoValidade tipoValidade;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "marca_id")
     private Marca marca;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "origem_id")
     private Origem origem;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_id")
     private TipoItem tipoItem;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tiposelo_id")
     private TipoSelo tipoSelo;
@@ -375,6 +388,11 @@ public class Produto {
 
     public void setId(Integer id) {
 	this.id = id;
+    }
+
+    @Override
+    public String toString() {
+	return "Produto [id=" + id + ", codigoProduto=" + codigoProduto + ", descricao=" + descricao + ", unidadeDetalhada=" + unidadeDetalhada + ", graduacaoAlcoolica=" + graduacaoAlcoolica + "]";
     }
 
 }

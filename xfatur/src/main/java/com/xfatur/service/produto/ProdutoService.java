@@ -15,6 +15,7 @@ import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoEstoqueInsuficienteException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
 import com.xfatur.exception.ProdutoReservadoInsuficienteException;
+import com.xfatur.mappers.ModelMapper;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.repository.produto.ProdutoRepository;
 import com.xfatur.util.Util;
@@ -25,6 +26,9 @@ public class ProdutoService {
 
     @Autowired
     private ProdutoRepository repository;
+
+    @Autowired
+    private ModelMapper mapper;
 
     @Transactional(readOnly = false)
     public Produto save(Produto produto) {
@@ -47,7 +51,13 @@ public class ProdutoService {
     }
 
     public Page<Produto> findByDescricao(String descricao, Pageable pageable) {
-	return repository.findByDescricao(descricao, pageable);
+	Page<Produto> l = repository.findByDescricao(descricao, pageable);
+	Produto produto = l.getContent().get(0);
+
+	ProdutoDTO dto = mapper.toDto(produto);
+	System.out.println(dto);
+
+	return l;
     }
 
     public Produto findByCodigoProduto(String codigoProduto) {

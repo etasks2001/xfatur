@@ -1,6 +1,8 @@
 package com.xfatur.mappers;
 
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
 import com.xfatur.dto.produto.LinhaDTO;
@@ -80,6 +82,11 @@ public interface ModelMapper {
 
     PaisDTO toDto(Pais model);
 
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "codigoProduto", source = "codigoProduto")
+    @Mapping(target = "descricao", source = "descricao")
+    @Mapping(target = "descricao", source = "descricao")
     Produto toModel(ProdutoDTO dto);
 
     ProdutoDTO toDto(Produto model);
