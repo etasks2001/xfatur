@@ -1,12 +1,16 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.produto.ProdutoDTO;
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoEstoqueInsuficienteException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
@@ -42,8 +46,8 @@ public class ProdutoService {
 	throw new ProdutoIdNotFoundException("Produto não encontrado.");
     }
 
-    public List<Produto> buscaPorDescricao(String descricao) {
-	return repository.buscaPorDescricao(descricao);
+    public Page<Produto> findByDescricao(String descricao, Pageable pageable) {
+	return repository.findByDescricao(descricao, pageable);
     }
 
     public Produto findByCodigoProduto(String codigoProduto) {
@@ -82,6 +86,12 @@ public class ProdutoService {
 
     public Integer findIdByCodigoProduto(String codigoProduto) {
 	return repository.findIdByCodigoProduto(codigoProduto);
+    }
+
+    @Transactional(readOnly = false)
+    public void update(@Valid ProdutoDTO dto) {
+	repository.update(dto.getId(), dto.getCodigoProduto());
+
     }
 
 }

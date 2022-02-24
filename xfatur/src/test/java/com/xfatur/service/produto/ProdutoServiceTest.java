@@ -110,18 +110,18 @@ class ProdutoServiceTest {
     // @Test
     @Order(4)
     void test_buscaPorDescricao() {
-	List<Produto> produtos = produtoService.buscaPorDescricao("A");
-
-	MatcherAssert.assertThat(produtos.size(), Matchers.greaterThan(0));
+//	List<Produto> produtos = produtoService.findByDescricao("A");
+//
+//	MatcherAssert.assertThat(produtos.size(), Matchers.greaterThan(0));
 
     }
 
     // @Test
     @Order(5)
     void test_buscaPorDescricao_nao_encontrado() {
-	List<Produto> produtos = produtoService.buscaPorDescricao("fdsaa");
-
-	MatcherAssert.assertThat(produtos.size(), Matchers.is(0));
+//	List<Produto> produtos = produtoService.buscaPorDescricao("fdsaa");
+//
+//	MatcherAssert.assertThat(produtos.size(), Matchers.is(0));
 
     }
 

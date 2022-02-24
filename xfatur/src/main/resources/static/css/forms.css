@@ -10,6 +10,7 @@
 @import url("../css/tipovalidade.css");
 @import url("../css/unidade.css");
 @import url("../css/pais.css");
+@import url("../css/produto.css");
 
 section form .cadastro{
     grid-gap: 3px;

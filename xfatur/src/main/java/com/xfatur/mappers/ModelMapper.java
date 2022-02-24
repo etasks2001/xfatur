@@ -7,6 +7,7 @@ import com.xfatur.dto.produto.LinhaDTO;
 import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.dto.produto.OrigemDTO;
 import com.xfatur.dto.produto.PaisDTO;
+import com.xfatur.dto.produto.ProdutoDTO;
 import com.xfatur.dto.produto.ProdutorDTO;
 import com.xfatur.dto.produto.RegiaoProdutoraDTO;
 import com.xfatur.dto.produto.TipoItemDTO;
@@ -19,6 +20,7 @@ import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
 import com.xfatur.model.produto.Pais;
+import com.xfatur.model.produto.Produto;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
 import com.xfatur.model.produto.TipoItem;
@@ -77,5 +79,9 @@ public interface ModelMapper {
     Pais toModel(PaisDTO dto);
 
     PaisDTO toDto(Pais model);
+
+    Produto toModel(ProdutoDTO dto);
+
+    ProdutoDTO toDto(Produto model);
 
 }
