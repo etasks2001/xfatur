@@ -86,7 +86,7 @@ public interface ModelMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "codigoProduto", source = "codigoProduto")
     @Mapping(target = "descricao", source = "descricao")
-    @Mapping(target = "descricao", source = "descricao")
+
     Produto toModel(ProdutoDTO dto);
 
     ProdutoDTO toDto(Produto model);

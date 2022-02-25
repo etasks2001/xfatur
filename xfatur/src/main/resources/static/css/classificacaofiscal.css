@@ -1,36 +1,29 @@
-.classificacaofiscal {
-    display: grid;
-    grid-template-rows:auto auto auto auto auto;
-    grid-template-columns: 65px 116px 550px;
-    grid-template-areas: 
-    "label-ncm input-ncm ."
-    ". error_ncm error_ncm"
-    "label-descricao input-descricao input-descricao"
-    ". error_descricao error_descricao"
-    ". botoes botoes"
-    ;
+
+label{
+    font-size: 0.875rem;
 }
 
-#error_descricao{
-    grid-area: error_descricao;
+#cf-ncm{
+    display:inline-block;
+    width: 100px
 }
 
-#error_ncm{
-    grid-area: error_ncm;
+.cf-label-ncm{
+    width: 60px;
+    
+}
+.cf-label-descricao{
+    
+    width: 60px;
+}
+#cf-descricao{
+    display:inline-block;
+    width: 900px
+    
 }
 
-.label-ncm {
-    grid-area: label-ncm;
-}
-
-.input-ncm {
-    grid-area: input-ncm;
-}
-
-.label-descricao {
-    grid-area: label-descricao;
-}
-
-.input-descricao {
-    grid-area: input-descricao;
+.cf-start{
+    display:inline-block;
+ width: 60px;   
+    
 }

@@ -1,24 +1,31 @@
+
 .produto {
-    display: grid;
-    grid-template-rows:auto auto auto auto auto;
-    grid-template-columns: 65px 116px 550px;
-    grid-template-areas: 
-    "label-descricao input-descricao input-descricao"
-    ". error_descricao error_descricao"
-    ". botoes botoes"
-    ;
+    
 }
 
-#error_id{
-    grid-area: error_descricao;
+label {
+    font-size: 0.875rem;
 }
 
-.label-descricao {
-    grid-area: label-descricao;
+#codigoProduto {
+    display: inline-block;
+    max-width: 100px;
 }
 
-.input-descricao {
-    grid-area: input-descricao;
+#codigoDeBarras {
+    display: inline-block;
+    max-width: 130px;
+}
+#descricao {
+    display: inline-block;
+    max-width: 1200px;
 }
 
+.label-descricao{
+    width: 100px;
+}
 
+.label-codigoProduto{
+ width: 100px;   
+    
+}

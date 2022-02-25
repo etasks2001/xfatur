@@ -1,23 +1,32 @@
 <!DOCTYPE html>
-<html
-	layout:decorate="~{/cadastro/cadastro}"
-	xmlns:th="http://www.thymeleaf.org" 
->
+<html layout:decorate="~{/cadastro/cadastro}" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8" />
+<meta charset="UTF-8" />
 
 </head>
 <body>
 
-<form method="POST" th:object="${produtoDTO}"  th:action="${produtoDTO.id == null} ? @{/produto/salvar} : @{/produto/alterar}"  layout:fragment="principal" >
-	<div th:replace="cadastro/fragments :: alert-success"></div>
-	<div class="cadastro produto">
-		<input type="hidden" th:field="*{id}">
-		<label class="label-descricao col-form-label col-form-label-sm" for="descricao">Descrição</label>
-		<input autofocus class="input-descricao form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''" >
-		<div  th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
-		<div th:replace="~{/cadastro/fragments.html :: botoes(${produtoDTO.id == null} ? 'Gravar' : 'Alterar', ${ #execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())})}"></div>
-	</div>
-</form>
+	<form method="POST" th:object="${produtoDTO}" th:action="${produtoDTO.id == null} ? @{/produto/salvar} : @{/produto/alterar}" layout:fragment="principal">
+		<div th:replace="cadastro/fragments :: alert-success"></div>
+		<div class="cadastro produto">
+			<input type="hidden" th:field="*{id}">
+			<div>
+				<label class="label-codigoProduto form-label form-label-sm" for="codigoProduto">Código Produto</label> 
+				<input autofocus id="codigoProduto" class="form-control form-control-sm" type="text" maxlength="10" th:field="*{codigoProduto}"
+					th:classappend="${#fields.hasErrors('codigoProduto')} ? 'is-invalid' : ''"> <span></span>
+				<div th:replace="~{cadastro/fragments.html :: erro('codigoProduto')}"></div>
+
+				<label class="label-codigoDeBarras form-label form-label-sm" for="codigoDeBarras">Código de Barras</label> <input id="codigoDeBarras" class="form-control form-control-sm" type="text" maxlength="14" th:field="*{codigoDeBarras}"
+					th:classappend="${#fields.hasErrors('codigoDeBarras')} ? 'is-invalid' : ''"> <span></span>
+				<div th:replace="~{cadastro/fragments.html :: erro('codigoDeBarras')}"></div>
+
+			</div>
+			<div>
+				<label class="label-descricao form-label form-label-sm" for="descricao">Descrição</label> <input id="descricao" class="input-descricao form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''">
+				<div th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
+			</div>
+			<div th:replace="~{/cadastro/fragments.html :: botoes(${produtoDTO.id == null} ? 'Gravar' : 'Alterar', ${ #execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())})}"></div>
+		</div>
+	</form>
 </body>
 </html>
