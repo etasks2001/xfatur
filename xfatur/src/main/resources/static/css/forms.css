@@ -24,8 +24,9 @@ section form .cadastro{
 }
 
 .barra-botoes {
-    display: grid;
+    display:inline-block;
+/*     display: grid;
     grid-template-columns: 90px 90px;
     grid-gap: 5px;
     grid-area: botoes;
-}
+ */}

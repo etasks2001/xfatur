@@ -1,29 +1,26 @@
-
-label{
+label {
     font-size: 0.875rem;
 }
 
-#cf-ncm{
-    display:inline-block;
+#cf-ncm {
+    display: inline-block;
     width: 100px
 }
 
-.cf-label-ncm{
+.cf-label-ncm {
     width: 60px;
-    
-}
-.cf-label-descricao{
-    
-    width: 60px;
-}
-#cf-descricao{
-    display:inline-block;
-    width: 900px
-    
 }
 
-.cf-start{
-    display:inline-block;
- width: 60px;   
-    
+.cf-label-descricao {
+    width: 60px;
+}
+
+#cf-descricao {
+    display: inline-block;
+    width: 900px
+}
+
+.cf-start {
+    display: inline-block;
+    width: 60px;
 }
