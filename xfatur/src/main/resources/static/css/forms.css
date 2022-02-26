@@ -1,32 +1,53 @@
 @import url("../css/classificacaofiscal.css");
+
 @import url("../css/marca.css");
+
 @import url("../css/origem.css");
+
 @import url("../css/regiaoprodutora.css");
+
 @import url("../css/produtor.css");
+
 @import url("../css/tipoitem.css");
+
 @import url("../css/linha.css");
+
 @import url("../css/tiposelo.css");
+
 @import url("../css/tributacao.css");
+
 @import url("../css/tipovalidade.css");
+
 @import url("../css/unidade.css");
+
 @import url("../css/pais.css");
+
 @import url("../css/produto.css");
 
-section form .cadastro{
-    grid-gap: 3px;
-    margin: 2px;
-    
-    padding: 5px;
+.form-erros {
+	display: inline-block;
+	width: 300px;
+}
+
+label {
+	font-size: 0.875rem;
+}
+
+section form .cadastro {
+	grid-gap: 3px;
+	margin: 2px;
+	padding: 5px;
 }
 
 .cadastro-section {
-    width: 100%;
+	width: 100%;
 }
 
 .barra-botoes {
-    display:inline-block;
-/*     display: grid;
+	display: inline-block;
+	/*     display: grid;
     grid-template-columns: 90px 90px;
     grid-gap: 5px;
     grid-area: botoes;
- */}
+ */
+}

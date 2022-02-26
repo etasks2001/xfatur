@@ -1,26 +1,16 @@
-label {
-    font-size: 0.875rem;
+
+#classificacaofiscal-ncm {
+    display: inline;
+    width: 90px
 }
 
-#cf-ncm {
-    display: inline-block;
-    width: 100px
-}
-
-.cf-label-ncm {
-    width: 60px;
-}
-
-.cf-label-descricao {
-    width: 60px;
-}
-
-#cf-descricao {
+#classificacaofiscal-descricao {
     display: inline-block;
     width: 900px
 }
 
-.cf-start {
-    display: inline-block;
+
+.classificacaofiscal-label-left {
+	display: inline-block;
     width: 60px;
 }

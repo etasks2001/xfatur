@@ -13,22 +13,28 @@
 	<div th:replace="cadastro/fragments :: alert-success"></div>
 	<div class="cadastro pais">
 		<input type="hidden" th:field="*{id}">
-
-		<label class="label-nome col-form-label col-form-label-sm" for="nome">Nome</label>
-		<input autofocus class="input-nome form-control form-control-sm" type="text" maxlength="80" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid' : ''" >
-		<div  th:replace="~{cadastro/fragments.html :: erro('nome')}"></div>
-
-		<label class="label-sigla col-form-label col-form-label-sm" for="sigla">Sigla</label>
-		<input autofocus class="input-sigla form-control form-control-sm" type="text" maxlength="2" th:field="*{sigla}" th:classappend="${#fields.hasErrors('sigla')} ? 'is-invalid' : ''" >
-		<div  th:replace="~{cadastro/fragments.html :: erro('sigla')}"></div>
+		<div>
+			<label class="pais-label-left form-label form-label-sm" for="nome">Nome</label>
+			<input autofocus id="pais-nome" class="form-control form-control-sm" type="text" maxlength="80" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid' : ''" >
+			<div  th:replace="~{cadastro/fragments.html :: erro('nome')}"></div>
+		</div>
+		<div>		
+			<label class="pais-label-left form-label form-label-sm" for="sigla">Sigla</label>
+			<input id="pais-sigla" class="form-control form-control-sm" type="text" maxlength="2" th:field="*{sigla}" th:classappend="${#fields.hasErrors('sigla')} ? 'is-invalid' : ''" >
+			<div  th:replace="~{cadastro/fragments.html :: erro('sigla')}"></div>
+		</div>		
 		
-		<label class="label-origem col-form-label col-form-label-sm" for="origem">Origem</label>
-		<input autofocus class="input-origem form-control form-control-sm" type="text" maxlength="60" th:field="*{origem}" th:classappend="${#fields.hasErrors('origem')} ? 'is-invalid' : ''" >
-		<div  th:replace="~{cadastro/fragments.html :: erro('origem')}"></div>
+		<div>
+			<label class="pais-label-left form-label form-label-sm" for="origem">Origem</label>
+			<input id="pais-origem" class="form-control form-control-sm" type="text" maxlength="60" th:field="*{origem}" th:classappend="${#fields.hasErrors('origem')} ? 'is-invalid' : ''" >
+			<div  th:replace="~{cadastro/fragments.html :: erro('origem')}"></div>
+		</div>		
 		
-		<label class="label-codigoBacen col-form-label col-form-label-sm" for="codigoBacen">Cód Bacen</label>
-		<input autofocus class="input-codigoBacen form-control form-control-sm" type="text" maxlength="4" th:field="*{codigoBacen}" th:classappend="${#fields.hasErrors('codigoBacen')} ? 'is-invalid' : ''" >
-		<div  th:replace="~{cadastro/fragments.html :: erro('codigoBacen')}"></div>
+		<div>		
+			<label class="pais-label-left form-label form-label-sm" for="codigoBacen">Código Bacen</label>
+			<input id="pais-codigoBacen" class="form-control form-control-sm" type="text" maxlength="4" th:field="*{codigoBacen}" th:classappend="${#fields.hasErrors('codigoBacen')} ? 'is-invalid' : ''" >
+			<div  th:replace="~{cadastro/fragments.html :: erro('codigoBacen')}"></div>
+		</div>
 
 		<div th:replace="~{/cadastro/fragments.html :: botoes(${paisDTO.id == null} ? 'Gravar' : 'Alterar', ${ #execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())})}"></div>
 	</div>

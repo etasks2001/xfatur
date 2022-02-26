@@ -1,38 +1,17 @@
-.linha {
-    display: grid;
-    grid-template-rows:auto auto auto auto auto;
-    grid-template-columns: 65px 116px 550px;
-    grid-template-areas: 
-    "label-descricao input-descricao input-descricao"
-    ". error_descricao error_descricao"
-    "label-tipo input-tipo ."
-    ". error_tipo error_tipo"
-    ". botoes botoes"
-    ;
+#linha-descricao {
+	display: inline-block;
+	width: 900px;
 }
 
-#error_descricao{
-    grid-area: error_descricao;
-}
 
-.label-descricao {
-    grid-area: label-descricao;
-}
-
-.input-descricao {
-    grid-area: input-descricao;
+#linha-tipo{
+	display: inline-block;
+	width: 100px;
 }
 
 
 
-#error_tipo{
-    grid-area: error_tipo;
-}
-
-.label-tipo {
-    grid-area: label-tipo;
-}
-
-.input-tipo {
-    grid-area: input-tipo;
+.linha-label-left {
+	display: inline-block;
+	width: 60px;
 }

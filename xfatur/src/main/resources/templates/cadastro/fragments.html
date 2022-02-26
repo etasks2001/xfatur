@@ -3,17 +3,26 @@
 <head></head>
 <body>
 	<div class="barra-botoes" th:fragment="botoes(label, cadname)">
+	
+	
+	
+	
+		<span th:class="${'__${cadname}__'+'-label-left'}"></span>
 		<button type="submit" class="btn btn-primary submit" th:text="${label}" >gravar</button>
 		<a type="button" class="btn btn-info search" th:href="@{/cadastro/pesquisar/__${cadname}__}">Pesquisar</a>
 		
 		<!-- (${#strings.replace( ,'cadastro/','')}) -->
 	</div>
 
-	<div th:fragment="erro(nome)" class="invalid-feedback" th:id="${'error_'+'__${nome}__'}">
-		<span th:errors="*{__${nome}__}"></span>
+	<div th:fragment="erro(nome)" class="invalid-feedback" >
+		<span class="left-position"></span>
+		<div class="form-erros" >
+			<span th:errors="*{__${nome}__}"></span>
+		</div>
 	</div>
 
 	<div th:fragment="alert-success" th:if="${success != null}" >
+	
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
 			<strong th:text="${success}"></strong>
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

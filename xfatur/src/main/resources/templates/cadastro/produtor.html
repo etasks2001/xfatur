@@ -13,9 +13,11 @@
 	<div th:replace="cadastro/fragments :: alert-success"></div>
 	<div class="cadastro produtor">
 		<input type="hidden" th:field="*{id}">
-		<label class="label-descricao col-form-label col-form-label-sm" for="descricao">Descrição</label>
-		<input autofocus class="input-descricao form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''" >
-		<div  th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
+		<div>		
+			<label class="left-position col-form-label col-form-label-sm" for="descricao">Descrição</label>
+			<input autofocus id="produtor-descricao" class="form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''" >
+			<div  th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
+		</div>		
 		<div th:replace="~{/cadastro/fragments.html :: botoes(${produtorDTO.id == null} ? 'Gravar' : 'Alterar', ${ #execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())})}"></div>
 	</div>
 </form>
