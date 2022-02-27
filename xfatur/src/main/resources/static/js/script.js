@@ -26,14 +26,32 @@ let onblur = function(e) {
 
 }
 
+
+function setMask(input, pattern){
+	
+	if (input) {
+		let mask = new Inputmask(pattern);
+		mask.mask(input);
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
 window.onload = function() {
 
-	var ncm_mask = document.getElementById("classificacaofiscal-ncm");
+	setMask(document.getElementById("classificacaofiscal-ncm"), "9999.9999");
+	setMask(document.getElementById("origem-codigo"), "9");
+	setMask(document.getElementById("tipoitem-codigo"), "99");
+	setMask(document.getElementById("tiposelo-codigo"), "999999");
+	setMask(document.getElementById("tributacao-codigo"), "99");
 
-	if (ncm_mask) {
-		var im = new Inputmask("9999.9999");
-		im.mask(ncm_mask);
-	}
 	
 
 	let inputs = document.querySelectorAll("input");
@@ -48,7 +66,6 @@ window.onload = function() {
 	
 	
 	var abreviacao = document.getElementById("unidade-abreviacao");
-	
 	if (abreviacao) {
 		abreviacao.addEventListener("input", lowercase);
 	}
