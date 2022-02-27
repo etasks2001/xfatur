@@ -13,36 +13,36 @@ import com.xfatur.validation.multi.checkers.TipoSeloChecker;
 @MultiFielValidate(checker = TipoSeloChecker.class)
 public class TipoSeloDTO implements DTO {
 
-    private Integer id;
+	private Integer id;
 
-    @Pattern(regexp = "^[0-9][0-9][0-9][0-9][0-9][0-9].*", message = "Deve corresponder de 0 a 9 modelo 999999")
-    private String codigo;
+	@Pattern(regexp = "^[0-9][0-9][0-9][0-9][0-9][0-9].*", message = "Somente números")
+	private String codigo;
 
-    @Size(min = 3, max = 80)
-    private String descricao;
+	@Size(min = 3, max = 80)
+	private String descricao;
 
-    public String getDescricao() {
-	return descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setDescricao(String descricao) {
-	this.descricao = descricao;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public Integer getId() {
-	return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getCodigo() {
-	return codigo;
-    }
+	public String getCodigo() {
+		return codigo;
+	}
 
-    public void setCodigo(String codigo) {
-	this.codigo = codigo;
-    }
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
 }

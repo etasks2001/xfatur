@@ -20,48 +20,48 @@ import com.xfatur.service.produto.ProdutorService;
 @RequestMapping("produtor")
 public class ProdutorController {
 
-    @Autowired
-    private ProdutorService service;
-    @Autowired
-    private ModelMapper mapper;
+	@Autowired
+	private ProdutorService service;
+	@Autowired
+	private ModelMapper mapper;
 
-    @GetMapping("form")
-    public String openForm(ProdutorDTO dto) {
+	@GetMapping("form")
+	public String openForm(ProdutorDTO dto) {
 
-	return "/cadastro/produtor";
-    }
-
-    @PostMapping("salvar")
-    public String salvar(@Valid ProdutorDTO dto, BindingResult result, RedirectAttributes attr) {
-	if (result.hasErrors()) {
-	    return "cadastro/produtor";
+		return "/cadastro/produtor";
 	}
 
-	service.save(mapper.toModel(dto));
+	@PostMapping("salvar")
+	public String salvar(@Valid ProdutorDTO dto, BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
+			return "cadastro/produtor";
+		}
 
-	attr.addFlashAttribute("success", "Produtor incluída.");
+		service.save(mapper.toModel(dto));
 
-	return "redirect:/produtor/form";
-    }
+		attr.addFlashAttribute("success", "Produtor incluído.");
 
-    @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable("id") Integer id) {
-	ProdutorDTO dto = mapper.toDto(service.findById(id));
-
-	return new ModelAndView("/cadastro/produtor", "produtorDTO", dto);
-    }
-
-    @PostMapping("alterar")
-    public String alterar(@Valid ProdutorDTO dto, BindingResult result, RedirectAttributes attr) {
-
-	if (result.hasErrors()) {
-	    return "cadastro/produtor";
+		return "redirect:/produtor/form";
 	}
 
-	service.update(dto);
+	@GetMapping("/editar/{id}")
+	public ModelAndView editar(@PathVariable("id") Integer id) {
+		ProdutorDTO dto = mapper.toDto(service.findById(id));
 
-	attr.addFlashAttribute("success", "Produtor alterada.");
+		return new ModelAndView("/cadastro/produtor", "produtorDTO", dto);
+	}
 
-	return "redirect:/produtor/form";
-    }
+	@PostMapping("alterar")
+	public String alterar(@Valid ProdutorDTO dto, BindingResult result, RedirectAttributes attr) {
+
+		if (result.hasErrors()) {
+			return "cadastro/produtor";
+		}
+
+		service.update(dto);
+
+		attr.addFlashAttribute("success", "Produtor alterado.");
+
+		return "redirect:/produtor/form";
+	}
 }

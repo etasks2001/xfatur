@@ -13,58 +13,58 @@ import com.xfatur.validation.multi.checkers.PaisChecker;
 @MultiFielValidate(checker = PaisChecker.class)
 public class PaisDTO implements DTO {
 
-    private Integer id;
+	private Integer id;
 
-    @Size(min = 3, max = 80)
-    private String nome;
+	@Size(min = 3, max = 80)
+	private String nome;
 
-    @Size(min = 1, max = 2)
-    private String sigla;
+	@Pattern(regexp = "^[A-Z][A-Z].*", message = "De A a Z")
+	private String sigla;
 
-    @Size(min = 3, max = 60)
-    private String origem;
+	@Size(min = 3, max = 60)
+	private String origem;
 
-    @Pattern(regexp = "^[0-9][0-9][0-9][0-9].*", message = "Deve corresponder de 0 a 9")
-    private String codigoBacen;
+	@Pattern(regexp = "^[0-9][0-9][0-9][0-9].*", message = "Apenas números")
+	private String codigoBacen;
 
-    public Integer getId() {
-	return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getNome() {
-	return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setNome(String nome) {
-	this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public String getSigla() {
-	return sigla;
-    }
+	public String getSigla() {
+		return sigla;
+	}
 
-    public void setSigla(String sigla) {
-	this.sigla = sigla;
-    }
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
 
-    public String getOrigem() {
-	return origem;
-    }
+	public String getOrigem() {
+		return origem;
+	}
 
-    public void setOrigem(String origem) {
-	this.origem = origem;
-    }
+	public void setOrigem(String origem) {
+		this.origem = origem;
+	}
 
-    public String getCodigoBacen() {
-	return codigoBacen;
-    }
+	public String getCodigoBacen() {
+		return codigoBacen;
+	}
 
-    public void setCodigoBacen(String codigoBacen) {
-	this.codigoBacen = codigoBacen;
-    }
+	public void setCodigoBacen(String codigoBacen) {
+		this.codigoBacen = codigoBacen;
+	}
 
 }

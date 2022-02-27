@@ -3,25 +3,18 @@
 	width: 100px;
 }
 
-#codigoProduto {
+#produto-codigoProduto {
 	display: inline-block;
 	max-width: 100px;
 }
 
-#codigoDeBarras {
+#produto-codigoDeBarras {
 	display: inline-block;
 	max-width: 130px;
 }
 
-#descricao {
+#produto-descricao {
 	display: inline-block;
 	max-width: 1200px;
 }
 
-.label-descricao {
-	width: 100px;
-}
-
-.label-codigoProduto {
-	width: 100px;
-}

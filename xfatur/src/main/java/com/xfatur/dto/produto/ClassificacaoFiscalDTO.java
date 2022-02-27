@@ -15,11 +15,9 @@ public class ClassificacaoFiscalDTO implements DTO {
 
 	private Integer id;
 
-//	@Unique(uniqueConstraint = NcmUnique.class, message = "NCM já está cadastrado.")
-	@Pattern(regexp = "^\\d{4}[\\.]\\d{4}$", message = "Somente números")
+	@Pattern(regexp = "^\\d{4}[\\.]\\d{4}$", message = "Apenas números")
 	private String ncm;
 
-//	@Unique(uniqueConstraint = DescricaoClassificacaoFiscalUnique.class, message = "Descrição já está cadastrada.")
 	@Size(min = 3, max = 80)
 	private String descricao;
 

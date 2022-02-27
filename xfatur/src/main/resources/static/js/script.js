@@ -51,6 +51,8 @@ window.onload = function() {
 	setMask(document.getElementById("tipoitem-codigo"), "99");
 	setMask(document.getElementById("tiposelo-codigo"), "999999");
 	setMask(document.getElementById("tributacao-codigo"), "99");
+	setMask(document.getElementById("pais-codigoBacen"), "9999");
+	setMask(document.getElementById("produto-codigoProduto"), {mask:"999.**.999"});
 
 	
 

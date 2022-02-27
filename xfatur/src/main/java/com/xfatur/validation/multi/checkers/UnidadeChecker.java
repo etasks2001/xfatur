@@ -14,34 +14,33 @@ import com.xfatur.validation.unique.executable.State;
 @Component
 public class UnidadeChecker implements Checker {
 
-    @Autowired
-    private UnidadeService service;
+	@Autowired
+	private UnidadeService service;
 
-    public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
-	UnidadeDTO origem = (UnidadeDTO) dto;
-	Boolean hasDescricao = null;
-	Boolean hasAbreviacao = null;
+	public boolean isValid(DTO dto, MultiFieldValidator validator, ConstraintValidatorContext context) {
+		UnidadeDTO origem = (UnidadeDTO) dto;
+		Boolean hasDescricao = null;
+		Boolean hasAbreviacao = null;
 
-	Integer id = origem.getId();
-	String abreviacao = origem.getAbreviacao().trim();
-	String descricao = origem.getDescricao().trim();
+		Integer id = origem.getId();
+		String descricao = origem.getDescricao().trim();
+		String abreviacao = origem.getAbreviacao().trim();
 
-	hasAbreviacao = service.hasAbreviacao(id, abreviacao);
-	if (hasAbreviacao) {
-	    validator.setMessage(context, "Abreviação já cadastrada.", "abreviacao");
+		hasDescricao = service.hasDescricao(id, descricao);
+
+		if (hasDescricao) {
+			validator.setMessage(context, "Unidade já cadastrada.", "descricao");
+		}
+
+		hasAbreviacao = service.hasAbreviacao(id, abreviacao);
+		if (hasAbreviacao) {
+			validator.setMessage(context, "Abreviação já cadastrada.", "abreviacao");
+		}
+		if (hasAbreviacao || hasDescricao) {
+			return State.INVALID.getValue();
+
+		}
+
+		return State.VALID.getValue();
 	}
-
-	hasDescricao = service.hasDescricao(id, descricao);
-
-	if (hasDescricao) {
-	    validator.setMessage(context, "Unidade já cadastrada.", "descricao");
-	}
-
-	if (hasAbreviacao || hasDescricao) {
-	    return State.INVALID.getValue();
-
-	}
-
-	return State.VALID.getValue();
-    }
 }

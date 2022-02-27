@@ -15,7 +15,7 @@ public class OrigemDTO implements DTO {
 
 	private Integer id;
 
-	@Pattern(regexp = "^[0-9].*", message = "Deve corresponder de 0 a 9")
+	@Pattern(regexp = "^[0-9].*", message = "Apenas números")
 	private String codigo;
 
 	@Size(min = 3, max = 80)

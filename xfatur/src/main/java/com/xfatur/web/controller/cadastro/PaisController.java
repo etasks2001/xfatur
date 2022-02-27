@@ -20,48 +20,48 @@ import com.xfatur.service.produto.PaisService;
 @RequestMapping("pais")
 public class PaisController {
 
-    @Autowired
-    private PaisService service;
-    @Autowired
-    private ModelMapper mapper;
+	@Autowired
+	private PaisService service;
+	@Autowired
+	private ModelMapper mapper;
 
-    @GetMapping("form")
-    public String openForm(PaisDTO dto) {
+	@GetMapping("form")
+	public String openForm(PaisDTO dto) {
 
-	return "/cadastro/pais";
-    }
-
-    @PostMapping("salvar")
-    public String salvar(@Valid PaisDTO dto, BindingResult result, RedirectAttributes attr) {
-	if (result.hasErrors()) {
-	    return "cadastro/pais";
+		return "/cadastro/pais";
 	}
 
-	service.save(mapper.toModel(dto));
+	@PostMapping("salvar")
+	public String salvar(@Valid PaisDTO dto, BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
+			return "cadastro/pais";
+		}
 
-	attr.addFlashAttribute("success", "Pais incluída.");
+		service.save(mapper.toModel(dto));
 
-	return "redirect:/pais/form";
-    }
+		attr.addFlashAttribute("success", "País incluído.");
 
-    @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable("id") Integer id) {
-	PaisDTO dto = mapper.toDto(service.findById(id));
-
-	return new ModelAndView("/cadastro/pais", "paisDTO", dto);
-    }
-
-    @PostMapping("alterar")
-    public String alterar(@Valid PaisDTO dto, BindingResult result, RedirectAttributes attr) {
-
-	if (result.hasErrors()) {
-	    return "cadastro/pais";
+		return "redirect:/pais/form";
 	}
 
-	service.update(dto);
+	@GetMapping("/editar/{id}")
+	public ModelAndView editar(@PathVariable("id") Integer id) {
+		PaisDTO dto = mapper.toDto(service.findById(id));
 
-	attr.addFlashAttribute("success", "Pais alterada.");
+		return new ModelAndView("/cadastro/pais", "paisDTO", dto);
+	}
 
-	return "redirect:/pais/form";
-    }
+	@PostMapping("alterar")
+	public String alterar(@Valid PaisDTO dto, BindingResult result, RedirectAttributes attr) {
+
+		if (result.hasErrors()) {
+			return "cadastro/pais";
+		}
+
+		service.update(dto);
+
+		attr.addFlashAttribute("success", "País alterado.");
+
+		return "redirect:/pais/form";
+	}
 }
