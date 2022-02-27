@@ -2,20 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head></head>
 <body>
-	<div class="barra-botoes" th:fragment="botoes(label, cadname)">
-	
-	
-	
-	
-		<span th:class="${'__${cadname}__'+'-label-left'}"></span>
+	<div  th:class="barra-botoes" th:fragment="botoes(label)" th:with="cadname=${#execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())}">
+		<span th:class="${'__${cadname}__' + '-label-left'}"></span>
 		<button type="submit" class="btn btn-primary submit" th:text="${label}" >gravar</button>
 		<a type="button" class="btn btn-info search" th:href="@{/cadastro/pesquisar/__${cadname}__}">Pesquisar</a>
-		
-		<!-- (${#strings.replace( ,'cadastro/','')}) -->
 	</div>
 
-	<div th:fragment="erro(nome)" class="invalid-feedback" >
-		<span class="left-position"></span>
+	<div th:fragment="erro(nome)" class="invalid-feedback m-0" th:with="cadname=${#execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())}">
+		<span th:class="${'__${cadname}__' + '-label-left'}"></span>
 		<div class="form-erros" >
 			<span th:errors="*{__${nome}__}"></span>
 		</div>
@@ -23,16 +17,12 @@
 
 	<div th:fragment="alert-success" th:if="${success != null}" >
 	
-		<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<div class="alert alert-success alert-dismissible fade show m-1 p-1" role="alert">
 			<strong th:text="${success}"></strong>
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			<button type="button" class="btn-close m-1 p-1" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
 	</div>
 	
-	
-	
-	
-	
-	
+	<header th:fragment="header" class="h5 mb-0 alert alert-primary p-0 pb-1 ps-1 pt-1 " th:text="#{pesquisa.__${cadname}__.legenda}" th:with="cadname=${#execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())}"></header> 
 </body>
 </html>

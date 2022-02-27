@@ -20,48 +20,48 @@ import com.xfatur.service.produto.TipoItemService;
 @RequestMapping("tipoitem")
 public class TipoItemController {
 
-    @Autowired
-    private TipoItemService service;
-    @Autowired
-    private ModelMapper mapper;
+	@Autowired
+	private TipoItemService service;
+	@Autowired
+	private ModelMapper mapper;
 
-    @GetMapping("form")
-    public String openForm(TipoItemDTO dto) {
+	@GetMapping("form")
+	public String openForm(TipoItemDTO dto) {
 
-	return "/cadastro/tipoitem";
-    }
-
-    @PostMapping("salvar")
-    public String salvar(@Valid TipoItemDTO dto, BindingResult result, RedirectAttributes attr) {
-	if (result.hasErrors()) {
-	    return "cadastro/tipoitem";
+		return "/cadastro/tipoitem";
 	}
 
-	service.save(mapper.toModel(dto));
+	@PostMapping("salvar")
+	public String salvar(@Valid TipoItemDTO dto, BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
+			return "cadastro/tipoitem";
+		}
 
-	attr.addFlashAttribute("success", "Classificação fiscal incluída.");
+		service.save(mapper.toModel(dto));
 
-	return "redirect:/tipoitem/form";
-    }
+		attr.addFlashAttribute("success", "Tipo do Item incluído.");
 
-    @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable("id") Integer id) {
-	TipoItemDTO dto = mapper.toDto(service.findById(id));
-
-	return new ModelAndView("/cadastro/tipoitem", "tipoItemDTO", dto);
-    }
-
-    @PostMapping("alterar")
-    public String alterar(@Valid TipoItemDTO dto, BindingResult result, RedirectAttributes attr) {
-
-	if (result.hasErrors()) {
-	    return "cadastro/tipoitem";
+		return "redirect:/tipoitem/form";
 	}
 
-	service.update(dto);
+	@GetMapping("/editar/{id}")
+	public ModelAndView editar(@PathVariable("id") Integer id) {
+		TipoItemDTO dto = mapper.toDto(service.findById(id));
 
-	attr.addFlashAttribute("success", "Classificação fiscal alterada.");
+		return new ModelAndView("/cadastro/tipoitem", "tipoItemDTO", dto);
+	}
 
-	return "redirect:/tipoitem/form";
-    }
+	@PostMapping("alterar")
+	public String alterar(@Valid TipoItemDTO dto, BindingResult result, RedirectAttributes attr) {
+
+		if (result.hasErrors()) {
+			return "cadastro/tipoitem";
+		}
+
+		service.update(dto);
+
+		attr.addFlashAttribute("success", "Tipo do item alterado.");
+
+		return "redirect:/tipoitem/form";
+	}
 }

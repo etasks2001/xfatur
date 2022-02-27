@@ -1,3 +1,7 @@
+.pais-label-left {
+	display: inline-block;
+	width: 90px;
+}
 
 #pais-nome {
 	display: inline-block;
@@ -19,7 +23,3 @@
 	width: 60px;
 }
 
-.pais-label-left {
-	display: inline-block;
-	width: 100px;
-}

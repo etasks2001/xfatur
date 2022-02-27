@@ -1,3 +1,8 @@
+.linha-label-left {
+	display: inline-block;
+	width: 60px;
+}
+
 #linha-descricao {
 	display: inline-block;
 	width: 900px;
@@ -11,7 +16,3 @@
 
 
 
-.linha-label-left {
-	display: inline-block;
-	width: 60px;
-}

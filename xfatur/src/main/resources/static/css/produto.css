@@ -1,31 +1,27 @@
-
-.produto {
-    
-}
-
-label {
-    font-size: 0.875rem;
+.produto-label-left {
+	display: inline-block;
+	width: 100px;
 }
 
 #codigoProduto {
-    display: inline-block;
-    max-width: 100px;
+	display: inline-block;
+	max-width: 100px;
 }
 
 #codigoDeBarras {
-    display: inline-block;
-    max-width: 130px;
+	display: inline-block;
+	max-width: 130px;
 }
+
 #descricao {
-    display: inline-block;
-    max-width: 1200px;
+	display: inline-block;
+	max-width: 1200px;
 }
 
-.label-descricao{
-    width: 100px;
+.label-descricao {
+	width: 100px;
 }
 
-.label-codigoProduto{
- width: 100px;   
-    
+.label-codigoProduto {
+	width: 100px;
 }

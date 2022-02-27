@@ -1,18 +1,18 @@
-#origem-codigo{
-	display: inline-block;
-	width: 35px;
-	
-}
-#origem-descricao{
-	display: inline-block;
-	width: 900px;
-	
-}
-
-
-
 .origem-label-left{
 	display: inline-block;
 	width: 60px;
 }
+
+#origem-codigo{
+	display: inline-block;
+	width: 35px;
+}
+
+#origem-descricao{
+	display: inline-block;
+	width: 900px;
+
+}
+
+
 

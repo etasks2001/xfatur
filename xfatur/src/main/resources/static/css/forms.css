@@ -34,9 +34,7 @@ label {
 }
 
 section form .cadastro {
-	grid-gap: 3px;
-	margin: 2px;
-	padding: 5px;
+	padding: 4px;
 }
 
 .cadastro-section {
@@ -45,9 +43,9 @@ section form .cadastro {
 
 .barra-botoes {
 	display: inline-block;
-	/*     display: grid;
-    grid-template-columns: 90px 90px;
-    grid-gap: 5px;
-    grid-area: botoes;
- */
+	margin: 3px 0 3px
+}
+
+.form-row {
+	margin: 2px 0 2px
 }

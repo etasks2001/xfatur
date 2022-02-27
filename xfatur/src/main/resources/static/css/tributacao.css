@@ -1,38 +1,14 @@
-.tributacao {
-    display: grid;
-    grid-template-rows:auto auto auto auto auto;
-    grid-template-columns: 65px 116px 550px;
-    grid-template-areas: 
-    "label-codigo input-codigo ."
-    ". error_codigo error_codigo"
-    "label-descricao input-descricao input-descricao"
-    ". error_descricao error_descricao"
-    ". botoes botoes"
-    ;
+.tributacao-label-left {
+	display: inline-block;;
+	width: 60px
 }
 
-#error_descricao{
-    grid-area: error_descricao;
+#tributacao-codigo {
+	display: inline-block;;
+	width: 120px
 }
 
-.label-descricao {
-    grid-area: label-descricao;
-}
-
-.input-descricao {
-    grid-area: input-descricao;
-}
-
-
-
-#error_codigo{
-    grid-area: error_codigo;
-}
-
-.label-codigo {
-    grid-area: label-codigo;
-}
-
-.input-codigo {
-    grid-area: input-codigo;
+#tributacao-descricao {
+	display: inline-block;;
+	width: 900px
 }

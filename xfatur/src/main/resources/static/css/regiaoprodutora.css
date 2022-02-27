@@ -1,24 +1,9 @@
-.regiaoprodutora {
-    display: grid;
-    grid-template-rows:auto auto auto auto auto;
-    grid-template-columns: 65px 116px 550px;
-    grid-template-areas: 
-    "label-descricao input-descricao input-descricao"
-    ". error_descricao error_descricao"
-    ". botoes botoes"
-    ;
+.regiaoprodutora-label-left {
+	display: inline-block;
+	width: 60px;
 }
 
-#error_id{
-    grid-area: error_descricao;
+#regiaoprodutora-descricao {
+	display: inline-block;
+	width: 900px;
 }
-
-.label-descricao {
-    grid-area: label-descricao;
-}
-
-.input-descricao {
-    grid-area: input-descricao;
-}
-
-

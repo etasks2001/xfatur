@@ -28,7 +28,7 @@ let onblur = function(e) {
 
 window.onload = function() {
 
-	var ncm_mask = document.getElementById("cf-ncm");
+	var ncm_mask = document.getElementById("classificacaofiscal-ncm");
 
 	if (ncm_mask) {
 		var im = new Inputmask("9999.9999");
@@ -47,7 +47,7 @@ window.onload = function() {
 	
 	
 	
-	var abreviacao = document.getElementById("abreviacao");
+	var abreviacao = document.getElementById("unidade-abreviacao");
 	
 	if (abreviacao) {
 		abreviacao.addEventListener("input", lowercase);

@@ -1,36 +1,14 @@
-.tipoitem {
-    display: grid;
-    grid-template-rows:auto auto auto auto auto;
-    grid-template-columns: 65px 116px 550px;
-    grid-template-areas: 
-    "label-codigo input-codigo ."
-    ". error_codigo error_codigo"
-    "label-descricao input-descricao input-descricao"
-    ". error_descricao error_descricao"
-    ". botoes botoes"
-    ;
+.tipoitem-label-left{
+	display: inline-block;
+	width: 60px
 }
 
-#error_descricao{
-    grid-area: error_descricao;
+#tipoitem-codigo{
+	display: inline-block;
+	width: 50px
 }
 
-#error_codigo{
-    grid-area: error_codigo;
-}
-
-.label-codigo {
-    grid-area: label-codigo;
-}
-
-.input-codigo {
-    grid-area: input-codigo;
-}
-
-.label-descricao {
-    grid-area: label-descricao;
-}
-
-.input-descricao {
-    grid-area: input-descricao;
+#tipoitem-descricao{
+	display: inline-block;
+	width: 900px
 }

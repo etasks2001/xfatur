@@ -1,9 +1,10 @@
+.marca-label-left {
+	display: inline-block;
+	width: 60px;
+}
+
 #marca-descricao {
 	display: inline-block;
 	width: 900px;
 }
 
-.marca-label-left {
-	display: inline-block;
-	width: 60px;
-}

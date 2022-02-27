@@ -1,16 +1,14 @@
+.classificacaofiscal-label-left {
+	display: inline-block;
+	width: 60px;
+}
 
 #classificacaofiscal-ncm {
-    display: inline;
-    width: 90px
+	display: inline;
+	width: 90px
 }
 
 #classificacaofiscal-descricao {
-    display: inline-block;
-    width: 900px
-}
-
-
-.classificacaofiscal-label-left {
 	display: inline-block;
-    width: 60px;
+	width: 900px
 }
