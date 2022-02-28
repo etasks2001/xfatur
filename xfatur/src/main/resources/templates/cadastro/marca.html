@@ -17,7 +17,7 @@
 		<input type="hidden" th:field="*{id}">
 
 		<div class="form-row">
-			<label class="marca-label-left form-label form-label-sm" for="descricao">Descrição</label>
+			<label class="marca-label-left form-label form-label-sm" for="marca-descricao">Descrição</label>
 			<input autofocus id="marca-descricao" class="form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''" >
 			<div  th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
 		</div>

@@ -22,7 +22,6 @@ let onblur = function(e) {
 	if (errorfield) {
 		errorfield.innerHTML = "";
 	}
-	console.log(input.id);
 
 }
 
@@ -39,13 +38,7 @@ function setMask(input, pattern){
 
 
 
-
-
-
-
-
 window.onload = function() {
-
 	setMask(document.getElementById("classificacaofiscal-ncm"), "9999.9999");
 	setMask(document.getElementById("origem-codigo"), "9");
 	setMask(document.getElementById("tipoitem-codigo"), "99");
@@ -53,6 +46,7 @@ window.onload = function() {
 	setMask(document.getElementById("tributacao-codigo"), "99");
 	setMask(document.getElementById("pais-codigoBacen"), "9999");
 	setMask(document.getElementById("produto-codigoProduto"), {mask:"999.**.999"});
+	setMask(document.getElementById("produto-codigoDeBarras"), {regex:"^[0-9]*$"});
 
 	
 

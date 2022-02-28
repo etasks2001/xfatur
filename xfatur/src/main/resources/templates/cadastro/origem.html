@@ -16,13 +16,13 @@
 	<input type="hidden" th:field="*{id}">
 
 	<div class="form-row">
-		<label class="origem-label-left form-label form-label-sm" for="descricao">Código</label>
+		<label class="origem-label-left form-label form-label-sm" for="origem-codigo">Código</label>
 		<input autofocus id="origem-codigo" class=" form-control form-control-sm" type="text" maxlength="1" th:field="*{codigo}" th:classappend="${#fields.hasErrors('codigo')} ? 'is-invalid' : ''" >
 		<div  th:replace="~{cadastro/fragments.html :: erro('codigo')}"></div>
 	</div>
 
 	<div class="form-row">
-		<label class="origem-label-left form-label form-label-sm" for="descricao">Descrição</label>
+		<label class="origem-label-left form-label form-label-sm" for="origem-descricao">Descrição</label>
 		<input id="origem-descricao" class=" form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''" >
 		<div  th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
 	</div>

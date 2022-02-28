@@ -13,20 +13,36 @@
 			<input type="hidden" th:field="*{id}">
 			
 			<div class="form-row">
-				<label class="produto-label-left form-label form-label-sm" for="codigoProduto">Código Produto</label> 
-				<input id="produto-codigoProduto" class="form-control form-control-sm" type="text" maxlength="10" th:field="*{codigoProduto}" th:classappend="${#fields.hasErrors('codigoProduto')} ? 'is-invalid' : ''"> <span></span>
-				<div th:replace="~{cadastro/fragments.html :: erro('codigoProduto')}"></div>
-
-				<label class="form-label form-label-sm" for="codigoDeBarras">Código de Barras</label>
-				<input id="produto-codigoDeBarras" class="form-control form-control-sm" type="text" maxlength="14" th:field="*{codigoDeBarras}" th:classappend="${#fields.hasErrors('codigoDeBarras')} ? 'is-invalid' : ''"> <span></span>
-				<div th:replace="~{cadastro/fragments.html :: erro('codigoDeBarras')}"></div>
+				<div class="form-row-columns">
+					<div>
+						<label class="produto-label-left form-label form-label-sm" for="produto-codigoProduto">Código Produto</label> 
+						<input id="produto-codigoProduto" class="form-control form-control-sm" type="text" maxlength="10" th:field="*{codigoProduto}" th:classappend="${#fields.hasErrors('codigoProduto')} ? 'is-invalid' : ''">
+						<div th:replace="~{cadastro/fragments.html :: erro('codigoProduto')}"></div>
+					</div>
+	
+					<div>
+						<label class="label-codigoDeBarras form-label form-label-sm" for="produto-codigoDeBarras">Código de Barras</label>
+						<input id="produto-codigoDeBarras" class="form-control form-control-sm" type="text" maxlength="14" th:field="*{codigoDeBarras}" th:classappend="${#fields.hasErrors('codigoDeBarras')} ? 'is-invalid' : ''">
+						
+					</div>
+				</div>								
 			</div>
 			
 			<div class="form-row">
-				<label class="produto-label-left form-label form-label-sm" for="descricao">Descrição</label>
+				<label class="produto-label-left form-label form-label-sm" for="produto-descricao">Descrição</label>
 				<input id="produto-descricao" class="input-descricao form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''">
 				<div th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
 			</div>
+			
+			<div class="form-row">
+				<label class="produto-label-left form-label form-label-sm" for="produto-pais">País</label> 
+				<select id="produto-pais" class="form-control form-control-sm" th:field="*{pais}">
+					<option th:each="p : ${paises}" th:value="${p.id}" th:text="${p.nome}"></option>
+				</select>
+			</div>
+			
+			
+			
 			<div th:replace="~{/cadastro/fragments.html :: botoes(${produtoDTO.id == null} ? 'Gravar' : 'Alterar')}"></div>
 		</div>
 	</form>

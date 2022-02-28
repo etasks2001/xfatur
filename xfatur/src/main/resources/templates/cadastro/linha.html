@@ -16,13 +16,13 @@
 		<input type="hidden" th:field="*{id}">
 		
 		<div class="form-row">
-			<label class="linha-label-left form-label form-label-sm" for="descricao">Descrição</label>
+			<label class="linha-label-left form-label form-label-sm" for="linha-descricao">Descrição</label>
 			<input autofocus id="linha-descricao" class="form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''" >
 			<div  th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
 		</div>
 		
 		<div class="form-row">
-			<label class="linha-label-left form-label form-label-sm" for="descricao">Tipo</label>
+			<label class="linha-label-left form-label form-label-sm" for="linha-tipo">Tipo</label>
 			<input id="linha-tipo" class="form-control form-control-sm" type="text" maxlength="3" th:field="*{tipo}" th:classappend="${#fields.hasErrors('tipo')} ? 'is-invalid' : ''" >
 			<div  th:replace="~{cadastro/fragments.html :: erro('tipo')}"></div>
 		</div>

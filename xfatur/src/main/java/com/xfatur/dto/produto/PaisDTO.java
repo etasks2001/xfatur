@@ -67,4 +67,9 @@ public class PaisDTO implements DTO {
 		this.codigoBacen = codigoBacen;
 	}
 
+	@Override
+	public String toString() {
+		return "PaisDTO [id=" + id + ", nome=" + nome + "]";
+	}
+
 }

@@ -29,7 +29,7 @@ public class ProdutoDTO implements DTO {
 
 	private Integer id;
 
-	@Pattern(regexp = "^[0-9][0-9][0-9][\\.][0-9A-Z][0-9A-Z][0-9][0-9][0-9].*", message = "Verifique")
+	@Pattern(regexp = "^[0-9][0-9][0-9][\\.][0-9A-Z][0-9A-Z][0-9][0-9][0-9].*", message = "Código inválido.")
 	private String codigoProduto;
 
 	@Size(min = 3, max = 80)
@@ -39,6 +39,7 @@ public class ProdutoDTO implements DTO {
 	private String graduacaoAlcoolica;
 	private BigDecimal pesoLiquido;
 	private BigDecimal pesoBruto;
+
 	private String codigoDeBarras;
 
 	private BigDecimal pesoDaCaixa;

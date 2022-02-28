@@ -31,6 +31,7 @@
 
 label {
 	font-size: 0.875rem;
+	margin-left: 5px
 }
 
 section form .cadastro {
@@ -48,4 +49,8 @@ section form .cadastro {
 
 .form-row {
 	margin: 2px 0 2px
+}
+
+.form-erros{
+	display: inline;
 }

@@ -1,6 +1,7 @@
 .tipoitem-label-left{
 	display: inline-block;
 	width: 60px
+	margin-left: 5px
 }
 
 #tipoitem-codigo{

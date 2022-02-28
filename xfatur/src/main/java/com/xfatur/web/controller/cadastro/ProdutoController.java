@@ -1,11 +1,14 @@
 package com.xfatur.web.controller.cadastro;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,55 +16,66 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xfatur.dto.produto.ProdutoDTO;
+import com.xfatur.dto.projections.PaisView;
 import com.xfatur.mappers.ModelMapper;
+import com.xfatur.service.produto.PaisService;
 import com.xfatur.service.produto.ProdutoService;
 
 @Controller
 @RequestMapping("produto")
 public class ProdutoController {
 
-    @Autowired
-    private ProdutoService service;
-    @Autowired
-    private ModelMapper mapper;
+	@Autowired
+	private ProdutoService service;
+	@Autowired
+	private ModelMapper mapper;
 
-    @GetMapping("form")
-    public String openForm(ProdutoDTO dto) {
+	@Autowired
+	private PaisService paisService;
 
-	return "/cadastro/produto";
-    }
+	@GetMapping("form")
+	public String openForm(ProdutoDTO dto) {
 
-    @PostMapping("salvar")
-    public String salvar(@Valid ProdutoDTO dto, BindingResult result, RedirectAttributes attr) {
-	if (result.hasErrors()) {
-	    return "cadastro/produto";
+		return "/cadastro/produto";
 	}
 
-	service.save(mapper.toModel(dto));
+	@PostMapping("salvar")
+	public String salvar(@Valid ProdutoDTO dto, BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
+			return "cadastro/produto";
+		}
 
-	attr.addFlashAttribute("success", "Produto incluído.");
+		service.save(mapper.toModel(dto));
 
-	return "redirect:/produto/form";
-    }
+		attr.addFlashAttribute("success", "Produto incluído.");
 
-    @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable("id") Integer id) {
-	ProdutoDTO dto = mapper.toDto(service.findById(id));
-
-	return new ModelAndView("/cadastro/produto", "produtoDTO", dto);
-    }
-
-    @PostMapping("alterar")
-    public String alterar(@Valid ProdutoDTO dto, BindingResult result, RedirectAttributes attr) {
-
-	if (result.hasErrors()) {
-	    return "cadastro/produto";
+		return "redirect:/produto/form";
 	}
 
-	service.update(dto);
+	@GetMapping("/editar/{id}")
+	public ModelAndView editar(@PathVariable("id") Integer id) {
+		ProdutoDTO dto = mapper.toDto(service.findById(id));
 
-	attr.addFlashAttribute("success", "Produto alterado.");
+		return new ModelAndView("/cadastro/produto", "produtoDTO", dto);
+	}
 
-	return "redirect:/produto/form";
-    }
+	@PostMapping("alterar")
+	public String alterar(@Valid ProdutoDTO dto, BindingResult result, RedirectAttributes attr) {
+
+		if (result.hasErrors()) {
+			return "cadastro/produto";
+		}
+
+		service.update(dto);
+
+		attr.addFlashAttribute("success", "Produto alterado.");
+
+		return "redirect:/produto/form";
+	}
+
+	@ModelAttribute("paises")
+	public List<PaisView> listaDePaises() {
+		return paisService.findAll();
+	}
+
 }

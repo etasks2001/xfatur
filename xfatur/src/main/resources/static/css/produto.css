@@ -1,11 +1,12 @@
 .produto-label-left {
 	display: inline-block;
 	width: 100px;
+	margin-left: 5px
 }
 
 #produto-codigoProduto {
 	display: inline-block;
-	max-width: 100px;
+	max-width: 130px;
 }
 
 #produto-codigoDeBarras {
@@ -16,5 +17,14 @@
 #produto-descricao {
 	display: inline-block;
 	max-width: 1200px;
+}
+
+.label-codigoDeBarras {
+	width: 112px;
+	margin-left: 5px
+}
+
+.form-row-columns {
+	display: flex;;
 }
 

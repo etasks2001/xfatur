@@ -1,6 +1,7 @@
 .origem-label-left{
 	display: inline-block;
 	width: 60px;
+	margin-left: 5px
 }
 
 #origem-codigo{

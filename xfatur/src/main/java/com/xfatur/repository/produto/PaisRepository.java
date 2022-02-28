@@ -1,5 +1,7 @@
 package com.xfatur.repository.produto;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.xfatur.dto.projections.PaisView;
 import com.xfatur.model.produto.Pais;
 
 public interface PaisRepository extends JpaRepository<Pais, Integer> {
@@ -34,5 +37,8 @@ public interface PaisRepository extends JpaRepository<Pais, Integer> {
 
 	@Query("select count(p)>0 from Pais p where p.codigoBacen = :codigoBacen and (:id is null or p.id <> :id)")
 	Boolean hasCodigoBacen(@Param("id") Integer id, @Param("codigoBacen") String codigoBacen);
+
+	@Query("select p.id as id, p.nome as nome from Pais p order by p.nome asc")
+	List<PaisView> buscaTdosIdNome();
 
 }

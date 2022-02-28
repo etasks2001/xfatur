@@ -13,19 +13,21 @@
 	<div th:replace="~{/cadastro/fragments.html :: header}"></div>
 	<div th:replace="cadastro/fragments :: alert-success"></div>
 	<div class="cadastro unidade">
-		<input type="hidden" th:field="*{id}">
+	<input type="hidden" th:field="*{id}">
+	
 	<div class="form-row">
-		<label class="unidade-label-left form-label form-label-sm" for="descricao">Descrição</label>
+		<label class="unidade-label-left form-label form-label-sm" for="unidade-descricao">Descrição</label>
 		<input autofocus id="unidade-descricao" class="form-control form-control-sm" type="text" maxlength="80" th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid' : ''" >
 		<div  th:replace="~{cadastro/fragments.html :: erro('descricao')}"></div>
 	</div>
 
 	<div class="form-row">		
-		<label class="unidade-label-left form-label form-label-sm" for="abreviacao">Abrev.</label>
+		<label class="unidade-label-left form-label form-label-sm" for="unidade-abreviacao">Abrev.</label>
 		<input id="unidade-abreviacao" class="form-control form-control-sm" type="text" maxlength="6" th:field="*{abreviacao}" th:classappend="${#fields.hasErrors('abreviacao')} ? 'is-invalid' : ''" >
 		<div  th:replace="~{cadastro/fragments.html :: erro('abreviacao')}"></div>
 	</div>
-		<div th:replace="~{/cadastro/fragments.html :: botoes(${unidadeDTO.id == null} ? 'Gravar' : 'Alterar')}"></div>
+	
+	<div th:replace="~{/cadastro/fragments.html :: botoes(${unidadeDTO.id == null} ? 'Gravar' : 'Alterar')}"></div>
 	</div>
 </form>
 </body>

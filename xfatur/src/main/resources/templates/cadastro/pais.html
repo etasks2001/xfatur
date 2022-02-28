@@ -16,25 +16,25 @@
 		<input type="hidden" th:field="*{id}">
 
 		<div class="form-row">
-			<label class="pais-label-left form-label form-label-sm" for="nome">Nome</label>
+			<label class="pais-label-left form-label form-label-sm" for="pais-nome">Nome</label>
 			<input autofocus id="pais-nome" class="form-control form-control-sm" type="text" maxlength="80" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid' : ''" >
 			<div  th:replace="~{cadastro/fragments.html :: erro('nome')}"></div>
 		</div>
 		
 		<div class="form-row">		
-			<label class="pais-label-left form-label form-label-sm" for="sigla">Sigla</label>
+			<label class="pais-label-left form-label form-label-sm" for="pais-sigla">Sigla</label>
 			<input id="pais-sigla" class="form-control form-control-sm" type="text" maxlength="2" th:field="*{sigla}" th:classappend="${#fields.hasErrors('sigla')} ? 'is-invalid' : ''" >
 			<div  th:replace="~{cadastro/fragments.html :: erro('sigla')}"></div>
 		</div>		
 		
 		<div class="form-row">
-			<label class="pais-label-left form-label form-label-sm" for="origem">Origem</label>
+			<label class="pais-label-left form-label form-label-sm" for="pais-origem">Origem</label>
 			<input id="pais-origem" class="form-control form-control-sm" type="text" maxlength="60" th:field="*{origem}" th:classappend="${#fields.hasErrors('origem')} ? 'is-invalid' : ''" >
 			<div  th:replace="~{cadastro/fragments.html :: erro('origem')}"></div>
 		</div>		
 		
 		<div class="form-row">
-			<label class="pais-label-left form-label form-label-sm" for="codigoBacen">Código Bacen</label>
+			<label class="pais-label-left form-label form-label-sm" for="pais-codigoBacen">Código Bacen</label>
 			<input id="pais-codigoBacen" class="form-control form-control-sm" type="text" maxlength="4" th:field="*{codigoBacen}" th:classappend="${#fields.hasErrors('codigoBacen')} ? 'is-invalid' : ''" >
 			<div  th:replace="~{cadastro/fragments.html :: erro('codigoBacen')}"></div>
 		</div>
