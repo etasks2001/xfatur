@@ -8,13 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.dto.projections.ProdutoView;
 import com.xfatur.model.produto.Produto;
 
 @Transactional
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
-	@Query("select p from Produto p where p.descricao like %:descricao%")
-	Page<Produto> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
+	@Query("select p.id as id, p.codigoProduto as codigoProduto, p.descricao as descricao, pa.nome as pais, pr.descricao as produtor from Produto p join p.pais pa join p.produtor pr where p.descricao like %:descricao%")
+	Page<ProdutoView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
 
 	Produto findByCodigoProduto(String codigoProduto);
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.dto.produto.ProdutoDTO;
+import com.xfatur.dto.projections.ProdutoView;
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoEstoqueInsuficienteException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
@@ -50,12 +51,8 @@ public class ProdutoService {
 		throw new ProdutoIdNotFoundException("Produto não encontrado.");
 	}
 
-	public Page<Produto> findByDescricao(String descricao, Pageable pageable) {
-		Page<Produto> l = repository.findByDescricao(descricao, pageable);
-		Produto produto = l.getContent().get(0);
-
-		ProdutoDTO dto = mapper.toDto(produto);
-		System.out.println(dto);
+	public Page<ProdutoView> findByDescricao(String descricao, Pageable pageable) {
+		Page<ProdutoView> l = repository.findByDescricao(descricao, pageable);
 
 		return l;
 	}

@@ -17,9 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xfatur.dto.produto.ProdutoDTO;
 import com.xfatur.dto.projections.PaisView;
+import com.xfatur.dto.projections.ProdutorView;
 import com.xfatur.mappers.ModelMapper;
 import com.xfatur.service.produto.PaisService;
 import com.xfatur.service.produto.ProdutoService;
+import com.xfatur.service.produto.ProdutorService;
 
 @Controller
 @RequestMapping("produto")
@@ -32,6 +34,8 @@ public class ProdutoController {
 
 	@Autowired
 	private PaisService paisService;
+	@Autowired
+	private ProdutorService produtorService;
 
 	@GetMapping("form")
 	public String openForm(ProdutoDTO dto) {
@@ -75,7 +79,13 @@ public class ProdutoController {
 
 	@ModelAttribute("paises")
 	public List<PaisView> listaDePaises() {
-		return paisService.findAll();
+		return paisService.buscaTodosPorIdNome();
+	}
+
+	@ModelAttribute("produtores")
+	public List<ProdutorView> listaDeProdutores() {
+
+		return produtorService.buscaTodosPorIdDescricao();
 	}
 
 }

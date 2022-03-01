@@ -588,7 +588,7 @@ create table produto(
 	tipovalidade_id		int not null references tipovalidade,
 	marca_id		int not null references marca,
 	origem_id		int not null references origem,
-	tipo_id			int not null references tipoitem,
+	tipoitem_id		int not null references tipoitem,
 	tiposelo_id		int not null references tiposelo,
 	primary key 		(id),
 	unique 			(codigoProduto)

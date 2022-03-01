@@ -36,8 +36,15 @@
 			
 			<div class="form-row">
 				<label class="produto-label-left form-label form-label-sm" for="produto-pais">País</label> 
-				<select id="produto-pais" class="form-control form-control-sm" th:field="*{pais}">
+				<select id="produto-pais" class="form-select form-select-sm" th:field="*{pais}">
 					<option th:each="p : ${paises}" th:value="${p.id}" th:text="${p.nome}"></option>
+				</select>
+			</div>
+
+			<div class="form-row">
+				<label class="produto-label-left form-label form-label-sm" for="produto-produtor">Produtor</label> 
+				<select id="produto-produtor" class="form-select form-select-sm" th:field="*{produtor}">
+					<option th:each="p : ${produtores}" th:value="${p.id}" th:text="${p.descricao}"></option>
 				</select>
 			</div>
 			

@@ -69,8 +69,8 @@ public class PaisService {
 		return repository.findByNome(search, pageable);
 	}
 
-	public List<PaisView> findAll() {
-		return repository.buscaTdosIdNome();
+	public List<PaisView> buscaTodosPorIdNome() {
+		return repository.buscaTodosPorIdNome();
 	}
 
 }

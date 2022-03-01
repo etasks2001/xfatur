@@ -1,5 +1,6 @@
 package com.xfatur.service.produto;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.dto.produto.ProdutorDTO;
+import com.xfatur.dto.projections.ProdutorView;
 import com.xfatur.exception.ProdutorIdNotFoundException;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.repository.produto.ProdutorRepository;
@@ -17,41 +19,46 @@ import com.xfatur.repository.produto.ProdutorRepository;
 @Transactional(readOnly = true)
 public class ProdutorService {
 
-    @Autowired
-    private ProdutorRepository repository;
+	@Autowired
+	private ProdutorRepository repository;
 
-    public void deleteById(Integer id) {
-	repository.deleteById(id);
-    }
-
-    public Integer findByIdDescricao(String descricao) {
-	return repository.findByIdDescricao(descricao);
-    }
-
-    @Transactional(readOnly = false)
-    public Produtor save(Produtor produtor) {
-	return repository.save(produtor);
-    }
-
-    public Produtor findById(int id) {
-	Optional<Produtor> produtor = repository.findById(id);
-	if (produtor.isPresent()) {
-	    return produtor.get();
+	public void deleteById(Integer id) {
+		repository.deleteById(id);
 	}
 
-	throw new ProdutorIdNotFoundException("Código do Produtor não encontrado");
-    }
+	public Integer findByIdDescricao(String descricao) {
+		return repository.findByIdDescricao(descricao);
+	}
 
-    public Page<Produtor> findByDescricao(String descricao, Pageable pageable) {
-	return repository.findByDescricao(descricao, pageable);
-    }
+	@Transactional(readOnly = false)
+	public Produtor save(Produtor produtor) {
+		return repository.save(produtor);
+	}
 
-    public Boolean hasDescricao(Integer id, String descricao) {
-	return repository.hasDescricao(id, descricao);
-    }
+	public Produtor findById(int id) {
+		Optional<Produtor> produtor = repository.findById(id);
+		if (produtor.isPresent()) {
+			return produtor.get();
+		}
 
-    @Transactional
-    public void update(ProdutorDTO dto) {
-	repository.update(dto.getId(), dto.getDescricao());
-    }
+		throw new ProdutorIdNotFoundException("Código do Produtor não encontrado");
+	}
+
+	public Page<Produtor> findByDescricao(String descricao, Pageable pageable) {
+		return repository.findByDescricao(descricao, pageable);
+	}
+
+	public Boolean hasDescricao(Integer id, String descricao) {
+		return repository.hasDescricao(id, descricao);
+	}
+
+	@Transactional
+	public void update(ProdutorDTO dto) {
+		repository.update(dto.getId(), dto.getDescricao());
+	}
+
+	public List<ProdutorView> buscaTodosPorIdDescricao() {
+		return repository.buscaTodosPorIdDescricao();
+	}
+
 }

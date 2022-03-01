@@ -5,31 +5,31 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.model.produto.Produto;
+import com.xfatur.dto.projections.ProdutoView;
 import com.xfatur.service.produto.ProdutoService;
 
 @Component(value = "produtoqueryby")
-public class ProdutoQueryBy implements QueryBy<Produto> {
+public class ProdutoQueryBy implements QueryBy<ProdutoView> {
 
-    private static final String[] COLUMNS = new String[] { "id", "codigoProduto", "descricao" };
-    @Autowired
-    private ProdutoService service;
+	private static final String[] COLUMNS = new String[] { "id", "codigoProduto", "descricao", "pais", "produtor" };
+	@Autowired
+	private ProdutoService service;
 
-    @Override
-    public Page<Produto> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
+	@Override
+	public Page<ProdutoView> execute(String search, Pageable pageable, String column) {
+		if (search.trim().length() == 0) {
+			return Page.empty();
+		}
+
+		if (column.equals("descricao")) {
+			return service.findByDescricao(search, pageable);
+		}
+		return Page.empty();
 	}
 
-	if (column.equals("descricao")) {
-	    return service.findByDescricao(search, pageable);
+	@Override
+	public String getColumnName(int index) {
+		return COLUMNS[index];
 	}
-	return Page.empty();
-    }
-
-    @Override
-    public String getColumnName(int index) {
-	return COLUMNS[index];
-    }
 
 }

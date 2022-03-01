@@ -39,6 +39,6 @@ public interface PaisRepository extends JpaRepository<Pais, Integer> {
 	Boolean hasCodigoBacen(@Param("id") Integer id, @Param("codigoBacen") String codigoBacen);
 
 	@Query("select p.id as id, p.nome as nome from Pais p order by p.nome asc")
-	List<PaisView> buscaTdosIdNome();
+	List<PaisView> buscaTodosPorIdNome();
 
 }

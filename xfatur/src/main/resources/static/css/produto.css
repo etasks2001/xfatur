@@ -28,3 +28,14 @@
 	display: flex;;
 }
 
+
+#produto-pais{
+	display: inline-block;
+	width: 150px;
+}
+
+
+#produto-produtor{
+	display: inline-block;
+	width: 300px;
+}
