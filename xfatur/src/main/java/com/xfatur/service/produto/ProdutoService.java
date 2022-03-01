@@ -52,9 +52,7 @@ public class ProdutoService {
 	}
 
 	public Page<ProdutoView> findByDescricao(String descricao, Pageable pageable) {
-		Page<ProdutoView> l = repository.findByDescricao(descricao, pageable);
-
-		return l;
+		return repository.findByDescricao(descricao, pageable);
 	}
 
 	public Produto findByCodigoProduto(String codigoProduto) {

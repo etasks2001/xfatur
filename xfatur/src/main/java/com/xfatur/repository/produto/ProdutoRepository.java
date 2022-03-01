@@ -14,7 +14,7 @@ import com.xfatur.model.produto.Produto;
 @Transactional
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
-	@Query("select p.id as id, p.codigoProduto as codigoProduto, p.descricao as descricao, pa.nome as pais, pr.descricao as produtor from Produto p join p.pais pa join p.produtor pr where p.descricao like %:descricao%")
+	@Query("select p.id as id, p.codigoProduto as codigoProduto, p.descricao as descricao, p.unidadeDetalhada as unidadedetalhada, pa.nome as pais, pr.descricao as produtor, p.cest as cest, p.ipiUnitario as ipiunitario,p.aliquotaipi as aliquotaipi  from Produto p join p.pais pa join p.produtor pr where p.descricao like %:descricao%")
 	Page<ProdutoView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
 
 	Produto findByCodigoProduto(String codigoProduto);

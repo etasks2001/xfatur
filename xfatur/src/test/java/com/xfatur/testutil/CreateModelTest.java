@@ -446,7 +446,7 @@ public class CreateModelTest {
 		produto.setIpiUnitario(new BigDecimal("10.12"));
 		produto.setAliquotaDeReducao(Boolean.FALSE);
 		produto.setIsentoICMS(Boolean.FALSE);
-		produto.setAliquotaIPI(new BigDecimal("12"));
+		produto.setAliquotaipi(new BigDecimal("12"));
 		produto.setAdquiridoComST(Boolean.FALSE);
 		produto.setCest("123457");
 		produto.setEstoque(1111);
@@ -485,7 +485,7 @@ public class CreateModelTest {
 		produto.setIpiUnitario(new BigDecimal("10.12"));
 		produto.setAliquotaDeReducao(Boolean.TRUE);
 		produto.setIsentoICMS(Boolean.TRUE);
-		produto.setAliquotaIPI(new BigDecimal("12"));
+		produto.setAliquotaipi(new BigDecimal("12"));
 		produto.setAdquiridoComST(Boolean.TRUE);
 		produto.setCest("123457");
 		produto.setEstoque(3333);
@@ -524,7 +524,7 @@ public class CreateModelTest {
 		produto.setIpiUnitario(new BigDecimal("10.12"));
 		produto.setAliquotaDeReducao(Boolean.TRUE);
 		produto.setIsentoICMS(Boolean.TRUE);
-		produto.setAliquotaIPI(new BigDecimal("12"));
+		produto.setAliquotaipi(new BigDecimal("12"));
 		produto.setAdquiridoComST(Boolean.TRUE);
 		produto.setCest("123457");
 		produto.setEstoque(3333);
@@ -563,7 +563,7 @@ public class CreateModelTest {
 		produto.setIpiUnitario(new BigDecimal("10.12"));
 		produto.setAliquotaDeReducao(Boolean.TRUE);
 		produto.setIsentoICMS(Boolean.TRUE);
-		produto.setAliquotaIPI(new BigDecimal("12"));
+		produto.setAliquotaipi(new BigDecimal("12"));
 		produto.setAdquiridoComST(Boolean.TRUE);
 		produto.setCest("123457");
 		produto.setEstoque(3333);

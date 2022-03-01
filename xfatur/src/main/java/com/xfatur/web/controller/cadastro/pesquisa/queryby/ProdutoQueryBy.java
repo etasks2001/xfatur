@@ -11,7 +11,7 @@ import com.xfatur.service.produto.ProdutoService;
 @Component(value = "produtoqueryby")
 public class ProdutoQueryBy implements QueryBy<ProdutoView> {
 
-	private static final String[] COLUMNS = new String[] { "id", "codigoProduto", "descricao", "pais", "produtor" };
+	private static final String[] COLUMNS = new String[] { "id", "codigoProduto", "descricao", "unidadedetalhada", "pais", "produtor", "cest", "ipiunitario", "aliquotaipi" };
 	@Autowired
 	private ProdutoService service;
 

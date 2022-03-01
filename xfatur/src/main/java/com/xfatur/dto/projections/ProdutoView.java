@@ -1,5 +1,7 @@
 package com.xfatur.dto.projections;
 
+import java.math.BigDecimal;
+
 public interface ProdutoView {
 	Integer getId();
 
@@ -7,8 +9,16 @@ public interface ProdutoView {
 
 	String getDescricao();
 
+	String getUnidadedetalhada();
+
 	String getPais();
 
 	String getProdutor();
+
+	String getCest();
+
+	BigDecimal getIpiUnitario();
+
+	BigDecimal getAliquotaipi();
 
 }

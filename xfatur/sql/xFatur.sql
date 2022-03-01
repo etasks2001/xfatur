@@ -570,7 +570,7 @@ create table produto(
 	ipiUnitario		numeric default 0,
 	aliquotaDeReducao	boolean,
 	isentoICMS		boolean,
-	aliquotaIPI		decimal default 0,
+	aliquotaipi		decimal default 0,
 	adquiridoComST		boolean,
 	cest			varchar(7) not null,
 	estoque			int not null default 0 constraint __estoque_insuficiente__ check(estoque >= 0),

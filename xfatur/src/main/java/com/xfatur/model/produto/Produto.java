@@ -14,6 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.xfatur.model.EstoqueMensal;
 import com.xfatur.model.Selo;
 import com.xfatur.model.preco.Item;
@@ -34,10 +38,13 @@ public class Produto {
 	private BigDecimal pesoDaCaixa;
 	private BigDecimal larguraDaCaixa;
 	private BigDecimal comprimentoDaCaixa;
+
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(value = Include.NON_NULL)
 	private BigDecimal ipiUnitario;
 	private Boolean aliquotaDeReducao;
 	private Boolean isentoICMS;
-	private BigDecimal aliquotaIPI;
+	private BigDecimal aliquotaipi;
 	private Boolean adquiridoComST;
 	private String cest;
 
@@ -234,12 +241,12 @@ public class Produto {
 		this.isentoICMS = isentoICMS;
 	}
 
-	public BigDecimal getAliquotaIPI() {
-		return aliquotaIPI;
+	public BigDecimal getAliquotaipi() {
+		return aliquotaipi;
 	}
 
-	public void setAliquotaIPI(BigDecimal aliquotaIPI) {
-		this.aliquotaIPI = aliquotaIPI;
+	public void setAliquotaipi(BigDecimal aliquotaipi) {
+		this.aliquotaipi = aliquotaipi;
 	}
 
 	public Boolean getAdquiridoComST() {
