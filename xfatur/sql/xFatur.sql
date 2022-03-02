@@ -572,6 +572,7 @@ create table produto(
 	isentoICMS		boolean,
 	aliquotaipi		decimal default 0,
 	adquiridoComST		boolean,
+	validade		date,
 	cest			varchar(7) not null,
 	estoque			int not null default 0 constraint __estoque_insuficiente__ check(estoque >= 0),
 	reservado		int not null default 0 constraint __reservado_insuficiente__ check(reservado >= 0),
