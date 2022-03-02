@@ -3,22 +3,40 @@ package com.xfatur.dto.projections;
 import java.math.BigDecimal;
 
 public interface ProdutoView {
-	Integer getId();
+    Integer getId();
 
-	String getCodigoProduto();
+    String getCodigoProduto();
 
-	String getDescricao();
+    String getCodigoDeBarras();
 
-	String getUnidadedetalhada();
+    String getDescricao();
 
-	String getPais();
+    String getUnidadedetalhada();
 
-	String getProdutor();
+    String getGraduacaoAlcoolica();
 
-	String getCest();
+    String getCest();
 
-	BigDecimal getIpiUnitario();
+    BigDecimal getIpiUnitario();
 
-	BigDecimal getAliquotaipi();
+    BigDecimal getAliquotaipi();
+
+    String getPais();
+
+    String getProdutor();
+
+    String getMarca();
+
+    String getRegiaoProdutora();
+
+    String getPesoLiquido();
+
+    String getPesoBruto();
+
+    String getLarguraDaCaixa();
+
+    String getComprimentoDaCaixa();
+
+    String getTipoValidade();
 
 }

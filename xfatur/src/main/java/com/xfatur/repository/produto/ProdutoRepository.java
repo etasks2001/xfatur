@@ -14,35 +14,76 @@ import com.xfatur.model.produto.Produto;
 @Transactional
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
-	@Query("select p.id as id, p.codigoProduto as codigoProduto, p.descricao as descricao, p.unidadeDetalhada as unidadedetalhada, pa.nome as pais, pr.descricao as produtor, p.cest as cest, p.ipiUnitario as ipiunitario,p.aliquotaipi as aliquotaipi  from Produto p join p.pais pa join p.produtor pr where p.descricao like %:descricao%")
-	Page<ProdutoView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
+    @Query("select p.id as id, " +
 
-	Produto findByCodigoProduto(String codigoProduto);
+	    "p.codigoProduto as codigoProduto, " +
 
-	@Modifying
-	@Query(nativeQuery = true, value = "update produto set estoque = estoque + :quantidade where id = :id")
-	void entradaEstoque(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+	    "p.codigoDeBarras as codigoDeBarras," +
 
-	@Modifying
-	@Query(nativeQuery = true, value = "update produto set reservado = reservado + :quantidade where id = :id ")
-	void entradaReservado(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+	    "p.descricao as descricao, " +
 
-	@Modifying
-	@Query(nativeQuery = true, value = "update produto set estoque = estoque - :quantidade where id = :id")
-	void saidaEstoque(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+	    "p.unidadeDetalhada as unidadedetalhada, " +
 
-	@Modifying
-	@Query(nativeQuery = true, value = "update produto set reservado = reservado - :quantidade where id = :id")
-	void saidaReservado(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+	    "p.graduacaoAlcoolica as graduacaoAlcoolica," +
 
-	@Query("select p.id from Produto p where p.codigoProduto = :codigoProduto")
-	Integer findIdByCodigoProduto(@Param("codigoProduto") String codigoProduto);
+	    "p.cest as cest, " +
 
-	@Modifying
-	@Query("update Produto p set p.codigoProduto = :codigoProduto where p.id = :id")
-	void update(@Param("id") Integer id, @Param("codigoProduto") String codigoProduto);
+	    "p.ipiUnitario as ipiUnitario, " +
 
-	@Query("select count(p)>0 from Produto p where p.codigoProduto = :codigoProduto and (:id is null or p.codigoProduto <>:id)")
-	Boolean hasCodigoProduto(@Param("id") Integer id, @Param("codigoProduto") String codigoProduto);
+	    "p.aliquotaipi as aliquotaipi, " +
+
+	    "pa.nome as pais, " +
+
+	    "pr.descricao as produtor, " +
+
+	    "m.descricao as marca, " +
+
+	    "rp.descricao as regiaoProdutora, " +
+
+	    "p.pesoLiquido as pesoLiquido, " +
+
+	    "p.pesoBruto as pesoBruto, " +
+
+	    "p.larguraDaCaixa as larguraDaCaixa, " +
+
+	    "p.comprimentoDaCaixa as comprimentoDaCaixa, " +
+
+	    "p.comprimentoDaCaixa as comprimentoDaCaixa, " +
+
+	    "tv.descricao as tipoValidade " +
+
+	    "from Produto p join p.pais pa join p.produtor pr join p.marca m join p.regiaoProdutora rp join p.tipoValidade tv " +
+
+	    "where p.descricao like %:descricao%")
+
+    Page<ProdutoView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
+
+    Produto findByCodigoProduto(String codigoProduto);
+
+    @Modifying
+    @Query(nativeQuery = true, value = "update produto set estoque = estoque + :quantidade where id = :id")
+    void entradaEstoque(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+
+    @Modifying
+    @Query(nativeQuery = true, value = "update produto set reservado = reservado + :quantidade where id = :id ")
+    void entradaReservado(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+
+    @Modifying
+    @Query(nativeQuery = true, value = "update produto set estoque = estoque - :quantidade where id = :id")
+    void saidaEstoque(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+
+    @Modifying
+    @Query(nativeQuery = true, value = "update produto set reservado = reservado - :quantidade where id = :id")
+    void saidaReservado(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+
+    @Query("select p.id from Produto p where p.codigoProduto = :codigoProduto")
+    Integer findIdByCodigoProduto(@Param("codigoProduto") String codigoProduto);
+
+    @Modifying
+    @Query("update Produto p set p.codigoProduto = :codigoProduto where p.id = :id")
+    void update(@Param("id") Integer id, @Param("codigoProduto") String codigoProduto);
+
+    @Query("select count(p)>0 from Produto p where p.codigoProduto = :codigoProduto and (:id is null or p.codigoProduto <>:id)")
+    Boolean hasCodigoProduto(@Param("id") Integer id, @Param("codigoProduto") String codigoProduto);
 
 }
