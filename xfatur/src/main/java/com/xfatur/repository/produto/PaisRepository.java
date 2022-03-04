@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.xfatur.dto.projections.PaisView;
 import com.xfatur.model.produto.Pais;
+import com.xfatur.web.controller.cadastro.pesquisa.projections.PaisView;
 
 public interface PaisRepository extends JpaRepository<Pais, Integer> {
 	@Query("select p.id from Pais p where p.codigoBacen=:codigoBacen")

@@ -5,34 +5,33 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
+import com.xfatur.web.controller.cadastro.pesquisa.projections.ClassificacaoFiscalView;
 
 @Component(value = "classificacaofiscalqueryby")
-public class ClassificacaoFiscalQueryBy implements QueryBy<ClassificacaoFiscalDTO> {
+public class ClassificacaoFiscalQueryBy implements QueryBy<ClassificacaoFiscalView> {
 
-    private static final String[] COLUMNS = new String[] { "id", "ncm", "descricao" };
-    @Autowired
-    private ClassificacaoFiscalService service;
+	private static final String[] COLUMNS = new String[] { "id", "ncm", "descricao" };
+	@Autowired
+	private ClassificacaoFiscalService service;
 
-    @Override
-    public Page<ClassificacaoFiscalDTO> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
+	@Override
+	public Page<ClassificacaoFiscalView> execute(String search, Pageable pageable, String column) {
+		if (search.trim().length() == 0) {
+			return Page.empty();
+		}
+
+		if (column.equals("ncm")) {
+			return service.findByNcm(search, pageable);
+		} else if (column.equals("descricao")) {
+			return service.findByDescricao(search, pageable);
+		}
+		return Page.empty();
 	}
 
-	if (column.equals("ncm")) {
-//	    return service.findByNcm(search, pageable);
-	    return Page.empty();
-	} else if (column.equals("descricao")) {
-	    return service.findByDescricao(search, pageable);
+	@Override
+	public String getColumnName(int index) {
+		return COLUMNS[index];
 	}
-	return Page.empty();
-    }
-
-    @Override
-    public String getColumnName(int index) {
-	return COLUMNS[index];
-    }
 
 }

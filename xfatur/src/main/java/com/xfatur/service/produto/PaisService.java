@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.dto.produto.PaisDTO;
-import com.xfatur.dto.projections.PaisView;
 import com.xfatur.exception.PaisIdNotFoundException;
 import com.xfatur.model.produto.Pais;
 import com.xfatur.repository.produto.PaisRepository;
+import com.xfatur.web.controller.cadastro.pesquisa.projections.PaisView;
 
 @Service
 @Transactional(readOnly = true)

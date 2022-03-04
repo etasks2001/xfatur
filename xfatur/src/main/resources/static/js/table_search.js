@@ -53,16 +53,16 @@ $(document).ready(function(){
 		$("#table_search").DataTable({
 			language: languageConfig,
 	        scrollX: true,
-	        style:'compact',
+	        //style:'compact',
 	        columns:columnDefs,
 	        search: {
 	            return:true
 	        },
-	        deferRender:true,
+	        //deferRender:true,
 			searching:true,
 			processing:true,
 			serverSide:true,
-			responsive:true,
+			//responsive:true,
 			lengthMenu:[10,15],
 			order:columndefault,
 			ajax:{
@@ -71,7 +71,7 @@ $(document).ready(function(){
 					cadname:cadname				
 				},
 			},
-	        dom: 'Qlfrtip',
+//	        dom: 'Qlfrtip',
 	        initComplete: function () {
 	        	  $('#table_search_filter label input').focus();
 	        	}

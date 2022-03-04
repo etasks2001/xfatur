@@ -1,4 +1,4 @@
-package com.xfatur.dto.projections;
+package com.xfatur.web.controller.cadastro.pesquisa.projections;
 
 public interface PaisView {
 	Integer getId();

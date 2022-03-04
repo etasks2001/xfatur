@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.dto.produto.ProdutoDTO;
-import com.xfatur.dto.projections.ProdutoView;
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoEstoqueInsuficienteException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
@@ -20,6 +19,7 @@ import com.xfatur.mappers.ModelMapper;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.repository.produto.ProdutoRepository;
 import com.xfatur.util.Util;
+import com.xfatur.web.controller.cadastro.pesquisa.projections.ProdutoView;
 
 @Service
 @Transactional(readOnly = true)

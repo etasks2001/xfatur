@@ -16,12 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xfatur.dto.produto.ProdutoDTO;
-import com.xfatur.dto.projections.PaisView;
-import com.xfatur.dto.projections.ProdutorView;
 import com.xfatur.mappers.ModelMapper;
 import com.xfatur.service.produto.PaisService;
 import com.xfatur.service.produto.ProdutoService;
 import com.xfatur.service.produto.ProdutorService;
+import com.xfatur.web.controller.cadastro.pesquisa.projections.PaisView;
+import com.xfatur.web.controller.cadastro.pesquisa.projections.ProdutorView;
 
 @Controller
 @RequestMapping("produto")

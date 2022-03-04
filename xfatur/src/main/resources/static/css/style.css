@@ -9,7 +9,7 @@ html, body {
 main {
     display: flex;
     min-height: calc(100vh - 52px);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .sidebar.sidebar-open {
