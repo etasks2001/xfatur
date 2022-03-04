@@ -8,10 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfatur.dto.produto.TipoSeloDTO;
 import com.xfatur.exception.TipoSeloIdNotFoundException;
 import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.repository.cadastro.TipoSeloRepository;
+import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
 
 @Service
 @Transactional(readOnly = true)

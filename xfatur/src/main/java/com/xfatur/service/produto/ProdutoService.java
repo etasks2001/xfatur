@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfatur.dto.produto.ProdutoDTO;
 import com.xfatur.exception.ProdutoCodigoNotFoundException;
 import com.xfatur.exception.ProdutoEstoqueInsuficienteException;
 import com.xfatur.exception.ProdutoIdNotFoundException;
@@ -18,8 +17,9 @@ import com.xfatur.exception.ProdutoReservadoInsuficienteException;
 import com.xfatur.mappers.ModelMapper;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.repository.cadastro.ProdutoRepository;
-import com.xfatur.repository.projections.ProdutoView;
+import com.xfatur.repository.projections.cadastro.ProdutoView;
 import com.xfatur.util.Util;
+import com.xfatur.validation.dto.cadastro.ProdutoDTO;
 
 @Service
 @Transactional(readOnly = true)

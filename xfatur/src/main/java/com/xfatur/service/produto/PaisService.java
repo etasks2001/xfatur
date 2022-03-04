@@ -9,11 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfatur.dto.produto.PaisDTO;
 import com.xfatur.exception.PaisIdNotFoundException;
 import com.xfatur.model.produto.Pais;
 import com.xfatur.repository.cadastro.PaisRepository;
-import com.xfatur.repository.projections.PaisView;
+import com.xfatur.repository.projections.cadastro.PaisView;
+import com.xfatur.validation.dto.cadastro.PaisDTO;
 
 @Service
 @Transactional(readOnly = true)

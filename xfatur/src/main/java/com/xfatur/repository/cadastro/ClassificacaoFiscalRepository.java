@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.xfatur.model.produto.ClassificacaoFiscal;
-import com.xfatur.repository.projections.ClassificacaoFiscalView;
+import com.xfatur.repository.projections.cadastro.ClassificacaoFiscalView;
 
 public interface ClassificacaoFiscalRepository extends JpaRepository<ClassificacaoFiscal, Integer> {
 

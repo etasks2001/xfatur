@@ -3,16 +3,6 @@ package com.xfatur.converter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.xfatur.dto.DestinatarioDTO;
-import com.xfatur.dto.EmitenteDTO;
-import com.xfatur.dto.EnderecoDTO;
-import com.xfatur.dto.EntregaDTO;
-import com.xfatur.dto.LocalDTO;
-import com.xfatur.dto.NaturezaJuridicaDTO;
-import com.xfatur.dto.PessoaDTO;
-import com.xfatur.dto.RamoAtividadeDTO;
-import com.xfatur.dto.RepresentanteDTO;
-import com.xfatur.dto.RetiradaDTO;
 import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
@@ -22,6 +12,16 @@ import com.xfatur.model.NaturezaJuridica;
 import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
+import com.xfatur.validation.dto.DestinatarioDTO;
+import com.xfatur.validation.dto.EmitenteDTO;
+import com.xfatur.validation.dto.EnderecoDTO;
+import com.xfatur.validation.dto.EntregaDTO;
+import com.xfatur.validation.dto.LocalDTO;
+import com.xfatur.validation.dto.NaturezaJuridicaDTO;
+import com.xfatur.validation.dto.PessoaDTO;
+import com.xfatur.validation.dto.RamoAtividadeDTO;
+import com.xfatur.validation.dto.RepresentanteDTO;
+import com.xfatur.validation.dto.RetiradaDTO;
 import com.xfatur.model.EnderecoRetirada;
 
 class DTOConverter {

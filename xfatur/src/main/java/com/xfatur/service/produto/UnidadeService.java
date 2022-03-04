@@ -8,10 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfatur.dto.produto.UnidadeDTO;
 import com.xfatur.exception.UnidadeIdNotFoundException;
 import com.xfatur.model.produto.Unidade;
 import com.xfatur.repository.cadastro.UnidadeRepository;
+import com.xfatur.validation.dto.cadastro.UnidadeDTO;
 
 @Service
 @Transactional(readOnly = true)

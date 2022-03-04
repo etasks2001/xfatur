@@ -2,7 +2,7 @@ package com.xfatur.validation.multi.checkers;
 
 import javax.validation.ConstraintValidatorContext;
 
-import com.xfatur.dto.DTO;
+import com.xfatur.validation.dto.DTO;
 import com.xfatur.validation.multi.MultiFieldValidator;
 
 public interface Checker {

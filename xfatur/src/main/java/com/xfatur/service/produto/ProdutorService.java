@@ -9,11 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfatur.dto.produto.ProdutorDTO;
 import com.xfatur.exception.ProdutorIdNotFoundException;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.repository.cadastro.ProdutorRepository;
-import com.xfatur.repository.projections.ProdutorView;
+import com.xfatur.repository.projections.cadastro.ProdutorView;
+import com.xfatur.validation.dto.cadastro.ProdutorDTO;
 
 @Service
 @Transactional(readOnly = true)

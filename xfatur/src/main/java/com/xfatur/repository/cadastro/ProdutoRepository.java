@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.model.produto.Produto;
-import com.xfatur.repository.projections.ProdutoView;
+import com.xfatur.repository.projections.cadastro.ProdutoView;
 
 @Transactional
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {

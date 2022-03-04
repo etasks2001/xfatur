@@ -9,10 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.exception.MarcaIdNotFoundException;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.repository.cadastro.MarcaRepository;
+import com.xfatur.validation.dto.cadastro.MarcaDTO;
 
 @Service
 @Transactional(readOnly = true)

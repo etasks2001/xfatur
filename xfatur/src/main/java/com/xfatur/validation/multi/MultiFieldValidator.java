@@ -6,7 +6,7 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.xfatur.dto.DTO;
+import com.xfatur.validation.dto.DTO;
 import com.xfatur.validation.multi.checkers.Checker;
 
 public class MultiFieldValidator implements ConstraintValidator<MultiFielValidate, DTO> {

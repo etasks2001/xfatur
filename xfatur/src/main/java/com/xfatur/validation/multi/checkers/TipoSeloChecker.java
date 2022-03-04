@@ -5,9 +5,9 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.dto.DTO;
-import com.xfatur.dto.produto.TipoSeloDTO;
 import com.xfatur.service.produto.TipoSeloService;
+import com.xfatur.validation.dto.DTO;
+import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
 import com.xfatur.validation.multi.MultiFieldValidator;
 import com.xfatur.validation.unique.executable.State;
 

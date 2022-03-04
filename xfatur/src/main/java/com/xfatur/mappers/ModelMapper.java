@@ -4,19 +4,6 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
-import com.xfatur.dto.produto.LinhaDTO;
-import com.xfatur.dto.produto.MarcaDTO;
-import com.xfatur.dto.produto.OrigemDTO;
-import com.xfatur.dto.produto.PaisDTO;
-import com.xfatur.dto.produto.ProdutoDTO;
-import com.xfatur.dto.produto.ProdutorDTO;
-import com.xfatur.dto.produto.RegiaoProdutoraDTO;
-import com.xfatur.dto.produto.TipoItemDTO;
-import com.xfatur.dto.produto.TipoSeloDTO;
-import com.xfatur.dto.produto.TipoValidadeDTO;
-import com.xfatur.dto.produto.TributacaoDTO;
-import com.xfatur.dto.produto.UnidadeDTO;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
@@ -30,6 +17,19 @@ import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.model.produto.Tributacao;
 import com.xfatur.model.produto.Unidade;
+import com.xfatur.validation.dto.cadastro.ClassificacaoFiscalDTO;
+import com.xfatur.validation.dto.cadastro.LinhaDTO;
+import com.xfatur.validation.dto.cadastro.MarcaDTO;
+import com.xfatur.validation.dto.cadastro.OrigemDTO;
+import com.xfatur.validation.dto.cadastro.PaisDTO;
+import com.xfatur.validation.dto.cadastro.ProdutoDTO;
+import com.xfatur.validation.dto.cadastro.ProdutorDTO;
+import com.xfatur.validation.dto.cadastro.RegiaoProdutoraDTO;
+import com.xfatur.validation.dto.cadastro.TipoItemDTO;
+import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
+import com.xfatur.validation.dto.cadastro.TipoValidadeDTO;
+import com.xfatur.validation.dto.cadastro.TributacaoDTO;
+import com.xfatur.validation.dto.cadastro.UnidadeDTO;
 
 @Mapper(componentModel = "spring")
 public interface ModelMapper {

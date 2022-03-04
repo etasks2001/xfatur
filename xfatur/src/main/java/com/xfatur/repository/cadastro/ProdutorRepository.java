@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.xfatur.model.produto.Produtor;
-import com.xfatur.repository.projections.ProdutorView;
+import com.xfatur.repository.projections.cadastro.ProdutorView;
 
 public interface ProdutorRepository extends JpaRepository<Produtor, Integer> {
 

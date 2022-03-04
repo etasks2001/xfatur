@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.dto.produto.ProdutoDTO;
 import com.xfatur.mappers.ModelMapper;
-import com.xfatur.repository.projections.PaisView;
-import com.xfatur.repository.projections.ProdutorView;
+import com.xfatur.repository.projections.cadastro.PaisView;
+import com.xfatur.repository.projections.cadastro.ProdutorView;
 import com.xfatur.service.produto.PaisService;
 import com.xfatur.service.produto.ProdutoService;
 import com.xfatur.service.produto.ProdutorService;
+import com.xfatur.validation.dto.cadastro.ProdutoDTO;
 
 @Controller
 @RequestMapping("produto")
