@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.dto.produto.ClassificacaoFiscalDTO;
 import com.xfatur.model.produto.ClassificacaoFiscal;
-import com.xfatur.repository.produto.ClassificacaoFiscalRepository;
+import com.xfatur.repository.cadastro.ClassificacaoFiscalRepository;
+import com.xfatur.repository.projections.ClassificacaoFiscalView;
 import com.xfatur.service.Servico;
-import com.xfatur.web.controller.cadastro.pesquisa.projections.ClassificacaoFiscalView;
 
 @Service(value = "classificacaofiscalservice")
 @Transactional(readOnly = true)

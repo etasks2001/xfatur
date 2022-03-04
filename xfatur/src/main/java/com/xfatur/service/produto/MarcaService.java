@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.MarcaDTO;
 import com.xfatur.exception.MarcaIdNotFoundException;
 import com.xfatur.model.produto.Marca;
-import com.xfatur.repository.produto.MarcaRepository;
+import com.xfatur.repository.cadastro.MarcaRepository;
 
 @Service
 @Transactional(readOnly = true)

@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.PaisDTO;
 import com.xfatur.exception.PaisIdNotFoundException;
 import com.xfatur.model.produto.Pais;
-import com.xfatur.repository.produto.PaisRepository;
-import com.xfatur.web.controller.cadastro.pesquisa.projections.PaisView;
+import com.xfatur.repository.cadastro.PaisRepository;
+import com.xfatur.repository.projections.PaisView;
 
 @Service
 @Transactional(readOnly = true)

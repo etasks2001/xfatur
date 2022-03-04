@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.TributacaoDTO;
 import com.xfatur.exception.TributacaoIdNotFoundException;
 import com.xfatur.model.produto.Tributacao;
-import com.xfatur.repository.produto.TributacaoRepository;
+import com.xfatur.repository.cadastro.TributacaoRepository;
 
 @Service
 @Transactional(readOnly = true)

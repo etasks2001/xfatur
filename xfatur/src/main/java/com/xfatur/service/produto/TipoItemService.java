@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.TipoItemDTO;
 import com.xfatur.exception.TipoIdNotFoundException;
 import com.xfatur.model.produto.TipoItem;
-import com.xfatur.repository.produto.TipoItemRepository;
+import com.xfatur.repository.cadastro.TipoItemRepository;
 
 @Service
 @Transactional(readOnly = true)

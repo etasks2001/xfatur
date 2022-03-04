@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.TipoSeloDTO;
 import com.xfatur.exception.TipoSeloIdNotFoundException;
 import com.xfatur.model.produto.TipoSelo;
-import com.xfatur.repository.produto.TipoSeloRepository;
+import com.xfatur.repository.cadastro.TipoSeloRepository;
 
 @Service
 @Transactional(readOnly = true)

@@ -17,9 +17,9 @@ import com.xfatur.exception.ProdutoIdNotFoundException;
 import com.xfatur.exception.ProdutoReservadoInsuficienteException;
 import com.xfatur.mappers.ModelMapper;
 import com.xfatur.model.produto.Produto;
-import com.xfatur.repository.produto.ProdutoRepository;
+import com.xfatur.repository.cadastro.ProdutoRepository;
+import com.xfatur.repository.projections.ProdutoView;
 import com.xfatur.util.Util;
-import com.xfatur.web.controller.cadastro.pesquisa.projections.ProdutoView;
 
 @Service
 @Transactional(readOnly = true)

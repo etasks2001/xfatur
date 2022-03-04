@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.ProdutorDTO;
 import com.xfatur.exception.ProdutorIdNotFoundException;
 import com.xfatur.model.produto.Produtor;
-import com.xfatur.repository.produto.ProdutorRepository;
-import com.xfatur.web.controller.cadastro.pesquisa.projections.ProdutorView;
+import com.xfatur.repository.cadastro.ProdutorRepository;
+import com.xfatur.repository.projections.ProdutorView;
 
 @Service
 @Transactional(readOnly = true)

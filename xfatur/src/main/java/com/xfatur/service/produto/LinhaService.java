@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.LinhaDTO;
 import com.xfatur.exception.LinhaIdNotFoundException;
 import com.xfatur.model.produto.Linha;
-import com.xfatur.repository.produto.LinhaRepository;
+import com.xfatur.repository.cadastro.LinhaRepository;
 
 @Service
 @Transactional(readOnly = true)

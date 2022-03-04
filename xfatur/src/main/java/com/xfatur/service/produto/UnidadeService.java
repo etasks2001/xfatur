@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.UnidadeDTO;
 import com.xfatur.exception.UnidadeIdNotFoundException;
 import com.xfatur.model.produto.Unidade;
-import com.xfatur.repository.produto.UnidadeRepository;
+import com.xfatur.repository.cadastro.UnidadeRepository;
 
 @Service
 @Transactional(readOnly = true)

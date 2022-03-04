@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.RegiaoProdutoraDTO;
 import com.xfatur.exception.RegiaoProdutoraIdNotFoundException;
 import com.xfatur.model.produto.RegiaoProdutora;
-import com.xfatur.repository.produto.RegiaoProdutoraRepository;
+import com.xfatur.repository.cadastro.RegiaoProdutoraRepository;
 
 @Service
 @Transactional(readOnly = true)

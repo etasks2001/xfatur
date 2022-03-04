@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.OrigemDTO;
 import com.xfatur.exception.OrigemIdNotFoundException;
 import com.xfatur.model.produto.Origem;
-import com.xfatur.repository.produto.OrigemRepository;
+import com.xfatur.repository.cadastro.OrigemRepository;
 
 @Service
 @Transactional(readOnly = true)

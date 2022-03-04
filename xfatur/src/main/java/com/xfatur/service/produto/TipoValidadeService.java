@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.dto.produto.TipoValidadeDTO;
 import com.xfatur.exception.TipoValidadeIdNotFoundException;
 import com.xfatur.model.produto.TipoValidade;
-import com.xfatur.repository.produto.TipoValidadeRepository;
+import com.xfatur.repository.cadastro.TipoValidadeRepository;
 
 @Service
 @Transactional(readOnly = true)
