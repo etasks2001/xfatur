@@ -14,76 +14,76 @@ import com.xfatur.repository.projections.cadastro.ProdutoView;
 @Transactional
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
-    @Query("select p.id as id, " +
+	@Query("select p.id as id, " +
 
-	    "p.codigoProduto as codigoProduto, " +
+			"p.codigoProduto as codigoProduto, " +
 
-	    "p.codigoDeBarras as codigoDeBarras," +
+			"p.codigoDeBarras as codigoDeBarras," +
 
-	    "p.descricao as descricao, " +
+			"p.descricao as descricao, " +
 
-	    "p.unidadeDetalhada as unidadedetalhada, " +
+			"p.unidadeDetalhada as unidadedetalhada, " +
 
-	    "p.graduacaoAlcoolica as graduacaoAlcoolica," +
+			"p.graduacaoAlcoolica as graduacaoAlcoolica," +
 
-	    "p.cest as cest, " +
+			"p.cest as cest, " +
 
-	    "p.ipiUnitario as ipiUnitario, " +
+			"p.ipiUnitario as ipiUnitario, " +
 
-	    "p.aliquotaipi as aliquotaipi, " +
+			"p.aliquotaipi as aliquotaipi, " +
 
-	    "pa.nome as pais, " +
+			"pa.nome as pais, " +
 
-	    "pr.descricao as produtor, " +
+			"pr.descricao as produtor, " +
 
-	    "m.descricao as marca, " +
+			"m.descricao as marca, " +
 
-	    "rp.descricao as regiaoProdutora, " +
+			"rp.descricao as regiaoProdutora, " +
 
-	    "p.pesoLiquido as pesoLiquido, " +
+			"p.pesoLiquido as pesoLiquido, " +
 
-	    "p.pesoBruto as pesoBruto, " +
+			"p.pesoBruto as pesoBruto, " +
 
-	    "p.larguraDaCaixa as larguraDaCaixa, " +
+			"p.larguraDaCaixa as larguraDaCaixa, " +
 
-	    "p.comprimentoDaCaixa as comprimentoDaCaixa, " +
+			"p.comprimentoDaCaixa as comprimentoDaCaixa, " +
 
-	    "p.comprimentoDaCaixa as comprimentoDaCaixa, " +
+			"p.comprimentoDaCaixa as comprimentoDaCaixa, " +
 
-	    "tv.descricao as tipoValidade " +
+			"tv.descricao as tipoValidade " +
 
-	    "from Produto p join p.pais pa join p.produtor pr join p.marca m join p.regiaoProdutora rp join p.tipoValidade tv " +
+			"from Produto p join p.pais pa join p.produtor pr join p.marca m join p.regiaoProdutora rp join p.tipoValidade tv " +
 
-	    "where p.descricao like %:descricao%")
+			"where p.descricao like %:descricao%")
 
-    Page<ProdutoView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
+	Page<ProdutoView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
 
-    Produto findByCodigoProduto(String codigoProduto);
+	Produto findByCodigoProduto(String codigoProduto);
 
-    @Modifying
-    @Query(nativeQuery = true, value = "update produto set estoque = estoque + :quantidade where id = :id")
-    void entradaEstoque(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+	@Modifying
+	@Query(nativeQuery = true, value = "update produto set estoque = estoque + :quantidade where id = :id")
+	void entradaEstoque(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
 
-    @Modifying
-    @Query(nativeQuery = true, value = "update produto set reservado = reservado + :quantidade where id = :id ")
-    void entradaReservado(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+	@Modifying
+	@Query(nativeQuery = true, value = "update produto set reservado = reservado + :quantidade where id = :id ")
+	void entradaReservado(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
 
-    @Modifying
-    @Query(nativeQuery = true, value = "update produto set estoque = estoque - :quantidade where id = :id")
-    void saidaEstoque(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+	@Modifying
+	@Query(nativeQuery = true, value = "update produto set estoque = estoque - :quantidade where id = :id")
+	void saidaEstoque(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
 
-    @Modifying
-    @Query(nativeQuery = true, value = "update produto set reservado = reservado - :quantidade where id = :id")
-    void saidaReservado(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
+	@Modifying
+	@Query(nativeQuery = true, value = "update produto set reservado = reservado - :quantidade where id = :id")
+	void saidaReservado(@Param("id") Integer id, @Param("quantidade") Integer quantidade);
 
-    @Query("select p.id from Produto p where p.codigoProduto = :codigoProduto")
-    Integer findIdByCodigoProduto(@Param("codigoProduto") String codigoProduto);
+	@Query("select p.id from Produto p where p.codigoProduto = :codigoProduto")
+	Integer findIdByCodigoProduto(@Param("codigoProduto") String codigoProduto);
 
-    @Modifying
-    @Query("update Produto p set p.codigoProduto = :codigoProduto where p.id = :id")
-    void update(@Param("id") Integer id, @Param("codigoProduto") String codigoProduto);
+	@Modifying
+	@Query("update Produto p set p.codigoProduto = :codigoProduto where p.id = :id")
+	void update(@Param("id") Integer id, @Param("codigoProduto") String codigoProduto);
 
-    @Query("select count(p)>0 from Produto p where p.codigoProduto = :codigoProduto and (:id is null or p.codigoProduto <>:id)")
-    Boolean hasCodigoProduto(@Param("id") Integer id, @Param("codigoProduto") String codigoProduto);
+	@Query(value = "select exists (select p from Produto p where p.codigoProduto = :codigoProduto and (:id is null or p.codigoProduto <>:id))", nativeQuery = true)
+	Boolean hasCodigoProduto(@Param("id") Integer id, @Param("codigoProduto") String codigoProduto);
 
 }

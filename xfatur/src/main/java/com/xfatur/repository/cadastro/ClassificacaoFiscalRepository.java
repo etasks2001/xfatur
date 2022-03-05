@@ -29,7 +29,7 @@ public interface ClassificacaoFiscalRepository extends JpaRepository<Classificac
 	@Query("select count(cf)>0 from ClassificacaoFiscal cf where cf.descricao = :descricao and (:id is null or cf.id <>:id)")
 	Boolean hasDescricao(Integer id, String descricao);
 
-	@Query("select count(cf)>0 from ClassificacaoFiscal cf where cf.ncm = :ncm and(:id is null or cf.id <> :id)")
+	@Query(value = "select exists (select * from ClassificacaoFiscal cf where cf.ncm = :ncm and(:id is null or cf.id <> :id))", nativeQuery = true)
 	Boolean hasNcm(@Param("id") Integer id, @Param("ncm") String ncm);
 
 	@Modifying
