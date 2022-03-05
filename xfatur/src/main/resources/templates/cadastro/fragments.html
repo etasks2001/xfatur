@@ -30,6 +30,15 @@
 		</div>
 	</div>
 	
-	<header th:fragment="header" class="h5 mb-0 alert alert-primary p-0 pb-1 ps-1 pt-1 " th:text="#{pesquisa.__${cadname}__.legenda}" th:with="cadname=${#execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())}"></header> 
+	<header th:fragment="header" class="h5 mb-0 alert alert-primary p-0 pb-1 ps-1 pt-1 " th:data-id="${cadname}" th:text="#{pesquisa.__${cadname}__.legenda}" th:with="cadname=${#execInfo.processedTemplateName.substring(#execInfo.processedTemplateName.lastIndexOf('/') + 1, #execInfo.processedTemplateName.length())}"
+	
+	th:data-selecteduri="${#request.getRequestURI()}"
+	
+
+	
+	>
+	
+	
+	</header> 
 </body>
 </html>

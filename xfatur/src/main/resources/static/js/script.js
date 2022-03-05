@@ -68,6 +68,35 @@ window.onload = function() {
 
 	
 	
+	let formheader = document.querySelector('[data-selecteduri]');
+	
+	if (formheader) {
+		
+		let selecteduri = formheader.dataset.selecteduri;
+		let urlArray = selecteduri.split('/'); 
+		 
+		
+		let cadname = urlArray[urlArray.length-1];
+
+		if(selecteduri.endsWith('/form')){
+			cadname = urlArray[urlArray.length-2];
+		}
+		
+		
+		let link = document.querySelector(`[href='/${cadname}/form']`);
+
+//		link.classList.toggle('text-white');
+//		link.classList.toggle('text-primary');
+		
+		link.classList.toggle('bg-dark');
+		link.classList.toggle('bg-secondary');
+		link.classList.toggle('disabled');
+
+		
+	}
+	
+	
+	
 	
 	
 }
