@@ -27,7 +27,7 @@ $(document).ready(function(){
 		let columnDefs = [];
 
 		columnDefs.push({title:' ', width: "10px", orderable : false, data : 'id', "render" : function(id) {
-			return `<a class="btn btn-success btn-sm btn-block" href="/${cadname}/editar/${id}" role="button"><i class="fa-regular fa-pen-to-square"></i></a>`;}});
+			return `<a class="btn btn-primary btn-sm btn-block" href="/${cadname}/editar/${id}" role="button"><i class="fa-regular fa-pen-to-square"></i></a>`;}});
 		
 
 		for(let i = 0; i<columns.length;i++){
@@ -46,7 +46,7 @@ $(document).ready(function(){
 		
 		
 		
-		columndefault[0] = Number(columndefault[0]);
+		columndefault[0] = Number(columndefault[0])+1;
 		
 		
 		

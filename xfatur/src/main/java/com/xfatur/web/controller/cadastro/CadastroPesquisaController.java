@@ -74,7 +74,7 @@ public class CadastroPesquisaController {
 
 	private String getColumnName(HttpServletRequest request, QueryBy<?> queryBy) {
 		int columnOrder = Integer.parseInt(request.getParameter("order[0][column]"));
-		String columnName = queryBy.getColumnName(columnOrder);
+		String columnName = queryBy.getColumnName(columnOrder - 1);
 
 		return columnName;
 	}

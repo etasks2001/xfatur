@@ -1,4 +1,3 @@
-
 let uppercase = function() {
 	let p = this.selectionStart;
 	this.value = this.value.toUpperCase();
@@ -25,18 +24,14 @@ let onblur = function(e) {
 
 }
 
+function setMask(input, pattern) {
 
-function setMask(input, pattern){
-	
 	if (input) {
 		let mask = new Inputmask(pattern);
 		mask.mask(input);
 	}
-	
-	
+
 }
-
-
 
 window.onload = function() {
 	setMask(document.getElementById("classificacaofiscal-ncm"), "9999.9999");
@@ -45,10 +40,12 @@ window.onload = function() {
 	setMask(document.getElementById("tiposelo-codigo"), "999999");
 	setMask(document.getElementById("tributacao-codigo"), "99");
 	setMask(document.getElementById("pais-codigoBacen"), "9999");
-	setMask(document.getElementById("produto-codigoProduto"), {mask:"999.**.999"});
-	setMask(document.getElementById("produto-codigoDeBarras"), {regex:"^[0-9]*$"});
-
-	
+	setMask(document.getElementById("produto-codigoProduto"), {
+		mask : "999.**.999"
+	});
+	setMask(document.getElementById("produto-codigoDeBarras"), {
+		regex : "^[0-9]*$"
+	});
 
 	let inputs = document.querySelectorAll("input");
 	if (inputs) {
@@ -57,46 +54,33 @@ window.onload = function() {
 			inputs[i].addEventListener("blur", onblur);
 		}
 	}
-	
-	
-	
-	
+
 	var abreviacao = document.getElementById("unidade-abreviacao");
 	if (abreviacao) {
 		abreviacao.addEventListener("input", lowercase);
 	}
 
-	
-	
 	let formheader = document.querySelector('[data-selecteduri]');
-	
-	if (formheader) {
-		
-		let selecteduri = formheader.dataset.selecteduri;
-		let urlArray = selecteduri.split('/'); 
-		 
-		
-		let cadname = urlArray[urlArray.length-1];
 
-		if(selecteduri.endsWith('/form')){
-			cadname = urlArray[urlArray.length-2];
+	if (formheader) {
+
+		let selecteduri = formheader.dataset.selecteduri;
+		let urlArray = selecteduri.split('/');
+
+		if (selecteduri.search("/form") >= 0) {
+			cadname = urlArray[urlArray.length - 2];
+		} else if (selecteduri.search("/pesquisar") >= 0) {
+			cadname = urlArray[urlArray.length - 1];
+		} else if (selecteduri.search("/editar") >= 0) {
+			cadname = urlArray[urlArray.length - 3];
 		}
-		
-		
+
 		let link = document.querySelector(`[href='/${cadname}/form']`);
 
-//		link.classList.toggle('text-white');
-//		link.classList.toggle('text-primary');
-		
 		link.classList.toggle('bg-dark');
-		link.classList.toggle('bg-secondary');
-		link.classList.toggle('disabled');
+		link.classList.toggle('bg-white');
+		link.classList.toggle('bg-primary');
+		link.classList.toggle('bg-white');
 
-		
 	}
-	
-	
-	
-	
-	
 }
