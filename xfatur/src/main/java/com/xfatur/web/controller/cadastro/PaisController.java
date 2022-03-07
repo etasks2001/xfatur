@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.PaisService;
 import com.xfatur.validation.dto.cadastro.PaisDTO;
 
@@ -20,48 +19,46 @@ import com.xfatur.validation.dto.cadastro.PaisDTO;
 @RequestMapping("pais")
 public class PaisController {
 
-	@Autowired
-	private PaisService service;
-	@Autowired
-	private ModelMapper mapper;
+    @Autowired
+    private PaisService service;
 
-	@GetMapping("form")
-	public String openForm(PaisDTO dto) {
+    @GetMapping("form")
+    public String openForm(PaisDTO dto) {
 
-		return "/cadastro/pais";
+	return "/cadastro/pais";
+    }
+
+    @PostMapping("salvar")
+    public String salvar(@Valid PaisDTO dto, BindingResult result, RedirectAttributes attr) {
+	if (result.hasErrors()) {
+	    return "cadastro/pais";
 	}
 
-	@PostMapping("salvar")
-	public String salvar(@Valid PaisDTO dto, BindingResult result, RedirectAttributes attr) {
-		if (result.hasErrors()) {
-			return "cadastro/pais";
-		}
+	service.save(dto);
 
-		service.save(mapper.toModel(dto));
+	attr.addFlashAttribute("success", "País incluído.");
 
-		attr.addFlashAttribute("success", "País incluído.");
+	return "redirect:/pais/form";
+    }
 
-		return "redirect:/pais/form";
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Integer id) {
+	PaisDTO dto = service.findById(id);
+
+	return new ModelAndView("/cadastro/pais", "paisDTO", dto);
+    }
+
+    @PostMapping("alterar")
+    public String alterar(@Valid PaisDTO dto, BindingResult result, RedirectAttributes attr) {
+
+	if (result.hasErrors()) {
+	    return "cadastro/pais";
 	}
 
-	@GetMapping("/editar/{id}")
-	public ModelAndView editar(@PathVariable("id") Integer id) {
-		PaisDTO dto = mapper.toDto(service.findById(id));
+	service.update(dto);
 
-		return new ModelAndView("/cadastro/pais", "paisDTO", dto);
-	}
+	attr.addFlashAttribute("success", "País alterado.");
 
-	@PostMapping("alterar")
-	public String alterar(@Valid PaisDTO dto, BindingResult result, RedirectAttributes attr) {
-
-		if (result.hasErrors()) {
-			return "cadastro/pais";
-		}
-
-		service.update(dto);
-
-		attr.addFlashAttribute("success", "País alterado.");
-
-		return "redirect:/pais/form";
-	}
+	return "redirect:/pais/form";
+    }
 }

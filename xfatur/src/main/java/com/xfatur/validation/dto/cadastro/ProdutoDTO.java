@@ -66,6 +66,10 @@ public class ProdutoDTO implements DTO {
     private TipoItem tipoItem;
     private TipoSelo tipoSelo;
 
+    private Integer estoque;
+
+    private Integer reservado;
+
     public Integer getId() {
 	return id;
     }
@@ -312,6 +316,22 @@ public class ProdutoDTO implements DTO {
 
     public void setAliquotaipi(BigDecimal aliquotaipi) {
 	this.aliquotaipi = aliquotaipi;
+    }
+
+    public Integer getEstoque() {
+	return estoque;
+    }
+
+    public void setEstoque(Integer estoque) {
+	this.estoque = estoque;
+    }
+
+    public Integer getReservado() {
+	return reservado;
+    }
+
+    public void setReservado(Integer reservado) {
+	this.reservado = reservado;
     }
 
 }

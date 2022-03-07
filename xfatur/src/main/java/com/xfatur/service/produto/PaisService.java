@@ -12,12 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.PaisIdNotFoundException;
 import com.xfatur.model.produto.Pais;
 import com.xfatur.repository.cadastro.PaisRepository;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.projections.cadastro.PaisView;
 import com.xfatur.validation.dto.cadastro.PaisDTO;
 
 @Service
 @Transactional(readOnly = true)
 public class PaisService {
+    @Autowired
+    private ModelMapper mapper;
 
     @Autowired
     private PaisRepository repository;
@@ -31,14 +34,14 @@ public class PaisService {
     }
 
     @Transactional(readOnly = false)
-    public Pais save(Pais pais) {
-	return repository.save(pais);
+    public Pais save(PaisDTO pais) {
+	return repository.save(mapper.toModel(pais));
     }
 
-    public Pais findById(int id) {
+    public PaisDTO findById(int id) {
 	Optional<Pais> pais = repository.findById(id);
 	if (pais.isPresent()) {
-	    return pais.get();
+	    return mapper.toDto(pais.get());
 	}
 
 	throw new PaisIdNotFoundException("Código do Pais não encontrado");

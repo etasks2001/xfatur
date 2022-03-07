@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.PaisIdNotFoundException;
-import com.xfatur.model.produto.Pais;
 import com.xfatur.testutil.CreateModelTest;
+import com.xfatur.validation.dto.cadastro.PaisDTO;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -49,8 +49,8 @@ class PaisServiceTest {
     // @Test
     @Order(4)
     void test_update() {
-	Pais pais1 = service.findById(ids.get(0));
-	Pais pais2 = service.findById(ids.get(0));
+	PaisDTO pais1 = service.findById(ids.get(0));
+	PaisDTO pais2 = service.findById(ids.get(0));
 
 	MatcherAssert.assertThat(pais1.getSigla(), Matchers.is(pais2.getSigla()));
 	MatcherAssert.assertThat(pais1.getOrigem(), Matchers.is(pais2.getOrigem()));

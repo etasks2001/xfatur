@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.ProdutorIdNotFoundException;
-import com.xfatur.model.produto.Produtor;
+import com.xfatur.validation.dto.cadastro.ProdutorDTO;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -48,7 +48,7 @@ class ProdutorServiceTest {
     // @Test
     @Order(4)
     void test_update() {
-	Produtor produtor = service.findById(ids.get(0));
+	ProdutorDTO produtor = service.findById(ids.get(0));
 
 	produtor.setDescricao(produtor.getDescricao() + " alterado");
 

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.OrigemService;
 import com.xfatur.validation.dto.cadastro.OrigemDTO;
 
@@ -20,48 +19,46 @@ import com.xfatur.validation.dto.cadastro.OrigemDTO;
 @RequestMapping("origem")
 public class OrigemController {
 
-	@Autowired
-	private OrigemService service;
-	@Autowired
-	private ModelMapper mapper;
+    @Autowired
+    private OrigemService service;
 
-	@GetMapping("form")
-	public String openForm(OrigemDTO dto) {
+    @GetMapping("form")
+    public String openForm(OrigemDTO dto) {
 
-		return "/cadastro/origem";
+	return "/cadastro/origem";
+    }
+
+    @PostMapping("salvar")
+    public String salvar(@Valid OrigemDTO dto, BindingResult result, RedirectAttributes attr) {
+	if (result.hasErrors()) {
+	    return "cadastro/origem";
 	}
 
-	@PostMapping("salvar")
-	public String salvar(@Valid OrigemDTO dto, BindingResult result, RedirectAttributes attr) {
-		if (result.hasErrors()) {
-			return "cadastro/origem";
-		}
+	service.save(dto);
 
-		service.save(mapper.toModel(dto));
+	attr.addFlashAttribute("success", "Origem incluída.");
 
-		attr.addFlashAttribute("success", "Origem incluída.");
+	return "redirect:/origem/form";
+    }
 
-		return "redirect:/origem/form";
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Integer id) {
+	OrigemDTO dto = service.findById(id);
+
+	return new ModelAndView("/cadastro/origem", "origemDTO", dto);
+    }
+
+    @PostMapping("alterar")
+    public String alterar(@Valid OrigemDTO dto, BindingResult result, RedirectAttributes attr) {
+
+	if (result.hasErrors()) {
+	    return "cadastro/origem";
 	}
 
-	@GetMapping("/editar/{id}")
-	public ModelAndView editar(@PathVariable("id") Integer id) {
-		OrigemDTO dto = mapper.toDto(service.findById(id));
+	service.update(dto);
 
-		return new ModelAndView("/cadastro/origem", "origemDTO", dto);
-	}
+	attr.addFlashAttribute("success", "Origem alterada.");
 
-	@PostMapping("alterar")
-	public String alterar(@Valid OrigemDTO dto, BindingResult result, RedirectAttributes attr) {
-
-		if (result.hasErrors()) {
-			return "cadastro/origem";
-		}
-
-		service.update(dto);
-
-		attr.addFlashAttribute("success", "Origem alterada.");
-
-		return "redirect:/origem/form";
-	}
+	return "redirect:/origem/form";
+    }
 }

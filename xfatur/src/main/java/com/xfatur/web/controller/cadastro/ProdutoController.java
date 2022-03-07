@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.projections.cadastro.PaisView;
 import com.xfatur.repository.projections.cadastro.ProdutorView;
 import com.xfatur.service.produto.PaisService;
@@ -27,65 +26,63 @@ import com.xfatur.validation.dto.cadastro.ProdutoDTO;
 @RequestMapping("produto")
 public class ProdutoController {
 
-	@Autowired
-	private ProdutoService service;
-	@Autowired
-	private ModelMapper mapper;
+    @Autowired
+    private ProdutoService service;
 
-	@Autowired
-	private PaisService paisService;
-	@Autowired
-	private ProdutorService produtorService;
+    @Autowired
+    private PaisService paisService;
+    @Autowired
+    private ProdutorService produtorService;
 
-	@GetMapping("form")
-	public String openForm(ProdutoDTO dto) {
+    @GetMapping("form")
+    public String openForm(ProdutoDTO dto) {
 
-		return "/cadastro/produto";
+	return "/cadastro/produto";
+    }
+
+    @PostMapping("salvar")
+    public String salvar(@Valid ProdutoDTO dto, BindingResult result, RedirectAttributes attr) {
+	if (result.hasErrors()) {
+	    return "cadastro/produto";
 	}
 
-	@PostMapping("salvar")
-	public String salvar(@Valid ProdutoDTO dto, BindingResult result, RedirectAttributes attr) {
-		if (result.hasErrors()) {
-			return "cadastro/produto";
-		}
+	service.save(dto);
 
-		service.save(mapper.toModel(dto));
+	attr.addFlashAttribute("success", "Produto incluído.");
 
-		attr.addFlashAttribute("success", "Produto incluído.");
+	return "redirect:/produto/form";
+    }
 
-		return "redirect:/produto/form";
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Integer id) {
+	ProdutoDTO dto = service.findById(id);
+
+	return new ModelAndView("/cadastro/produto", "produtoDTO", dto);
+    }
+
+    @PostMapping("alterar")
+    public String alterar(@Valid ProdutoDTO dto, BindingResult result, RedirectAttributes attr) {
+
+	if (result.hasErrors()) {
+	    return "cadastro/produto";
 	}
 
-	@GetMapping("/editar/{id}")
-	public ModelAndView editar(@PathVariable("id") Integer id) {
-		ProdutoDTO dto = mapper.toDto(service.findById(id));
+	service.update(dto);
 
-		return new ModelAndView("/cadastro/produto", "produtoDTO", dto);
-	}
+	attr.addFlashAttribute("success", "Produto alterado.");
 
-	@PostMapping("alterar")
-	public String alterar(@Valid ProdutoDTO dto, BindingResult result, RedirectAttributes attr) {
+	return "redirect:/produto/form";
+    }
 
-		if (result.hasErrors()) {
-			return "cadastro/produto";
-		}
+    @ModelAttribute("paises")
+    public List<PaisView> listaDePaises() {
+	return paisService.buscaTodosPorIdNome();
+    }
 
-		service.update(dto);
+    @ModelAttribute("produtores")
+    public List<ProdutorView> listaDeProdutores() {
 
-		attr.addFlashAttribute("success", "Produto alterado.");
-
-		return "redirect:/produto/form";
-	}
-
-	@ModelAttribute("paises")
-	public List<PaisView> listaDePaises() {
-		return paisService.buscaTodosPorIdNome();
-	}
-
-	@ModelAttribute("produtores")
-	public List<ProdutorView> listaDeProdutores() {
-
-		return produtorService.buscaTodosPorIdDescricao();
-	}
+	return produtorService.buscaTodosPorIdDescricao();
+    }
 
 }

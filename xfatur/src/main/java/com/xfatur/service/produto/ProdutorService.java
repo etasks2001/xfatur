@@ -12,12 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.ProdutorIdNotFoundException;
 import com.xfatur.model.produto.Produtor;
 import com.xfatur.repository.cadastro.ProdutorRepository;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.projections.cadastro.ProdutorView;
 import com.xfatur.validation.dto.cadastro.ProdutorDTO;
 
 @Service
 @Transactional(readOnly = true)
 public class ProdutorService {
+    @Autowired
+    private ModelMapper mapper;
 
     @Autowired
     private ProdutorRepository repository;
@@ -31,14 +34,14 @@ public class ProdutorService {
     }
 
     @Transactional(readOnly = false)
-    public Produtor save(Produtor produtor) {
-	return repository.save(produtor);
+    public Produtor save(ProdutorDTO produtor) {
+	return repository.save(mapper.toModel(produtor));
     }
 
-    public Produtor findById(int id) {
+    public ProdutorDTO findById(int id) {
 	Optional<Produtor> produtor = repository.findById(id);
 	if (produtor.isPresent()) {
-	    return produtor.get();
+	    return mapper.toDto(produtor.get());
 	}
 
 	throw new ProdutorIdNotFoundException("Código do Produtor não encontrado");

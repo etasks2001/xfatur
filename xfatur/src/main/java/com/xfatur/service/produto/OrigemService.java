@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.OrigemIdNotFoundException;
 import com.xfatur.model.produto.Origem;
 import com.xfatur.repository.cadastro.OrigemRepository;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.projections.cadastro.OrigemView;
 import com.xfatur.validation.dto.cadastro.OrigemDTO;
 
@@ -23,6 +24,9 @@ public class OrigemService {
     @Autowired
     private OrigemRepository repository;
 
+    @Autowired
+    private ModelMapper mapper;
+
     public void deleteById(Integer id) {
 	repository.deleteById(id);
     }
@@ -32,14 +36,14 @@ public class OrigemService {
     }
 
     @Transactional(readOnly = false)
-    public Origem save(Origem origem) {
-	return repository.save(origem);
+    public Origem save(OrigemDTO origem) {
+	return repository.save(mapper.toModel(origem));
     }
 
-    public Origem findById(int id) {
+    public OrigemDTO findById(int id) {
 	Optional<Origem> origem = repository.findById(id);
 	if (origem.isPresent()) {
-	    return origem.get();
+	    return mapper.toDto(origem.get());
 	}
 
 	throw new OrigemIdNotFoundException("Código da Origem não encontrado");

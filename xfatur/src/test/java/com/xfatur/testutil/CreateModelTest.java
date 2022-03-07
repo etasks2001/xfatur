@@ -26,9 +26,6 @@ import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
-import com.xfatur.model.produto.Pais;
-import com.xfatur.model.produto.Produto;
-import com.xfatur.model.produto.Produtor;
 import com.xfatur.model.produto.RegiaoProdutora;
 import com.xfatur.model.produto.TipoItem;
 import com.xfatur.model.produto.TipoSelo;
@@ -54,6 +51,9 @@ import com.xfatur.service.produto.TipoValidadeService;
 import com.xfatur.service.produto.TributacaoService;
 import com.xfatur.service.produto.UnidadeService;
 import com.xfatur.validation.dto.cadastro.MarcaDTO;
+import com.xfatur.validation.dto.cadastro.PaisDTO;
+import com.xfatur.validation.dto.cadastro.ProdutoDTO;
+import com.xfatur.validation.dto.cadastro.ProdutorDTO;
 
 public class CreateModelTest {
 
@@ -439,8 +439,8 @@ public class CreateModelTest {
 	return enderecoCobranca;
     }
 
-    public static Produto createProduto1() {
-	Produto produto = new Produto();
+    public static ProdutoDTO createProduto1() {
+	ProdutoDTO produto = new ProdutoDTO();
 
 	produto.setCodigoProduto("000.11.444");
 	produto.setDescricao("BEBIDA");
@@ -478,8 +478,8 @@ public class CreateModelTest {
 	return produto;
     }
 
-    public static Produto createProduto2() {
-	Produto produto = new Produto();
+    public static ProdutoDTO createProduto2() {
+	ProdutoDTO produto = new ProdutoDTO();
 
 	produto.setCodigoProduto("000.11.001");
 	produto.setDescricao("CHOCOLATE ");
@@ -517,8 +517,8 @@ public class CreateModelTest {
 	return produto;
     }
 
-    public static Produto createProduto3() {
-	Produto produto = new Produto();
+    public static ProdutoDTO createProduto3() {
+	ProdutoDTO produto = new ProdutoDTO();
 
 	produto.setCodigoProduto("111.11.001");
 	produto.setDescricao("GELEIA");
@@ -556,8 +556,8 @@ public class CreateModelTest {
 	return produto;
     }
 
-    public static Produto createProduto4() {
-	Produto produto = new Produto();
+    public static ProdutoDTO createProduto4() {
+	ProdutoDTO produto = new ProdutoDTO();
 
 	produto.setCodigoProduto("999.11.001");
 	produto.setDescricao("FEIJÃO");
@@ -595,7 +595,7 @@ public class CreateModelTest {
 	return produto;
     }
 
-    public static Stream<Produtor> produtorList() {
+    public static Stream<ProdutorDTO> produtorList() {
 	return Stream.of(createProdutor1(), createProdutor2(), createProdutor3());
     }
 
@@ -631,20 +631,20 @@ public class CreateModelTest {
 	return unidade;
     }
 
-    public static Produtor createProdutor1() {
-	Produtor produtor = new Produtor();
+    public static ProdutorDTO createProdutor1() {
+	ProdutorDTO produtor = new ProdutorDTO();
 	produtor.setDescricao("CERVEJARIA DO SUL");
 	return produtor;
     }
 
-    public static Produtor createProdutor2() {
-	Produtor produtor = new Produtor();
+    public static ProdutorDTO createProdutor2() {
+	ProdutorDTO produtor = new ProdutorDTO();
 	produtor.setDescricao("TOMATES DO JAPÃO");
 	return produtor;
     }
 
-    public static Produtor createProdutor3() {
-	Produtor produtor = new Produtor();
+    public static ProdutorDTO createProdutor3() {
+	ProdutorDTO produtor = new ProdutorDTO();
 	produtor.setDescricao("PESSEGOS DA ITALIA");
 	return produtor;
     }
@@ -809,21 +809,21 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static void createAndIds(ProdutoService service, Produto entity, List<Integer> ids) {
+    public static void createAndIds(ProdutoService service, ProdutoDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByCodigoProduto(entity.getCodigoProduto());
 
 	if (id == null) {
-	    Produto saved = service.save(entity);
-	    id = saved.getId();
+	    id = service.save(entity).getId();
+
 	}
 	ids.add(id);
     }
 
-    public static void createAndIds(ProdutorService service, Produtor entity, List<Integer> ids) {
+    public static void createAndIds(ProdutorService service, ProdutorDTO entity, List<Integer> ids) {
 	Integer id = service.findByIdDescricao(entity.getDescricao());
 	if (id == null) {
-	    Produtor saved = service.save(entity);
-	    id = saved.getId();
+	    id = service.save(entity).getId();
+
 	}
 
 	ids.add(id);
@@ -1062,8 +1062,8 @@ public class CreateModelTest {
     public static void createAndIds(OrigemService service, Origem entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
-	    Origem saved = service.save(entity);
-	    id = saved.getId();
+	    id = service.save(mapper.toDto(entity)).getId();
+
 	}
 
 	ids.add(id);
@@ -1224,13 +1224,13 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<Pais> paisList() {
+    public static Stream<PaisDTO> paisList() {
 	return Stream.of(createPais1(), createPais2(), createPais3(), createPais4(), createPais5());
 
     }
 
-    private static Pais createPais1() {
-	Pais pais = new Pais();
+    private static PaisDTO createPais1() {
+	PaisDTO pais = new PaisDTO();
 	pais.setNome("BRASIL");
 	pais.setOrigem("BRASILEIRA");
 	pais.setCodigoBacen("1058");
@@ -1238,8 +1238,8 @@ public class CreateModelTest {
 	return pais;
     }
 
-    private static Pais createPais2() {
-	Pais pais = new Pais();
+    private static PaisDTO createPais2() {
+	PaisDTO pais = new PaisDTO();
 	pais.setNome("GRÉCIA");
 	pais.setOrigem("GREGA");
 	pais.setCodigoBacen("3018");
@@ -1247,8 +1247,8 @@ public class CreateModelTest {
 	return pais;
     }
 
-    private static Pais createPais3() {
-	Pais pais = new Pais();
+    private static PaisDTO createPais3() {
+	PaisDTO pais = new PaisDTO();
 	pais.setNome("HOLANDA");
 	pais.setOrigem("HOLANDESA");
 	pais.setCodigoBacen("5738");
@@ -1256,8 +1256,8 @@ public class CreateModelTest {
 	return pais;
     }
 
-    private static Pais createPais4() {
-	Pais pais = new Pais();
+    private static PaisDTO createPais4() {
+	PaisDTO pais = new PaisDTO();
 	pais.setNome("HUNGRIA");
 	pais.setOrigem("HÚNGARA");
 	pais.setCodigoBacen("3557");
@@ -1265,8 +1265,8 @@ public class CreateModelTest {
 	return pais;
     }
 
-    private static Pais createPais5() {
-	Pais pais = new Pais();
+    private static PaisDTO createPais5() {
+	PaisDTO pais = new PaisDTO();
 	pais.setNome("ÍNDIA");
 	pais.setOrigem("INDIANA");
 	pais.setCodigoBacen("3611");
@@ -1328,17 +1328,17 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static void createAndIds(PaisService service, Pais entity, List<Integer> ids) {
+    public static void createAndIds(PaisService service, PaisDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByCodigoBacen(entity.getCodigoBacen());
 	if (id == null) {
-	    Pais saved = service.save(entity);
-	    id = saved.getId();
+	    id = service.save(entity).getId();
+
 	}
 
 	ids.add(id);
     }
 
-    public static Stream<Produto> produtoList() {
+    public static Stream<ProdutoDTO> produtoList() {
 	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2(), CreateModelTest.createProduto3(), CreateModelTest.createProduto4());
     }
 

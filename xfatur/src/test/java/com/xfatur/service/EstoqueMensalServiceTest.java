@@ -1,11 +1,8 @@
 package com.xfatur.service;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -16,12 +13,9 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xfatur.exception.EstoqueMensalDuplicadoRuntimeException;
 import com.xfatur.exception.EstoqueMensalIdNotFoundException;
 import com.xfatur.model.EstoqueMensal;
-import com.xfatur.model.produto.Produto;
 import com.xfatur.service.produto.ProdutoService;
-import com.xfatur.testutil.CreateModelTest;
 import com.xfatur.testutil.UtilCreateProduto;
 
 //@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -51,19 +45,19 @@ class EstoqueMensalServiceTest {
     @Order(1)
     void test_save() {
 
-	List<EstoqueMensal> estoqueMensalList = CreateModelTest.estoqueMensalList().collect(Collectors.toList());
-
-	for (int i = 0; i < estoqueMensalList.size(); i++) {
-	    Produto produto = produtoService.findById(idsProduto.get(i));
-	    EstoqueMensal estoqueMensal = estoqueMensalList.get(i);
-	    estoqueMensal.setProduto(produto);
-
-	    EstoqueMensal saved = estoqueMensalService.save(estoqueMensal);
-
-	    idsEstoqueMensal.add(saved.getId());
-
-	    assertNotNull(saved);
-	}
+//	List<EstoqueMensal> estoqueMensalList = CreateModelTest.estoqueMensalList().collect(Collectors.toList());
+//
+//	for (int i = 0; i < estoqueMensalList.size(); i++) {
+//	    Produto produto = produtoService.findById(idsProduto.get(i));
+//	    EstoqueMensal estoqueMensal = estoqueMensalList.get(i);
+//	    estoqueMensal.setProduto(produto);
+//
+//	    EstoqueMensal saved = estoqueMensalService.save(estoqueMensal);
+//
+//	    idsEstoqueMensal.add(saved.getId());
+//
+//	    assertNotNull(saved);
+//	}
 
     }
 
@@ -88,18 +82,18 @@ class EstoqueMensalServiceTest {
     // @Test
     @Order(4)
     void test_unique() {
-	EstoqueMensal estoqueMensal = new EstoqueMensal();
-	Produto produto = produtoService.findById(idsProduto.get(0));
-
-	estoqueMensal.setProduto(produto);
-	estoqueMensal.setAno(2001);
-	estoqueMensal.setMes(1);
-	estoqueMensal.setQuantidadeInicial(150);
-	estoqueMensal.setCustoUnitario(new BigDecimal("154.44"));
-
-	Exception exception = Assertions.assertThrows(EstoqueMensalDuplicadoRuntimeException.class, () -> estoqueMensalService.save(estoqueMensal));
-
-	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Produto mes e ano ja cadastrado"));
+//	EstoqueMensal estoqueMensal = new EstoqueMensal();
+//	Produto produto = produtoService.findById(idsProduto.get(0));
+//
+//	estoqueMensal.setProduto(produto);
+//	estoqueMensal.setAno(2001);
+//	estoqueMensal.setMes(1);
+//	estoqueMensal.setQuantidadeInicial(150);
+//	estoqueMensal.setCustoUnitario(new BigDecimal("154.44"));
+//
+//	Exception exception = Assertions.assertThrows(EstoqueMensalDuplicadoRuntimeException.class, () -> estoqueMensalService.save(estoqueMensal));
+//
+//	MatcherAssert.assertThat(exception.getMessage(), Matchers.is("Produto mes e ano ja cadastrado"));
     }
 
     // @Test
