@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.xfatur.model.produto.TipoSelo;
+import com.xfatur.repository.projections.cadastro.TipoSeloView;
 
 public interface TipoSeloRepository extends JpaRepository<TipoSelo, Integer> {
 
@@ -19,8 +20,8 @@ public interface TipoSeloRepository extends JpaRepository<TipoSelo, Integer> {
     @Query("select ts from TipoSelo ts where ts.descricao like %:descricao% order by ts.descricao asc")
     List<TipoSelo> findByDescricao(@Param("descricao") String descricao);
 
-    @Query("select ts from TipoSelo ts where ts.descricao like %:descricao%")
-    Page<TipoSelo> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
+    @Query("select ts.id as id, ts.codigo as codigo, ts.descricao as descricao from TipoSelo ts where ts.descricao like %:descricao%")
+    Page<TipoSeloView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
 
     @Query("select count(ts)>0 from TipoSelo ts where ts.codigo =:codigo and (:id is null or ts.id<>:id)")
     Boolean hasCodigo(@Param("id") Integer id, @Param("codigo") String codigo);

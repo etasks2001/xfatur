@@ -5,12 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.model.produto.Tributacao;
+import com.xfatur.repository.projections.cadastro.TributacaoView;
 import com.xfatur.repository.queryby.QueryBy;
 import com.xfatur.service.produto.TributacaoService;
 
 @Component(value = "tributacaoqueryby")
-public class TributacaoQueryBy implements QueryBy<Tributacao> {
+public class TributacaoQueryBy implements QueryBy<TributacaoView> {
 
     private static final String[] COLUMNS = new String[] { "id", "codigo", "descricao" };
 
@@ -18,7 +18,7 @@ public class TributacaoQueryBy implements QueryBy<Tributacao> {
     private TributacaoService service;
 
     @Override
-    public Page<Tributacao> execute(String search, Pageable pageable, String column) {
+    public Page<TributacaoView> execute(String search, Pageable pageable, String column) {
 	if (search.trim().length() == 0) {
 	    return Page.empty();
 	}

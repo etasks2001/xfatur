@@ -8,13 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.xfatur.model.produto.TipoValidade;
+import com.xfatur.repository.projections.cadastro.TipoValidadeView;
 
 public interface TipoValidadeRepository extends JpaRepository<TipoValidade, Integer> {
     @Query("select t.id from TipoValidade t where t.descricao=:descricao")
     Integer findByIdDescricao(@Param("descricao") String descricao);
 
-    @Query("select t from TipoValidade t where t.descricao like %:descricao%")
-    Page<TipoValidade> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
+    @Query("select t.id as id, t.descricao as descricao from TipoValidade t where t.descricao like %:descricao%")
+    Page<TipoValidadeView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
 
     @Modifying
     @Query("update TipoValidade tv set tv.descricao = :descricao where tv.id = :id")

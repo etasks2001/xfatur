@@ -5,23 +5,23 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.model.produto.TipoItem;
+import com.xfatur.repository.projections.cadastro.TipoItemView;
 import com.xfatur.repository.queryby.QueryBy;
 import com.xfatur.service.produto.TipoItemService;
 
 @Component(value = "tipoitemqueryby")
-public class TipoQueryBy implements QueryBy<TipoItem> {
+public class TipoItemQueryBy implements QueryBy<TipoItemView> {
 
-    private static final String[] COLUMNS = new String[] { "id", "ncm", "descricao" };
+    private static final String[] COLUMNS = new String[] { "id", "codigo", "descricao" };
     @Autowired
     private TipoItemService service;
 
     @Override
-    public Page<TipoItem> execute(String search, Pageable pageable, String column) {
+    public Page<TipoItemView> execute(String search, Pageable pageable, String column) {
 	if (search.trim().length() == 0) {
 	    return Page.empty();
 	}
-
+	System.out.println(column);
 	if (column.equals("codigo")) {
 	    return service.findByCodigo(search, pageable);
 	} else if (column.equals("descricao")) {

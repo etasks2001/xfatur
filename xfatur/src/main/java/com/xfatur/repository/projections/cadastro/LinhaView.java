@@ -1,8 +1,11 @@
 package com.xfatur.repository.projections.cadastro;
 
-public interface ProdutorView {
-    Integer getId();
+public interface LinhaView {
 
     String getDescricao();
+
+    String getTipo();
+
+    Integer getId();
 
 }

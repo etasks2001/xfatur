@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.xfatur.mappers.ModelMapper;
 import com.xfatur.model.produto.ClassificacaoFiscal;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.testutil.CreateModelTest;
 
 //@SpringBootTest

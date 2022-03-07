@@ -19,58 +19,58 @@ import com.xfatur.validation.dto.cadastro.PaisDTO;
 @Transactional(readOnly = true)
 public class PaisService {
 
-	@Autowired
-	private PaisRepository repository;
+    @Autowired
+    private PaisRepository repository;
 
-	public void deleteById(Integer id) {
-		repository.deleteById(id);
+    public void deleteById(Integer id) {
+	repository.deleteById(id);
+    }
+
+    public Integer findIdByCodigoBacen(String codigoBacen) {
+	return repository.findIdByCodigoBacen(codigoBacen);
+    }
+
+    @Transactional(readOnly = false)
+    public Pais save(Pais pais) {
+	return repository.save(pais);
+    }
+
+    public Pais findById(int id) {
+	Optional<Pais> pais = repository.findById(id);
+	if (pais.isPresent()) {
+	    return pais.get();
 	}
 
-	public Integer findIdByCodigoBacen(String codigoBacen) {
-		return repository.findIdByCodigoBacen(codigoBacen);
-	}
+	throw new PaisIdNotFoundException("Código do Pais não encontrado");
+    }
 
-	@Transactional(readOnly = false)
-	public Pais save(Pais pais) {
-		return repository.save(pais);
-	}
+    @Transactional(readOnly = false)
+    public void update(PaisDTO dto) {
+	repository.update(dto.getId(), dto.getNome(), dto.getSigla(), dto.getOrigem(), dto.getCodigoBacen());
+    }
 
-	public Pais findById(int id) {
-		Optional<Pais> pais = repository.findById(id);
-		if (pais.isPresent()) {
-			return pais.get();
-		}
+    public Boolean hasNome(Integer id, String nome) {
+	return repository.hasNome(id, nome);
+    }
 
-		throw new PaisIdNotFoundException("Código do Pais não encontrado");
-	}
+    public Boolean hasSigla(Integer id, String sigla) {
+	return repository.hasSigla(id, sigla);
+    }
 
-	@Transactional(readOnly = false)
-	public void update(PaisDTO dto) {
-		repository.update(dto.getId(), dto.getNome(), dto.getSigla(), dto.getOrigem(), dto.getCodigoBacen());
-	}
+    public Boolean hasOrigem(Integer id, String origem) {
+	return repository.hasOrigem(id, origem);
+    }
 
-	public Boolean hasNome(Integer id, String nome) {
-		return repository.hasNome(id, nome);
-	}
+    public Boolean hasCodigoBacen(Integer id, String codigoBacen) {
+	return repository.hasCodigoBacen(id, codigoBacen);
+    }
 
-	public Boolean hasSigla(Integer id, String sigla) {
-		return repository.hasSigla(id, sigla);
-	}
+    public Page<PaisView> findByNome(String search, Pageable pageable) {
+	return repository.findByNome(search, pageable);
+    }
 
-	public Boolean hasOrigem(Integer id, String origem) {
-		return repository.hasOrigem(id, origem);
-	}
-
-	public Boolean hasCodigoBacen(Integer id, String codigoBacen) {
-		return repository.hasCodigoBacen(id, codigoBacen);
-	}
-
-	public Page<Pais> findByNome(String search, Pageable pageable) {
-		return repository.findByNome(search, pageable);
-	}
-
-	public List<PaisView> buscaTodosPorIdNome() {
-		return repository.buscaTodosPorIdNome();
-	}
+    public List<PaisView> buscaTodosPorIdNome() {
+	return repository.buscaTodosPorIdNome();
+    }
 
 }

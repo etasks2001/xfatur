@@ -5,12 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.model.produto.Unidade;
+import com.xfatur.repository.projections.cadastro.UnidadeView;
 import com.xfatur.repository.queryby.QueryBy;
 import com.xfatur.service.produto.UnidadeService;
 
 @Component(value = "unidadequeryby")
-public class UnidadeQueryBy implements QueryBy<Unidade> {
+public class UnidadeQueryBy implements QueryBy<UnidadeView> {
 
     private static final String[] COLUMNS = new String[] { "id", "descricao", "abreviacao" };
 
@@ -18,7 +18,7 @@ public class UnidadeQueryBy implements QueryBy<Unidade> {
     private UnidadeService service;
 
     @Override
-    public Page<Unidade> execute(String search, Pageable pageable, String column) {
+    public Page<UnidadeView> execute(String search, Pageable pageable, String column) {
 	if (search.trim().length() == 0) {
 	    return Page.empty();
 	}

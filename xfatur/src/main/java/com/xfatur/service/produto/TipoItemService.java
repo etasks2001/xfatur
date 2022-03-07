@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.TipoIdNotFoundException;
 import com.xfatur.model.produto.TipoItem;
 import com.xfatur.repository.cadastro.TipoItemRepository;
+import com.xfatur.repository.projections.cadastro.TipoItemView;
 import com.xfatur.validation.dto.cadastro.TipoItemDTO;
 
 @Service
@@ -56,11 +57,11 @@ public class TipoItemService {
 	return repository.hasCodigo(id, codigo);
     }
 
-    public Page<TipoItem> findByCodigo(String search, Pageable pageable) {
+    public Page<TipoItemView> findByCodigo(String search, Pageable pageable) {
 	return repository.findByCodigo(search, pageable);
     }
 
-    public Page<TipoItem> findByDescricao(String search, Pageable pageable) {
+    public Page<TipoItemView> findByDescricao(String search, Pageable pageable) {
 	return repository.findByDescricao(search, pageable);
     }
 

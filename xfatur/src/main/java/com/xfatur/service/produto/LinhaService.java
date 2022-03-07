@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.LinhaIdNotFoundException;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.repository.cadastro.LinhaRepository;
+import com.xfatur.repository.projections.cadastro.LinhaView;
 import com.xfatur.validation.dto.cadastro.LinhaDTO;
 
 @Service
@@ -42,7 +43,7 @@ public class LinhaService {
 	throw new LinhaIdNotFoundException("Código da Linha não encontrado");
     }
 
-    public Page<Linha> findByDescricao(String descricao, Pageable pageable) {
+    public Page<LinhaView> findByDescricao(String descricao, Pageable pageable) {
 	return repository.findByDescricao(descricao, pageable);
     }
 

@@ -8,14 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.xfatur.model.produto.Tributacao;
+import com.xfatur.repository.projections.cadastro.TributacaoView;
 
 public interface TributacaoRepository extends JpaRepository<Tributacao, Integer> {
 
     @Query("select t.id from Tributacao t where t.descricao = :descricao")
     Integer findIdByDescricao(@Param("descricao") String descricao);
 
-    @Query("select t from Tributacao t where t.descricao like %:descricao%")
-    Page<Tributacao> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
+    @Query("select t.id as id, t.codigo as codigo, t.descricao as descricao from Tributacao t where t.descricao like %:descricao%")
+    Page<TributacaoView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
 
     @Modifying
     @Query("update Tributacao t set t.codigo = :codigo, t.descricao = :descricao where t.id=:id")

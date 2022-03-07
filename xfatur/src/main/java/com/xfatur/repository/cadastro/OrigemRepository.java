@@ -8,22 +8,23 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.xfatur.model.produto.Origem;
+import com.xfatur.repository.projections.cadastro.OrigemView;
 
 public interface OrigemRepository extends JpaRepository<Origem, Integer> {
-	@Query("select o.id from Origem o where o.descricao=:descricao")
-	Integer findIdByDescricao(@Param("descricao") String descricao);
+    @Query("select o.id from Origem o where o.descricao=:descricao")
+    Integer findIdByDescricao(@Param("descricao") String descricao);
 
-	@Query("select o from Origem o where o.descricao like %:descricao%")
-	Page<Origem> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
+    @Query("select o from Origem o where o.descricao like %:descricao%")
+    Page<OrigemView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
 
-	@Query("select count(o)>0 from Origem o where o.descricao = :descricao and (:id is null or o.id <>:id)")
-	Boolean hasDescricao(Integer id, String descricao);
+    @Query("select count(o)>0 from Origem o where o.descricao = :descricao and (:id is null or o.id <>:id)")
+    Boolean hasDescricao(Integer id, String descricao);
 
-	@Query("select count(o)>0 from Origem o where o.codigo = :codigo and (:id is null or o.id <> :id)")
-	Boolean hasCodigo(Integer id, String codigo);
+    @Query("select count(o)>0 from Origem o where o.codigo = :codigo and (:id is null or o.id <> :id)")
+    Boolean hasCodigo(Integer id, String codigo);
 
-	@Modifying
-	@Query("update Origem o set o.codigo=:codigo, o.descricao = :descricao where o.id=:id ")
-	void update(@Param("id") Integer id, @Param("codigo") String codigo, @Param("descricao") String descricao);
+    @Modifying
+    @Query("update Origem o set o.codigo=:codigo, o.descricao = :descricao where o.id=:id ")
+    void update(@Param("id") Integer id, @Param("codigo") String codigo, @Param("descricao") String descricao);
 
 }

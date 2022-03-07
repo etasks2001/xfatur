@@ -11,49 +11,50 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.RegiaoProdutoraIdNotFoundException;
 import com.xfatur.model.produto.RegiaoProdutora;
 import com.xfatur.repository.cadastro.RegiaoProdutoraRepository;
+import com.xfatur.repository.projections.cadastro.RegiaoProdutoraView;
 import com.xfatur.validation.dto.cadastro.RegiaoProdutoraDTO;
 
 @Service
 @Transactional(readOnly = true)
 public class RegiaoProdutoraService {
 
-	@Autowired
-	private RegiaoProdutoraRepository repository;
+    @Autowired
+    private RegiaoProdutoraRepository repository;
 
-	public void deleteById(Integer id) {
-		repository.deleteById(id);
+    public void deleteById(Integer id) {
+	repository.deleteById(id);
+    }
+
+    public Integer findByIdDescricao(String descricao) {
+	return repository.findByIdDescricao(descricao);
+    }
+
+    @Transactional(readOnly = false)
+    public RegiaoProdutora save(RegiaoProdutora regiaoProdutora) {
+	return repository.save(regiaoProdutora);
+    }
+
+    public RegiaoProdutora findById(int id) {
+	Optional<RegiaoProdutora> regiaoProdutora = repository.findById(id);
+	if (regiaoProdutora.isPresent()) {
+	    return regiaoProdutora.get();
 	}
 
-	public Integer findByIdDescricao(String descricao) {
-		return repository.findByIdDescricao(descricao);
-	}
+	throw new RegiaoProdutoraIdNotFoundException("Código da Região Produtora não encontrado");
+    }
 
-	@Transactional(readOnly = false)
-	public RegiaoProdutora save(RegiaoProdutora regiaoProdutora) {
-		return repository.save(regiaoProdutora);
-	}
+    public Page<RegiaoProdutoraView> findByDescricao(String descricao, Pageable pageable) {
+	return repository.findByDescricao(descricao, pageable);
+    }
 
-	public RegiaoProdutora findById(int id) {
-		Optional<RegiaoProdutora> regiaoProdutora = repository.findById(id);
-		if (regiaoProdutora.isPresent()) {
-			return regiaoProdutora.get();
-		}
+    @Transactional(readOnly = false)
+    public void update(RegiaoProdutoraDTO dto) {
+	repository.update(dto.getId(), dto.getDescricao());
 
-		throw new RegiaoProdutoraIdNotFoundException("Código da Região Produtora não encontrado");
-	}
+    }
 
-	public Page<RegiaoProdutora> findByDescricao(String descricao, Pageable pageable) {
-		return repository.findByDescricao(descricao, pageable);
-	}
-
-	@Transactional(readOnly = false)
-	public void update(RegiaoProdutoraDTO dto) {
-		repository.update(dto.getId(), dto.getDescricao());
-
-	}
-
-	public Boolean hasDescricao(Integer id, String descricao) {
-		return repository.hasDescricao(id, descricao);
-	}
+    public Boolean hasDescricao(Integer id, String descricao) {
+	return repository.hasDescricao(id, descricao);
+    }
 
 }

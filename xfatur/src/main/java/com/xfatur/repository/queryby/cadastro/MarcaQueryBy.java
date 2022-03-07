@@ -5,19 +5,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.model.produto.Marca;
+import com.xfatur.repository.projections.cadastro.MarcaView;
 import com.xfatur.repository.queryby.QueryBy;
 import com.xfatur.service.produto.MarcaService;
 
 @Component(value = "marcaqueryby")
-public class MarcaQueryBy implements QueryBy<Marca> {
+public class MarcaQueryBy implements QueryBy<MarcaView> {
 
     private static final String[] COLUMNS = new String[] { "id", "descricao" };
     @Autowired
     private MarcaService service;
 
     @Override
-    public Page<Marca> execute(String search, Pageable pageable, String column) {
+    public Page<MarcaView> execute(String search, Pageable pageable, String column) {
 	if (search.trim().length() == 0) {
 	    return Page.empty();
 	}

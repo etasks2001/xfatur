@@ -8,17 +8,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.xfatur.model.produto.Unidade;
+import com.xfatur.repository.projections.cadastro.UnidadeView;
 
 public interface UnidadeRepository extends JpaRepository<Unidade, Integer> {
 
     @Query("select u.id from Unidade u where u.abreviacao =:abreviacao")
     Integer findIdByAbreviacao(@Param("abreviacao") String abreviacao);
 
-    @Query("select u from Unidade u where u.descricao like %:descricao% ")
-    Page<Unidade> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
+    @Query("select u.id as id, u.descricao as descricao, u.abreviacao as abreviacao from Unidade u where u.descricao like %:descricao% ")
+    Page<UnidadeView> findByDescricao(@Param("descricao") String descricao, Pageable pageable);
 
-    @Query("select u from Unidade u where u.abreviacao like %:search% ")
-    Page<Unidade> findByAbreviacao(@Param("search") String search, Pageable pageable);
+    @Query("select u.id as id, u.descricao as descricao, u.abreviacao as abreviacao from Unidade u where u.abreviacao like %:search% ")
+    Page<UnidadeView> findByAbreviacao(@Param("search") String search, Pageable pageable);
 
     @Modifying
     @Query("update Unidade u set u.descricao = :descricao, u.abreviacao = :abreviacao where u.id= :id")

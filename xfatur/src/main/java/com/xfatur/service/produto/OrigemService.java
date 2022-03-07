@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.OrigemIdNotFoundException;
 import com.xfatur.model.produto.Origem;
 import com.xfatur.repository.cadastro.OrigemRepository;
+import com.xfatur.repository.projections.cadastro.OrigemView;
 import com.xfatur.validation.dto.cadastro.OrigemDTO;
 
 @Service
@@ -44,7 +45,7 @@ public class OrigemService {
 	throw new OrigemIdNotFoundException("Código da Origem não encontrado");
     }
 
-    public Page<Origem> findByNome(String descricao, Pageable pageable) {
+    public Page<OrigemView> findByNome(String descricao, Pageable pageable) {
 	return repository.findByDescricao(descricao, pageable);
     }
 

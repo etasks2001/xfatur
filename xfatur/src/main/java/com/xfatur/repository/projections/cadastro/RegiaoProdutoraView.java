@@ -1,6 +1,6 @@
 package com.xfatur.repository.projections.cadastro;
 
-public interface ProdutorView {
+public interface RegiaoProdutoraView {
     Integer getId();
 
     String getDescricao();

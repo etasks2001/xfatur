@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.UnidadeIdNotFoundException;
 import com.xfatur.model.produto.Unidade;
 import com.xfatur.repository.cadastro.UnidadeRepository;
+import com.xfatur.repository.projections.cadastro.UnidadeView;
 import com.xfatur.validation.dto.cadastro.UnidadeDTO;
 
 @Service
@@ -41,7 +42,7 @@ public class UnidadeService {
 	repository.deleteById(id);
     }
 
-    public Page<Unidade> findByDescricao(String descricao, Pageable pegeable) {
+    public Page<UnidadeView> findByDescricao(String descricao, Pageable pegeable) {
 	return repository.findByDescricao(descricao, pegeable);
     }
 
@@ -57,7 +58,7 @@ public class UnidadeService {
 	repository.update(dto.getId(), dto.getDescricao(), dto.getAbreviacao());
     }
 
-    public Page<Unidade> findByAbreviacao(String search, Pageable pageable) {
+    public Page<UnidadeView> findByAbreviacao(String search, Pageable pageable) {
 	return repository.findByAbreviacao(search, pageable);
     }
 

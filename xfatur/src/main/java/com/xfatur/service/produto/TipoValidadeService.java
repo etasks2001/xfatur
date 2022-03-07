@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.TipoValidadeIdNotFoundException;
 import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.repository.cadastro.TipoValidadeRepository;
+import com.xfatur.repository.projections.cadastro.TipoValidadeView;
 import com.xfatur.validation.dto.cadastro.TipoValidadeDTO;
 
 @Service
@@ -42,7 +43,7 @@ public class TipoValidadeService {
 	throw new TipoValidadeIdNotFoundException("Código do Tipo de Validade não encontrado");
     }
 
-    public Page<TipoValidade> findByDescricao(String descricao, Pageable pageable) {
+    public Page<TipoValidadeView> findByDescricao(String descricao, Pageable pageable) {
 	return repository.findByDescricao(descricao, pageable);
     }
 

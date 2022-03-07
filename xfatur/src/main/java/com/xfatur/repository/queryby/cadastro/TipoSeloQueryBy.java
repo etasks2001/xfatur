@@ -5,12 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.model.produto.TipoSelo;
+import com.xfatur.repository.projections.cadastro.TipoSeloView;
 import com.xfatur.repository.queryby.QueryBy;
 import com.xfatur.service.produto.TipoSeloService;
 
 @Component(value = "tiposeloqueryby")
-public class TipoSeloQueryBy implements QueryBy<TipoSelo> {
+public class TipoSeloQueryBy implements QueryBy<TipoSeloView> {
 
     private static final String[] COLUMNS = new String[] { "id", "codigo", "descricao" };
 
@@ -18,7 +18,7 @@ public class TipoSeloQueryBy implements QueryBy<TipoSelo> {
     private TipoSeloService service;
 
     @Override
-    public Page<TipoSelo> execute(String search, Pageable pageable, String column) {
+    public Page<TipoSeloView> execute(String search, Pageable pageable, String column) {
 	if (search.trim().length() == 0) {
 	    return Page.empty();
 	}

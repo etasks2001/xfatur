@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.mappers.ModelMapper;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.OrigemService;
 import com.xfatur.validation.dto.cadastro.OrigemDTO;
 

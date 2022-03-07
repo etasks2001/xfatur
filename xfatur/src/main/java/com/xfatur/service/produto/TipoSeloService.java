@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.TipoSeloIdNotFoundException;
 import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.repository.cadastro.TipoSeloRepository;
+import com.xfatur.repository.projections.cadastro.TipoSeloView;
 import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
 
 @Service
@@ -42,7 +43,7 @@ public class TipoSeloService {
 	throw new TipoSeloIdNotFoundException("Código do Tipo de Selo não encontrado");
     }
 
-    public Page<TipoSelo> findByDescricao(String descricao, Pageable pageable) {
+    public Page<TipoSeloView> findByDescricao(String descricao, Pageable pageable) {
 	return repository.findByDescricao(descricao, pageable);
     }
 

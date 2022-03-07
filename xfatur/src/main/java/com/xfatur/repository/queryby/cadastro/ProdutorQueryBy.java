@@ -5,19 +5,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.xfatur.model.produto.Produtor;
+import com.xfatur.repository.projections.cadastro.ProdutorView;
 import com.xfatur.repository.queryby.QueryBy;
 import com.xfatur.service.produto.ProdutorService;
 
 @Component(value = "produtorqueryby")
-public class ProdutorQueryBy implements QueryBy<Produtor> {
+public class ProdutorQueryBy implements QueryBy<ProdutorView> {
 
     private static final String[] COLUMNS = new String[] { "id", "descricao" };
     @Autowired
     private ProdutorService service;
 
     @Override
-    public Page<Produtor> execute(String search, Pageable pageable, String column) {
+    public Page<ProdutorView> execute(String search, Pageable pageable, String column) {
 	if (search.trim().length() == 0) {
 	    return Page.empty();
 	}

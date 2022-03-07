@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.TributacaoIdNotFoundException;
 import com.xfatur.model.produto.Tributacao;
 import com.xfatur.repository.cadastro.TributacaoRepository;
+import com.xfatur.repository.projections.cadastro.TributacaoView;
 import com.xfatur.validation.dto.cadastro.TributacaoDTO;
 
 @Service
@@ -41,7 +42,7 @@ public class TributacaoService {
 	throw new TributacaoIdNotFoundException("Código da Tributação não encontrado");
     }
 
-    public Page<Tributacao> findByDescricao(String descricao, Pageable pageabel) {
+    public Page<TributacaoView> findByDescricao(String descricao, Pageable pageabel) {
 	return repository.findByDescricao(descricao, pageabel);
     }
 

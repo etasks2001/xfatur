@@ -1,4 +1,4 @@
-package com.xfatur.mappers;
+package com.xfatur.repository.mappers;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -86,7 +86,6 @@ public interface ModelMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "codigoProduto", source = "codigoProduto")
     @Mapping(target = "descricao", source = "descricao")
-
     Produto toModel(ProdutoDTO dto);
 
     ProdutoDTO toDto(Produto model);

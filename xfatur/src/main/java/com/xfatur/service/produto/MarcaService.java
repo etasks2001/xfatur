@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.MarcaIdNotFoundException;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.repository.cadastro.MarcaRepository;
+import com.xfatur.repository.projections.cadastro.MarcaView;
 import com.xfatur.validation.dto.cadastro.MarcaDTO;
 
 @Service
@@ -53,7 +54,7 @@ public class MarcaService {
 
     }
 
-    public Page<Marca> findByDescricao(String search, Pageable pageable) {
+    public Page<MarcaView> findByDescricao(String search, Pageable pageable) {
 	return repository.findByDescricao(search, pageable);
     }
 
