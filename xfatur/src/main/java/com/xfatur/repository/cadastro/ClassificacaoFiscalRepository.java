@@ -26,10 +26,10 @@ public interface ClassificacaoFiscalRepository extends JpaRepository<Classificac
 	@Query("select cf.id as id, cf.ncm as ncm, cf.descricao as descricao  from ClassificacaoFiscal cf where cf.ncm like %:search%")
 	Page<ClassificacaoFiscalView> findByNcm(@Param("search") String search, Pageable pageable);
 
-	@Query("select count(cf)>0 from ClassificacaoFiscal cf where cf.descricao = :descricao and (:id is null or cf.id <>:id)")
-	Boolean hasDescricao(Integer id, String descricao);
+	@Query(value = "select exists (select * from ClassificacaoFiscal cf where cf.descricao = :descricao and (:id is null or cf.id <> cast(cast(:id as text) as int)))", nativeQuery = true)
+	Boolean hasDescricao(@Param("id") Integer id, @Param("descricao") String descricao);
 
-	@Query(value = "select exists (select * from ClassificacaoFiscal cf where cf.ncm = :ncm and(:id is null or cf.id <> :id))", nativeQuery = true)
+	@Query(value = "select exists (select * from ClassificacaoFiscal cf where cf.ncm = :ncm and (:id is null or cf.id <> cast(cast(:id as text) as int)))", nativeQuery = true)
 	Boolean hasNcm(@Param("id") Integer id, @Param("ncm") String ncm);
 
 	@Modifying

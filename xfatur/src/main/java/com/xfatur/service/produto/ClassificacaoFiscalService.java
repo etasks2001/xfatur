@@ -56,6 +56,7 @@ public class ClassificacaoFiscalService implements Servico {
 	}
 
 	public Boolean hasNcm(Integer id, String ncm) {
+
 		return repository.hasNcm(id, ncm);
 	}
 
