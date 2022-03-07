@@ -16,6 +16,8 @@ public class LinhaDTO implements DTO {
 
     private String tipo;
 
+    private Integer ordem = 0;
+
     public Integer getId() {
 	return id;
     }
@@ -38,6 +40,14 @@ public class LinhaDTO implements DTO {
 
     public void setTipo(String tipo) {
 	this.tipo = tipo;
+    }
+
+    public Integer getOrdem() {
+	return ordem;
+    }
+
+    public void setOrdem(Integer ordem) {
+	this.ordem = ordem;
     }
 
 }

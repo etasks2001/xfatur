@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.MarcaService;
 import com.xfatur.validation.dto.cadastro.MarcaDTO;
 
@@ -22,8 +21,6 @@ public class MarcaController {
 
     @Autowired
     private MarcaService service;
-    @Autowired
-    private ModelMapper mapper;
 
     @GetMapping("form")
     public String openForm(MarcaDTO dto) {
@@ -37,7 +34,7 @@ public class MarcaController {
 	    return "cadastro/marca";
 	}
 
-	service.save(mapper.toModel(dto));
+	service.save(dto);
 
 	attr.addFlashAttribute("success", "Marca incluída.");
 
@@ -46,7 +43,7 @@ public class MarcaController {
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Integer id) {
-	MarcaDTO dto = mapper.toDto(service.findById(id));
+	MarcaDTO dto = service.findById(id);
 
 	return new ModelAndView("/cadastro/marca", "marcaDTO", dto);
     }

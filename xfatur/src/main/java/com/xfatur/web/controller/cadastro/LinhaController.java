@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.LinhaService;
 import com.xfatur.validation.dto.cadastro.LinhaDTO;
 
@@ -22,8 +21,6 @@ public class LinhaController {
 
     @Autowired
     private LinhaService service;
-    @Autowired
-    private ModelMapper mapper;
 
     @GetMapping("form")
     public String openForm(LinhaDTO dto) {
@@ -37,7 +34,7 @@ public class LinhaController {
 	    return "cadastro/linha";
 	}
 
-	service.save(mapper.toModel(dto));
+	service.save(dto);
 
 	attr.addFlashAttribute("success", "Linha incluída.");
 
@@ -46,7 +43,7 @@ public class LinhaController {
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Integer id) {
-	LinhaDTO dto = mapper.toDto(service.findById(id));
+	LinhaDTO dto = service.findById(id);
 
 	return new ModelAndView("/cadastro/linha", "linhaDTO", dto);
     }

@@ -53,6 +53,7 @@ import com.xfatur.service.produto.TipoSeloService;
 import com.xfatur.service.produto.TipoValidadeService;
 import com.xfatur.service.produto.TributacaoService;
 import com.xfatur.service.produto.UnidadeService;
+import com.xfatur.validation.dto.cadastro.MarcaDTO;
 
 public class CreateModelTest {
 
@@ -962,42 +963,42 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<Marca> marcaList() {
+    public static Stream<MarcaDTO> marcaList() {
 
 	return Stream.of(createMarca1(), createMarca2(), createMarca3(), createMarca4(), createMarca5());
     }
 
-    private static Marca createMarca1() {
-	Marca marca = new Marca();
+    private static MarcaDTO createMarca1() {
+	MarcaDTO marca = new MarcaDTO();
 	marca.setDescricao("SEM MARCA");
 	return marca;
     }
 
-    private static Marca createMarca2() {
-	Marca marca = new Marca();
+    private static MarcaDTO createMarca2() {
+	MarcaDTO marca = new MarcaDTO();
 	marca.setDescricao("DOCE DE LEITE");
 	return marca;
     }
 
-    private static Marca createMarca3() {
-	Marca marca = new Marca();
+    private static MarcaDTO createMarca3() {
+	MarcaDTO marca = new MarcaDTO();
 	marca.setDescricao("LEITE CONDENSADO");
 	return marca;
     }
 
-    private static Marca createMarca4() {
-	Marca marca = new Marca();
+    private static MarcaDTO createMarca4() {
+	MarcaDTO marca = new MarcaDTO();
 	marca.setDescricao("DOCE DE AMORA");
 	return marca;
     }
 
-    private static Marca createMarca5() {
-	Marca marca = new Marca();
+    private static MarcaDTO createMarca5() {
+	MarcaDTO marca = new MarcaDTO();
 	marca.setDescricao("CALDO DE LIMAO");
 	return marca;
     }
 
-    public static void createAndIds(MarcaService service, Marca entity, List<Integer> ids) {
+    public static void createAndIds(MarcaService service, MarcaDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
 	    Marca saved = service.save(entity);
@@ -1320,7 +1321,7 @@ public class CreateModelTest {
     public static void createAndIds(LinhaService service, Linha entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
-	    Linha saved = service.save(entity);
+	    Linha saved = service.save(mapper.toDto(entity));
 	    id = saved.getId();
 	}
 

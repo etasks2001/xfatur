@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.LinhaIdNotFoundException;
-import com.xfatur.model.produto.Linha;
 import com.xfatur.testutil.CreateModelTest;
+import com.xfatur.validation.dto.cadastro.LinhaDTO;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -49,8 +49,8 @@ class LinhaServiceTest {
     // @Test
     @Order(4)
     void test_update() {
-	Linha linha1 = service.findById(ids.get(0));
-	Linha linha2 = service.findById(ids.get(0));
+	LinhaDTO linha1 = service.findById(ids.get(0));
+	LinhaDTO linha2 = service.findById(ids.get(0));
 
 	MatcherAssert.assertThat(linha1.getTipo(), Matchers.is(linha2.getTipo()));
 	MatcherAssert.assertThat(linha1.getOrdem(), Matchers.is(linha2.getOrdem()));

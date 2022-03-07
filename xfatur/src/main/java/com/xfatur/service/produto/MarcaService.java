@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.MarcaIdNotFoundException;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.repository.cadastro.MarcaRepository;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.projections.cadastro.MarcaView;
 import com.xfatur.validation.dto.cadastro.MarcaDTO;
 
@@ -21,6 +22,8 @@ public class MarcaService {
 
     @Autowired
     private MarcaRepository repository;
+    @Autowired
+    private ModelMapper mapper;
 
     public void deleteById(Integer id) {
 	repository.deleteById(id);
@@ -31,14 +34,14 @@ public class MarcaService {
     }
 
     @Transactional(readOnly = false)
-    public Marca save(Marca marca) {
-	return repository.save(marca);
+    public Marca save(MarcaDTO marca) {
+	return repository.save(mapper.toModel(marca));
     }
 
-    public Marca findById(int id) {
+    public MarcaDTO findById(int id) {
 	Optional<Marca> marca = repository.findById(id);
 	if (marca.isPresent()) {
-	    return marca.get();
+	    return mapper.toDto(marca.get());
 	}
 
 	throw new MarcaIdNotFoundException("Código da Marca não encontrado");

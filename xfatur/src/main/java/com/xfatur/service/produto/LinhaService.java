@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.LinhaIdNotFoundException;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.repository.cadastro.LinhaRepository;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.projections.cadastro.LinhaView;
 import com.xfatur.validation.dto.cadastro.LinhaDTO;
 
@@ -20,6 +21,8 @@ public class LinhaService {
 
     @Autowired
     private LinhaRepository repository;
+    @Autowired
+    private ModelMapper mapper;
 
     public void deleteById(Integer id) {
 	repository.deleteById(id);
@@ -30,14 +33,14 @@ public class LinhaService {
     }
 
     @Transactional(readOnly = false)
-    public Linha save(Linha linha) {
-	return repository.save(linha);
+    public Linha save(LinhaDTO linha) {
+	return repository.save(mapper.toModel(linha));
     }
 
-    public Linha findById(int id) {
+    public LinhaDTO findById(int id) {
 	Optional<Linha> linha = repository.findById(id);
 	if (linha.isPresent()) {
-	    return linha.get();
+	    return mapper.toDto(linha.get());
 	}
 
 	throw new LinhaIdNotFoundException("Código da Linha não encontrado");

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.xfatur.exception.MarcaIdNotFoundException;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.testutil.CreateModelTest;
+import com.xfatur.validation.dto.cadastro.MarcaDTO;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -49,7 +50,7 @@ class MarcaServiceTest {
     // @Test
     @Order(4)
     void test_update() {
-	Marca marca = service.findById(ids.get(0));
+	MarcaDTO marca = service.findById(ids.get(0));
 
 	marca.setDescricao(marca.getDescricao() + " alterado");
 
