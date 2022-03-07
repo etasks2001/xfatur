@@ -38,8 +38,8 @@ class ClassificacaoFiscalServiceTest {
     @Order(3)
     void test_findById() {
 
-	ClassificacaoFiscal found1 = service.findById(ids.get(0));
-	ClassificacaoFiscal found2 = service.findById(ids.get(0));
+	ClassificacaoFiscal found1 = mapper.toModel(service.findById(ids.get(0)));
+	ClassificacaoFiscal found2 = mapper.toModel(service.findById(ids.get(0)));
 
 	MatcherAssert.assertThat(found1.getNcm(), Matchers.is(found2.getNcm()));
 	assertNotNull(found1);

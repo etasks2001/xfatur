@@ -34,60 +34,60 @@ import com.xfatur.validation.dto.cadastro.UnidadeDTO;
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
 
-    ClassificacaoFiscal toModel(ClassificacaoFiscalDTO dto);
+    public ClassificacaoFiscal toModel(ClassificacaoFiscalDTO dto);
 
-    ClassificacaoFiscalDTO toDto(ClassificacaoFiscal model);
+    public ClassificacaoFiscalDTO toDto(ClassificacaoFiscal model);
 
-    Marca toModel(MarcaDTO dto);
+    public Marca toModel(MarcaDTO dto);
 
-    MarcaDTO toDto(Marca model);
+    public MarcaDTO toDto(Marca model);
 
-    Origem toModel(OrigemDTO dto);
+    public Origem toModel(OrigemDTO dto);
 
-    OrigemDTO toDto(Origem model);
+    public OrigemDTO toDto(Origem model);
 
-    RegiaoProdutora toModel(RegiaoProdutoraDTO dto);
+    public RegiaoProdutora toModel(RegiaoProdutoraDTO dto);
 
-    RegiaoProdutoraDTO toDto(RegiaoProdutora model);
+    public RegiaoProdutoraDTO toDto(RegiaoProdutora model);
 
-    Produtor toModel(ProdutorDTO dto);
+    public Produtor toModel(ProdutorDTO dto);
 
-    ProdutorDTO toDto(Produtor model);
+    public ProdutorDTO toDto(Produtor model);
 
-    TipoItem toModel(TipoItemDTO dto);
+    public TipoItem toModel(TipoItemDTO dto);
 
-    TipoItemDTO toDto(TipoItem model);
+    public TipoItemDTO toDto(TipoItem model);
 
-    Linha toModel(LinhaDTO dto);
+    public Linha toModel(LinhaDTO dto);
 
-    LinhaDTO toDto(Linha model);
+    public LinhaDTO toDto(Linha model);
 
-    TipoSelo toModel(TipoSeloDTO dto);
+    public TipoSelo toModel(TipoSeloDTO dto);
 
-    TipoSeloDTO toDto(TipoSelo model);
+    public TipoSeloDTO toDto(TipoSelo model);
 
-    Tributacao toModel(TributacaoDTO dto);
+    public Tributacao toModel(TributacaoDTO dto);
 
-    TributacaoDTO toDto(Tributacao model);
+    public TributacaoDTO toDto(Tributacao model);
 
-    TipoValidade toModel(TipoValidadeDTO dto);
+    public TipoValidade toModel(TipoValidadeDTO dto);
 
-    TipoValidadeDTO toDto(TipoValidade model);
+    public TipoValidadeDTO toDto(TipoValidade model);
 
-    Unidade toModel(UnidadeDTO dto);
+    public Unidade toModel(UnidadeDTO dto);
 
-    UnidadeDTO toDto(Unidade model);
+    public UnidadeDTO toDto(Unidade model);
 
-    Pais toModel(PaisDTO dto);
+    public Pais toModel(PaisDTO dto);
 
-    PaisDTO toDto(Pais model);
+    public PaisDTO toDto(Pais model);
 
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     @Mapping(target = "codigoProduto", source = "codigoProduto")
     @Mapping(target = "descricao", source = "descricao")
-    Produto toModel(ProdutoDTO dto);
+    public Produto toModel(ProdutoDTO dto);
 
-    ProdutoDTO toDto(Produto model);
+    public ProdutoDTO toDto(Produto model);
 
 }
