@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.TributacaoService;
 import com.xfatur.validation.dto.cadastro.TributacaoDTO;
 
@@ -22,8 +21,6 @@ public class TributacaoController {
 
     @Autowired
     private TributacaoService service;
-    @Autowired
-    private ModelMapper mapper;
 
     @GetMapping("form")
     public String openForm(TributacaoDTO dto) {
@@ -37,7 +34,7 @@ public class TributacaoController {
 	    return "cadastro/tributacao";
 	}
 
-	service.save(mapper.toModel(dto));
+	service.save(dto);
 
 	attr.addFlashAttribute("success", "Tributação incluída.");
 
@@ -46,7 +43,7 @@ public class TributacaoController {
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Integer id) {
-	TributacaoDTO dto = mapper.toDto(service.findById(id));
+	TributacaoDTO dto = service.findById(id);
 
 	return new ModelAndView("/cadastro/tributacao", "tributacaoDTO", dto);
     }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.UnidadeService;
 import com.xfatur.validation.dto.cadastro.UnidadeDTO;
 
@@ -22,8 +21,6 @@ public class UnidadeController {
 
     @Autowired
     private UnidadeService service;
-    @Autowired
-    private ModelMapper mapper;
 
     @GetMapping("form")
     public String openForm(UnidadeDTO dto) {
@@ -37,7 +34,7 @@ public class UnidadeController {
 	    return "cadastro/unidade";
 	}
 
-	service.save(mapper.toModel(dto));
+	service.save(dto);
 
 	attr.addFlashAttribute("success", "Unidade incluída.");
 
@@ -46,7 +43,7 @@ public class UnidadeController {
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Integer id) {
-	UnidadeDTO dto = mapper.toDto(service.findById(id));
+	UnidadeDTO dto = service.findById(id);
 
 	return new ModelAndView("/cadastro/unidade", "unidadeDTO", dto);
     }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.TipoItemService;
 import com.xfatur.validation.dto.cadastro.TipoItemDTO;
 
@@ -20,48 +19,46 @@ import com.xfatur.validation.dto.cadastro.TipoItemDTO;
 @RequestMapping("tipoitem")
 public class TipoItemController {
 
-	@Autowired
-	private TipoItemService service;
-	@Autowired
-	private ModelMapper mapper;
+    @Autowired
+    private TipoItemService service;
 
-	@GetMapping("form")
-	public String openForm(TipoItemDTO dto) {
+    @GetMapping("form")
+    public String openForm(TipoItemDTO dto) {
 
-		return "/cadastro/tipoitem";
+	return "/cadastro/tipoitem";
+    }
+
+    @PostMapping("salvar")
+    public String salvar(@Valid TipoItemDTO dto, BindingResult result, RedirectAttributes attr) {
+	if (result.hasErrors()) {
+	    return "cadastro/tipoitem";
 	}
 
-	@PostMapping("salvar")
-	public String salvar(@Valid TipoItemDTO dto, BindingResult result, RedirectAttributes attr) {
-		if (result.hasErrors()) {
-			return "cadastro/tipoitem";
-		}
+	service.save(dto);
 
-		service.save(mapper.toModel(dto));
+	attr.addFlashAttribute("success", "Tipo do Item incluído.");
 
-		attr.addFlashAttribute("success", "Tipo do Item incluído.");
+	return "redirect:/tipoitem/form";
+    }
 
-		return "redirect:/tipoitem/form";
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Integer id) {
+	TipoItemDTO dto = service.findById(id);
+
+	return new ModelAndView("/cadastro/tipoitem", "tipoItemDTO", dto);
+    }
+
+    @PostMapping("alterar")
+    public String alterar(@Valid TipoItemDTO dto, BindingResult result, RedirectAttributes attr) {
+
+	if (result.hasErrors()) {
+	    return "cadastro/tipoitem";
 	}
 
-	@GetMapping("/editar/{id}")
-	public ModelAndView editar(@PathVariable("id") Integer id) {
-		TipoItemDTO dto = mapper.toDto(service.findById(id));
+	service.update(dto);
 
-		return new ModelAndView("/cadastro/tipoitem", "tipoItemDTO", dto);
-	}
+	attr.addFlashAttribute("success", "Tipo do item alterado.");
 
-	@PostMapping("alterar")
-	public String alterar(@Valid TipoItemDTO dto, BindingResult result, RedirectAttributes attr) {
-
-		if (result.hasErrors()) {
-			return "cadastro/tipoitem";
-		}
-
-		service.update(dto);
-
-		attr.addFlashAttribute("success", "Tipo do item alterado.");
-
-		return "redirect:/tipoitem/form";
-	}
+	return "redirect:/tipoitem/form";
+    }
 }

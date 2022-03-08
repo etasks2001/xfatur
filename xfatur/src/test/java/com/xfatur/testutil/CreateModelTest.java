@@ -26,12 +26,6 @@ import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Linha;
 import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
-import com.xfatur.model.produto.RegiaoProdutora;
-import com.xfatur.model.produto.TipoItem;
-import com.xfatur.model.produto.TipoSelo;
-import com.xfatur.model.produto.TipoValidade;
-import com.xfatur.model.produto.Tributacao;
-import com.xfatur.model.produto.Unidade;
 import com.xfatur.model.test.EnderecoCobranca;
 import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.NaturezaJuridicaService;
@@ -54,6 +48,12 @@ import com.xfatur.validation.dto.cadastro.MarcaDTO;
 import com.xfatur.validation.dto.cadastro.PaisDTO;
 import com.xfatur.validation.dto.cadastro.ProdutoDTO;
 import com.xfatur.validation.dto.cadastro.ProdutorDTO;
+import com.xfatur.validation.dto.cadastro.RegiaoProdutoraDTO;
+import com.xfatur.validation.dto.cadastro.TipoItemDTO;
+import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
+import com.xfatur.validation.dto.cadastro.TipoValidadeDTO;
+import com.xfatur.validation.dto.cadastro.TributacaoDTO;
+import com.xfatur.validation.dto.cadastro.UnidadeDTO;
 
 public class CreateModelTest {
 
@@ -599,33 +599,33 @@ public class CreateModelTest {
 	return Stream.of(createProdutor1(), createProdutor2(), createProdutor3());
     }
 
-    public static Stream<Unidade> unidadeList() {
+    public static Stream<UnidadeDTO> unidadeList() {
 	return Stream.of(createUnidade1(), createUnidade2(), createUnidade3(), createUnidade4());
     }
 
-    private static Unidade createUnidade1() {
-	Unidade unidade = new Unidade();
+    private static UnidadeDTO createUnidade1() {
+	UnidadeDTO unidade = new UnidadeDTO();
 	unidade.setAbreviacao("cx");
 	unidade.setDescricao("CAIXA");
 	return unidade;
     }
 
-    private static Unidade createUnidade2() {
-	Unidade unidade = new Unidade();
+    private static UnidadeDTO createUnidade2() {
+	UnidadeDTO unidade = new UnidadeDTO();
 	unidade.setAbreviacao("kg");
 	unidade.setDescricao("QUILOGRAMA");
 	return unidade;
     }
 
-    private static Unidade createUnidade3() {
-	Unidade unidade = new Unidade();
+    private static UnidadeDTO createUnidade3() {
+	UnidadeDTO unidade = new UnidadeDTO();
 	unidade.setAbreviacao("lt");
 	unidade.setDescricao("LITRO");
 	return unidade;
     }
 
-    private static Unidade createUnidade4() {
-	Unidade unidade = new Unidade();
+    private static UnidadeDTO createUnidade4() {
+	UnidadeDTO unidade = new UnidadeDTO();
 	unidade.setAbreviacao("unid");
 	unidade.setDescricao("UNIDADE");
 	return unidade;
@@ -703,97 +703,96 @@ public class CreateModelTest {
 	return classificacaoFiscal;
     }
 
-    public static Stream<Tributacao> tributacaoList() {
+    public static Stream<TributacaoDTO> tributacaoList() {
 	return Stream.of(
 
 		createTributacao1(), createTributacao2(), createTributacao3(), createTributacao4(), createTributacao5(), createTributacao6(), createTributacao7(), createTributacao8(),
 		createTributacao9(), createTributacao10(), createTributacao11());
     }
 
-    private static Tributacao createTributacao11() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao11() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("90");
 	tributacao.setDescricao("OUTRAS");
 	return tributacao;
     }
 
-    private static Tributacao createTributacao10() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao10() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("70");
 	tributacao.setDescricao("COM REDUÇÃO DE BASE DE CÁLCULO E COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
 	return tributacao;
     }
 
-    private static Tributacao createTributacao9() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao9() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("60");
 	tributacao.setDescricao("ICMS COBRADO ANTERIORMENTE POR SUBSTITUIÇÃO TRIBUTÁRIA");
 	return tributacao;
     }
 
-    private static Tributacao createTributacao8() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao8() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("51");
 	tributacao.setDescricao("DIFERIMENTO");
 	return tributacao;
     }
 
-    private static Tributacao createTributacao7() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao7() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("50");
 	tributacao.setDescricao("SUSPENSÃO");
 	return tributacao;
     }
 
-    private static Tributacao createTributacao6() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao6() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("41");
 	tributacao.setDescricao("NÃO TRIBUTADA");
 	return tributacao;
     }
 
-    private static Tributacao createTributacao5() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao5() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("40");
 	tributacao.setDescricao("ISENTA");
 	return tributacao;
     }
 
-    private static Tributacao createTributacao4() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao4() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("30");
 	tributacao.setDescricao("ISENTA OU NÃO TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
 	return tributacao;
     }
 
-    private static Tributacao createTributacao3() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao3() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("20");
 	tributacao.setDescricao("COM REDUÇÃO DE BASE DE CÁLCULO");
 	return tributacao;
     }
 
-    private static Tributacao createTributacao2() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao2() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("10");
 	tributacao.setDescricao("TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
 	return tributacao;
     }
 
-    private static Tributacao createTributacao1() {
-	Tributacao tributacao = new Tributacao();
+    private static TributacaoDTO createTributacao1() {
+	TributacaoDTO tributacao = new TributacaoDTO();
 	tributacao.setCodigo("00");
 	tributacao.setDescricao("TRIBUTADA INTEGRALMENTE");
 
 	return tributacao;
     }
 
-    public static void createAndIds(TributacaoService service, Tributacao entity, List<Integer> ids) {
+    public static void createAndIds(TributacaoService service, TributacaoDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 
 	if (id == null) {
-	    Tributacao saved = service.save(entity);
-	    id = saved.getId();
+	    id = service.save(entity).getId();
 	}
 	ids.add(id);
     }
@@ -829,12 +828,10 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static void createAndIds(UnidadeService service, Unidade entity, List<Integer> ids) {
+    public static void createAndIds(UnidadeService service, UnidadeDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByAbreviacao(entity.getAbreviacao());
 	if (id == null) {
-
-	    Unidade save = service.save(entity);
-	    id = save.getId();
+	    id = service.save(entity).getId();
 	}
 	ids.add(id);
     }
@@ -871,11 +868,10 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static void createAndIds(RegiaoProdutoraService service, RegiaoProdutora entity, List<Integer> ids) {
+    public static void createAndIds(RegiaoProdutoraService service, RegiaoProdutoraDTO entity, List<Integer> ids) {
 	Integer id = service.findByIdDescricao(entity.getDescricao());
 	if (id == null) {
-	    RegiaoProdutora saved = service.save(entity);
-	    id = saved.getId();
+	    id = service.save(entity).getId();
 	}
 
 	ids.add(id);
@@ -897,67 +893,66 @@ public class CreateModelTest {
 	return Stream.of(CreateModelTest.createEnderecoCobranca1());
     }
 
-    public static Stream<RegiaoProdutora> regiaoProdutoraList() {
+    public static Stream<RegiaoProdutoraDTO> regiaoProdutoraList() {
 	return Stream.of(createRegiaoProdutora1(), createRegiaoProdutora2(), createRegiaoProdutora3(), createRegiaoProdutora4(), createRegiaoProdutora5());
     }
 
-    private static RegiaoProdutora createRegiaoProdutora1() {
-	RegiaoProdutora regiaoProdutora = new RegiaoProdutora();
+    private static RegiaoProdutoraDTO createRegiaoProdutora1() {
+	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
 	regiaoProdutora.setDescricao("ZONA DA MATA");
 	return regiaoProdutora;
     }
 
-    private static RegiaoProdutora createRegiaoProdutora2() {
-	RegiaoProdutora regiaoProdutora = new RegiaoProdutora();
+    private static RegiaoProdutoraDTO createRegiaoProdutora2() {
+	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
 	regiaoProdutora.setDescricao("SUL DE MINAS GERAIS");
 	return regiaoProdutora;
     }
 
-    private static RegiaoProdutora createRegiaoProdutora3() {
-	RegiaoProdutora regiaoProdutora = new RegiaoProdutora();
+    private static RegiaoProdutoraDTO createRegiaoProdutora3() {
+	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
 	regiaoProdutora.setDescricao("VALE DO PARANAPIACABA");
 	return regiaoProdutora;
     }
 
-    private static RegiaoProdutora createRegiaoProdutora4() {
-	RegiaoProdutora regiaoProdutora = new RegiaoProdutora();
+    private static RegiaoProdutoraDTO createRegiaoProdutora4() {
+	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
 	regiaoProdutora.setDescricao("VALE DO SAO FRANCISCO");
 	return regiaoProdutora;
     }
 
-    private static RegiaoProdutora createRegiaoProdutora5() {
-	RegiaoProdutora regiaoProdutora = new RegiaoProdutora();
+    private static RegiaoProdutoraDTO createRegiaoProdutora5() {
+	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
 	regiaoProdutora.setDescricao("NORTE DE SAO PAULO");
 	return regiaoProdutora;
     }
 
-    public static Stream<TipoValidade> tipoValidadeList() {
+    public static Stream<TipoValidadeDTO> tipoValidadeList() {
 	return Stream.of(createTipoValidade1(), createTipoValidade2(), createTipoValidade3());
     }
 
-    private static TipoValidade createTipoValidade1() {
-	TipoValidade tipoValidade = new TipoValidade();
+    private static TipoValidadeDTO createTipoValidade1() {
+	TipoValidadeDTO tipoValidade = new TipoValidadeDTO();
 	tipoValidade.setDescricao("INDETERMINADA");
 	return tipoValidade;
     }
 
-    private static TipoValidade createTipoValidade2() {
-	TipoValidade tipoValidade = new TipoValidade();
+    private static TipoValidadeDTO createTipoValidade2() {
+	TipoValidadeDTO tipoValidade = new TipoValidadeDTO();
 	tipoValidade.setDescricao("IMPERECÍVEL");
 	return tipoValidade;
     }
 
-    private static TipoValidade createTipoValidade3() {
-	TipoValidade tipoValidade = new TipoValidade();
+    private static TipoValidadeDTO createTipoValidade3() {
+	TipoValidadeDTO tipoValidade = new TipoValidadeDTO();
 	tipoValidade.setDescricao("OUTRA");
 	return tipoValidade;
     }
 
-    public static void createAndIds(TipoValidadeService service, TipoValidade entity, List<Integer> ids) {
+    public static void createAndIds(TipoValidadeService service, TipoValidadeDTO entity, List<Integer> ids) {
 	Integer id = service.findByIdDescricao(entity.getDescricao());
 	if (id == null) {
-	    TipoValidade saved = service.save(entity);
-	    id = saved.getId();
+	    id = service.save(entity).getId();
 	}
 
 	ids.add(id);
@@ -1069,156 +1064,155 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<TipoItem> tipoList() {
+    public static Stream<TipoItemDTO> tipoList() {
 	return Stream.of(createTipo1(), createTipo2(), createTipo3(), createTipo4(), createTipo5(), createTipo6(), createTipo7(), createTipo8(), createTipo9(), createTipo10(), createTipo11(),
 		createTipo12());
     }
 
-    private static TipoItem createTipo12() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo12() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("99");
 	tipo.setDescricao("OUTRAS");
 	return tipo;
     }
 
-    private static TipoItem createTipo11() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo11() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("10");
 	tipo.setDescricao("OUTROS INSUMOS");
 	return tipo;
     }
 
-    private static TipoItem createTipo10() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo10() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("09");
 	tipo.setDescricao("SERVIÇOS");
 	return tipo;
     }
 
-    private static TipoItem createTipo9() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo9() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("08");
 	tipo.setDescricao("ATIVO IMOBILIZADO");
 	return tipo;
     }
 
-    private static TipoItem createTipo8() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo8() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("07");
 	tipo.setDescricao("MATERIAL DE USO E CONSUMO");
 	return tipo;
     }
 
-    private static TipoItem createTipo7() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo7() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("06");
 	tipo.setDescricao("PRODUTO INTERMEDIÁRIO");
 	return tipo;
     }
 
-    private static TipoItem createTipo6() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo6() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("05");
 	tipo.setDescricao("SUBPRODUTO");
 	return tipo;
     }
 
-    private static TipoItem createTipo5() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo5() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("04");
 	tipo.setDescricao("PRODUTO ACABADO");
 	return tipo;
     }
 
-    private static TipoItem createTipo4() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo4() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("03");
 	tipo.setDescricao("PRODUTO EM PROCESSO");
 	return tipo;
     }
 
-    private static TipoItem createTipo3() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo3() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("02");
 	tipo.setDescricao("EMBALAGEM");
 	return tipo;
     }
 
-    private static TipoItem createTipo2() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo2() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("01");
 	tipo.setDescricao("MATÉRIA-PRIMA");
 	return tipo;
     }
 
-    private static TipoItem createTipo1() {
-	TipoItem tipo = new TipoItem();
+    private static TipoItemDTO createTipo1() {
+	TipoItemDTO tipo = new TipoItemDTO();
 	tipo.setCodigo("00");
 	tipo.setDescricao("MERCADORIA PARA REVENDA");
 	return tipo;
     }
 
-    public static void createAndIds(TipoItemService service, TipoItem entity, List<Integer> ids) {
+    public static void createAndIds(TipoItemService service, TipoItemDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
-	    TipoItem saved = service.save(entity);
-	    id = saved.getId();
+	    id = service.save(entity).getId();
+
 	}
 
 	ids.add(id);
     }
 
-    public static Stream<TipoSelo> tipoSeloList() {
+    public static Stream<TipoSeloDTO> tipoSeloList() {
 	return Stream.of(createTipoSelo1(), createTipoSelo2(), createTipoSelo3(), createTipoSelo4(), createTipoSelo5(), createTipoSelo6());
     }
 
-    private static TipoSelo createTipoSelo6() {
-	TipoSelo tipoSelo = new TipoSelo();
+    private static TipoSeloDTO createTipoSelo6() {
+	TipoSeloDTO tipoSelo = new TipoSeloDTO();
 	tipoSelo.setCodigo("971012");
 	tipoSelo.setDescricao("971012-Nacional p/Exp.-Tipo3-Verde Escuro combinado c/marrom");
 	return tipoSelo;
     }
 
-    private static TipoSelo createTipoSelo5() {
-	TipoSelo tipoSelo = new TipoSelo();
+    private static TipoSeloDTO createTipoSelo5() {
+	TipoSeloDTO tipoSelo = new TipoSeloDTO();
 	tipoSelo.setCodigo("971011");
 	tipoSelo.setDescricao("971011-Nacional p/Exp.-Tipo2-Verde Escuro combinado c/marrom");
 	return tipoSelo;
     }
 
-    private static TipoSelo createTipoSelo4() {
-	TipoSelo tipoSelo = new TipoSelo();
+    private static TipoSeloDTO createTipoSelo4() {
+	TipoSeloDTO tipoSelo = new TipoSeloDTO();
 	tipoSelo.setCodigo("971010");
 	tipoSelo.setDescricao("971010-Nacional p/Exp.-Tipo1-Verde Escuro combinado c/marrom");
 	return tipoSelo;
     }
 
-    private static TipoSelo createTipoSelo3() {
-	TipoSelo tipoSelo = new TipoSelo();
+    private static TipoSeloDTO createTipoSelo3() {
+	TipoSeloDTO tipoSelo = new TipoSeloDTO();
 	tipoSelo.setCodigo("971001");
 	tipoSelo.setDescricao("971001-Nacional-Verde combinado com marrom");
 	return tipoSelo;
     }
 
-    private static TipoSelo createTipoSelo2() {
-	TipoSelo tipoSelo = new TipoSelo();
+    private static TipoSeloDTO createTipoSelo2() {
+	TipoSeloDTO tipoSelo = new TipoSeloDTO();
 	tipoSelo.setCodigo("861009");
 	tipoSelo.setDescricao("861009-Estrangeiro - Vermelho combinado com azul");
 	return tipoSelo;
     }
 
-    private static TipoSelo createTipoSelo1() {
-	TipoSelo tipoSelo = new TipoSelo();
+    private static TipoSeloDTO createTipoSelo1() {
+	TipoSeloDTO tipoSelo = new TipoSeloDTO();
 	tipoSelo.setCodigo("100000");
 	tipoSelo.setDescricao("SEM SELO");
 	return tipoSelo;
     }
 
-    public static void createAndIds(TipoSeloService service, TipoSelo entity, List<Integer> ids) {
+    public static void createAndIds(TipoSeloService service, TipoSeloDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
-	    TipoSelo saved = service.save(entity);
-	    id = saved.getId();
+	    id = service.save(entity).getId();
 	}
 
 	ids.add(id);

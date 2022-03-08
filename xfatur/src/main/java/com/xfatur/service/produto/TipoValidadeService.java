@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.TipoValidadeIdNotFoundException;
 import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.repository.cadastro.TipoValidadeRepository;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.projections.cadastro.TipoValidadeView;
 import com.xfatur.validation.dto.cadastro.TipoValidadeDTO;
 
@@ -20,6 +21,8 @@ public class TipoValidadeService {
 
     @Autowired
     private TipoValidadeRepository repository;
+    @Autowired
+    private ModelMapper mapper;
 
     public void deleteById(Integer id) {
 	repository.deleteById(id);
@@ -30,14 +33,14 @@ public class TipoValidadeService {
     }
 
     @Transactional(readOnly = false)
-    public TipoValidade save(TipoValidade regiaoProdutora) {
-	return repository.save(regiaoProdutora);
+    public TipoValidade save(TipoValidadeDTO regiaoProdutora) {
+	return repository.save(mapper.toModel(regiaoProdutora));
     }
 
-    public TipoValidade findById(int id) {
+    public TipoValidadeDTO findById(int id) {
 	Optional<TipoValidade> regiaoProdutora = repository.findById(id);
 	if (regiaoProdutora.isPresent()) {
-	    return regiaoProdutora.get();
+	    return mapper.toDto(regiaoProdutora.get());
 	}
 
 	throw new TipoValidadeIdNotFoundException("Código do Tipo de Validade não encontrado");

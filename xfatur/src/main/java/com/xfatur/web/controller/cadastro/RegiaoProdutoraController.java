@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.RegiaoProdutoraService;
 import com.xfatur.validation.dto.cadastro.RegiaoProdutoraDTO;
 
@@ -20,48 +19,46 @@ import com.xfatur.validation.dto.cadastro.RegiaoProdutoraDTO;
 @RequestMapping("regiaoprodutora")
 public class RegiaoProdutoraController {
 
-	@Autowired
-	private RegiaoProdutoraService service;
-	@Autowired
-	private ModelMapper mapper;
+    @Autowired
+    private RegiaoProdutoraService service;
 
-	@GetMapping("form")
-	public String openForm(RegiaoProdutoraDTO dto) {
+    @GetMapping("form")
+    public String openForm(RegiaoProdutoraDTO dto) {
 
-		return "/cadastro/regiaoprodutora";
+	return "/cadastro/regiaoprodutora";
+    }
+
+    @PostMapping("salvar")
+    public String salvar(@Valid RegiaoProdutoraDTO dto, BindingResult result, RedirectAttributes attr) {
+	if (result.hasErrors()) {
+	    return "cadastro/regiaoprodutora";
 	}
 
-	@PostMapping("salvar")
-	public String salvar(@Valid RegiaoProdutoraDTO dto, BindingResult result, RedirectAttributes attr) {
-		if (result.hasErrors()) {
-			return "cadastro/regiaoprodutora";
-		}
+	service.save(dto);
 
-		service.save(mapper.toModel(dto));
+	attr.addFlashAttribute("success", "Regiao Produtora incluída.");
 
-		attr.addFlashAttribute("success", "Regiao Produtora incluída.");
+	return "redirect:/regiaoprodutora/form";
+    }
 
-		return "redirect:/regiaoprodutora/form";
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Integer id) {
+	RegiaoProdutoraDTO dto = service.findById(id);
+
+	return new ModelAndView("/cadastro/regiaoprodutora", "regiaoProdutoraDTO", dto);
+    }
+
+    @PostMapping("alterar")
+    public String alterar(@Valid RegiaoProdutoraDTO dto, BindingResult result, RedirectAttributes attr) {
+
+	if (result.hasErrors()) {
+	    return "cadastro/regiaoprodutora";
 	}
 
-	@GetMapping("/editar/{id}")
-	public ModelAndView editar(@PathVariable("id") Integer id) {
-		RegiaoProdutoraDTO dto = mapper.toDto(service.findById(id));
+	service.update(dto);
 
-		return new ModelAndView("/cadastro/regiaoprodutora", "regiaoProdutoraDTO", dto);
-	}
+	attr.addFlashAttribute("success", "Regiao Produtora alterada.");
 
-	@PostMapping("alterar")
-	public String alterar(@Valid RegiaoProdutoraDTO dto, BindingResult result, RedirectAttributes attr) {
-
-		if (result.hasErrors()) {
-			return "cadastro/regiaoprodutora";
-		}
-
-		service.update(dto);
-
-		attr.addFlashAttribute("success", "Regiao Produtora alterada.");
-
-		return "redirect:/regiaoprodutora/form";
-	}
+	return "redirect:/regiaoprodutora/form";
+    }
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.RegiaoProdutoraIdNotFoundException;
 import com.xfatur.model.produto.RegiaoProdutora;
 import com.xfatur.repository.cadastro.RegiaoProdutoraRepository;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.projections.cadastro.RegiaoProdutoraView;
 import com.xfatur.validation.dto.cadastro.RegiaoProdutoraDTO;
 
@@ -20,6 +21,8 @@ public class RegiaoProdutoraService {
 
     @Autowired
     private RegiaoProdutoraRepository repository;
+    @Autowired
+    private ModelMapper mapper;
 
     public void deleteById(Integer id) {
 	repository.deleteById(id);
@@ -30,14 +33,14 @@ public class RegiaoProdutoraService {
     }
 
     @Transactional(readOnly = false)
-    public RegiaoProdutora save(RegiaoProdutora regiaoProdutora) {
-	return repository.save(regiaoProdutora);
+    public RegiaoProdutora save(RegiaoProdutoraDTO regiaoProdutora) {
+	return repository.save(mapper.toModel(regiaoProdutora));
     }
 
-    public RegiaoProdutora findById(int id) {
+    public RegiaoProdutoraDTO findById(int id) {
 	Optional<RegiaoProdutora> regiaoProdutora = repository.findById(id);
 	if (regiaoProdutora.isPresent()) {
-	    return regiaoProdutora.get();
+	    return mapper.toDto(regiaoProdutora.get());
 	}
 
 	throw new RegiaoProdutoraIdNotFoundException("Código da Região Produtora não encontrado");

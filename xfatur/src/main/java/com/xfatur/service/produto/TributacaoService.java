@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.TributacaoIdNotFoundException;
 import com.xfatur.model.produto.Tributacao;
 import com.xfatur.repository.cadastro.TributacaoRepository;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.projections.cadastro.TributacaoView;
 import com.xfatur.validation.dto.cadastro.TributacaoDTO;
 
@@ -19,10 +20,12 @@ import com.xfatur.validation.dto.cadastro.TributacaoDTO;
 public class TributacaoService {
     @Autowired
     private TributacaoRepository repository;
+    @Autowired
+    private ModelMapper mapper;
 
     @Transactional(readOnly = false)
-    public Tributacao save(Tributacao tributacao) {
-	return repository.save(tributacao);
+    public Tributacao save(TributacaoDTO tributacao) {
+	return repository.save(mapper.toModel(tributacao));
     }
 
     public Integer findIdByDescricao(String descricao) {
@@ -33,10 +36,10 @@ public class TributacaoService {
 	repository.deleteById(id);
     }
 
-    public Tributacao findById(Integer id) {
+    public TributacaoDTO findById(Integer id) {
 	Optional<Tributacao> found = repository.findById(id);
 	if (found.isPresent()) {
-	    return found.get();
+	    return mapper.toDto(found.get());
 
 	}
 	throw new TributacaoIdNotFoundException("Código da Tributação não encontrado");

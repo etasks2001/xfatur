@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.xfatur.exception.TipoIdNotFoundException;
 import com.xfatur.model.produto.TipoItem;
 import com.xfatur.testutil.CreateModelTest;
+import com.xfatur.validation.dto.cadastro.TipoItemDTO;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -34,7 +35,7 @@ class TipoServiceTest {
     @Order(2)
     void update() {
 	ids.forEach(id -> {
-	    TipoItem tipo = service.findById(id);
+	    TipoItemDTO tipo = service.findById(id);
 
 	    tipo.setDescricao(tipo.getDescricao() + " A");
 

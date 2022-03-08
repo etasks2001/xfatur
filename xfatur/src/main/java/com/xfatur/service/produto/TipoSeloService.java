@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xfatur.exception.TipoSeloIdNotFoundException;
 import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.repository.cadastro.TipoSeloRepository;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.projections.cadastro.TipoSeloView;
 import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
 
@@ -19,10 +20,12 @@ import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
 public class TipoSeloService {
     @Autowired
     private TipoSeloRepository repository;
+    @Autowired
+    private ModelMapper mapper;
 
     @Transactional(readOnly = false)
-    public TipoSelo save(TipoSelo tributacao) {
-	return repository.save(tributacao);
+    public TipoSelo save(TipoSeloDTO tributacao) {
+	return repository.save(mapper.toModel(tributacao));
     }
 
     public Integer findIdByDescricao(String descricao) {
@@ -33,11 +36,11 @@ public class TipoSeloService {
 	repository.deleteById(id);
     }
 
-    public TipoSelo findById(Integer id) {
+    public TipoSeloDTO findById(Integer id) {
 
 	Optional<TipoSelo> found = repository.findById(id);
 	if (found.isPresent()) {
-	    return found.get();
+	    return mapper.toDto(found.get());
 
 	}
 	throw new TipoSeloIdNotFoundException("Código do Tipo de Selo não encontrado");

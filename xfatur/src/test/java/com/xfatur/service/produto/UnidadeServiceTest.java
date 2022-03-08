@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.UnidadeIdNotFoundException;
-import com.xfatur.model.produto.Unidade;
 import com.xfatur.testutil.CreateModelTest;
+import com.xfatur.validation.dto.cadastro.UnidadeDTO;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -35,7 +35,7 @@ class UnidadeServiceTest {
     // @Test
     @Order(2)
     void test_update() {
-	Unidade unidade = service.findById(ids.get(0));
+	UnidadeDTO unidade = service.findById(ids.get(0));
 
 	unidade.setDescricao(unidade.getDescricao() + " alterado");
 
@@ -44,7 +44,7 @@ class UnidadeServiceTest {
     // @Test
     @Order(3)
     void test_findById() {
-	Unidade unidade = service.findById(ids.get(0));
+	UnidadeDTO unidade = service.findById(ids.get(0));
 
 	assertNotNull(unidade);
     }

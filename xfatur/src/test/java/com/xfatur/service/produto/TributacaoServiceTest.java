@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.TributacaoIdNotFoundException;
-import com.xfatur.model.produto.Tributacao;
 import com.xfatur.testutil.CreateModelTest;
+import com.xfatur.validation.dto.cadastro.TributacaoDTO;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -34,7 +34,7 @@ class TributacaoServiceTest {
     @Order(2)
     void update() {
 	ids.forEach(id -> {
-	    Tributacao tributacao = service.findById(id);
+	    TributacaoDTO tributacao = service.findById(id);
 
 	    tributacao.setDescricao(tributacao.getDescricao() + " A");
 

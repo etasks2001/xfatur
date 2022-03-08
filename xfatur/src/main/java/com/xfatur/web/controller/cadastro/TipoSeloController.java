@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.TipoSeloService;
 import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
 
@@ -22,8 +21,6 @@ public class TipoSeloController {
 
     @Autowired
     private TipoSeloService service;
-    @Autowired
-    private ModelMapper mapper;
 
     @GetMapping("form")
     public String openForm(TipoSeloDTO dto) {
@@ -37,7 +34,7 @@ public class TipoSeloController {
 	    return "cadastro/tiposelo";
 	}
 
-	service.save(mapper.toModel(dto));
+	service.save(dto);
 
 	attr.addFlashAttribute("success", "Tipo de Selo incluído.");
 
@@ -46,7 +43,7 @@ public class TipoSeloController {
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Integer id) {
-	TipoSeloDTO dto = mapper.toDto(service.findById(id));
+	TipoSeloDTO dto = service.findById(id);
 
 	return new ModelAndView("/cadastro/tiposelo", "tipoSeloDTO", dto);
     }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.produto.TipoValidadeService;
 import com.xfatur.validation.dto.cadastro.TipoValidadeDTO;
 
@@ -22,8 +21,6 @@ public class TipoValidadeController {
 
     @Autowired
     private TipoValidadeService service;
-    @Autowired
-    private ModelMapper mapper;
 
     @GetMapping("form")
     public String openForm(TipoValidadeDTO dto) {
@@ -37,7 +34,7 @@ public class TipoValidadeController {
 	    return "cadastro/tipovalidade";
 	}
 
-	service.save(mapper.toModel(dto));
+	service.save(dto);
 
 	attr.addFlashAttribute("success", "Tipo Validade incluída.");
 
@@ -46,7 +43,7 @@ public class TipoValidadeController {
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Integer id) {
-	TipoValidadeDTO dto = mapper.toDto(service.findById(id));
+	TipoValidadeDTO dto = service.findById(id);
 
 	return new ModelAndView("/cadastro/tipovalidade", "tipoValidadeDTO", dto);
     }

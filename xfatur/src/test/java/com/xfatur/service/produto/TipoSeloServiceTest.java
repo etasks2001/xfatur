@@ -7,8 +7,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.testutil.CreateModelTest;
+import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -30,7 +30,7 @@ class TipoSeloServiceTest {
     @Order(2)
     void update() {
 	ids.forEach(id -> {
-	    TipoSelo tipoSelo = service.findById(id);
+	    TipoSeloDTO tipoSelo = service.findById(id);
 
 	    tipoSelo.setDescricao(tipoSelo.getDescricao() + " A");
 

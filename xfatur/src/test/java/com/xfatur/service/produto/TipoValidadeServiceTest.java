@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.TipoValidadeIdNotFoundException;
-import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.testutil.CreateModelTest;
+import com.xfatur.validation.dto.cadastro.TipoValidadeDTO;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -50,7 +50,7 @@ class TipoValidadeServiceTest {
     // @Test
     @Order(4)
     void test_update() {
-	TipoValidade tipoValidade = service.findById(ids.get(0));
+	TipoValidadeDTO tipoValidade = service.findById(ids.get(0));
 
 	tipoValidade.setDescricao(tipoValidade.getDescricao());
 

@@ -20,10 +20,12 @@ import com.xfatur.validation.dto.cadastro.TipoItemDTO;
 public class TipoItemService {
     @Autowired
     private TipoItemRepository repository;
+    @Autowired
+    private com.xfatur.repository.mappers.ModelMapper mapper;
 
     @Transactional(readOnly = false)
-    public TipoItem save(TipoItem tributacao) {
-	return repository.save(tributacao);
+    public TipoItem save(TipoItemDTO tributacao) {
+	return repository.save(mapper.toModel(tributacao));
     }
 
     public Integer findIdByDescricao(String descricao) {
@@ -36,10 +38,10 @@ public class TipoItemService {
 
     }
 
-    public TipoItem findById(Integer id) {
+    public TipoItemDTO findById(Integer id) {
 	Optional<TipoItem> found = repository.findById(id);
 	if (found.isPresent()) {
-	    return found.get();
+	    return mapper.toDto(found.get());
 
 	}
 	throw new TipoIdNotFoundException("Código do Tipo do Item não encontrado");
