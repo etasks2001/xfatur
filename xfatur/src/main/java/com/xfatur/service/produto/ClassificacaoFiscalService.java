@@ -3,6 +3,8 @@ package com.xfatur.service.produto;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,8 @@ import com.xfatur.validation.dto.cadastro.ClassificacaoFiscalDTO;
 @Transactional(readOnly = true)
 public class ClassificacaoFiscalService implements Servico {
 
+    private static Logger LOG = LoggerFactory.getLogger(ClassificacaoFiscalService.class);
+
     @Autowired
     private ModelMapper mapper;
 
@@ -27,13 +31,16 @@ public class ClassificacaoFiscalService implements Servico {
     private ClassificacaoFiscalRepository repository;
 
     public void deleteById(Integer id) {
-
 	repository.deleteById(id);
     }
 
     @Transactional(readOnly = false)
     public ClassificacaoFiscal save(ClassificacaoFiscalDTO classificacaoFiscalDTO) {
-	return repository.save(mapper.toModel(classificacaoFiscalDTO));
+
+	ClassificacaoFiscal save = repository.save(mapper.toModel(classificacaoFiscalDTO));
+
+	LOG.info("ClassificacaoFiscal incluída com id " + save.getId() + "");
+	return save;
     }
 
     public Integer findIdByDescricao(String descricao) {
@@ -81,8 +88,9 @@ public class ClassificacaoFiscalService implements Servico {
 
     @Transactional(readOnly = false)
     public void update(ClassificacaoFiscalDTO dto) {
-
 	repository.update(dto.getId(), dto.getNcm(), dto.getDescricao());
+
+	LOG.info("ClassificacaoFiscal alterada com id " + dto.getId() + "");
     }
 
 }

@@ -45,7 +45,6 @@ public class CadastroPesquisaController {
     public Map<String, Object> execute(HttpServletRequest request) {
 	String name = request.getParameter("cadname") + "queryby";
 
-	System.out.println(name);
 	QueryBy<?> queryBy = beanFactory.getBean(name, QueryBy.class);
 
 	String columnName = getColumnName(request, queryBy);
