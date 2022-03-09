@@ -6,13 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.xfatur.repository.projections.cadastro.LinhaView;
-import com.xfatur.repository.queryby.QueryBy;
+import com.xfatur.repository.queryby.QueryByAbstract;
 import com.xfatur.service.produto.LinhaService;
 
 @Component(value = "linhaqueryby")
-public class LinhaQueryBy implements QueryBy<LinhaView> {
-
-    private static final String[] COLUMNS = new String[] { "id", "descricao", "tipo" };
+public class LinhaQueryBy extends QueryByAbstract<LinhaView> {
 
     @Autowired
     private LinhaService service;
@@ -27,11 +25,6 @@ public class LinhaQueryBy implements QueryBy<LinhaView> {
 	    return service.findByDescricao(search, pageable);
 	}
 	return Page.empty();
-    }
-
-    @Override
-    public String getColumnName(int index) {
-	return COLUMNS[index];
     }
 
 }

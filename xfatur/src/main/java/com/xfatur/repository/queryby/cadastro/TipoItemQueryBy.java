@@ -6,13 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.xfatur.repository.projections.cadastro.TipoItemView;
-import com.xfatur.repository.queryby.QueryBy;
+import com.xfatur.repository.queryby.QueryByAbstract;
 import com.xfatur.service.produto.TipoItemService;
 
 @Component(value = "tipoitemqueryby")
-public class TipoItemQueryBy implements QueryBy<TipoItemView> {
+public class TipoItemQueryBy extends QueryByAbstract<TipoItemView> {
 
-    private static final String[] COLUMNS = new String[] { "id", "codigo", "descricao" };
     @Autowired
     private TipoItemService service;
 
@@ -28,11 +27,6 @@ public class TipoItemQueryBy implements QueryBy<TipoItemView> {
 	    return service.findByDescricao(search, pageable);
 	}
 	return Page.empty();
-    }
-
-    @Override
-    public String getColumnName(int index) {
-	return COLUMNS[index];
     }
 
 }

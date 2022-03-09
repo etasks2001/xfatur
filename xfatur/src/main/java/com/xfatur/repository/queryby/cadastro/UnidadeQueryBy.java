@@ -6,13 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.xfatur.repository.projections.cadastro.UnidadeView;
-import com.xfatur.repository.queryby.QueryBy;
+import com.xfatur.repository.queryby.QueryByAbstract;
 import com.xfatur.service.produto.UnidadeService;
 
 @Component(value = "unidadequeryby")
-public class UnidadeQueryBy implements QueryBy<UnidadeView> {
-
-    private static final String[] COLUMNS = new String[] { "id", "descricao", "abreviacao" };
+public class UnidadeQueryBy extends QueryByAbstract<UnidadeView> {
 
     @Autowired
     private UnidadeService service;
@@ -31,11 +29,6 @@ public class UnidadeQueryBy implements QueryBy<UnidadeView> {
 	    return service.findByAbreviacao(search.toLowerCase(), pageable);
 	}
 	return Page.empty();
-    }
-
-    @Override
-    public String getColumnName(int index) {
-	return COLUMNS[index];
     }
 
 }

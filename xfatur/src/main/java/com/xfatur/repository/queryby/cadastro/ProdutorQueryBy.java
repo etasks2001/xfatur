@@ -6,13 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.xfatur.repository.projections.cadastro.ProdutorView;
-import com.xfatur.repository.queryby.QueryBy;
+import com.xfatur.repository.queryby.QueryByAbstract;
 import com.xfatur.service.produto.ProdutorService;
 
 @Component(value = "produtorqueryby")
-public class ProdutorQueryBy implements QueryBy<ProdutorView> {
+public class ProdutorQueryBy extends QueryByAbstract<ProdutorView> {
 
-    private static final String[] COLUMNS = new String[] { "id", "descricao" };
     @Autowired
     private ProdutorService service;
 
@@ -26,11 +25,6 @@ public class ProdutorQueryBy implements QueryBy<ProdutorView> {
 	    return service.findByDescricao(search, pageable);
 	}
 	return Page.empty();
-    }
-
-    @Override
-    public String getColumnName(int index) {
-	return COLUMNS[index];
     }
 
 }

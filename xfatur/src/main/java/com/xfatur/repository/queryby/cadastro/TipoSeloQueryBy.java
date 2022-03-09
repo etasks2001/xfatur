@@ -6,13 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.xfatur.repository.projections.cadastro.TipoSeloView;
-import com.xfatur.repository.queryby.QueryBy;
+import com.xfatur.repository.queryby.QueryByAbstract;
 import com.xfatur.service.produto.TipoSeloService;
 
 @Component(value = "tiposeloqueryby")
-public class TipoSeloQueryBy implements QueryBy<TipoSeloView> {
-
-    private static final String[] COLUMNS = new String[] { "id", "codigo", "descricao" };
+public class TipoSeloQueryBy extends QueryByAbstract<TipoSeloView> {
 
     @Autowired
     private TipoSeloService service;
@@ -27,11 +25,6 @@ public class TipoSeloQueryBy implements QueryBy<TipoSeloView> {
 	    return service.findByDescricao(search, pageable);
 	}
 	return Page.empty();
-    }
-
-    @Override
-    public String getColumnName(int index) {
-	return COLUMNS[index];
     }
 
 }

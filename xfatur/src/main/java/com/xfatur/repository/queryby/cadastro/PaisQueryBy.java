@@ -6,13 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.xfatur.repository.projections.cadastro.PaisView;
-import com.xfatur.repository.queryby.QueryBy;
+import com.xfatur.repository.queryby.QueryByAbstract;
 import com.xfatur.service.produto.PaisService;
 
 @Component(value = "paisqueryby")
-public class PaisQueryBy implements QueryBy<PaisView> {
-
-    private static final String[] COLUMNS = new String[] { "id", "nome", "sigla", "origem", "codigoBacen" };
+public class PaisQueryBy extends QueryByAbstract<PaisView> {
 
     @Autowired
     private PaisService service;
@@ -27,11 +25,6 @@ public class PaisQueryBy implements QueryBy<PaisView> {
 	    return service.findByNome(search, pageable);
 	}
 	return Page.empty();
-    }
-
-    @Override
-    public String getColumnName(int index) {
-	return COLUMNS[index];
     }
 
 }

@@ -6,13 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.xfatur.repository.projections.cadastro.OrigemView;
-import com.xfatur.repository.queryby.QueryBy;
+import com.xfatur.repository.queryby.QueryByAbstract;
 import com.xfatur.service.produto.OrigemService;
 
 @Component(value = "origemqueryby")
-public class OrigemQueryBy implements QueryBy<OrigemView> {
-
-    private static final String[] COLUMNS = new String[] { "id", "codigo", "descricao" };
+public class OrigemQueryBy extends QueryByAbstract<OrigemView> {
 
     @Autowired
     private OrigemService service;
@@ -27,11 +25,6 @@ public class OrigemQueryBy implements QueryBy<OrigemView> {
 	    return service.findByNome(search, pageable);
 	}
 	return Page.empty();
-    }
-
-    @Override
-    public String getColumnName(int index) {
-	return COLUMNS[index];
     }
 
 }
