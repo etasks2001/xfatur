@@ -16,11 +16,7 @@ public class ProdutorQueryBy extends QueryByAbstract<ProdutorView> {
     private ProdutorService service;
 
     @Override
-    public Page<ProdutorView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<ProdutorView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("descricao")) {
 	    return service.findByDescricao(search, pageable);
 	}

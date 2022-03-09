@@ -4,6 +4,8 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public abstract class QueryByAbstract<T> implements QueryBy<T> {
 
@@ -19,5 +21,17 @@ public abstract class QueryByAbstract<T> implements QueryBy<T> {
 
 	return split[index];
     }
+
+    @Override
+    public Page<T> execute(String search, Pageable pageable, String column) {
+
+	if (search.trim().length() == 0) {
+	    return Page.empty();
+	}
+
+	return executeOptions(search, pageable, column);
+    }
+
+    protected abstract Page<T> executeOptions(String search, Pageable pageable, String column);
 
 }

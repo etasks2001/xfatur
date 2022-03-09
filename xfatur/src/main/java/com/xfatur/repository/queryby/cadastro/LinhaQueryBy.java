@@ -16,14 +16,11 @@ public class LinhaQueryBy extends QueryByAbstract<LinhaView> {
     private LinhaService service;
 
     @Override
-    public Page<LinhaView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<LinhaView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("descricao")) {
 	    return service.findByDescricao(search, pageable);
 	}
+
 	return Page.empty();
     }
 

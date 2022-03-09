@@ -16,11 +16,7 @@ public class TipoItemQueryBy extends QueryByAbstract<TipoItemView> {
     private TipoItemService service;
 
     @Override
-    public Page<TipoItemView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-	System.out.println(column);
+    public Page<TipoItemView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("codigo")) {
 	    return service.findByCodigo(search, pageable);
 	} else if (column.equals("descricao")) {

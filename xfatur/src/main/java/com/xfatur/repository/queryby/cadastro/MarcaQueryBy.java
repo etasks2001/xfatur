@@ -16,11 +16,7 @@ public class MarcaQueryBy extends QueryByAbstract<MarcaView> {
     private MarcaService service;
 
     @Override
-    public Page<MarcaView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<MarcaView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("descricao")) {
 	    return service.findByDescricao(search, pageable);
 	}

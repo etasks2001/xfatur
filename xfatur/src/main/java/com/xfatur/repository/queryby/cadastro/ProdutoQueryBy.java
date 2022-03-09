@@ -16,11 +16,7 @@ public class ProdutoQueryBy extends QueryByAbstract<ProdutoView> {
     private ProdutoService service;
 
     @Override
-    public Page<ProdutoView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<ProdutoView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("descricao")) {
 	    return service.findByDescricao(search, pageable);
 	}

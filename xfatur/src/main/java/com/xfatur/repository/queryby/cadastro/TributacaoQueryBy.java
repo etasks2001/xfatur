@@ -16,11 +16,7 @@ public class TributacaoQueryBy extends QueryByAbstract<TributacaoView> {
     private TributacaoService service;
 
     @Override
-    public Page<TributacaoView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<TributacaoView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("descricao")) {
 	    return service.findByDescricao(search, pageable);
 	}

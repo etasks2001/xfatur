@@ -16,11 +16,7 @@ public class TipoValidadeQueryBy extends QueryByAbstract<TipoValidadeView> {
     private TipoValidadeService service;
 
     @Override
-    public Page<TipoValidadeView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<TipoValidadeView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("descricao")) {
 	    return service.findByDescricao(search, pageable);
 	}

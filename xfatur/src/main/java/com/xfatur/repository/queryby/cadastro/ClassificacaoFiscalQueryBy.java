@@ -16,12 +16,7 @@ public class ClassificacaoFiscalQueryBy extends QueryByAbstract<ClassificacaoFis
     private ClassificacaoFiscalService service;
 
     @Override
-    public Page<ClassificacaoFiscalView> execute(String search, Pageable pageable, String column) {
-
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<ClassificacaoFiscalView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("ncm")) {
 	    return service.findByNcm(search, pageable);
 	} else if (column.equals("descricao")) {

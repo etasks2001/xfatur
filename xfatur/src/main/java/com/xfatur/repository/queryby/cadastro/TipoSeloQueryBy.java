@@ -16,11 +16,7 @@ public class TipoSeloQueryBy extends QueryByAbstract<TipoSeloView> {
     private TipoSeloService service;
 
     @Override
-    public Page<TipoSeloView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<TipoSeloView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("descricao")) {
 	    return service.findByDescricao(search, pageable);
 	}

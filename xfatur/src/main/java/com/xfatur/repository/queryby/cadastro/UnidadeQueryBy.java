@@ -16,11 +16,7 @@ public class UnidadeQueryBy extends QueryByAbstract<UnidadeView> {
     private UnidadeService service;
 
     @Override
-    public Page<UnidadeView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<UnidadeView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("descricao")) {
 	    return service.findByDescricao(search, pageable);
 	}
@@ -28,6 +24,7 @@ public class UnidadeQueryBy extends QueryByAbstract<UnidadeView> {
 	if (column.equals("abreviacao")) {
 	    return service.findByAbreviacao(search.toLowerCase(), pageable);
 	}
+
 	return Page.empty();
     }
 

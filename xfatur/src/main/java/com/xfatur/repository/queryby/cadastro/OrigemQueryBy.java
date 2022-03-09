@@ -16,11 +16,7 @@ public class OrigemQueryBy extends QueryByAbstract<OrigemView> {
     private OrigemService service;
 
     @Override
-    public Page<OrigemView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<OrigemView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("descricao")) {
 	    return service.findByNome(search, pageable);
 	}

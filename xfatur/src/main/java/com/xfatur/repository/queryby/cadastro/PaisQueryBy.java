@@ -16,11 +16,7 @@ public class PaisQueryBy extends QueryByAbstract<PaisView> {
     private PaisService service;
 
     @Override
-    public Page<PaisView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<PaisView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("nome")) {
 	    return service.findByNome(search, pageable);
 	}

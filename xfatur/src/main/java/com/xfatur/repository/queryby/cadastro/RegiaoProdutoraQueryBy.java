@@ -16,11 +16,7 @@ public class RegiaoProdutoraQueryBy extends QueryByAbstract<RegiaoProdutoraView>
     private RegiaoProdutoraService service;
 
     @Override
-    public Page<RegiaoProdutoraView> execute(String search, Pageable pageable, String column) {
-	if (search.trim().length() == 0) {
-	    return Page.empty();
-	}
-
+    public Page<RegiaoProdutoraView> executeOptions(String search, Pageable pageable, String column) {
 	if (column.equals("descricao")) {
 	    return service.findByDescricao(search, pageable);
 	}
