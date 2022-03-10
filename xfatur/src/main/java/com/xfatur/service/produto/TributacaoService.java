@@ -24,8 +24,9 @@ public class TributacaoService {
     private ModelMapper mapper;
 
     @Transactional(readOnly = false)
-    public Tributacao save(TributacaoDTO tributacao) {
-	return repository.save(mapper.toModel(tributacao));
+    public TributacaoDTO save(TributacaoDTO tributacao) {
+	Tributacao saved = repository.save(mapper.toModel(tributacao));
+	return mapper.toDto(saved);
     }
 
     public Integer findIdByDescricao(String descricao) {
@@ -40,7 +41,6 @@ public class TributacaoService {
 	Optional<Tributacao> found = repository.findById(id);
 	if (found.isPresent()) {
 	    return mapper.toDto(found.get());
-
 	}
 	throw new TributacaoIdNotFoundException("Código da Tributação não encontrado");
     }

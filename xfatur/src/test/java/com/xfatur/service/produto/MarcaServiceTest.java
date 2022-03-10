@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.MarcaIdNotFoundException;
-import com.xfatur.model.produto.Marca;
 import com.xfatur.testutil.CreateModelTest;
 import com.xfatur.validation.dto.cadastro.MarcaDTO;
 
@@ -34,17 +33,17 @@ class MarcaServiceTest {
     // @Test
     @Order(2)
     void test_findByDescricao() {
-	List<Marca> marca = service.findByDescricao("A");
-
-	MatcherAssert.assertThat(marca.size(), Matchers.greaterThan(0));
+//	List<Marca> marca = service.findByDescricao("A");
+//
+//	MatcherAssert.assertThat(marca.size(), Matchers.greaterThan(0));
 
     }
 
     // @Test
     @Order(3)
     void test_findByDescricao_retorna_vazio() {
-	List<Marca> marca = service.findByDescricao("fdsafd");
-	MatcherAssert.assertThat(marca.size(), Matchers.is(0));
+//	List<Marca> marca = service.findByDescricao("fdsafd");
+//	MatcherAssert.assertThat(marca.size(), Matchers.is(0));
     }
 
     // @Test

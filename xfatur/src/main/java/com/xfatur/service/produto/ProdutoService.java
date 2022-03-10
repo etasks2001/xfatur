@@ -32,8 +32,9 @@ public class ProdutoService {
     private ModelMapper mapper;
 
     @Transactional(readOnly = false)
-    public Produto save(ProdutoDTO produto) {
-	return repository.save(mapper.toModel(produto));
+    public ProdutoDTO save(ProdutoDTO produto) {
+	Produto saved = repository.save(mapper.toModel(produto));
+	return mapper.toDto(saved);
     }
 
     @Transactional(readOnly = false)

@@ -34,8 +34,9 @@ public class ProdutorService {
     }
 
     @Transactional(readOnly = false)
-    public Produtor save(ProdutorDTO produtor) {
-	return repository.save(mapper.toModel(produtor));
+    public ProdutorDTO save(ProdutorDTO produtor) {
+	Produtor saved = repository.save(mapper.toModel(produtor));
+	return mapper.toDto(saved);
     }
 
     public ProdutorDTO findById(int id) {

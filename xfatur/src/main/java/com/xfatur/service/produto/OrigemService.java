@@ -36,8 +36,9 @@ public class OrigemService {
     }
 
     @Transactional(readOnly = false)
-    public Origem save(OrigemDTO origem) {
-	return repository.save(mapper.toModel(origem));
+    public OrigemDTO save(OrigemDTO origem) {
+	Origem saved = repository.save(mapper.toModel(origem));
+	return mapper.toDto(saved);
     }
 
     public OrigemDTO findById(int id) {

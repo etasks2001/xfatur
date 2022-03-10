@@ -33,8 +33,9 @@ public class LinhaService {
     }
 
     @Transactional(readOnly = false)
-    public Linha save(LinhaDTO linha) {
-	return repository.save(mapper.toModel(linha));
+    public LinhaDTO save(LinhaDTO linha) {
+	Linha saved = repository.save(mapper.toModel(linha));
+	return mapper.toDto(saved);
     }
 
     public LinhaDTO findById(int id) {

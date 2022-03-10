@@ -1,6 +1,5 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,9 @@ public class MarcaService {
     }
 
     @Transactional(readOnly = false)
-    public Marca save(MarcaDTO marca) {
-	return repository.save(mapper.toModel(marca));
+    public MarcaDTO save(MarcaDTO marca) {
+	Marca saved = repository.save(mapper.toModel(marca));
+	return mapper.toDto(saved);
     }
 
     public MarcaDTO findById(int id) {
@@ -45,10 +45,6 @@ public class MarcaService {
 	}
 
 	throw new MarcaIdNotFoundException("Código da Marca não encontrado");
-    }
-
-    public List<Marca> findByDescricao(String descricao) {
-	return repository.findByDescricao(descricao);
     }
 
     @Transactional

@@ -34,8 +34,9 @@ public class PaisService {
     }
 
     @Transactional(readOnly = false)
-    public Pais save(PaisDTO pais) {
-	return repository.save(mapper.toModel(pais));
+    public PaisDTO save(PaisDTO pais) {
+	Pais saved = repository.save(mapper.toModel(pais));
+	return mapper.toDto(saved);
     }
 
     public PaisDTO findById(int id) {

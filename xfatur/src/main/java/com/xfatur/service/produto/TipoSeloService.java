@@ -24,8 +24,9 @@ public class TipoSeloService {
     private ModelMapper mapper;
 
     @Transactional(readOnly = false)
-    public TipoSelo save(TipoSeloDTO tributacao) {
-	return repository.save(mapper.toModel(tributacao));
+    public TipoSeloDTO save(TipoSeloDTO tributacao) {
+	TipoSelo saved = repository.save(mapper.toModel(tributacao));
+	return mapper.toDto(saved);
     }
 
     public Integer findIdByDescricao(String descricao) {

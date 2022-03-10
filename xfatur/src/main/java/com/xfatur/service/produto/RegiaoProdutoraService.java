@@ -33,8 +33,9 @@ public class RegiaoProdutoraService {
     }
 
     @Transactional(readOnly = false)
-    public RegiaoProdutora save(RegiaoProdutoraDTO regiaoProdutora) {
-	return repository.save(mapper.toModel(regiaoProdutora));
+    public RegiaoProdutoraDTO save(RegiaoProdutoraDTO regiaoProdutora) {
+	RegiaoProdutora saved = repository.save(mapper.toModel(regiaoProdutora));
+	return mapper.toDto(saved);
     }
 
     public RegiaoProdutoraDTO findById(int id) {

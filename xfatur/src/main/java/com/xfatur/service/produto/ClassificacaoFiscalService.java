@@ -1,6 +1,5 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -35,12 +34,12 @@ public class ClassificacaoFiscalService implements Servico {
     }
 
     @Transactional(readOnly = false)
-    public ClassificacaoFiscal save(ClassificacaoFiscalDTO classificacaoFiscalDTO) {
+    public ClassificacaoFiscalDTO save(ClassificacaoFiscalDTO classificacaoFiscalDTO) {
 
-	ClassificacaoFiscal save = repository.save(mapper.toModel(classificacaoFiscalDTO));
+	ClassificacaoFiscal saved = repository.save(mapper.toModel(classificacaoFiscalDTO));
 
-	LOG.info("ClassificacaoFiscal incluída com id " + save.getId() + "");
-	return save;
+	LOG.info("ClassificacaoFiscal incluída com id " + saved.getId() + "");
+	return mapper.toDto(saved);
     }
 
     public Integer findIdByDescricao(String descricao) {
@@ -57,12 +56,6 @@ public class ClassificacaoFiscalService implements Servico {
 
     }
 
-    public List<ClassificacaoFiscal> findByDescricao(String descricao) {
-
-	return repository.findByDescricao(descricao);
-
-    }
-
     public Boolean hasDescricao(Integer id, String descricao) {
 	return repository.hasDescricao(id, descricao);
     }
@@ -70,10 +63,6 @@ public class ClassificacaoFiscalService implements Servico {
     public Boolean hasNcm(Integer id, String ncm) {
 
 	return repository.hasNcm(id, ncm);
-    }
-
-    public Page<ClassificacaoFiscal> findAll(Pageable pageable) {
-	return repository.findAll(pageable);
     }
 
     public Page<ClassificacaoFiscalView> findByDescricao(String search, Pageable pageable) {

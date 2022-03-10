@@ -1,6 +1,5 @@
 package com.xfatur.service.produto;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,9 @@ public class TipoItemService {
     private com.xfatur.repository.mappers.ModelMapper mapper;
 
     @Transactional(readOnly = false)
-    public TipoItem save(TipoItemDTO tributacao) {
-	return repository.save(mapper.toModel(tributacao));
+    public TipoItemDTO save(TipoItemDTO tributacao) {
+	TipoItem saved = repository.save(mapper.toModel(tributacao));
+	return mapper.toDto(saved);
     }
 
     public Integer findIdByDescricao(String descricao) {
@@ -45,10 +45,6 @@ public class TipoItemService {
 
 	}
 	throw new TipoIdNotFoundException("Código do Tipo do Item não encontrado");
-    }
-
-    public List<TipoItem> findByDescricao(String descricao) {
-	return repository.findByDescricao(descricao);
     }
 
     public Boolean hasDescricao(Integer id, String descricao) {

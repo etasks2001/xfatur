@@ -33,8 +33,9 @@ public class TipoValidadeService {
     }
 
     @Transactional(readOnly = false)
-    public TipoValidade save(TipoValidadeDTO regiaoProdutora) {
-	return repository.save(mapper.toModel(regiaoProdutora));
+    public TipoValidadeDTO save(TipoValidadeDTO regiaoProdutora) {
+	TipoValidade saved = repository.save(mapper.toModel(regiaoProdutora));
+	return mapper.toDto(saved);
     }
 
     public TipoValidadeDTO findById(int id) {

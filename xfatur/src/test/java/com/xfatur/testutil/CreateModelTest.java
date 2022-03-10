@@ -24,7 +24,6 @@ import com.xfatur.model.Representante;
 import com.xfatur.model.Selo;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.model.produto.Linha;
-import com.xfatur.model.produto.Marca;
 import com.xfatur.model.produto.Origem;
 import com.xfatur.model.test.EnderecoCobranca;
 import com.xfatur.repository.mappers.ModelMapper;
@@ -44,6 +43,8 @@ import com.xfatur.service.produto.TipoSeloService;
 import com.xfatur.service.produto.TipoValidadeService;
 import com.xfatur.service.produto.TributacaoService;
 import com.xfatur.service.produto.UnidadeService;
+import com.xfatur.validation.dto.cadastro.ClassificacaoFiscalDTO;
+import com.xfatur.validation.dto.cadastro.LinhaDTO;
 import com.xfatur.validation.dto.cadastro.MarcaDTO;
 import com.xfatur.validation.dto.cadastro.PaisDTO;
 import com.xfatur.validation.dto.cadastro.ProdutoDTO;
@@ -802,7 +803,7 @@ public class CreateModelTest {
 
 	if (id == null) {
 
-	    ClassificacaoFiscal saved = service.save(mapper.toDto(entity));
+	    ClassificacaoFiscalDTO saved = service.save(mapper.toDto(entity));
 	    id = saved.getId();
 	}
 	ids.add(id);
@@ -996,7 +997,7 @@ public class CreateModelTest {
     public static void createAndIds(MarcaService service, MarcaDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
-	    Marca saved = service.save(entity);
+	    MarcaDTO saved = service.save(entity);
 	    id = saved.getId();
 	}
 
@@ -1315,7 +1316,7 @@ public class CreateModelTest {
     public static void createAndIds(LinhaService service, Linha entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
-	    Linha saved = service.save(mapper.toDto(entity));
+	    LinhaDTO saved = service.save(mapper.toDto(entity));
 	    id = saved.getId();
 	}
 

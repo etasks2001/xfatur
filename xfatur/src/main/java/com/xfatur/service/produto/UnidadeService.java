@@ -37,8 +37,9 @@ public class UnidadeService {
     }
 
     @Transactional(readOnly = false)
-    public Unidade save(UnidadeDTO unidade) {
-	return repository.save(mapper.toModel(unidade));
+    public UnidadeDTO save(UnidadeDTO unidade) {
+	Unidade saved = repository.save(mapper.toModel(unidade));
+	return mapper.toDto(saved);
     }
 
     public void deleteById(Integer id) {

@@ -57,18 +57,18 @@ class ClassificacaoFiscalServiceTest {
     // @Test
     @Order(5)
     void test_findByDescricao() {
-	List<ClassificacaoFiscal> classificacoesFiscais = service.findByDescricao("O");
-
-	MatcherAssert.assertThat(classificacoesFiscais.size(), Matchers.greaterThan(0));
+//	List<ClassificacaoFiscal> classificacoesFiscais = service.findByDescricao("O");
+//
+//	MatcherAssert.assertThat(classificacoesFiscais.size(), Matchers.greaterThan(0));
 
     }
 
     // @Test
     @Order(6)
     void test_findByDescricao_size_0() {
-	List<ClassificacaoFiscal> list = service.findByDescricao("fdsafdaO");
-
-	MatcherAssert.assertThat(list.size(), Matchers.is(0));
+//	List<ClassificacaoFiscal> list = service.findByDescricao("fdsafdaO");
+//
+//	MatcherAssert.assertThat(list.size(), Matchers.is(0));
 
     }
 
