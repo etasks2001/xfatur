@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.xfatur.model.Destinatario;
 import com.xfatur.model.Emitente;
 import com.xfatur.model.Endereco;
@@ -22,11 +20,7 @@ import com.xfatur.model.Pessoa;
 import com.xfatur.model.RamoAtividade;
 import com.xfatur.model.Representante;
 import com.xfatur.model.Selo;
-import com.xfatur.model.produto.ClassificacaoFiscal;
-import com.xfatur.model.produto.Linha;
-import com.xfatur.model.produto.Origem;
 import com.xfatur.model.test.EnderecoCobranca;
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.NaturezaJuridicaService;
 import com.xfatur.service.RamoAtividadeService;
 import com.xfatur.service.RepresentanteService;
@@ -46,6 +40,7 @@ import com.xfatur.service.produto.UnidadeService;
 import com.xfatur.validation.dto.cadastro.ClassificacaoFiscalDTO;
 import com.xfatur.validation.dto.cadastro.LinhaDTO;
 import com.xfatur.validation.dto.cadastro.MarcaDTO;
+import com.xfatur.validation.dto.cadastro.OrigemDTO;
 import com.xfatur.validation.dto.cadastro.PaisDTO;
 import com.xfatur.validation.dto.cadastro.ProdutoDTO;
 import com.xfatur.validation.dto.cadastro.ProdutorDTO;
@@ -57,9 +52,6 @@ import com.xfatur.validation.dto.cadastro.TributacaoDTO;
 import com.xfatur.validation.dto.cadastro.UnidadeDTO;
 
 public class CreateModelTest {
-
-    @Autowired
-    private static ModelMapper mapper;
 
     public static Representante createRepresentante1() {
 
@@ -650,54 +642,54 @@ public class CreateModelTest {
 	return produtor;
     }
 
-    public static Stream<ClassificacaoFiscal> classificacaoFiscalList() {
+    public static Stream<ClassificacaoFiscalDTO> classificacaoFiscalList() {
 
 	return Stream.of(createClassificacaoFiscal1(), createClassificacaoFiscal2(), createClassificacaoFiscal3(), createClassificacaoFiscal4(), createClassificacaoFiscal5(),
 		createClassificacaoFiscal6());
     }
 
-    private static ClassificacaoFiscal createClassificacaoFiscal1() {
-	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+    private static ClassificacaoFiscalDTO createClassificacaoFiscal1() {
+	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
 	classificacaoFiscal.setNcm("12345678");
 	classificacaoFiscal.setDescricao("SORVETE DE MASSA");
 
 	return classificacaoFiscal;
     }
 
-    private static ClassificacaoFiscal createClassificacaoFiscal2() {
-	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+    private static ClassificacaoFiscalDTO createClassificacaoFiscal2() {
+	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
 	classificacaoFiscal.setNcm("45879314");
 	classificacaoFiscal.setDescricao("SORVETE DE COPO");
 
 	return classificacaoFiscal;
     }
 
-    private static ClassificacaoFiscal createClassificacaoFiscal3() {
-	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+    private static ClassificacaoFiscalDTO createClassificacaoFiscal3() {
+	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
 	classificacaoFiscal.setNcm("52975484");
 	classificacaoFiscal.setDescricao("SORVETE DE MASSA E COPO");
 
 	return classificacaoFiscal;
     }
 
-    private static ClassificacaoFiscal createClassificacaoFiscal4() {
-	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+    private static ClassificacaoFiscalDTO createClassificacaoFiscal4() {
+	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
 	classificacaoFiscal.setNcm("15975344");
 	classificacaoFiscal.setDescricao("SORVETE DE PALITO");
 
 	return classificacaoFiscal;
     }
 
-    private static ClassificacaoFiscal createClassificacaoFiscal5() {
-	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+    private static ClassificacaoFiscalDTO createClassificacaoFiscal5() {
+	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
 	classificacaoFiscal.setNcm("55487974");
 	classificacaoFiscal.setDescricao("COLHER DE MADEIRA");
 
 	return classificacaoFiscal;
     }
 
-    private static ClassificacaoFiscal createClassificacaoFiscal6() {
-	ClassificacaoFiscal classificacaoFiscal = new ClassificacaoFiscal();
+    private static ClassificacaoFiscalDTO createClassificacaoFiscal6() {
+	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
 	classificacaoFiscal.setNcm("14534564");
 	classificacaoFiscal.setDescricao("COPO DE PLASTICO");
 
@@ -798,12 +790,12 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static void createAndIds(ClassificacaoFiscalService service, ClassificacaoFiscal entity, List<Integer> ids) {
+    public static void createAndIds(ClassificacaoFiscalService service, ClassificacaoFiscalDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 
 	if (id == null) {
 
-	    ClassificacaoFiscalDTO saved = service.save(mapper.toDto(entity));
+	    ClassificacaoFiscalDTO saved = service.save(entity);
 	    id = saved.getId();
 	}
 	ids.add(id);
@@ -1004,13 +996,13 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<Origem> origemList() {
+    public static Stream<OrigemDTO> origemList() {
 
 	return Stream.of(createOrigem1(), createOrigem2(), createOrigem3(), createOrigem4(), createOrigem5());
     }
 
-    private static Origem createOrigem1() {
-	Origem origem = new Origem();
+    private static OrigemDTO createOrigem1() {
+	OrigemDTO origem = new OrigemDTO();
 	origem.setId(0);
 	origem.setCodigo("0");
 	origem.setDescricao("NACIONAL");
@@ -1018,8 +1010,8 @@ public class CreateModelTest {
 	return origem;
     }
 
-    private static Origem createOrigem2() {
-	Origem origem = new Origem();
+    private static OrigemDTO createOrigem2() {
+	OrigemDTO origem = new OrigemDTO();
 	origem.setId(1);
 	origem.setCodigo("1");
 	origem.setDescricao("ESTRANGEIRA-IMPORT. DIRETA");
@@ -1027,8 +1019,8 @@ public class CreateModelTest {
 	return origem;
     }
 
-    private static Origem createOrigem3() {
-	Origem origem = new Origem();
+    private static OrigemDTO createOrigem3() {
+	OrigemDTO origem = new OrigemDTO();
 	origem.setId(2);
 	origem.setCodigo("2");
 	origem.setDescricao("ESTRANGEIRA-ADQ.MERCADO INTERNO");
@@ -1036,8 +1028,8 @@ public class CreateModelTest {
 	return origem;
     }
 
-    private static Origem createOrigem4() {
-	Origem origem = new Origem();
+    private static OrigemDTO createOrigem4() {
+	OrigemDTO origem = new OrigemDTO();
 	origem.setId(6);
 	origem.setCodigo("3");
 
@@ -1046,8 +1038,8 @@ public class CreateModelTest {
 	return origem;
     }
 
-    private static Origem createOrigem5() {
-	Origem origem = new Origem();
+    private static OrigemDTO createOrigem5() {
+	OrigemDTO origem = new OrigemDTO();
 	origem.setCodigo("5");
 	origem.setId(7);
 	origem.setDescricao("(LISTA CAMEX) ESTRANGEIRA-ADQ.MERCADO INTERNO");
@@ -1055,10 +1047,10 @@ public class CreateModelTest {
 	return origem;
     }
 
-    public static void createAndIds(OrigemService service, Origem entity, List<Integer> ids) {
+    public static void createAndIds(OrigemService service, OrigemDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
-	    id = service.save(mapper.toDto(entity)).getId();
+	    id = service.save(entity).getId();
 
 	}
 
@@ -1269,54 +1261,54 @@ public class CreateModelTest {
 	return pais;
     }
 
-    public static Stream<Linha> linhaList() {
+    public static Stream<LinhaDTO> linhaList() {
 	return Stream.of(createLinha1(), createLinha2(), createLinha3(), createLinha4(), createLinha5());
     }
 
-    private static Linha createLinha1() {
-	Linha linha = new Linha();
+    private static LinhaDTO createLinha1() {
+	LinhaDTO linha = new LinhaDTO();
 	linha.setDescricao("AMENDOIN");
 	linha.setOrdem(1);
 	linha.setTipo("COM");
 	return linha;
     }
 
-    private static Linha createLinha2() {
-	Linha linha = new Linha();
+    private static LinhaDTO createLinha2() {
+	LinhaDTO linha = new LinhaDTO();
 	linha.setDescricao("ARROZ");
 	linha.setOrdem(2);
 	linha.setTipo("ALI");
 	return linha;
     }
 
-    private static Linha createLinha3() {
-	Linha linha = new Linha();
+    private static LinhaDTO createLinha3() {
+	LinhaDTO linha = new LinhaDTO();
 	linha.setDescricao("NOS MOSCADA");
 	linha.setOrdem(3);
 	linha.setTipo("CER");
 	return linha;
     }
 
-    private static Linha createLinha4() {
-	Linha linha = new Linha();
+    private static LinhaDTO createLinha4() {
+	LinhaDTO linha = new LinhaDTO();
 	linha.setDescricao("GELEIA");
 	linha.setOrdem(4);
 	linha.setTipo("GEL");
 	return linha;
     }
 
-    private static Linha createLinha5() {
-	Linha linha = new Linha();
+    private static LinhaDTO createLinha5() {
+	LinhaDTO linha = new LinhaDTO();
 	linha.setDescricao("ALCOOL");
 	linha.setOrdem(5);
 	linha.setTipo("LIM");
 	return linha;
     }
 
-    public static void createAndIds(LinhaService service, Linha entity, List<Integer> ids) {
+    public static void createAndIds(LinhaService service, LinhaDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
 	if (id == null) {
-	    LinhaDTO saved = service.save(mapper.toDto(entity));
+	    LinhaDTO saved = service.save(entity);
 	    id = saved.getId();
 	}
 

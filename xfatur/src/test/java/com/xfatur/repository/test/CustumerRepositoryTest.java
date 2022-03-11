@@ -1,7 +1,5 @@
 package com.xfatur.repository.test;
 
-import java.util.Set;
-
 import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +13,7 @@ import com.xfatur.model.test.PhoneNumber;
 class CustumerRepositoryTest {
 
     @Autowired
-    CustomerRepository repository;
+//    CustomerRepository repository;
 
     // //@Test
     @Order(1)
@@ -34,7 +32,7 @@ class CustumerRepositoryTest {
 	customer.addPhoneNumber(phoneNumber1);
 	customer.addPhoneNumber(phoneNumber2);
 
-	repository.save(customer);
+//	repository.save(customer);
     }
 
     // //@Test
@@ -42,12 +40,12 @@ class CustumerRepositoryTest {
     @Order(2)
     void test_load_customer() {
 	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-	Customer customer = repository.findById(1).get();
+//	Customer customer = repository.findById(1).get();
 	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-	System.out.println(customer.getName());
+//	System.out.println(customer.getName());
 
-	Set<PhoneNumber> phoneNumbers = customer.getPhoneNumbers();
-	phoneNumbers.forEach(phoneNumber -> System.out.println(phoneNumber.getNumber()));
+//	Set<PhoneNumber> phoneNumbers = customer.getPhoneNumbers();
+//	phoneNumbers.forEach(phoneNumber -> System.out.println(phoneNumber.getNumber()));
 	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 
@@ -56,32 +54,32 @@ class CustumerRepositoryTest {
     @Order(3)
     void test_update_customer() {
 	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-	Customer customer = repository.findById(1).get();
-	customer.setName("Heitor Augusto");
+//	Customer customer = repository.findById(1).get();
+//	customer.setName("Heitor Augusto");
 	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-	Set<PhoneNumber> phoneNumbers = customer.getPhoneNumbers();
+//	Set<PhoneNumber> phoneNumbers = customer.getPhoneNumbers();
 
-	phoneNumbers.forEach(pn -> {
-	    if (pn.getId() == 1) {
-		pn.setNumber("55 11 3333-4444");
-		pn.setType("cell");
-	    } else if (pn.getId() == 2) {
-		pn.setNumber("55 11 6666-9999");
-		pn.setType("school");
-	    }
-	});
-	if (phoneNumbers.size() == 0) {
-	    PhoneNumber phoneNumber = new PhoneNumber();
-	    phoneNumber.setNumber("55 11 3333-4444");
-	    phoneNumber.setType("cell");
-
-	    customer.addPhoneNumber(phoneNumber);
-
-	}
-	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-	repository.save(customer);
-	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//	phoneNumbers.forEach(pn -> {
+//	    if (pn.getId() == 1) {
+//		pn.setNumber("55 11 3333-4444");
+//		pn.setType("cell");
+//	    } else if (pn.getId() == 2) {
+//		pn.setNumber("55 11 6666-9999");
+//		pn.setType("school");
+//	    }
+//	});
+//	if (phoneNumbers.size() == 0) {
+//	    PhoneNumber phoneNumber = new PhoneNumber();
+//	    phoneNumber.setNumber("55 11 3333-4444");
+//	    phoneNumber.setType("cell");
+//
+//	    customer.addPhoneNumber(phoneNumber);
+//
+//	}
+//	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//	repository.save(customer);
+//	System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
 //
 //	//@Test

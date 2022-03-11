@@ -1,12 +1,9 @@
 package com.xfatur.model.test;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
+//@Entity
 public class BankAccount {
 
-    @Id
+//    @Id
     private Integer accno;
     private String lastname;
     private String firstname;

@@ -47,7 +47,7 @@ class LicenseRepositoryTest {
 
 //	license.setPerson(person);
 
-	personRepository.save(person);
+//	personRepository.save(person);
     }
 
     // @Test
@@ -59,29 +59,29 @@ class LicenseRepositoryTest {
 	person.setLast_name("Telles");
 	person.setAge(35);
 
-	Person saved = personRepository.save(person);
+//	Person saved = personRepository.save(person);
 
 	License license = new License();
 	license.setType("BUSS");
 	license.setValid_from(new Date());
 	license.setValid_to(new Date());
-	saved.setLicense(license);
-
-	personRepository.save(saved);
+//	saved.setLicense(license);
+//
+//	personRepository.save(saved);
 
     }
 
     // @Test
     @Order(3)
     void test_update() {
-	Person person = personRepository.findById(1).get();
+//	Person person = personRepository.findById(1).get();
 
-	License license = person.getLicense();
-	license.setType("BUSSsssss");
-	license.setValid_from(new Date());
-	license.setValid_to(new Date());
-	license.setPerson(person);
-
-	licenseRepository.save(license);
+//	License license = person.getLicense();
+//	license.setType("BUSSsssss");
+//	license.setValid_from(new Date());
+//	license.setValid_to(new Date());
+//	license.setPerson(person);
+//
+//	licenseRepository.save(license);
     }
 }
