@@ -1,31 +1,29 @@
-2022-03-11 16:15:37,010 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 6.2.2.Final
-2022-03-11 16:15:37,050 INFO o.s.b.StartupInfoLogger [main] Starting ListaServiceTest using Java 1.8.0_221 on mauro-PC with PID 5620 (started by mauro in C:\Users\mauro\git\xfatur\xfatur)
-2022-03-11 16:15:37,060 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.6.4, Spring v5.3.16
-2022-03-11 16:15:37,060 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "dev"
-2022-03-11 16:15:38,030 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-03-11 16:15:38,171 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 126 ms. Found 25 JPA repository interfaces.
-2022-03-11 16:15:38,951 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
-2022-03-11 16:15:38,961 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
-2022-03-11 16:15:38,961 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
-2022-03-11 16:15:38,961 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.58]
-2022-03-11 16:15:39,051 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
-2022-03-11 16:15:39,051 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1711 ms
-2022-03-11 16:15:39,282 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-03-11 16:15:39,332 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 5.6.5.Final
-2022-03-11 16:15:39,492 INFO o.h.a.c.r.j.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2022-03-11 16:15:39,602 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
-2022-03-11 16:15:39,702 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
-2022-03-11 16:15:39,732 INFO o.h.d.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
-2022-03-11 16:15:40,782 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-03-11 16:15:40,873 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-03-11 16:15:43,183 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
-2022-03-11 16:15:43,203 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
-2022-03-11 16:15:43,214 INFO o.s.b.StartupInfoLogger [main] Started ListaServiceTest in 6.534 seconds (JVM running for 7.715)
-2022-03-11 16:15:43,604 WARN o.h.e.j.s.SqlExceptionHelper [main] SQL Error: 0, SQLState: 23503
-2022-03-11 16:15:43,604 ERROR o.h.e.j.s.SqlExceptionHelper [main] ERROR: insert or update on table "listaprecoitem" violates foreign key constraint "listaprecoitem_produto_id_fkey"
-  Detalhe: Key (produto_id)=(1) is not present in table "produto".
-2022-03-11 16:15:43,624 INFO o.s.t.c.t.TransactionContext [main] Began transaction (1) for test context [DefaultTestContext@d80cf6 testClass = ListaServiceTest, testInstance = com.xfatur.service.preco.ListaServiceTest@212f46, testMethod = test_findById@ListaServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@29fe84 testClass = ListaServiceTest, locations = '{}', classes = '{class com.xfatur.XFaturApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1204a1a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@145ca0e, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@fc5f04, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@1c7df28, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@f43c82, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@19d02cb], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c3689b]; rollback [true]
-2022-03-11 16:15:43,624 INFO o.s.t.c.t.TransactionContext [main] Rolled back transaction for test: [DefaultTestContext@d80cf6 testClass = ListaServiceTest, testInstance = com.xfatur.service.preco.ListaServiceTest@212f46, testMethod = test_findById@ListaServiceTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@29fe84 testClass = ListaServiceTest, locations = '{}', classes = '{class com.xfatur.XFaturApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1204a1a, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@145ca0e, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@fc5f04, org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@1c7df28, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@f43c82, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@19d02cb], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> false, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
-2022-03-11 16:15:43,704 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-03-11 16:15:43,704 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2022-03-11 16:15:43,714 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2022-03-12 19:57:44,285 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 6.2.2.Final
+2022-03-12 19:57:44,363 INFO o.s.b.StartupInfoLogger [restartedMain] Starting XFaturApplication using Java 1.8.0_211 on home-PC with PID 4256 (C:\Users\home\git\xfatur\xfatur\target\classes started by home in C:\Users\home\git\xfatur\xfatur)
+2022-03-12 19:57:44,363 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v2.6.4, Spring v5.3.16
+2022-03-12 19:57:44,363 INFO o.s.b.SpringApplication [restartedMain] The following 1 profile is active: "dev"
+2022-03-12 19:57:44,753 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-03-12 19:57:44,753 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-03-12 19:57:45,829 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-03-12 19:57:46,033 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 188 ms. Found 25 JPA repository interfaces.
+2022-03-12 19:57:47,219 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2022-03-12 19:57:47,234 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2022-03-12 19:57:47,234 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2022-03-12 19:57:47,234 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.58]
+2022-03-12 19:57:47,391 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2022-03-12 19:57:47,391 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2638 ms
+2022-03-12 19:57:47,641 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-03-12 19:57:47,703 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 5.6.5.Final
+2022-03-12 19:57:47,953 INFO o.h.a.c.r.j.JavaReflectionManager [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-03-12 19:57:48,109 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2022-03-12 19:57:48,249 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2022-03-12 19:57:48,297 INFO o.h.d.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL94Dialect
+2022-03-12 19:57:49,826 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-03-12 19:57:49,841 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-03-12 19:57:52,872 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2022-03-12 19:57:52,887 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2022-03-12 19:57:52,920 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2022-03-12 19:57:52,920 INFO o.s.b.StartupInfoLogger [restartedMain] Started XFaturApplication in 9.281 seconds (JVM running for 10.324)
+2022-03-12 19:59:41,046 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-12 19:59:41,046 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2022-03-12 19:59:41,052 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 6 ms
