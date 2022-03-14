@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @GetMapping
-    public String index() {
+    public String index() throws Exception {
+
 	return "home";
     }
 
