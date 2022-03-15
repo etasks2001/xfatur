@@ -29,7 +29,7 @@ import com.xfatur.model.produto.Produto;
 import com.xfatur.service.produto.ProdutoService;
 import com.xfatur.testutil.UtilCreateProduto;
 
-@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(value = Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 class ListaServiceTest {
