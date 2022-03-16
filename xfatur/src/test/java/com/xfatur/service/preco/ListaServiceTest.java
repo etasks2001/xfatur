@@ -20,6 +20,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xfatur.exception.ListaPrecoIdNotFoundException;
@@ -57,6 +59,8 @@ class ListaServiceTest {
 
     @Test
     @Order(1)
+    @Sql({ "classpath:produtor.sql" })
+    @Sql(value = { "classpath:produtor-clean.sql" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
     void test_save() {
 	Lista listaPreco = new Lista();
 

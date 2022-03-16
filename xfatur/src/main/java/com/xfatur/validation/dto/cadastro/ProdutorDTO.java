@@ -33,4 +33,9 @@ public class ProdutorDTO implements DTO {
 	this.id = id;
     }
 
+    @Override
+    public String toString() {
+	return "ProdutorDTO [id=" + id + ", descricao=" + descricao + "]";
+    }
+
 }

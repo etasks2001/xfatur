@@ -588,9 +588,9 @@ public class CreateModelTest {
 	return produto;
     }
 
-    public static Stream<ProdutorDTO> produtorList() {
-	return Stream.of(createProdutor1(), createProdutor2(), createProdutor3());
-    }
+//    public static Stream<ProdutorDTO> produtorList() {
+//	return Stream.of(createProdutor1(), createProdutor2(), createProdutor3());
+//    }
 
     public static Stream<UnidadeDTO> unidadeList() {
 	return Stream.of(createUnidade1(), createUnidade2(), createUnidade3(), createUnidade4());
@@ -624,23 +624,23 @@ public class CreateModelTest {
 	return unidade;
     }
 
-    public static ProdutorDTO createProdutor1() {
-	ProdutorDTO produtor = new ProdutorDTO();
-	produtor.setDescricao("CERVEJARIA DO SUL");
-	return produtor;
-    }
-
-    public static ProdutorDTO createProdutor2() {
-	ProdutorDTO produtor = new ProdutorDTO();
-	produtor.setDescricao("TOMATES DO JAPÃO");
-	return produtor;
-    }
-
-    public static ProdutorDTO createProdutor3() {
-	ProdutorDTO produtor = new ProdutorDTO();
-	produtor.setDescricao("PESSEGOS DA ITALIA");
-	return produtor;
-    }
+//    public static ProdutorDTO createProdutor1() {
+//	ProdutorDTO produtor = new ProdutorDTO();
+//	produtor.setDescricao("CERVEJARIA DO SUL");
+//	return produtor;
+//    }
+//
+//    public static ProdutorDTO createProdutor2() {
+//	ProdutorDTO produtor = new ProdutorDTO();
+//	produtor.setDescricao("TOMATES DO JAPÃO");
+//	return produtor;
+//    }
+//
+//    public static ProdutorDTO createProdutor3() {
+//	ProdutorDTO produtor = new ProdutorDTO();
+//	produtor.setDescricao("PESSEGOS DA ITALIA");
+//	return produtor;
+//    }
 
     public static Stream<ClassificacaoFiscalDTO> classificacaoFiscalList() {
 
@@ -811,14 +811,11 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static void createAndIds(ProdutorService service, ProdutorDTO entity, List<Integer> ids) {
-	Integer id = service.findByIdDescricao(entity.getDescricao());
-	if (id == null) {
-	    id = service.save(entity).getId();
-
+    public static void createAndIds(ProdutorService service, List<Integer> ids) {
+	List<ProdutorDTO> all = service.findAll();
+	for (ProdutorDTO produtorDTO : all) {
+	    ids.add(produtorDTO.getId());
 	}
-
-	ids.add(id);
     }
 
     public static void createAndIds(UnidadeService service, UnidadeDTO entity, List<Integer> ids) {

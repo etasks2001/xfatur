@@ -2,6 +2,7 @@ package com.xfatur.service.produto;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -63,6 +64,16 @@ public class ProdutorService {
 
     public List<ProdutorView> buscaTodosPorIdDescricao() {
 	return repository.buscaTodosPorIdDescricao();
+    }
+
+    public List<ProdutorDTO> findAll() {
+	List<Produtor> all = repository.findAll();
+	System.out.println(all.size());
+
+	List<ProdutorDTO> collect = all.stream().map(model -> mapper.toDto(model)).collect(Collectors.toList());
+	System.out.println(collect.get(0));
+
+	return collect;
     }
 
 }
