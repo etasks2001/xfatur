@@ -29,6 +29,7 @@ import com.xfatur.model.produto.Produto;
 import com.xfatur.service.produto.ProdutoService;
 import com.xfatur.testutil.UtilCreateProduto;
 
+//@Sql(scripts = "classpath:chema-test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(value = Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
@@ -57,9 +58,6 @@ class ListaServiceTest {
     @Test
     @Order(1)
     void test_save() {
-	System.out.println("==============================================================================================");
-	System.out.println("Início dos testes Lista de preço");
-	System.out.println("----------------------------------------------------------------------------------------------");
 	Lista listaPreco = new Lista();
 
 	listaPreco.setCodigo("001/1");
@@ -160,18 +158,9 @@ class ListaServiceTest {
     @AfterAll
     void delete() {
 
-	System.out.println("==============================================================================================");
-	System.out.println("Início da exclusão da lista de preco");
-	System.out.println("----------------------------------------------------------------------------------------------");
 	idsLista.forEach(id -> listaService.deleteById(id));
-	System.out.println("----------------------------------------------------------------------------------------------");
-	System.out.println("Fim da exclusão da lista de preco");
-	System.out.println("==============================================================================================");
 
 //	utilCreateProduto.clear();
-	System.out.println("----------------------------------------------------------------------------------------------");
-	System.out.println("Fim dos testes Lista de preço");
-	System.out.println("==============================================================================================");
 
     }
 }
