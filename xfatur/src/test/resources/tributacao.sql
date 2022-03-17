@@ -1,0 +1,11 @@
+insert into tributacao (codigo, descricao) values ('00','TRIBUTADA INTEGRALMENTE');
+insert into tributacao (codigo, descricao) values ('10','TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA');
+insert into tributacao (codigo, descricao) values ('20','COM REDUÇÃO DE BASE DE CÁLCULO');
+insert into tributacao (codigo, descricao) values ('30','ISENTA OU NÃO TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA');
+insert into tributacao (codigo, descricao) values ('40','ISENTA');
+insert into tributacao (codigo, descricao) values ('41','NÃO TRIBUTADA');
+insert into tributacao (codigo, descricao) values ('50','SUSPENSÃO');
+insert into tributacao (codigo, descricao) values ('51','DIFERIMENTO');
+insert into tributacao (codigo, descricao) values ('60','ICMS COBRADO ANTERIORMENTE POR SUBSTITUIÇÃO TRIBUTÁRIA');
+insert into tributacao (codigo, descricao) values ('70','COM REDUÇÃO DE BASE DE CÁLCULO E COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA');
+insert into tributacao (codigo, descricao) values ('90','OUTRAS');

@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.repository.mappers.ModelMapper;
-import com.xfatur.testutil.CreateModelTest;
 
 //@SpringBootTest
 ////@TestInstance(Lifecycle.PER_CLASS)
@@ -31,7 +30,7 @@ class ClassificacaoFiscalServiceTest {
     // @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.classificacaoFiscalList().forEach(entiry -> CreateModelTest.createAndIds(service, entiry, ids));
+//	CreateModelTest.classificacaoFiscalList().forEach(entiry -> CreateModelTest.createAndIds(service, entiry, ids));
     }
 
     // @Test

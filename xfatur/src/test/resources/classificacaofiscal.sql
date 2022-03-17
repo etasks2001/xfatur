@@ -1,0 +1,6 @@
+insert into classificacaofiscal(ncm,descricao) values ('12345678','SORVETE DE MASSA')
+insert into classificacaofiscal(ncm,descricao) values ('45879314','SORVETE DE COPO')
+insert into classificacaofiscal(ncm,descricao) values ('52975484','SORVETE DE MASSA E COPO')
+insert into classificacaofiscal(ncm,descricao) values ('15975344','SORVETE DE PALITO')
+insert into classificacaofiscal(ncm,descricao) values ('55487974','COLHER DE MADEIRA')
+insert into classificacaofiscal(ncm,descricao) values ('14534564','COPO DE PLASTICO')

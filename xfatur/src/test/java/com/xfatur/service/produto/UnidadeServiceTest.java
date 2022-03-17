@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.UnidadeIdNotFoundException;
-import com.xfatur.testutil.CreateModelTest;
 import com.xfatur.validation.dto.cadastro.UnidadeDTO;
 
 //@SpringBootTest
@@ -29,7 +28,7 @@ class UnidadeServiceTest {
     // @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.unidadeList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
+//	CreateModelTest.unidadeList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
     // @Test

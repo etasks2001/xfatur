@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.MarcaIdNotFoundException;
-import com.xfatur.testutil.CreateModelTest;
 import com.xfatur.validation.dto.cadastro.MarcaDTO;
 
 //@SpringBootTest
@@ -27,7 +26,7 @@ class MarcaServiceTest {
     // @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.marcaList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
+//	CreateModelTest.marcaList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
     // @Test

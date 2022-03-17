@@ -33,7 +33,7 @@ class ProdutoServiceTest {
 
     @BeforeAll
     void insert() {
-	idsProduto = utilCreateProduto.idsProduto();
+//	idsProduto = utilCreateProduto.idsProduto();
 
     }
 
@@ -234,6 +234,6 @@ class ProdutoServiceTest {
 
     @AfterAll
     void delete() {
-	utilCreateProduto.clear();
+//	utilCreateProduto.clear();
     }
 }

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.xfatur.testutil.CreateModelTest;
 import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
 
 //@SpringBootTest
@@ -23,7 +22,7 @@ class TipoSeloServiceTest {
     // @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.tipoSeloList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
+//	CreateModelTest.tipoSeloList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
     // @Test

@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.TributacaoIdNotFoundException;
-import com.xfatur.testutil.CreateModelTest;
 import com.xfatur.validation.dto.cadastro.TributacaoDTO;
 
 //@SpringBootTest
@@ -27,7 +26,7 @@ class TributacaoServiceTest {
     // @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.tributacaoList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
+//	CreateModelTest.tributacaoList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
     // @Test

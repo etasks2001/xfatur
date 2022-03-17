@@ -37,7 +37,7 @@ class SeloServiceTest {
 
     @BeforeAll
     void insert_produto() {
-	idsProduto = utilCreateProduto.idsProduto();
+//	idsProduto = utilCreateProduto.idsProduto();
     }
 
     // @Test
@@ -128,7 +128,7 @@ class SeloServiceTest {
     @AfterAll
     void delete() {
 	idsSelo.forEach(id -> seloService.deleteById(id));
-	utilCreateProduto.clear();
+//	utilCreateProduto.clear();
     }
 
 }

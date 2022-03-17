@@ -1,0 +1,12 @@
+insert into tipoitem (codigo, descricao) values ('00','MERCADORIA PARA REVENDA');
+insert into tipoitem (codigo, descricao) values ('01','MATÉRIA-PRIMA');
+insert into tipoitem (codigo, descricao) values ('02','EMBALAGEM');
+insert into tipoitem (codigo, descricao) values ('03','PRODUTO EM PROCESSO');
+insert into tipoitem (codigo, descricao) values ('04','PRODUTO ACABADO');
+insert into tipoitem (codigo, descricao) values ('05','SUBPRODUTO');
+insert into tipoitem (codigo, descricao) values ('06','PRODUTO INTERMEDIÁRIO');
+insert into tipoitem (codigo, descricao) values ('07','MATERIAL DE USO E CONSUMO');
+insert into tipoitem (codigo, descricao) values ('08','ATIVO IMOBILIZADO');
+insert into tipoitem (codigo, descricao) values ('09','SERVIÇOS');
+insert into tipoitem (codigo, descricao) values ('10','OUTROS INSUMOS');
+insert into tipoitem (codigo, descricao) values ('99','OUTRAS');

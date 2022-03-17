@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.TipoIdNotFoundException;
-import com.xfatur.testutil.CreateModelTest;
 import com.xfatur.validation.dto.cadastro.TipoItemDTO;
 
 //@SpringBootTest
@@ -27,7 +26,7 @@ class TipoServiceTest {
     // @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.tipoList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
+//	CreateModelTest.tipoList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
     // @Test

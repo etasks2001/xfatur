@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.OrigemIdNotFoundException;
-import com.xfatur.testutil.CreateModelTest;
 import com.xfatur.validation.dto.cadastro.OrigemDTO;
 
 //@SpringBootTest
@@ -27,7 +26,7 @@ class OrigemServiceTest {
     // @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.origemList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
+//	CreateModelTest.origemList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
     // @Test

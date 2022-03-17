@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.PaisIdNotFoundException;
-import com.xfatur.testutil.CreateModelTest;
 import com.xfatur.validation.dto.cadastro.PaisDTO;
 
 //@SpringBootTest
@@ -27,7 +26,7 @@ class PaisServiceTest {
     // @Test
     @Order(1)
     void test_save() {
-	CreateModelTest.paisList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
+//	CreateModelTest.paisList().forEach(entity -> CreateModelTest.createAndIds(service, entity, ids));
     }
 
     // @Test

@@ -38,7 +38,7 @@ class EstoqueMensalServiceTest {
 
     @BeforeAll
     void insert_produto() {
-	idsProduto = utilCreateProduto.idsProduto();
+//	idsProduto = utilCreateProduto.idsProduto();
     }
 
     // @Test
@@ -122,7 +122,7 @@ class EstoqueMensalServiceTest {
     @AfterAll
     void delete() {
 	idsEstoqueMensal.forEach(id -> estoqueMensalService.deleteById(id));
-	utilCreateProduto.clear();
+//	utilCreateProduto.clear();
     }
 
 }

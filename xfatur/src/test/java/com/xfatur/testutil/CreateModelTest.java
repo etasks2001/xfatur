@@ -432,190 +432,190 @@ public class CreateModelTest {
 	return enderecoCobranca;
     }
 
-    public static ProdutoDTO createProduto1() {
-	ProdutoDTO produto = new ProdutoDTO();
-
-	produto.setCodigoProduto("000.11.444");
-	produto.setDescricao("BEBIDA");
-	produto.setUnidadeDetalhada("114456");
-	produto.setGraduacaoAlcoolica("10%");
-	produto.setPesoLiquido(new BigDecimal("10.12"));
-	produto.setPesoBruto(new BigDecimal("15.12"));
-	produto.setCodigoDeBarras("01234567891234");
-	produto.setPesoDaCaixa(new BigDecimal("154.12"));
-	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
-	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
-	produto.setIpiUnitario(new BigDecimal("10.12"));
-	produto.setAliquotaDeReducao(Boolean.FALSE);
-	produto.setIsentoICMS(Boolean.FALSE);
-	produto.setAliquotaipi(new BigDecimal("12"));
-	produto.setAdquiridoComST(Boolean.FALSE);
-	produto.setCest("123457");
-	produto.setEstoque(1111);
-	produto.setReservado(2222);
-	produto.setReducaoICMS_id(1);
-	produto.setIva_id(1);
-	produto.setProdutor(null);
-	produto.setUnidade(null);
-	produto.setClassificacaoFiscal(null);
-	produto.setTributacao(null);
-	produto.setRegiaoProdutora(null);
-	produto.setLinha(null);
-	produto.setPais(null);
-	produto.setTipoValidade(null);
-	produto.setMarca(null);
-	produto.setOrigem(null);
-	produto.setTipoItem(null);
-	produto.setTipoSelo(null);
-
-	return produto;
-    }
-
-    public static ProdutoDTO createProduto2() {
-	ProdutoDTO produto = new ProdutoDTO();
-
-	produto.setCodigoProduto("000.11.001");
-	produto.setDescricao("CHOCOLATE ");
-	produto.setUnidadeDetalhada("114456");
-	produto.setGraduacaoAlcoolica("10%");
-	produto.setPesoLiquido(new BigDecimal("10.12"));
-	produto.setPesoBruto(new BigDecimal("15.12"));
-	produto.setCodigoDeBarras("01234567891234");
-	produto.setPesoDaCaixa(new BigDecimal("154.12"));
-	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
-	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
-	produto.setIpiUnitario(new BigDecimal("10.12"));
-	produto.setAliquotaDeReducao(Boolean.TRUE);
-	produto.setIsentoICMS(Boolean.TRUE);
-	produto.setAliquotaipi(new BigDecimal("12"));
-	produto.setAdquiridoComST(Boolean.TRUE);
-	produto.setCest("123457");
-	produto.setEstoque(3333);
-	produto.setReservado(4444);
-	produto.setReducaoICMS_id(1);
-	produto.setIva_id(1);
-	produto.setProdutor(null);
-	produto.setUnidade(null);
-	produto.setClassificacaoFiscal(null);
-	produto.setTributacao(null);
-	produto.setRegiaoProdutora(null);
-	produto.setLinha(null);
-	produto.setPais(null);
-	produto.setTipoValidade(null);
-	produto.setMarca(null);
-	produto.setOrigem(null);
-	produto.setTipoItem(null);
-	produto.setTipoSelo(null);
-
-	return produto;
-    }
-
-    public static ProdutoDTO createProduto3() {
-	ProdutoDTO produto = new ProdutoDTO();
-
-	produto.setCodigoProduto("111.11.001");
-	produto.setDescricao("GELEIA");
-	produto.setUnidadeDetalhada("114456");
-	produto.setGraduacaoAlcoolica("10%");
-	produto.setPesoLiquido(new BigDecimal("10.12"));
-	produto.setPesoBruto(new BigDecimal("15.12"));
-	produto.setCodigoDeBarras("01234567891234");
-	produto.setPesoDaCaixa(new BigDecimal("154.12"));
-	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
-	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
-	produto.setIpiUnitario(new BigDecimal("10.12"));
-	produto.setAliquotaDeReducao(Boolean.TRUE);
-	produto.setIsentoICMS(Boolean.TRUE);
-	produto.setAliquotaipi(new BigDecimal("12"));
-	produto.setAdquiridoComST(Boolean.TRUE);
-	produto.setCest("123457");
-	produto.setEstoque(3333);
-	produto.setReservado(4444);
-	produto.setReducaoICMS_id(1);
-	produto.setIva_id(1);
-	produto.setProdutor(null);
-	produto.setUnidade(null);
-	produto.setClassificacaoFiscal(null);
-	produto.setTributacao(null);
-	produto.setRegiaoProdutora(null);
-	produto.setLinha(null);
-	produto.setPais(null);
-	produto.setTipoValidade(null);
-	produto.setMarca(null);
-	produto.setOrigem(null);
-	produto.setTipoItem(null);
-	produto.setTipoSelo(null);
-
-	return produto;
-    }
-
-    public static ProdutoDTO createProduto4() {
-	ProdutoDTO produto = new ProdutoDTO();
-
-	produto.setCodigoProduto("999.11.001");
-	produto.setDescricao("FEIJÃO");
-	produto.setUnidadeDetalhada("114456");
-	produto.setGraduacaoAlcoolica("10%");
-	produto.setPesoLiquido(new BigDecimal("10.12"));
-	produto.setPesoBruto(new BigDecimal("15.12"));
-	produto.setCodigoDeBarras("01234567891234");
-	produto.setPesoDaCaixa(new BigDecimal("154.12"));
-	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
-	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
-	produto.setIpiUnitario(new BigDecimal("10.12"));
-	produto.setAliquotaDeReducao(Boolean.TRUE);
-	produto.setIsentoICMS(Boolean.TRUE);
-	produto.setAliquotaipi(new BigDecimal("12"));
-	produto.setAdquiridoComST(Boolean.TRUE);
-	produto.setCest("123457");
-	produto.setEstoque(3333);
-	produto.setReservado(4444);
-	produto.setReducaoICMS_id(1);
-	produto.setIva_id(1);
-	produto.setProdutor(null);
-	produto.setUnidade(null);
-	produto.setClassificacaoFiscal(null);
-	produto.setTributacao(null);
-	produto.setRegiaoProdutora(null);
-	produto.setLinha(null);
-	produto.setPais(null);
-	produto.setTipoValidade(null);
-	produto.setMarca(null);
-	produto.setOrigem(null);
-	produto.setTipoItem(null);
-	produto.setTipoSelo(null);
-
-	return produto;
-    }
-
-//    public static Stream<ProdutorDTO> produtorList() {
-//	return Stream.of(createProdutor1(), createProdutor2(), createProdutor3());
+//    public static ProdutoDTO createProduto1() {
+//	ProdutoDTO produto = new ProdutoDTO();
+//
+//	produto.setCodigoProduto("000.11.444");
+//	produto.setDescricao("BEBIDA");
+//	produto.setUnidadeDetalhada("114456");
+//	produto.setGraduacaoAlcoolica("10%");
+//	produto.setPesoLiquido(new BigDecimal("10.12"));
+//	produto.setPesoBruto(new BigDecimal("15.12"));
+//	produto.setCodigoDeBarras("01234567891234");
+//	produto.setPesoDaCaixa(new BigDecimal("154.12"));
+//	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
+//	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
+//	produto.setIpiUnitario(new BigDecimal("10.12"));
+//	produto.setAliquotaDeReducao(Boolean.FALSE);
+//	produto.setIsentoICMS(Boolean.FALSE);
+//	produto.setAliquotaipi(new BigDecimal("12"));
+//	produto.setAdquiridoComST(Boolean.FALSE);
+//	produto.setCest("123457");
+//	produto.setEstoque(1111);
+//	produto.setReservado(2222);
+//	produto.setReducaoICMS_id(1);
+//	produto.setIva_id(1);
+//	produto.setProdutor(null);
+//	produto.setUnidade(null);
+//	produto.setClassificacaoFiscal(null);
+//	produto.setTributacao(null);
+//	produto.setRegiaoProdutora(null);
+//	produto.setLinha(null);
+//	produto.setPais(null);
+//	produto.setTipoValidade(null);
+//	produto.setMarca(null);
+//	produto.setOrigem(null);
+//	produto.setTipoItem(null);
+//	produto.setTipoSelo(null);
+//
+//	return produto;
+//    }
+//
+//    public static ProdutoDTO createProduto2() {
+//	ProdutoDTO produto = new ProdutoDTO();
+//
+//	produto.setCodigoProduto("000.11.001");
+//	produto.setDescricao("CHOCOLATE ");
+//	produto.setUnidadeDetalhada("114456");
+//	produto.setGraduacaoAlcoolica("10%");
+//	produto.setPesoLiquido(new BigDecimal("10.12"));
+//	produto.setPesoBruto(new BigDecimal("15.12"));
+//	produto.setCodigoDeBarras("01234567891234");
+//	produto.setPesoDaCaixa(new BigDecimal("154.12"));
+//	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
+//	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
+//	produto.setIpiUnitario(new BigDecimal("10.12"));
+//	produto.setAliquotaDeReducao(Boolean.TRUE);
+//	produto.setIsentoICMS(Boolean.TRUE);
+//	produto.setAliquotaipi(new BigDecimal("12"));
+//	produto.setAdquiridoComST(Boolean.TRUE);
+//	produto.setCest("123457");
+//	produto.setEstoque(3333);
+//	produto.setReservado(4444);
+//	produto.setReducaoICMS_id(1);
+//	produto.setIva_id(1);
+//	produto.setProdutor(null);
+//	produto.setUnidade(null);
+//	produto.setClassificacaoFiscal(null);
+//	produto.setTributacao(null);
+//	produto.setRegiaoProdutora(null);
+//	produto.setLinha(null);
+//	produto.setPais(null);
+//	produto.setTipoValidade(null);
+//	produto.setMarca(null);
+//	produto.setOrigem(null);
+//	produto.setTipoItem(null);
+//	produto.setTipoSelo(null);
+//
+//	return produto;
+//    }
+//
+//    public static ProdutoDTO createProduto3() {
+//	ProdutoDTO produto = new ProdutoDTO();
+//
+//	produto.setCodigoProduto("111.11.001");
+//	produto.setDescricao("GELEIA");
+//	produto.setUnidadeDetalhada("114456");
+//	produto.setGraduacaoAlcoolica("10%");
+//	produto.setPesoLiquido(new BigDecimal("10.12"));
+//	produto.setPesoBruto(new BigDecimal("15.12"));
+//	produto.setCodigoDeBarras("01234567891234");
+//	produto.setPesoDaCaixa(new BigDecimal("154.12"));
+//	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
+//	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
+//	produto.setIpiUnitario(new BigDecimal("10.12"));
+//	produto.setAliquotaDeReducao(Boolean.TRUE);
+//	produto.setIsentoICMS(Boolean.TRUE);
+//	produto.setAliquotaipi(new BigDecimal("12"));
+//	produto.setAdquiridoComST(Boolean.TRUE);
+//	produto.setCest("123457");
+//	produto.setEstoque(3333);
+//	produto.setReservado(4444);
+//	produto.setReducaoICMS_id(1);
+//	produto.setIva_id(1);
+//	produto.setProdutor(null);
+//	produto.setUnidade(null);
+//	produto.setClassificacaoFiscal(null);
+//	produto.setTributacao(null);
+//	produto.setRegiaoProdutora(null);
+//	produto.setLinha(null);
+//	produto.setPais(null);
+//	produto.setTipoValidade(null);
+//	produto.setMarca(null);
+//	produto.setOrigem(null);
+//	produto.setTipoItem(null);
+//	produto.setTipoSelo(null);
+//
+//	return produto;
+//    }
+//
+//    public static ProdutoDTO createProduto4() {
+//	ProdutoDTO produto = new ProdutoDTO();
+//
+//	produto.setCodigoProduto("999.11.001");
+//	produto.setDescricao("FEIJÃO");
+//	produto.setUnidadeDetalhada("114456");
+//	produto.setGraduacaoAlcoolica("10%");
+//	produto.setPesoLiquido(new BigDecimal("10.12"));
+//	produto.setPesoBruto(new BigDecimal("15.12"));
+//	produto.setCodigoDeBarras("01234567891234");
+//	produto.setPesoDaCaixa(new BigDecimal("154.12"));
+//	produto.setLarguraDaCaixa(new BigDecimal("10.12"));
+//	produto.setComprimentoDaCaixa(new BigDecimal("10.12"));
+//	produto.setIpiUnitario(new BigDecimal("10.12"));
+//	produto.setAliquotaDeReducao(Boolean.TRUE);
+//	produto.setIsentoICMS(Boolean.TRUE);
+//	produto.setAliquotaipi(new BigDecimal("12"));
+//	produto.setAdquiridoComST(Boolean.TRUE);
+//	produto.setCest("123457");
+//	produto.setEstoque(3333);
+//	produto.setReservado(4444);
+//	produto.setReducaoICMS_id(1);
+//	produto.setIva_id(1);
+//	produto.setProdutor(null);
+//	produto.setUnidade(null);
+//	produto.setClassificacaoFiscal(null);
+//	produto.setTributacao(null);
+//	produto.setRegiaoProdutora(null);
+//	produto.setLinha(null);
+//	produto.setPais(null);
+//	produto.setTipoValidade(null);
+//	produto.setMarca(null);
+//	produto.setOrigem(null);
+//	produto.setTipoItem(null);
+//	produto.setTipoSelo(null);
+//
+//	return produto;
 //    }
 
-    public static Stream<UnidadeDTO> unidadeList() {
-	return Stream.of(createUnidade1(), createUnidade2(), createUnidade3(), createUnidade4());
+    public static Stream<ProdutorDTO> produtorList() {
+	return Stream.of(createProdutor1(), createProdutor2(), createProdutor3());
     }
 
-    private static UnidadeDTO createUnidade1() {
-	UnidadeDTO unidade = new UnidadeDTO();
-	unidade.setAbreviacao("cx");
-	unidade.setDescricao("CAIXA");
-	return unidade;
-    }
+//    public static Stream<UnidadeDTO> unidadeList() {
+//	return Stream.of(createUnidade1(), createUnidade2(), createUnidade3(), createUnidade4());
+//    }
 
-    private static UnidadeDTO createUnidade2() {
-	UnidadeDTO unidade = new UnidadeDTO();
-	unidade.setAbreviacao("kg");
-	unidade.setDescricao("QUILOGRAMA");
-	return unidade;
-    }
-
-    private static UnidadeDTO createUnidade3() {
-	UnidadeDTO unidade = new UnidadeDTO();
-	unidade.setAbreviacao("lt");
-	unidade.setDescricao("LITRO");
-	return unidade;
-    }
+//    private static UnidadeDTO createUnidade1() {
+//	UnidadeDTO unidade = new UnidadeDTO();
+//	unidade.setAbreviacao("cx");
+//	unidade.setDescricao("CAIXA");
+//	return unidade;
+//    }
+//
+//    private static UnidadeDTO createUnidade2() {
+//	UnidadeDTO unidade = new UnidadeDTO();
+//	unidade.setAbreviacao("kg");
+//	unidade.setDescricao("QUILOGRAMA");
+//	return unidade;
+//    }
+//
+//    private static UnidadeDTO createUnidade3() {
+//	UnidadeDTO unidade = new UnidadeDTO();
+//	unidade.setAbreviacao("lt");
+//	unidade.setDescricao("LITRO");
+//	return unidade;
+//    }
 
     private static UnidadeDTO createUnidade4() {
 	UnidadeDTO unidade = new UnidadeDTO();
@@ -624,162 +624,162 @@ public class CreateModelTest {
 	return unidade;
     }
 
-//    public static ProdutorDTO createProdutor1() {
-//	ProdutorDTO produtor = new ProdutorDTO();
-//	produtor.setDescricao("CERVEJARIA DO SUL");
-//	return produtor;
+    public static ProdutorDTO createProdutor1() {
+	ProdutorDTO produtor = new ProdutorDTO();
+	produtor.setDescricao("CERVEJARIA DO SUL");
+	return produtor;
+    }
+
+    public static ProdutorDTO createProdutor2() {
+	ProdutorDTO produtor = new ProdutorDTO();
+	produtor.setDescricao("TOMATES DO JAPÃO");
+	return produtor;
+    }
+
+    public static ProdutorDTO createProdutor3() {
+	ProdutorDTO produtor = new ProdutorDTO();
+	produtor.setDescricao("PESSEGOS DA ITALIA");
+	return produtor;
+    }
+
+//    public static Stream<ClassificacaoFiscalDTO> classificacaoFiscalList() {
+//
+//	return Stream.of(createClassificacaoFiscal1(), createClassificacaoFiscal2(), createClassificacaoFiscal3(), createClassificacaoFiscal4(), createClassificacaoFiscal5(),
+//		createClassificacaoFiscal6());
 //    }
 //
-//    public static ProdutorDTO createProdutor2() {
-//	ProdutorDTO produtor = new ProdutorDTO();
-//	produtor.setDescricao("TOMATES DO JAPÃO");
-//	return produtor;
+//    private static ClassificacaoFiscalDTO createClassificacaoFiscal1() {
+//	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
+//	classificacaoFiscal.setNcm("12345678");
+//	classificacaoFiscal.setDescricao("SORVETE DE MASSA");
+//
+//	return classificacaoFiscal;
 //    }
 //
-//    public static ProdutorDTO createProdutor3() {
-//	ProdutorDTO produtor = new ProdutorDTO();
-//	produtor.setDescricao("PESSEGOS DA ITALIA");
-//	return produtor;
+//    private static ClassificacaoFiscalDTO createClassificacaoFiscal2() {
+//	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
+//	classificacaoFiscal.setNcm("45879314");
+//	classificacaoFiscal.setDescricao("SORVETE DE COPO");
+//
+//	return classificacaoFiscal;
+//    }
+//
+//    private static ClassificacaoFiscalDTO createClassificacaoFiscal3() {
+//	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
+//	classificacaoFiscal.setNcm("52975484");
+//	classificacaoFiscal.setDescricao("SORVETE DE MASSA E COPO");
+//
+//	return classificacaoFiscal;
+//    }
+//
+//    private static ClassificacaoFiscalDTO createClassificacaoFiscal4() {
+//	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
+//	classificacaoFiscal.setNcm("15975344");
+//	classificacaoFiscal.setDescricao("SORVETE DE PALITO");
+//
+//	return classificacaoFiscal;
+//    }
+//
+//    private static ClassificacaoFiscalDTO createClassificacaoFiscal5() {
+//	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
+//	classificacaoFiscal.setNcm("55487974");
+//	classificacaoFiscal.setDescricao("COLHER DE MADEIRA");
+//
+//	return classificacaoFiscal;
+//    }
+//
+//    private static ClassificacaoFiscalDTO createClassificacaoFiscal6() {
+//	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
+//	classificacaoFiscal.setNcm("14534564");
+//	classificacaoFiscal.setDescricao("COPO DE PLASTICO");
+//
+//	return classificacaoFiscal;
 //    }
 
-    public static Stream<ClassificacaoFiscalDTO> classificacaoFiscalList() {
-
-	return Stream.of(createClassificacaoFiscal1(), createClassificacaoFiscal2(), createClassificacaoFiscal3(), createClassificacaoFiscal4(), createClassificacaoFiscal5(),
-		createClassificacaoFiscal6());
-    }
-
-    private static ClassificacaoFiscalDTO createClassificacaoFiscal1() {
-	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
-	classificacaoFiscal.setNcm("12345678");
-	classificacaoFiscal.setDescricao("SORVETE DE MASSA");
-
-	return classificacaoFiscal;
-    }
-
-    private static ClassificacaoFiscalDTO createClassificacaoFiscal2() {
-	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
-	classificacaoFiscal.setNcm("45879314");
-	classificacaoFiscal.setDescricao("SORVETE DE COPO");
-
-	return classificacaoFiscal;
-    }
-
-    private static ClassificacaoFiscalDTO createClassificacaoFiscal3() {
-	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
-	classificacaoFiscal.setNcm("52975484");
-	classificacaoFiscal.setDescricao("SORVETE DE MASSA E COPO");
-
-	return classificacaoFiscal;
-    }
-
-    private static ClassificacaoFiscalDTO createClassificacaoFiscal4() {
-	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
-	classificacaoFiscal.setNcm("15975344");
-	classificacaoFiscal.setDescricao("SORVETE DE PALITO");
-
-	return classificacaoFiscal;
-    }
-
-    private static ClassificacaoFiscalDTO createClassificacaoFiscal5() {
-	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
-	classificacaoFiscal.setNcm("55487974");
-	classificacaoFiscal.setDescricao("COLHER DE MADEIRA");
-
-	return classificacaoFiscal;
-    }
-
-    private static ClassificacaoFiscalDTO createClassificacaoFiscal6() {
-	ClassificacaoFiscalDTO classificacaoFiscal = new ClassificacaoFiscalDTO();
-	classificacaoFiscal.setNcm("14534564");
-	classificacaoFiscal.setDescricao("COPO DE PLASTICO");
-
-	return classificacaoFiscal;
-    }
-
-    public static Stream<TributacaoDTO> tributacaoList() {
-	return Stream.of(
-
-		createTributacao1(), createTributacao2(), createTributacao3(), createTributacao4(), createTributacao5(), createTributacao6(), createTributacao7(), createTributacao8(),
-		createTributacao9(), createTributacao10(), createTributacao11());
-    }
-
-    private static TributacaoDTO createTributacao11() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("90");
-	tributacao.setDescricao("OUTRAS");
-	return tributacao;
-    }
-
-    private static TributacaoDTO createTributacao10() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("70");
-	tributacao.setDescricao("COM REDUÇÃO DE BASE DE CÁLCULO E COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
-	return tributacao;
-    }
-
-    private static TributacaoDTO createTributacao9() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("60");
-	tributacao.setDescricao("ICMS COBRADO ANTERIORMENTE POR SUBSTITUIÇÃO TRIBUTÁRIA");
-	return tributacao;
-    }
-
-    private static TributacaoDTO createTributacao8() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("51");
-	tributacao.setDescricao("DIFERIMENTO");
-	return tributacao;
-    }
-
-    private static TributacaoDTO createTributacao7() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("50");
-	tributacao.setDescricao("SUSPENSÃO");
-	return tributacao;
-    }
-
-    private static TributacaoDTO createTributacao6() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("41");
-	tributacao.setDescricao("NÃO TRIBUTADA");
-	return tributacao;
-    }
-
-    private static TributacaoDTO createTributacao5() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("40");
-	tributacao.setDescricao("ISENTA");
-	return tributacao;
-    }
-
-    private static TributacaoDTO createTributacao4() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("30");
-	tributacao.setDescricao("ISENTA OU NÃO TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
-	return tributacao;
-    }
-
-    private static TributacaoDTO createTributacao3() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("20");
-	tributacao.setDescricao("COM REDUÇÃO DE BASE DE CÁLCULO");
-	return tributacao;
-    }
-
-    private static TributacaoDTO createTributacao2() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("10");
-	tributacao.setDescricao("TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
-	return tributacao;
-    }
-
-    private static TributacaoDTO createTributacao1() {
-	TributacaoDTO tributacao = new TributacaoDTO();
-	tributacao.setCodigo("00");
-	tributacao.setDescricao("TRIBUTADA INTEGRALMENTE");
-
-	return tributacao;
-    }
+//    public static Stream<TributacaoDTO> tributacaoList() {
+//	return Stream.of(
+//
+//		createTributacao1(), createTributacao2(), createTributacao3(), createTributacao4(), createTributacao5(), createTributacao6(), createTributacao7(), createTributacao8(),
+//		createTributacao9(), createTributacao10(), createTributacao11());
+//    }
+//
+//    private static TributacaoDTO createTributacao11() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("90");
+//	tributacao.setDescricao("OUTRAS");
+//	return tributacao;
+//    }
+//
+//    private static TributacaoDTO createTributacao10() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("70");
+//	tributacao.setDescricao("COM REDUÇÃO DE BASE DE CÁLCULO E COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
+//	return tributacao;
+//    }
+//
+//    private static TributacaoDTO createTributacao9() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("60");
+//	tributacao.setDescricao("ICMS COBRADO ANTERIORMENTE POR SUBSTITUIÇÃO TRIBUTÁRIA");
+//	return tributacao;
+//    }
+//
+//    private static TributacaoDTO createTributacao8() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("51");
+//	tributacao.setDescricao("DIFERIMENTO");
+//	return tributacao;
+//    }
+//
+//    private static TributacaoDTO createTributacao7() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("50");
+//	tributacao.setDescricao("SUSPENSÃO");
+//	return tributacao;
+//    }
+//
+//    private static TributacaoDTO createTributacao6() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("41");
+//	tributacao.setDescricao("NÃO TRIBUTADA");
+//	return tributacao;
+//    }
+//
+//    private static TributacaoDTO createTributacao5() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("40");
+//	tributacao.setDescricao("ISENTA");
+//	return tributacao;
+//    }
+//
+//    private static TributacaoDTO createTributacao4() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("30");
+//	tributacao.setDescricao("ISENTA OU NÃO TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
+//	return tributacao;
+//    }
+//
+//    private static TributacaoDTO createTributacao3() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("20");
+//	tributacao.setDescricao("COM REDUÇÃO DE BASE DE CÁLCULO");
+//	return tributacao;
+//    }
+//
+//    private static TributacaoDTO createTributacao2() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("10");
+//	tributacao.setDescricao("TRIBUTADA E COM COBRANÇA DO ICMS POR SUBSTITUIÇÃO TRIBUTÁRIA");
+//	return tributacao;
+//    }
+//
+//    private static TributacaoDTO createTributacao1() {
+//	TributacaoDTO tributacao = new TributacaoDTO();
+//	tributacao.setCodigo("00");
+//	tributacao.setDescricao("TRIBUTADA INTEGRALMENTE");
+//
+//	return tributacao;
+//    }
 
     public static void createAndIds(TributacaoService service, TributacaoDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
@@ -883,61 +883,61 @@ public class CreateModelTest {
 	return Stream.of(CreateModelTest.createEnderecoCobranca1());
     }
 
-    public static Stream<RegiaoProdutoraDTO> regiaoProdutoraList() {
-	return Stream.of(createRegiaoProdutora1(), createRegiaoProdutora2(), createRegiaoProdutora3(), createRegiaoProdutora4(), createRegiaoProdutora5());
-    }
+//    public static Stream<RegiaoProdutoraDTO> regiaoProdutoraList() {
+//	return Stream.of(createRegiaoProdutora1(), createRegiaoProdutora2(), createRegiaoProdutora3(), createRegiaoProdutora4(), createRegiaoProdutora5());
+//    }
+//
+//    private static RegiaoProdutoraDTO createRegiaoProdutora1() {
+//	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
+//	regiaoProdutora.setDescricao("ZONA DA MATA");
+//	return regiaoProdutora;
+//    }
+//
+//    private static RegiaoProdutoraDTO createRegiaoProdutora2() {
+//	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
+//	regiaoProdutora.setDescricao("SUL DE MINAS GERAIS");
+//	return regiaoProdutora;
+//    }
+//
+//    private static RegiaoProdutoraDTO createRegiaoProdutora3() {
+//	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
+//	regiaoProdutora.setDescricao("VALE DO PARANAPIACABA");
+//	return regiaoProdutora;
+//    }
+//
+//    private static RegiaoProdutoraDTO createRegiaoProdutora4() {
+//	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
+//	regiaoProdutora.setDescricao("VALE DO SAO FRANCISCO");
+//	return regiaoProdutora;
+//    }
+//
+//    private static RegiaoProdutoraDTO createRegiaoProdutora5() {
+//	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
+//	regiaoProdutora.setDescricao("NORTE DE SAO PAULO");
+//	return regiaoProdutora;
+//    }
 
-    private static RegiaoProdutoraDTO createRegiaoProdutora1() {
-	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
-	regiaoProdutora.setDescricao("ZONA DA MATA");
-	return regiaoProdutora;
-    }
-
-    private static RegiaoProdutoraDTO createRegiaoProdutora2() {
-	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
-	regiaoProdutora.setDescricao("SUL DE MINAS GERAIS");
-	return regiaoProdutora;
-    }
-
-    private static RegiaoProdutoraDTO createRegiaoProdutora3() {
-	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
-	regiaoProdutora.setDescricao("VALE DO PARANAPIACABA");
-	return regiaoProdutora;
-    }
-
-    private static RegiaoProdutoraDTO createRegiaoProdutora4() {
-	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
-	regiaoProdutora.setDescricao("VALE DO SAO FRANCISCO");
-	return regiaoProdutora;
-    }
-
-    private static RegiaoProdutoraDTO createRegiaoProdutora5() {
-	RegiaoProdutoraDTO regiaoProdutora = new RegiaoProdutoraDTO();
-	regiaoProdutora.setDescricao("NORTE DE SAO PAULO");
-	return regiaoProdutora;
-    }
-
-    public static Stream<TipoValidadeDTO> tipoValidadeList() {
-	return Stream.of(createTipoValidade1(), createTipoValidade2(), createTipoValidade3());
-    }
-
-    private static TipoValidadeDTO createTipoValidade1() {
-	TipoValidadeDTO tipoValidade = new TipoValidadeDTO();
-	tipoValidade.setDescricao("INDETERMINADA");
-	return tipoValidade;
-    }
-
-    private static TipoValidadeDTO createTipoValidade2() {
-	TipoValidadeDTO tipoValidade = new TipoValidadeDTO();
-	tipoValidade.setDescricao("IMPERECÍVEL");
-	return tipoValidade;
-    }
-
-    private static TipoValidadeDTO createTipoValidade3() {
-	TipoValidadeDTO tipoValidade = new TipoValidadeDTO();
-	tipoValidade.setDescricao("OUTRA");
-	return tipoValidade;
-    }
+//    public static Stream<TipoValidadeDTO> tipoValidadeList() {
+//	return Stream.of(createTipoValidade1(), createTipoValidade2(), createTipoValidade3());
+//    }
+//
+//    private static TipoValidadeDTO createTipoValidade1() {
+//	TipoValidadeDTO tipoValidade = new TipoValidadeDTO();
+//	tipoValidade.setDescricao("INDETERMINADA");
+//	return tipoValidade;
+//    }
+//
+//    private static TipoValidadeDTO createTipoValidade2() {
+//	TipoValidadeDTO tipoValidade = new TipoValidadeDTO();
+//	tipoValidade.setDescricao("IMPERECÍVEL");
+//	return tipoValidade;
+//    }
+//
+//    private static TipoValidadeDTO createTipoValidade3() {
+//	TipoValidadeDTO tipoValidade = new TipoValidadeDTO();
+//	tipoValidade.setDescricao("OUTRA");
+//	return tipoValidade;
+//    }
 
     public static void createAndIds(TipoValidadeService service, TipoValidadeDTO entity, List<Integer> ids) {
 	Integer id = service.findByIdDescricao(entity.getDescricao());
@@ -948,40 +948,40 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<MarcaDTO> marcaList() {
-
-	return Stream.of(createMarca1(), createMarca2(), createMarca3(), createMarca4(), createMarca5());
-    }
-
-    private static MarcaDTO createMarca1() {
-	MarcaDTO marca = new MarcaDTO();
-	marca.setDescricao("SEM MARCA");
-	return marca;
-    }
-
-    private static MarcaDTO createMarca2() {
-	MarcaDTO marca = new MarcaDTO();
-	marca.setDescricao("DOCE DE LEITE");
-	return marca;
-    }
-
-    private static MarcaDTO createMarca3() {
-	MarcaDTO marca = new MarcaDTO();
-	marca.setDescricao("LEITE CONDENSADO");
-	return marca;
-    }
-
-    private static MarcaDTO createMarca4() {
-	MarcaDTO marca = new MarcaDTO();
-	marca.setDescricao("DOCE DE AMORA");
-	return marca;
-    }
-
-    private static MarcaDTO createMarca5() {
-	MarcaDTO marca = new MarcaDTO();
-	marca.setDescricao("CALDO DE LIMAO");
-	return marca;
-    }
+//    public static Stream<MarcaDTO> marcaList() {
+//
+//	return Stream.of(createMarca1(), createMarca2(), createMarca3(), createMarca4(), createMarca5());
+//    }
+//
+//    private static MarcaDTO createMarca1() {
+//	MarcaDTO marca = new MarcaDTO();
+//	marca.setDescricao("SEM MARCA");
+//	return marca;
+//    }
+//
+//    private static MarcaDTO createMarca2() {
+//	MarcaDTO marca = new MarcaDTO();
+//	marca.setDescricao("DOCE DE LEITE");
+//	return marca;
+//    }
+//
+//    private static MarcaDTO createMarca3() {
+//	MarcaDTO marca = new MarcaDTO();
+//	marca.setDescricao("LEITE CONDENSADO");
+//	return marca;
+//    }
+//
+//    private static MarcaDTO createMarca4() {
+//	MarcaDTO marca = new MarcaDTO();
+//	marca.setDescricao("DOCE DE AMORA");
+//	return marca;
+//    }
+//
+//    private static MarcaDTO createMarca5() {
+//	MarcaDTO marca = new MarcaDTO();
+//	marca.setDescricao("CALDO DE LIMAO");
+//	return marca;
+//    }
 
     public static void createAndIds(MarcaService service, MarcaDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
@@ -993,56 +993,56 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<OrigemDTO> origemList() {
+//    public static Stream<OrigemDTO> origemList() {
+//
+//	return Stream.of(createOrigem1(), createOrigem2(), createOrigem3(), createOrigem4(), createOrigem5());
+//    }
 
-	return Stream.of(createOrigem1(), createOrigem2(), createOrigem3(), createOrigem4(), createOrigem5());
-    }
-
-    private static OrigemDTO createOrigem1() {
-	OrigemDTO origem = new OrigemDTO();
-	origem.setId(0);
-	origem.setCodigo("0");
-	origem.setDescricao("NACIONAL");
-
-	return origem;
-    }
-
-    private static OrigemDTO createOrigem2() {
-	OrigemDTO origem = new OrigemDTO();
-	origem.setId(1);
-	origem.setCodigo("1");
-	origem.setDescricao("ESTRANGEIRA-IMPORT. DIRETA");
-
-	return origem;
-    }
-
-    private static OrigemDTO createOrigem3() {
-	OrigemDTO origem = new OrigemDTO();
-	origem.setId(2);
-	origem.setCodigo("2");
-	origem.setDescricao("ESTRANGEIRA-ADQ.MERCADO INTERNO");
-
-	return origem;
-    }
-
-    private static OrigemDTO createOrigem4() {
-	OrigemDTO origem = new OrigemDTO();
-	origem.setId(6);
-	origem.setCodigo("3");
-
-	origem.setDescricao("(LISTA CAMEX) ESTRANGEIRA-IMPORT. DIRETA");
-
-	return origem;
-    }
-
-    private static OrigemDTO createOrigem5() {
-	OrigemDTO origem = new OrigemDTO();
-	origem.setCodigo("5");
-	origem.setId(7);
-	origem.setDescricao("(LISTA CAMEX) ESTRANGEIRA-ADQ.MERCADO INTERNO");
-
-	return origem;
-    }
+//    private static OrigemDTO createOrigem1() {
+//	OrigemDTO origem = new OrigemDTO();
+//	origem.setId(0);
+//	origem.setCodigo("0");
+//	origem.setDescricao("NACIONAL");
+//
+//	return origem;
+//    }
+//
+//    private static OrigemDTO createOrigem2() {
+//	OrigemDTO origem = new OrigemDTO();
+//	origem.setId(1);
+//	origem.setCodigo("1");
+//	origem.setDescricao("ESTRANGEIRA-IMPORT. DIRETA");
+//
+//	return origem;
+//    }
+//
+//    private static OrigemDTO createOrigem3() {
+//	OrigemDTO origem = new OrigemDTO();
+//	origem.setId(2);
+//	origem.setCodigo("2");
+//	origem.setDescricao("ESTRANGEIRA-ADQ.MERCADO INTERNO");
+//
+//	return origem;
+//    }
+//
+//    private static OrigemDTO createOrigem4() {
+//	OrigemDTO origem = new OrigemDTO();
+//	origem.setId(6);
+//	origem.setCodigo("3");
+//
+//	origem.setDescricao("(LISTA CAMEX) ESTRANGEIRA-IMPORT. DIRETA");
+//
+//	return origem;
+//    }
+//
+//    private static OrigemDTO createOrigem5() {
+//	OrigemDTO origem = new OrigemDTO();
+//	origem.setCodigo("5");
+//	origem.setId(7);
+//	origem.setDescricao("(LISTA CAMEX) ESTRANGEIRA-ADQ.MERCADO INTERNO");
+//
+//	return origem;
+//    }
 
     public static void createAndIds(OrigemService service, OrigemDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
@@ -1054,94 +1054,94 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<TipoItemDTO> tipoList() {
-	return Stream.of(createTipo1(), createTipo2(), createTipo3(), createTipo4(), createTipo5(), createTipo6(), createTipo7(), createTipo8(), createTipo9(), createTipo10(), createTipo11(),
-		createTipo12());
-    }
-
-    private static TipoItemDTO createTipo12() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("99");
-	tipo.setDescricao("OUTRAS");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo11() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("10");
-	tipo.setDescricao("OUTROS INSUMOS");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo10() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("09");
-	tipo.setDescricao("SERVIÇOS");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo9() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("08");
-	tipo.setDescricao("ATIVO IMOBILIZADO");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo8() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("07");
-	tipo.setDescricao("MATERIAL DE USO E CONSUMO");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo7() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("06");
-	tipo.setDescricao("PRODUTO INTERMEDIÁRIO");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo6() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("05");
-	tipo.setDescricao("SUBPRODUTO");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo5() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("04");
-	tipo.setDescricao("PRODUTO ACABADO");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo4() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("03");
-	tipo.setDescricao("PRODUTO EM PROCESSO");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo3() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("02");
-	tipo.setDescricao("EMBALAGEM");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo2() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("01");
-	tipo.setDescricao("MATÉRIA-PRIMA");
-	return tipo;
-    }
-
-    private static TipoItemDTO createTipo1() {
-	TipoItemDTO tipo = new TipoItemDTO();
-	tipo.setCodigo("00");
-	tipo.setDescricao("MERCADORIA PARA REVENDA");
-	return tipo;
-    }
+//    public static Stream<TipoItemDTO> tipoList() {
+//	return Stream.of(createTipo1(), createTipo2(), createTipo3(), createTipo4(), createTipo5(), createTipo6(), createTipo7(), createTipo8(), createTipo9(), createTipo10(), createTipo11(),
+//		createTipo12());
+//    }
+//
+//    private static TipoItemDTO createTipo12() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("99");
+//	tipo.setDescricao("OUTRAS");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo11() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("10");
+//	tipo.setDescricao("OUTROS INSUMOS");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo10() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("09");
+//	tipo.setDescricao("SERVIÇOS");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo9() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("08");
+//	tipo.setDescricao("ATIVO IMOBILIZADO");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo8() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("07");
+//	tipo.setDescricao("MATERIAL DE USO E CONSUMO");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo7() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("06");
+//	tipo.setDescricao("PRODUTO INTERMEDIÁRIO");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo6() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("05");
+//	tipo.setDescricao("SUBPRODUTO");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo5() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("04");
+//	tipo.setDescricao("PRODUTO ACABADO");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo4() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("03");
+//	tipo.setDescricao("PRODUTO EM PROCESSO");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo3() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("02");
+//	tipo.setDescricao("EMBALAGEM");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo2() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("01");
+//	tipo.setDescricao("MATÉRIA-PRIMA");
+//	return tipo;
+//    }
+//
+//    private static TipoItemDTO createTipo1() {
+//	TipoItemDTO tipo = new TipoItemDTO();
+//	tipo.setCodigo("00");
+//	tipo.setDescricao("MERCADORIA PARA REVENDA");
+//	return tipo;
+//    }
 
     public static void createAndIds(TipoItemService service, TipoItemDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
@@ -1153,51 +1153,51 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<TipoSeloDTO> tipoSeloList() {
-	return Stream.of(createTipoSelo1(), createTipoSelo2(), createTipoSelo3(), createTipoSelo4(), createTipoSelo5(), createTipoSelo6());
-    }
-
-    private static TipoSeloDTO createTipoSelo6() {
-	TipoSeloDTO tipoSelo = new TipoSeloDTO();
-	tipoSelo.setCodigo("971012");
-	tipoSelo.setDescricao("971012-Nacional p/Exp.-Tipo3-Verde Escuro combinado c/marrom");
-	return tipoSelo;
-    }
-
-    private static TipoSeloDTO createTipoSelo5() {
-	TipoSeloDTO tipoSelo = new TipoSeloDTO();
-	tipoSelo.setCodigo("971011");
-	tipoSelo.setDescricao("971011-Nacional p/Exp.-Tipo2-Verde Escuro combinado c/marrom");
-	return tipoSelo;
-    }
-
-    private static TipoSeloDTO createTipoSelo4() {
-	TipoSeloDTO tipoSelo = new TipoSeloDTO();
-	tipoSelo.setCodigo("971010");
-	tipoSelo.setDescricao("971010-Nacional p/Exp.-Tipo1-Verde Escuro combinado c/marrom");
-	return tipoSelo;
-    }
-
-    private static TipoSeloDTO createTipoSelo3() {
-	TipoSeloDTO tipoSelo = new TipoSeloDTO();
-	tipoSelo.setCodigo("971001");
-	tipoSelo.setDescricao("971001-Nacional-Verde combinado com marrom");
-	return tipoSelo;
-    }
-
-    private static TipoSeloDTO createTipoSelo2() {
-	TipoSeloDTO tipoSelo = new TipoSeloDTO();
-	tipoSelo.setCodigo("861009");
-	tipoSelo.setDescricao("861009-Estrangeiro - Vermelho combinado com azul");
-	return tipoSelo;
-    }
-
-    private static TipoSeloDTO createTipoSelo1() {
-	TipoSeloDTO tipoSelo = new TipoSeloDTO();
-	tipoSelo.setCodigo("100000");
-	tipoSelo.setDescricao("SEM SELO");
-	return tipoSelo;
-    }
+//    public static Stream<TipoSeloDTO> tipoSeloList() {
+//	return Stream.of(createTipoSelo1(), createTipoSelo2(), createTipoSelo3(), createTipoSelo4(), createTipoSelo5(), createTipoSelo6());
+//    }
+//
+//    private static TipoSeloDTO createTipoSelo6() {
+//	TipoSeloDTO tipoSelo = new TipoSeloDTO();
+//	tipoSelo.setCodigo("971012");
+//	tipoSelo.setDescricao("971012-Nacional p/Exp.-Tipo3-Verde Escuro combinado c/marrom");
+//	return tipoSelo;
+//    }
+//
+//    private static TipoSeloDTO createTipoSelo5() {
+//	TipoSeloDTO tipoSelo = new TipoSeloDTO();
+//	tipoSelo.setCodigo("971011");
+//	tipoSelo.setDescricao("971011-Nacional p/Exp.-Tipo2-Verde Escuro combinado c/marrom");
+//	return tipoSelo;
+//    }
+//
+//    private static TipoSeloDTO createTipoSelo4() {
+//	TipoSeloDTO tipoSelo = new TipoSeloDTO();
+//	tipoSelo.setCodigo("971010");
+//	tipoSelo.setDescricao("971010-Nacional p/Exp.-Tipo1-Verde Escuro combinado c/marrom");
+//	return tipoSelo;
+//    }
+//
+//    private static TipoSeloDTO createTipoSelo3() {
+//	TipoSeloDTO tipoSelo = new TipoSeloDTO();
+//	tipoSelo.setCodigo("971001");
+//	tipoSelo.setDescricao("971001-Nacional-Verde combinado com marrom");
+//	return tipoSelo;
+//    }
+//
+//    private static TipoSeloDTO createTipoSelo2() {
+//	TipoSeloDTO tipoSelo = new TipoSeloDTO();
+//	tipoSelo.setCodigo("861009");
+//	tipoSelo.setDescricao("861009-Estrangeiro - Vermelho combinado com azul");
+//	return tipoSelo;
+//    }
+//
+//    private static TipoSeloDTO createTipoSelo1() {
+//	TipoSeloDTO tipoSelo = new TipoSeloDTO();
+//	tipoSelo.setCodigo("100000");
+//	tipoSelo.setDescricao("SEM SELO");
+//	return tipoSelo;
+//    }
 
     public static void createAndIds(TipoSeloService service, TipoSeloDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
@@ -1208,99 +1208,99 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<PaisDTO> paisList() {
-	return Stream.of(createPais1(), createPais2(), createPais3(), createPais4(), createPais5());
+//    public static Stream<PaisDTO> paisList() {
+//	return Stream.of(createPais1(), createPais2(), createPais3(), createPais4(), createPais5());
+//
+//    }
+//
+//    private static PaisDTO createPais1() {
+//	PaisDTO pais = new PaisDTO();
+//	pais.setNome("BRASIL");
+//	pais.setOrigem("BRASILEIRA");
+//	pais.setCodigoBacen("1058");
+//	pais.setSigla("BR");
+//	return pais;
+//    }
+//
+//    private static PaisDTO createPais2() {
+//	PaisDTO pais = new PaisDTO();
+//	pais.setNome("GRÉCIA");
+//	pais.setOrigem("GREGA");
+//	pais.setCodigoBacen("3018");
+//	pais.setSigla("GR");
+//	return pais;
+//    }
+//
+//    private static PaisDTO createPais3() {
+//	PaisDTO pais = new PaisDTO();
+//	pais.setNome("HOLANDA");
+//	pais.setOrigem("HOLANDESA");
+//	pais.setCodigoBacen("5738");
+//	pais.setSigla("HO");
+//	return pais;
+//    }
+//
+//    private static PaisDTO createPais4() {
+//	PaisDTO pais = new PaisDTO();
+//	pais.setNome("HUNGRIA");
+//	pais.setOrigem("HÚNGARA");
+//	pais.setCodigoBacen("3557");
+//	pais.setSigla("HU");
+//	return pais;
+//    }
+//
+//    private static PaisDTO createPais5() {
+//	PaisDTO pais = new PaisDTO();
+//	pais.setNome("ÍNDIA");
+//	pais.setOrigem("INDIANA");
+//	pais.setCodigoBacen("3611");
+//	pais.setSigla("ID");
+//	return pais;
+//    }
 
-    }
-
-    private static PaisDTO createPais1() {
-	PaisDTO pais = new PaisDTO();
-	pais.setNome("BRASIL");
-	pais.setOrigem("BRASILEIRA");
-	pais.setCodigoBacen("1058");
-	pais.setSigla("BR");
-	return pais;
-    }
-
-    private static PaisDTO createPais2() {
-	PaisDTO pais = new PaisDTO();
-	pais.setNome("GRÉCIA");
-	pais.setOrigem("GREGA");
-	pais.setCodigoBacen("3018");
-	pais.setSigla("GR");
-	return pais;
-    }
-
-    private static PaisDTO createPais3() {
-	PaisDTO pais = new PaisDTO();
-	pais.setNome("HOLANDA");
-	pais.setOrigem("HOLANDESA");
-	pais.setCodigoBacen("5738");
-	pais.setSigla("HO");
-	return pais;
-    }
-
-    private static PaisDTO createPais4() {
-	PaisDTO pais = new PaisDTO();
-	pais.setNome("HUNGRIA");
-	pais.setOrigem("HÚNGARA");
-	pais.setCodigoBacen("3557");
-	pais.setSigla("HU");
-	return pais;
-    }
-
-    private static PaisDTO createPais5() {
-	PaisDTO pais = new PaisDTO();
-	pais.setNome("ÍNDIA");
-	pais.setOrigem("INDIANA");
-	pais.setCodigoBacen("3611");
-	pais.setSigla("ID");
-	return pais;
-    }
-
-    public static Stream<LinhaDTO> linhaList() {
-	return Stream.of(createLinha1(), createLinha2(), createLinha3(), createLinha4(), createLinha5());
-    }
-
-    private static LinhaDTO createLinha1() {
-	LinhaDTO linha = new LinhaDTO();
-	linha.setDescricao("AMENDOIN");
-	linha.setOrdem(1);
-	linha.setTipo("COM");
-	return linha;
-    }
-
-    private static LinhaDTO createLinha2() {
-	LinhaDTO linha = new LinhaDTO();
-	linha.setDescricao("ARROZ");
-	linha.setOrdem(2);
-	linha.setTipo("ALI");
-	return linha;
-    }
-
-    private static LinhaDTO createLinha3() {
-	LinhaDTO linha = new LinhaDTO();
-	linha.setDescricao("NOS MOSCADA");
-	linha.setOrdem(3);
-	linha.setTipo("CER");
-	return linha;
-    }
-
-    private static LinhaDTO createLinha4() {
-	LinhaDTO linha = new LinhaDTO();
-	linha.setDescricao("GELEIA");
-	linha.setOrdem(4);
-	linha.setTipo("GEL");
-	return linha;
-    }
-
-    private static LinhaDTO createLinha5() {
-	LinhaDTO linha = new LinhaDTO();
-	linha.setDescricao("ALCOOL");
-	linha.setOrdem(5);
-	linha.setTipo("LIM");
-	return linha;
-    }
+//    public static Stream<LinhaDTO> linhaList() {
+//	return Stream.of(createLinha1(), createLinha2(), createLinha3(), createLinha4(), createLinha5());
+//    }
+//
+//    private static LinhaDTO createLinha1() {
+//	LinhaDTO linha = new LinhaDTO();
+//	linha.setDescricao("AMENDOIN");
+//	linha.setOrdem(1);
+//	linha.setTipo("COM");
+//	return linha;
+//    }
+//
+//    private static LinhaDTO createLinha2() {
+//	LinhaDTO linha = new LinhaDTO();
+//	linha.setDescricao("ARROZ");
+//	linha.setOrdem(2);
+//	linha.setTipo("ALI");
+//	return linha;
+//    }
+//
+//    private static LinhaDTO createLinha3() {
+//	LinhaDTO linha = new LinhaDTO();
+//	linha.setDescricao("NOS MOSCADA");
+//	linha.setOrdem(3);
+//	linha.setTipo("CER");
+//	return linha;
+//    }
+//
+//    private static LinhaDTO createLinha4() {
+//	LinhaDTO linha = new LinhaDTO();
+//	linha.setDescricao("GELEIA");
+//	linha.setOrdem(4);
+//	linha.setTipo("GEL");
+//	return linha;
+//    }
+//
+//    private static LinhaDTO createLinha5() {
+//	LinhaDTO linha = new LinhaDTO();
+//	linha.setDescricao("ALCOOL");
+//	linha.setOrdem(5);
+//	linha.setTipo("LIM");
+//	return linha;
+//    }
 
     public static void createAndIds(LinhaService service, LinhaDTO entity, List<Integer> ids) {
 	Integer id = service.findIdByDescricao(entity.getDescricao());
@@ -1322,9 +1322,9 @@ public class CreateModelTest {
 	ids.add(id);
     }
 
-    public static Stream<ProdutoDTO> produtoList() {
-	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2(), CreateModelTest.createProduto3(), CreateModelTest.createProduto4());
-    }
+//    public static Stream<ProdutoDTO> produtoList() {
+//	return Stream.of(CreateModelTest.createProduto1(), CreateModelTest.createProduto2(), CreateModelTest.createProduto3(), CreateModelTest.createProduto4());
+//    }
 
     public static Stream<EstoqueMensal> estoqueMensalList() {
 
