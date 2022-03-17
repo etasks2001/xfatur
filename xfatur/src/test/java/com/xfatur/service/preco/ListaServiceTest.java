@@ -47,61 +47,61 @@ class ListaServiceTest {
 
     @Test
     @Order(1)
-    @Sql(scripts = { "classpath:produto-clean.sql",
+    @Sql(scripts = { "classpath:cadastro/produto-clean.sql",
 
-	    "classpath:produtor-clean.sql",
+	    "classpath:cadastro/produtor-clean.sql",
 
-	    "classpath:unidade-clean.sql",
+	    "classpath:cadastro/unidade-clean.sql",
 
-	    "classpath:classificacaofiscal-clean.sql",
+	    "classpath:cadastro/classificacaofiscal-clean.sql",
 
-	    "classpath:tributacao-clean.sql",
+	    "classpath:cadastro/tributacao-clean.sql",
 
-	    "classpath:regiaoprodutora-clean.sql",
+	    "classpath:cadastro/regiaoprodutora-clean.sql",
 
-	    "classpath:tipovalidade-clean.sql",
+	    "classpath:cadastro/tipovalidade-clean.sql",
 
-	    "classpath:origem-clean.sql",
+	    "classpath:cadastro/origem-clean.sql",
 
-	    "classpath:marca-clean.sql",
+	    "classpath:cadastro/marca-clean.sql",
 
-	    "classpath:tipoitem-clean.sql",
+	    "classpath:cadastro/tipoitem-clean.sql",
 
-	    "classpath:tiposelo-clean.sql",
+	    "classpath:cadastro/tiposelo-clean.sql",
 
-	    "classpath:linha-clean.sql",
+	    "classpath:cadastro/linha-clean.sql",
 
-	    "classpath:pais-clean.sql"
+	    "classpath:cadastro/pais-clean.sql"
 
     }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.ISOLATED))
 
     @Sql(scripts = {
 
-	    "classpath:produtor.sql",
+	    "classpath:cadastro/produtor.sql",
 
-	    "classpath:unidade.sql",
+	    "classpath:cadastro/unidade.sql",
 
-	    "classpath:classificacaofiscal.sql",
+	    "classpath:cadastro/classificacaofiscal.sql",
 
-	    "classpath:tributacao.sql",
+	    "classpath:cadastro/tributacao.sql",
 
-	    "classpath:regiaoprodutora.sql",
+	    "classpath:cadastro/regiaoprodutora.sql",
 
-	    "classpath:tipovalidade.sql",
+	    "classpath:cadastro/tipovalidade.sql",
 
-	    "classpath:origem.sql",
+	    "classpath:cadastro/origem.sql",
 
-	    "classpath:marca.sql",
+	    "classpath:cadastro/marca.sql",
 
-	    "classpath:tipoitem.sql",
+	    "classpath:cadastro/tipoitem.sql",
 
-	    "classpath:tiposelo.sql",
+	    "classpath:cadastro/tiposelo.sql",
 
-	    "classpath:linha.sql",
+	    "classpath:cadastro/linha.sql",
 
-	    "classpath:pais.sql",
+	    "classpath:cadastro/pais.sql",
 
-	    "classpath:produto.sql"
+	    "classpath:cadastro/produto.sql"
 
     }, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.ISOLATED))
 
