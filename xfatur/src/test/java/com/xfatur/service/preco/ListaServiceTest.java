@@ -3,7 +3,7 @@ package com.xfatur.service.preco;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -26,8 +26,6 @@ import com.xfatur.service.produto.ProdutoService;
 class ListaServiceTest {
 
     List<Integer> idsLista = new ArrayList<Integer>();
-//    @Autowired
-//    UtilCreateProduto utilCreateProduto;
 
     @Autowired
     ProdutoService produtoService;
@@ -40,71 +38,16 @@ class ListaServiceTest {
     @Autowired
     ItemService itemService;
 
-    @BeforeAll
-    void insert() {
-//	idsProduto = utilCreateProduto.idsProduto();
-    }
-
     @Test
     @Order(1)
-    @Sql(scripts = { "classpath:cadastro/produto-clean.sql",
-
-	    "classpath:cadastro/produtor-clean.sql",
-
-	    "classpath:cadastro/unidade-clean.sql",
-
-	    "classpath:cadastro/classificacaofiscal-clean.sql",
-
-	    "classpath:cadastro/tributacao-clean.sql",
-
-	    "classpath:cadastro/regiaoprodutora-clean.sql",
-
-	    "classpath:cadastro/tipovalidade-clean.sql",
-
-	    "classpath:cadastro/origem-clean.sql",
-
-	    "classpath:cadastro/marca-clean.sql",
-
-	    "classpath:cadastro/tipoitem-clean.sql",
-
-	    "classpath:cadastro/tiposelo-clean.sql",
-
-	    "classpath:cadastro/linha-clean.sql",
-
-	    "classpath:cadastro/pais-clean.sql"
-
-    }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.ISOLATED))
-
-    @Sql(scripts = {
-
-	    "classpath:cadastro/produtor.sql",
-
-	    "classpath:cadastro/unidade.sql",
-
-	    "classpath:cadastro/classificacaofiscal.sql",
-
-	    "classpath:cadastro/tributacao.sql",
-
-	    "classpath:cadastro/regiaoprodutora.sql",
-
-	    "classpath:cadastro/tipovalidade.sql",
-
-	    "classpath:cadastro/origem.sql",
-
-	    "classpath:cadastro/marca.sql",
-
-	    "classpath:cadastro/tipoitem.sql",
-
-	    "classpath:cadastro/tiposelo.sql",
-
-	    "classpath:cadastro/linha.sql",
-
-	    "classpath:cadastro/pais.sql",
-
-	    "classpath:cadastro/produto.sql"
-
-    }, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.ISOLATED))
-
+    @Sql(scripts = { "classpath:cadastro/produto-clean.sql", "classpath:cadastro/produtor-clean.sql", "classpath:cadastro/unidade-clean.sql", "classpath:cadastro/classificacaofiscal-clean.sql",
+	    "classpath:cadastro/tributacao-clean.sql", "classpath:cadastro/regiaoprodutora-clean.sql", "classpath:cadastro/tipovalidade-clean.sql", "classpath:cadastro/origem-clean.sql",
+	    "classpath:cadastro/marca-clean.sql", "classpath:cadastro/tipoitem-clean.sql", "classpath:cadastro/tiposelo-clean.sql", "classpath:cadastro/linha-clean.sql",
+	    "classpath:cadastro/pais-clean.sql" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.ISOLATED))
+    @Sql(scripts = { "classpath:cadastro/produtor.sql", "classpath:cadastro/unidade.sql", "classpath:cadastro/classificacaofiscal.sql", "classpath:cadastro/tributacao.sql",
+	    "classpath:cadastro/regiaoprodutora.sql", "classpath:cadastro/tipovalidade.sql", "classpath:cadastro/origem.sql", "classpath:cadastro/marca.sql", "classpath:cadastro/tipoitem.sql",
+	    "classpath:cadastro/tiposelo.sql", "classpath:cadastro/linha.sql", "classpath:cadastro/pais.sql",
+	    "classpath:cadastro/produto.sql" }, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.ISOLATED))
     void test_save() {
 //	Lista listaPreco = new Lista();
 //
@@ -203,12 +146,10 @@ class ListaServiceTest {
 //	listaService.save(lista);
 //    }
 //
-//    @AfterAll
-//    void delete() {
-//
-//	idsLista.forEach(id -> listaService.deleteById(id));
-//
-////	utilCreateProduto.clear();
-//
-//    }
+    @AfterAll
+    void delete() {
+
+	idsLista.forEach(id -> listaService.deleteById(id));
+
+    }
 }
