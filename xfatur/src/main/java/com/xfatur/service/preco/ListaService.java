@@ -34,4 +34,5 @@ public class ListaService {
 	}
 	throw new ListaPrecoIdNotFoundException("Lista não encontrada");
     }
+
 }
