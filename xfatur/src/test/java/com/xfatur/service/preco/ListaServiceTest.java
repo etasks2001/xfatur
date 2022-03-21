@@ -52,6 +52,7 @@ class ListaServiceTest {
 	    "classpath:cadastro/tiposelo.sql", "classpath:cadastro/linha.sql", "classpath:cadastro/pais.sql",
 	    "classpath:cadastro/produto.sql" }, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.ISOLATED))
     void test_save() {
+
 	Lista listaPreco = new Lista();
 
 	listaPreco.setCodigo("001/1");
