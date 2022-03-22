@@ -1,6 +1,7 @@
 package com.xfatur.validation.dto.cadastro;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -50,6 +51,7 @@ public class ProdutoDTO implements DTO {
     private Boolean isentoICMS;
     private BigDecimal aliquotaipi;
     private Boolean adquiridoComST;
+    private LocalDate validade;
     private String cest;
     private Integer reducaoICMS_id;
     private Integer iva_id;
@@ -332,6 +334,14 @@ public class ProdutoDTO implements DTO {
 
     public void setReservado(Integer reservado) {
 	this.reservado = reservado;
+    }
+
+    public LocalDate getValidade() {
+	return validade;
+    }
+
+    public void setValidade(LocalDate validade) {
+	this.validade = validade;
     }
 
 }
