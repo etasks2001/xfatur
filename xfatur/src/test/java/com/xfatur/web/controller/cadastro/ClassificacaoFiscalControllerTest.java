@@ -40,9 +40,7 @@ class ClassificacaoFiscalControllerTest {
 
 		.andExpect(model().attribute("classificacaoFiscalDTO", hasProperty("ncm", nullValue())))
 
-		.andExpect(model().attribute("classificacaoFiscalDTO", hasProperty("descricao", nullValue())))
-
-	;
+		.andExpect(model().attribute("classificacaoFiscalDTO", hasProperty("descricao", nullValue())));
 
     }
 
