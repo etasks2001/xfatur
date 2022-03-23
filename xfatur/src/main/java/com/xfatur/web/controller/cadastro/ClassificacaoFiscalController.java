@@ -29,7 +29,6 @@ public class ClassificacaoFiscalController {
     }
 
     @PostMapping("salvar")
-
     public String salvar(@Valid ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
 	if (result.hasErrors()) {
 	    return "cadastro/classificacaofiscal";
