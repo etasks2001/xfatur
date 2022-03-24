@@ -6,7 +6,7 @@
 </head>
 <body>
 
-	<form method="POST" th:object="${classificacaoFiscalDTO}" th:action="${classificacaoFiscalDTO.id == null} ? @{/classificacaofiscal/salvar} : @{/classificacaofiscal/alterar}" layout:fragment="principal">
+	<form method="POST" th:object="${classificacaofiscal}" th:action="${classificacaofiscal.id == null} ? @{/classificacaofiscal/salvar} : @{/classificacaofiscal/alterar}" layout:fragment="principal">
 		<div th:replace="~{/cadastro/fragments.html :: header}"></div>
 		<div th:replace="cadastro/fragments :: alert-success"></div>
 		<div class="cadastro classificacaofiscal">
@@ -25,7 +25,7 @@
 			</div>
 
 			<div>
-				<div th:replace="~{/cadastro/fragments.html :: botoes(${classificacaoFiscalDTO.id == null} ? 'Gravar' : 'Alterar')}"></div>
+				<div th:replace="~{/cadastro/fragments.html :: botoes(${classificacaofiscal.id == null} ? 'Gravar' : 'Alterar')}"></div>
 			</div>
 		</div>
 	</form>
