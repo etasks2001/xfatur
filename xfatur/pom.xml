@@ -12,7 +12,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>xFatur</name>
-	<description>Demo project for Spring Boot</description>
+	<description>xFatur</description>
 	<properties>
 		<java.version>1.8</java.version>
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
@@ -159,6 +159,11 @@
 						</arg>
 					</compilerArgs>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M4</version>
 			</plugin>
 		</plugins>
 	</build>

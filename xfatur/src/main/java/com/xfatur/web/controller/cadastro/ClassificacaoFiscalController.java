@@ -27,8 +27,6 @@ public class ClassificacaoFiscalController {
     public String openForm(Model model) {
 	model.addAttribute("classificacaofiscal", new ClassificacaoFiscalDTO());
 
-	System.out.println(model.getClass().getCanonicalName());
-
 	return "/cadastro/classificacaofiscal";
     }
 
@@ -50,7 +48,7 @@ public class ClassificacaoFiscalController {
 
 	ClassificacaoFiscalDTO dto = service.findById(id);
 
-	return new ModelAndView("/cadastro/classificacaofiscal", "classificacaoFiscalDTO", dto);
+	return new ModelAndView("/cadastro/classificacaofiscal", "classificacaofiscal", dto);
     }
 
     @PostMapping("alterar")

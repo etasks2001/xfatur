@@ -7,17 +7,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.xfatur.service.produto.ClassificacaoFiscalService;
 
-@WebMvcTest(ClassificacaoFiscalController.class)
+//@WebMvcTest(ClassificacaoFiscalController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class ClassificacaoFiscalControllerTest {
 
     @Autowired
@@ -29,18 +32,19 @@ class ClassificacaoFiscalControllerTest {
     @Test
     @DisplayName("GET /classificacaofiscal/form success")
     void test() throws Exception {
-	Assertions.assertThat(mock).isNotNull();
+	Assertions.assertNotNull(mock, "Formulário encontrado");
+
 	mock.perform(get("/classificacaofiscal/form"))
 
 		.andExpect(status().isOk())
 
 		.andExpect(view().name("/cadastro/classificacaofiscal"))
 
-		.andExpect(model().attribute("classificacaoFiscalDTO", hasProperty("id", nullValue())))
+		.andExpect(model().attribute("classificacaofiscal", hasProperty("id", nullValue())))
 
-		.andExpect(model().attribute("classificacaoFiscalDTO", hasProperty("ncm", nullValue())))
+		.andExpect(model().attribute("classificacaofiscal", hasProperty("ncm", nullValue())))
 
-		.andExpect(model().attribute("classificacaoFiscalDTO", hasProperty("descricao", nullValue())));
+		.andExpect(model().attribute("classificacaofiscal", hasProperty("descricao", nullValue())));
 
     }
 
