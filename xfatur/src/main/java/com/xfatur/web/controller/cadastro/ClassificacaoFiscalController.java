@@ -31,16 +31,21 @@ public class ClassificacaoFiscalController {
     }
 
     @PostMapping("salvar")
-    public String salvar(@Valid ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
+    public ModelAndView salvar(@Valid ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
 	if (result.hasErrors()) {
-	    return "cadastro/classificacaofiscal";
+
+	    ModelAndView modelAndView = new ModelAndView("cadastro/classificacaofiscal");
+
+	    modelAndView.addObject("classificacaofiscal", dto);
+
+	    return modelAndView;
 	}
 
 	service.save(dto);
 
 	attr.addFlashAttribute("success", "Classificação fiscal incluída.");
 
-	return "redirect:/classificacaofiscal/form";
+	return new ModelAndView("redirect:/classificacaofiscal/form");
     }
 
     @GetMapping("/editar/{id}")
@@ -52,16 +57,21 @@ public class ClassificacaoFiscalController {
     }
 
     @PostMapping("alterar")
-    public String alterar(@Valid ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
+    public ModelAndView alterar(@Valid ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
 
 	if (result.hasErrors()) {
-	    return "cadastro/classificacaofiscal";
+
+	    ModelAndView modelAndView = new ModelAndView("cadastro/classificacaofiscal");
+
+	    modelAndView.addObject("classificacaofiscal", dto);
+
+	    return modelAndView;
 	}
 
 	service.update(dto);
 
 	attr.addFlashAttribute("success", "Classificação fiscal alterada.");
 
-	return "redirect:/classificacaofiscal/form";
+	return new ModelAndView("redirect:/classificacaofiscal/form");
     }
 }

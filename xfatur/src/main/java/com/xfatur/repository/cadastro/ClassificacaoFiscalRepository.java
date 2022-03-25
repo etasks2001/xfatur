@@ -14,26 +14,26 @@ import com.xfatur.repository.projections.cadastro.ClassificacaoFiscalView;
 
 public interface ClassificacaoFiscalRepository extends JpaRepository<ClassificacaoFiscal, Integer> {
 
-	@Query("select cf.id from ClassificacaoFiscal cf where cf.descricao = :descricao")
-	Integer findIdByDescricao(@Param("descricao") String descricao);
+    @Query("select cf.id from ClassificacaoFiscal cf where cf.descricao = :descricao")
+    Integer findIdByDescricao(@Param("descricao") String descricao);
 
-	@Query("select cf from ClassificacaoFiscal cf where cf.descricao like %:descricao% order by cf.descricao")
-	List<ClassificacaoFiscal> findByDescricao(@Param("descricao") String descricao);
+    @Query("select cf from ClassificacaoFiscal cf where cf.descricao like %:descricao% order by cf.descricao")
+    List<ClassificacaoFiscal> findByDescricao(@Param("descricao") String descricao);
 
-	@Query("select cf.id as id, cf.ncm as ncm, cf.descricao as descricao from ClassificacaoFiscal cf where cf.descricao like %:search%")
-	Page<ClassificacaoFiscalView> findByDescricao(@Param("search") String search, Pageable pageable);
+    @Query("select cf.id as id, cf.ncm as ncm, cf.descricao as descricao from ClassificacaoFiscal cf where cf.descricao like %:search%")
+    Page<ClassificacaoFiscalView> findByDescricao(@Param("search") String search, Pageable pageable);
 
-	@Query("select cf.id as id, cf.ncm as ncm, cf.descricao as descricao  from ClassificacaoFiscal cf where cf.ncm like %:search%")
-	Page<ClassificacaoFiscalView> findByNcm(@Param("search") String search, Pageable pageable);
+    @Query("select cf.id as id, cf.ncm as ncm, cf.descricao as descricao  from ClassificacaoFiscal cf where cf.ncm like %:search%")
+    Page<ClassificacaoFiscalView> findByNcm(@Param("search") String search, Pageable pageable);
 
-	@Query(value = "select exists (select * from ClassificacaoFiscal cf where cf.descricao = :descricao and (:id is null or cf.id <> cast(cast(:id as text) as int)))", nativeQuery = true)
-	Boolean hasDescricao(@Param("id") Integer id, @Param("descricao") String descricao);
+    @Query(value = "select exists (select * from ClassificacaoFiscal cf where cf.descricao = :descricao and (:id is null or cf.id <> cast(cast(:id as text) as int)))", nativeQuery = true)
+    Boolean hasDescricao(@Param("id") Integer id, @Param("descricao") String descricao);
 
-	@Query(value = "select exists (select * from ClassificacaoFiscal cf where cf.ncm = :ncm and (:id is null or cf.id <> cast(cast(:id as text) as int)))", nativeQuery = true)
-	Boolean hasNcm(@Param("id") Integer id, @Param("ncm") String ncm);
+    @Query(value = "select exists (select * from ClassificacaoFiscal cf where cf.ncm = :ncm and (:id is null or cf.id <> cast(cast(:id as text) as int)))", nativeQuery = true)
+    Boolean hasNcm(@Param("id") Integer id, @Param("ncm") String ncm);
 
-	@Modifying
-	@Query("update ClassificacaoFiscal cf set cf.ncm = :ncm, cf.descricao = :descricao  where cf.id = :id")
-	void update(@Param("id") Integer id, @Param("ncm") String ncm, @Param("descricao") String lastname);
+    @Modifying
+    @Query("update ClassificacaoFiscal cf set cf.ncm = :ncm, cf.descricao = :descricao  where cf.id = :id")
+    void update(@Param("id") Integer id, @Param("ncm") String ncm, @Param("descricao") String lastname);
 
 }
