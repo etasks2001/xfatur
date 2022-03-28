@@ -82,6 +82,30 @@ class ClassificacaoFiscalControllerTest {
     }
 
     @Test
+    @DisplayName("GET /classificacaofiscal/editar/{id} localizando id sem sucesso e retornando formulário preenchido")
+    @Sql(scripts = { "classpath:/cadastro/classificacaofiscal.sql" }, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.DEFAULT))
+    @Sql(scripts = {
+	    "classpath:/cadastro/classificacaofiscal-clean.sql" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.DEFAULT))
+    void localizando_id_sem_sucesso_e_retornando_formulario_preenchido_test() throws Exception {
+
+	Integer id = 879765467;
+
+	mock.perform(get("/classificacaofiscal/editar/{id}", id))
+
+		.andExpect(status().isOk())
+
+		.andExpect(view().name("/cadastro/classificacaofiscal"))
+
+		.andExpect(model().attribute("classificacaofiscal", hasProperty("id", is(id))))
+
+		.andExpect(model().attribute("classificacaofiscal", hasProperty("ncm", is("1234.5678"))))
+
+		.andExpect(model().attribute("classificacaofiscal", hasProperty("descricao", is("SORVETE DE MASSA"))))
+
+	;
+    }
+
+    @Test
     @DisplayName("POST /classificacaofiscal/alterar >> alterar cadastro sem erros nos campos")
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal.sql" }, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.DEFAULT))
     @Sql(scripts = {
