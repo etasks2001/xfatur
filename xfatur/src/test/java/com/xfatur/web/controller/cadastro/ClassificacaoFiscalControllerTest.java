@@ -96,6 +96,12 @@ class ClassificacaoFiscalControllerTest {
 
 		.andExpect(status().isOk())
 
+		.andExpect(model().attribute("message", "Código da classificação fiscal não encontrado."))
+
+		.andExpect(model().attribute("status", "404"))
+
+		.andExpect(model().attribute("error", "Operação não pode ser realizada."))
+
 	;
     }
 
