@@ -92,15 +92,9 @@ class ClassificacaoFiscalControllerTest {
 
 	mock.perform(get("/classificacaofiscal/editar/{id}", id))
 
+		.andExpect(view().name("error"))
+
 		.andExpect(status().isOk())
-
-		.andExpect(view().name("/cadastro/classificacaofiscal"))
-
-		.andExpect(model().attribute("classificacaofiscal", hasProperty("id", is(id))))
-
-		.andExpect(model().attribute("classificacaofiscal", hasProperty("ncm", is("1234.5678"))))
-
-		.andExpect(model().attribute("classificacaofiscal", hasProperty("descricao", is("SORVETE DE MASSA"))))
 
 	;
     }

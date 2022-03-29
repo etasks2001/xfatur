@@ -1,7 +1,5 @@
 package com.xfatur.service.produto;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xfatur.exception.ClassificacaoFiscalCodigoNaoEncontrado;
 import com.xfatur.model.produto.ClassificacaoFiscal;
 import com.xfatur.repository.cadastro.ClassificacaoFiscalRepository;
 import com.xfatur.repository.mappers.ModelMapper;
@@ -47,13 +46,7 @@ public class ClassificacaoFiscalService implements Servico {
     }
 
     public ClassificacaoFiscalDTO findById(Integer id) {
-	Optional<ClassificacaoFiscal> found = repository.findById(id);
-
-	if (found.isPresent()) {
-	    return mapper.toDto(found.get());
-	}
-	throw new RuntimeException("Código da Classificação Fiscal não encontrado.");
-
+	return mapper.toDto(repository.findById(id).orElseThrow(() -> new ClassificacaoFiscalCodigoNaoEncontrado("Código da classificação fiscal não encontrado.")));
     }
 
     public Boolean hasDescricao(Integer id, String descricao) {
