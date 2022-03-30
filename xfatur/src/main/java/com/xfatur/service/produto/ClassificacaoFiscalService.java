@@ -28,10 +28,6 @@ public class ClassificacaoFiscalService implements Servico {
     @Autowired
     private ClassificacaoFiscalRepository repository;
 
-    public void deleteById(Integer id) {
-	repository.deleteById(id);
-    }
-
     @Transactional(readOnly = false)
     public ClassificacaoFiscalDTO save(ClassificacaoFiscalDTO classificacaoFiscalDTO) {
 
@@ -59,7 +55,6 @@ public class ClassificacaoFiscalService implements Servico {
     }
 
     public Page<ClassificacaoFiscalView> findByDescricao(String search, Pageable pageable) {
-
 	return repository.findByDescricao(search, pageable);
 
     }

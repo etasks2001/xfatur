@@ -1,10 +1,12 @@
 package com.xfatur.web.controller.cadastro;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,7 +24,6 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.jdbc.SqlConfig.TransactionMode;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.xfatur.service.produto.ClassificacaoFiscalService;
 import com.xfatur.validation.dto.cadastro.ClassificacaoFiscalDTO;
@@ -39,6 +40,105 @@ class ClassificacaoFiscalControllerTest {
     private ClassificacaoFiscalService service;
 
     @Test
+    @DisplayName("POST /classificacaofiscal/alterar >> gravar cadastro sem erros nos campos")
+    @Sql(scripts = {
+	    "classpath:/cadastro/classificacaofiscal-clean.sql" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.DEFAULT))
+    void gravar_cadastro_sem_erros_nos_campos() throws Exception {
+
+	mock.perform(post("/classificacaofiscal/salvar")
+
+		.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+
+		.param("id", "")
+
+		.param("ncm", "9999.9999")
+
+		.param("descricao", "ultimo")
+
+		.sessionAttr("dto", new ClassificacaoFiscalDTO())
+
+	)
+
+		.andExpect(status().is3xxRedirection())
+
+		.andExpect(view().name("redirect:/classificacaofiscal/form"))
+
+		.andExpect(flash().attribute("success", is("Classificação fiscal incluída.")))
+
+	;
+    }
+
+    @Test
+    @DisplayName("POST /classificacaofiscal/alterar >> gravar cadastro com erros nos campos")
+    void gravar_cadastro_com_erros_nos_campos() throws Exception {
+
+	mock.perform(post("/classificacaofiscal/salvar")
+
+		.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+
+		.param("id", "")
+
+		.param("ncm", "")
+
+		.param("descricao", "")
+
+		.sessionAttr("dto", new ClassificacaoFiscalDTO())
+
+	)
+
+		.andExpect(model().attributeExists("classificacaofiscal"))
+
+		.andExpect(status().isOk())
+
+		.andExpect(view().name("cadastro/classificacaofiscal"))
+
+		.andExpect(model().attributeHasFieldErrors("classificacaofiscal", "ncm"))
+
+		.andExpect(model().attributeHasFieldErrors("classificacaofiscal", "descricao"))
+
+	;
+    }
+
+    @Test
+    @Sql(scripts = { "classpath:/cadastro/classificacaofiscal.sql" }, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.DEFAULT))
+    @Sql(scripts = {
+	    "classpath:/cadastro/classificacaofiscal-clean.sql" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.DEFAULT))
+
+    @DisplayName("POST /classificacaofiscal/alterar >> gravar cadastro já cadastrado")
+    void gravar_cadastro_ja_cadastrado() throws Exception {
+
+	mock.perform(post("/classificacaofiscal/salvar")
+
+		.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+
+		.param("id", "")
+
+		.param("ncm", "1234.5678")
+
+		.param("descricao", "SORVETE DE COPO")
+
+		.sessionAttr("dto", new ClassificacaoFiscalDTO())
+
+	)
+
+		.andExpect(status().isOk())
+
+		.andExpect(model().attributeExists("classificacaofiscal"))
+
+		.andExpect(view().name("cadastro/classificacaofiscal"))
+
+		.andExpect(model().attributeHasFieldErrors("classificacaofiscal", "ncm"))
+
+		.andExpect(model().attributeHasFieldErrors("classificacaofiscal", "descricao"))
+
+		.andExpect(content().string(containsString("NCM já cadastrado.")))
+
+		.andExpect(content().string(containsString("Descrição já cadastrada.")))
+
+	;
+    }
+
+    @Test
     @DisplayName("GET /classificacaofiscal/form >>> abrindo formulário")
     void openForm_test() throws Exception {
 	Assertions.assertNotNull(mock, "Formulário encontrado");
@@ -49,11 +149,17 @@ class ClassificacaoFiscalControllerTest {
 
 		.andExpect(view().name("/cadastro/classificacaofiscal"))
 
+		.andExpect(model().attributeExists("classificacaofiscal"))
+
 		.andExpect(model().attribute("classificacaofiscal", hasProperty("id", nullValue())))
 
 		.andExpect(model().attribute("classificacaofiscal", hasProperty("ncm", nullValue())))
 
-		.andExpect(model().attribute("classificacaofiscal", hasProperty("descricao", nullValue())));
+		.andExpect(model().attribute("classificacaofiscal", hasProperty("descricao", nullValue())))
+
+		.andExpect(content().string(containsString("action=\"/classificacaofiscal/salvar\"")))
+
+	;
 
     }
 
@@ -72,21 +178,25 @@ class ClassificacaoFiscalControllerTest {
 
 		.andExpect(view().name("/cadastro/classificacaofiscal"))
 
+		.andExpect(model().attributeExists("classificacaofiscal"))
+
 		.andExpect(model().attribute("classificacaofiscal", hasProperty("id", is(id))))
 
 		.andExpect(model().attribute("classificacaofiscal", hasProperty("ncm", is("1234.5678"))))
 
 		.andExpect(model().attribute("classificacaofiscal", hasProperty("descricao", is("SORVETE DE MASSA"))))
 
+		.andExpect(content().string(containsString("action=\"/classificacaofiscal/alterar\"")))
+
 	;
     }
 
     @Test
-    @DisplayName("GET /classificacaofiscal/editar/{id} localizando id sem sucesso e retornando formulário preenchido")
+    @DisplayName("GET /classificacaofiscal/editar/{id} localizando id sem sucesso")
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal.sql" }, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.DEFAULT))
     @Sql(scripts = {
 	    "classpath:/cadastro/classificacaofiscal-clean.sql" }, executionPhase = ExecutionPhase.AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8", transactionMode = TransactionMode.DEFAULT))
-    void localizando_id_sem_sucesso_e_retornando_formulario_preenchido_test() throws Exception {
+    void localizando_id_sem_sucesso_test() throws Exception {
 
 	Integer id = 879765467;
 
@@ -127,13 +237,13 @@ class ClassificacaoFiscalControllerTest {
 
 	)
 
-		.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+		.andExpect(status().is3xxRedirection())
 
 		.andExpect(view().name("redirect:/classificacaofiscal/form"))
 
 		.andExpect(flash().attribute("success", is("Classificação fiscal alterada.")))
 
-		.andExpect(status().is3xxRedirection());
+	;
     }
 
     @Test
@@ -160,6 +270,8 @@ class ClassificacaoFiscalControllerTest {
 
 		.andExpect(view().name("cadastro/classificacaofiscal"))
 
+		.andExpect(model().attributeExists("classificacaofiscal"))
+
 		.andExpect(model().attribute("classificacaofiscal", hasProperty("id", is(id))))
 
 		.andExpect(model().attribute("classificacaofiscal", hasProperty("ncm", is(""))))
@@ -169,6 +281,8 @@ class ClassificacaoFiscalControllerTest {
 		.andExpect(model().attributeHasFieldErrors("classificacaofiscal", "ncm"))
 
 		.andExpect(model().attributeHasFieldErrors("classificacaofiscal", "descricao"))
+
+		.andExpect(content().string(containsString("action=\"/classificacaofiscal/alterar\"")))
 
 	;
 
@@ -198,6 +312,8 @@ class ClassificacaoFiscalControllerTest {
 
 		.andExpect(view().name("cadastro/classificacaofiscal"))
 
+		.andExpect(model().attributeExists("classificacaofiscal"))
+
 		.andExpect(model().attribute("classificacaofiscal", hasProperty("id", is(id))))
 
 		.andExpect(model().attribute("classificacaofiscal", hasProperty("ncm", is("4587.9314"))))
@@ -207,6 +323,12 @@ class ClassificacaoFiscalControllerTest {
 		.andExpect(model().attributeHasFieldErrors("classificacaofiscal", "ncm"))
 
 		.andExpect(model().attributeHasFieldErrors("classificacaofiscal", "descricao"))
+
+		.andExpect(content().string(containsString("NCM já cadastrado.")))
+
+		.andExpect(content().string(containsString("Descrição já cadastrada.")))
+
+		.andExpect(content().string(containsString("action=\"/classificacaofiscal/alterar\"")))
 
 	;
 
