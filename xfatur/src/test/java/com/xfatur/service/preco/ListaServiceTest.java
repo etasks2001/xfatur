@@ -9,6 +9,7 @@ import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,7 @@ import com.xfatur.service.produto.ProdutoService;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(value = Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
+@DisplayName("Service - Lista de Preço")
 class ListaServiceTest {
 
     List<Integer> idsLista = new ArrayList<Integer>();
