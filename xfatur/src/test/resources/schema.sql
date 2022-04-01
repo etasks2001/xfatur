@@ -1,4 +1,41 @@
-﻿/*
+﻿DROP TABLE IF EXISTS usuarios_tem_perfis;
+DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS perfil;
+
+
+CREATE TABLE perfil (
+	id		serial not null,
+	descricao	varchar(255) not null,
+	PRIMARY KEY	(id),
+	UNIQUE		(descricao)
+);
+/*-----------------------------------------------------------------------------------------------------*/
+CREATE TABLE usuario (
+	id			serial not null,
+	ativo 			boolean not null,
+	email 			varchar(255) not null,
+	senha 			varchar(255) not null,
+	codigo_verificador 	varchar(6) default null,
+	PRIMARY KEY 		(id),
+	UNIQUE			(email)
+	
+);
+CREATE INDEX idx_usuario_email ON usuario (email);
+
+
+
+/*-----------------------------------------------------------------------------------------------------*/
+CREATE TABLE usuarios_tem_perfis (
+	usuario_id 	int not null,
+	perfil_id 	int not null,
+	PRIMARY KEY 	(usuario_id,perfil_id),
+	FOREIGN KEY 	(usuario_id)	REFERENCES usuario (id),
+	FOREIGN KEY 	(perfil_id)	REFERENCES perfil (id)
+);
+
+
+
+/*
 
 drop table if exists license;
 drop table if exists person;
