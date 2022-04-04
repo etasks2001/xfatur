@@ -22,9 +22,9 @@ import com.xfatur.service.security.UsuarioService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String ADMIN = PerfilTipo.ADMIN.getDesc();
-    private static final String MEDICO = PerfilTipo.FATURAMENTO.getDesc();
-    private static final String PACIENTE = PerfilTipo.PACIENTE.getDesc();
+    private static final String FINANCEIRO = PerfilTipo.FINANCEIRO.getDesc();
+    private static final String FATURAMENTO = PerfilTipo.FATURAMENTO.getDesc();
+    private static final String FISCAL = PerfilTipo.FISCAL.getDesc();
 
     @Autowired
     private UsuarioService usuarioService;
@@ -36,30 +36,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	http.authorizeRequests()
 
-		.antMatchers("/", "/home", "/webjars/**", "/css/**", "/js/**", "/image/**", "/u/novo/cadastro", "/u/cadastro/realizado", "/u/cadastro/paciente/salvar", "/u/confirmacao/cadastro",
-			"/u/p/**", "/expired")
+		.antMatchers("/", "/login", "/webjars/**", "/css/**", "/js/**", "/image/**", "/u/p/**", "/expired")
 
 		.permitAll()
 
-		// Acessos privados admin
-		.antMatchers("/u/editar/senha", "/u/confirmar/senha").hasAnyAuthority(MEDICO, PACIENTE)
-
-		.antMatchers("/u/**").hasAuthority(ADMIN)
+		.antMatchers("/home").hasAnyAuthority(FINANCEIRO, FATURAMENTO, FISCAL)
 
 		// Acessos privados admin
-		.antMatchers("/especialidades/datatables/server/medico/*").hasAnyAuthority(MEDICO, ADMIN)
+		.antMatchers("/u/editar/senha", "/u/confirmar/senha").hasAnyAuthority(FATURAMENTO, FISCAL)
 
-		.antMatchers("/especialidades/titulo").hasAnyAuthority(MEDICO, ADMIN, PACIENTE)
+		.antMatchers("/u/**").hasAuthority(FINANCEIRO)
 
-		.antMatchers("/especialidades/**").hasAuthority(ADMIN)
+		// Acessos privados admin
+		.antMatchers("/especialidades/datatables/server/medico/*").hasAnyAuthority(FATURAMENTO, FINANCEIRO)
+
+		.antMatchers("/especialidades/titulo").hasAnyAuthority(FATURAMENTO, FINANCEIRO, FISCAL)
+
+		.antMatchers("/especialidades/**").hasAuthority(FINANCEIRO)
 
 		// Acessos privados pacientes
-		.antMatchers("/pacientes/**").hasAuthority(PACIENTE)
+		.antMatchers("/pacientes/**").hasAuthority(FISCAL)
 
 		// Acessos privados médicos
-		.antMatchers("/medicos/especialidade/titulo/*").hasAnyAuthority(MEDICO, PACIENTE).antMatchers("/medicos/dados", "/medicos/salvar", "/medicos/editar").hasAnyAuthority(MEDICO, ADMIN)
+		.antMatchers("/medicos/especialidade/titulo/*").hasAnyAuthority(FATURAMENTO, FISCAL).antMatchers("/medicos/dados", "/medicos/salvar", "/medicos/editar")
+		.hasAnyAuthority(FATURAMENTO, FINANCEIRO)
 
-		.antMatchers("/medicos/**").hasAuthority(MEDICO)
+		.antMatchers("/medicos/**").hasAuthority(FATURAMENTO)
 
 		.anyRequest()
 
@@ -72,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		.loginPage("/login")
 
-		.defaultSuccessUrl("/", true)
+		.defaultSuccessUrl("/home", true)
 
 		.failureUrl("/login-error")
 

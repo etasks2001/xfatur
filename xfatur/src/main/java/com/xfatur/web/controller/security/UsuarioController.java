@@ -62,7 +62,7 @@ public class UsuarioController {
 
 	if (perfis.size() > 2 ||
 
-		perfis.containsAll(Arrays.asList(new Perfil(PerfilTipo.ADMIN.getCod()), new Perfil(PerfilTipo.PACIENTE.getCod()))))
+		perfis.containsAll(Arrays.asList(new Perfil(PerfilTipo.FINANCEIRO.getCod()), new Perfil(PerfilTipo.FISCAL.getCod()))))
 
 	{
 
@@ -93,13 +93,13 @@ public class UsuarioController {
 
 	Usuario us = usuarioService.buscaPorIdEPerfis(usuarioId, perfisId);
 
-	if (us.getPerfis().contains(new Perfil(PerfilTipo.ADMIN.getCod()))
+	if (us.getPerfis().contains(new Perfil(PerfilTipo.FINANCEIRO.getCod()))
 
 	) {
 
 	    return new ModelAndView("usuario/cadastro", "usuario", us);
 
-	} else if (us.getPerfis().contains(new Perfil(PerfilTipo.PACIENTE.getCod()))) {
+	} else if (us.getPerfis().contains(new Perfil(PerfilTipo.FISCAL.getCod()))) {
 	    ModelAndView model = new ModelAndView("error");
 	    model.addObject("status", "403");
 	    model.addObject("error", "Área restrita.");

@@ -1,7 +1,7 @@
 package com.xfatur.model.security;
 
 public enum PerfilTipo {
-    ADMIN(1, "ADMIN"), FATURAMENTO(2, "MEDICO"), PACIENTE(3, "PACIENTE");
+    FINANCEIRO(1, "FINANCEIRO"), FATURAMENTO(2, "FATURAMENTO"), FISCAL(3, "FISCAL");
 
     private long cod;
     private String desc;

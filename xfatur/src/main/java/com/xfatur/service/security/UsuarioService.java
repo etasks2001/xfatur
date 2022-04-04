@@ -110,7 +110,7 @@ public class UsuarioService implements UserDetailsService {
 
 	String encoded = crypt.encode(usuario.getSenha());
 	usuario.setSenha(encoded);
-	usuario.addPerfil(PerfilTipo.PACIENTE);
+	usuario.addPerfil(PerfilTipo.FISCAL);
 
 	repository.save(usuario);
 
