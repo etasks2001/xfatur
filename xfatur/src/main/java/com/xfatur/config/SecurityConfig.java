@@ -47,24 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// Acessos privados admin
 		.antMatchers("/u/editar/senha", "/u/confirmar/senha").hasAnyAuthority(FATURAMENTO, FISCAL)
 
-		.antMatchers("/u/**").hasAuthority(FINANCEIRO)
-
-		// Acessos privados admin
-		.antMatchers("/especialidades/datatables/server/medico/*").hasAnyAuthority(FATURAMENTO, FINANCEIRO)
-
-		.antMatchers("/especialidades/titulo").hasAnyAuthority(FATURAMENTO, FINANCEIRO, FISCAL)
-
-		.antMatchers("/especialidades/**").hasAuthority(FINANCEIRO)
-
-		// Acessos privados pacientes
-		.antMatchers("/pacientes/**").hasAuthority(FISCAL)
-
-		// Acessos privados médicos
-		.antMatchers("/medicos/especialidade/titulo/*").hasAnyAuthority(FATURAMENTO, FISCAL).antMatchers("/medicos/dados", "/medicos/salvar", "/medicos/editar")
-		.hasAnyAuthority(FATURAMENTO, FINANCEIRO)
-
-		.antMatchers("/medicos/**").hasAuthority(FATURAMENTO)
-
 		.anyRequest()
 
 		.authenticated()
