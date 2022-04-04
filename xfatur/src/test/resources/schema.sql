@@ -37,8 +37,10 @@ INSERT INTO perfil (id,descricao) VALUES (1,'FINANCEIRO'),(2,'FATURAMENTO'),(3,'
 
 
 INSERT INTO usuario (ativo, email, senha) VALUES (true, 'msergiost@hotmail.com', '$2a$10$GNDvn3lJHD4n6Z5YK3JoGeniH7bxshFzyxMXrxLbHPQ52ifZC7dUS');
+INSERT INTO usuario (ativo, email, senha) VALUES (true, 'finan@hotmail.com', '$2a$10$GNDvn3lJHD4n6Z5YK3JoGeniH7bxshFzyxMXrxLbHPQ52ifZC7dUS');
 
 INSERT INTO usuarios_tem_perfis (usuario_id, perfil_id) VALUES (1,1);
+INSERT INTO usuarios_tem_perfis (usuario_id, perfil_id) VALUES (2,1);
 INSERT INTO usuarios_tem_perfis (usuario_id, perfil_id) VALUES (1,2);
 INSERT INTO usuarios_tem_perfis (usuario_id, perfil_id) VALUES (1,3);
 

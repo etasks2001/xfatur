@@ -42,6 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		.antMatchers("/home").hasAnyAuthority(FINANCEIRO, FATURAMENTO, FISCAL)
 
+		.antMatchers("/cadastros").hasAnyAuthority(FATURAMENTO)
+
 		// Acessos privados admin
 		.antMatchers("/u/editar/senha", "/u/confirmar/senha").hasAnyAuthority(FATURAMENTO, FISCAL)
 
@@ -86,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		.logout()
 
-		.logoutSuccessUrl("/")
+		.logoutSuccessUrl("/login")
 
 		.deleteCookies("JSESSIONID")
 

@@ -25,7 +25,7 @@
 	  <div class="container-fluid">
 	      <a class="navbar-brand text-white border border-secondary rounded col-md-auto col-lg-auto me-0 px-3 btnmenu grupo-0" th:href="@{/home}"><span class="fas fa-home"></span>  [(#{home.menu.empresa})]</a>
 	      <div layout:fragment="menu"></div>
-	      <form class="navbar p-1">
+	      <form class="navbar p-1" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()" >
 	      	<span class="alert alert-light m-1 p-1">Usuário: email@gmail.com</span>
 	        <button class="btn btn-success  m-1 p-1" type="submit" style="font-family: Inter,sans-serif;"><i class="fas fa-sign-out-alt"></i> Sair</button>
 	      </form>
