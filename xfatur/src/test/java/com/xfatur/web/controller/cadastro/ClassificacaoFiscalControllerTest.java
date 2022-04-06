@@ -19,28 +19,29 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.xfatur.service.produto.ClassificacaoFiscalService;
 
-//@WebMvcTest(ClassificacaoFiscalController.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(ClassificacaoFiscalController.class)
+//@SpringBootTest
+//@AutoConfigureMockMvc
 @DisplayName("Controller - Classificação Fiscal")
 class ClassificacaoFiscalControllerTest {
 
     @Autowired
     private MockMvc mock;
 
-    @Autowired
+    @MockBean
     private ClassificacaoFiscalService service;
 
     @Test
     @DisplayName("GET /classificacaofiscal/form >> abrir formulário")
+
     void openForm_test() throws Exception {
 	Assertions.assertNotNull(mock, "Formulário encontrado");
 

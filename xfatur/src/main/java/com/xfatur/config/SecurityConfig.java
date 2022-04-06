@@ -1,6 +1,5 @@
 package com.xfatur.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,13 +9,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import com.xfatur.model.security.PerfilTipo;
-import com.xfatur.service.security.UsuarioService;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
@@ -26,8 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String FATURAMENTO = PerfilTipo.FATURAMENTO.getDesc();
     private static final String FISCAL = PerfilTipo.FISCAL.getDesc();
 
-    @Autowired
-    private UsuarioService usuarioService;
+//    @Autowired
+//    private UsuarioService usuarioService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -100,7 +97,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-	auth.userDetailsService(usuarioService).passwordEncoder(new BCryptPasswordEncoder());
+//	auth.userDetailsService(usuarioService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Bean

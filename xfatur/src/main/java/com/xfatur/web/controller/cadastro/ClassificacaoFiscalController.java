@@ -21,50 +21,50 @@ import com.xfatur.validation.dto.cadastro.ClassificacaoFiscalDTO;
 @RequestMapping("classificacaofiscal")
 public class ClassificacaoFiscalController {
 
-	@Autowired
-	private ClassificacaoFiscalService service;
+    @Autowired
+    private ClassificacaoFiscalService service;
 
-	@GetMapping("form")
-	public String openForm(Model model) {
-		model.addAttribute("classificacaofiscal", new ClassificacaoFiscalDTO());
+    @GetMapping("form")
+    public String openForm(Model model) {
+	model.addAttribute("classificacaofiscal", new ClassificacaoFiscalDTO());
 
-		return "/cadastro/classificacaofiscal";
+	return "/cadastro/classificacaofiscal";
+    }
+
+    @PostMapping("salvar")
+    public String salvar(@Valid @ModelAttribute("classificacaofiscal") ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
+	if (result.hasErrors()) {
+
+	    return "cadastro/classificacaofiscal";
 	}
 
-	@PostMapping("salvar")
-	public String salvar(@Valid @ModelAttribute("classificacaofiscal") ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
-		if (result.hasErrors()) {
+	service.save(dto);
 
-			return "cadastro/classificacaofiscal";
-		}
+	attr.addFlashAttribute("success", "Classificação fiscal incluída.");
 
-		service.save(dto);
+	return "redirect:/classificacaofiscal/form";
+    }
 
-		attr.addFlashAttribute("success", "Classificação fiscal incluída.");
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable("id") Integer id) {
 
-		return "redirect:/classificacaofiscal/form";
+	ClassificacaoFiscalDTO dto = service.findById(id);
+
+	return new ModelAndView("/cadastro/classificacaofiscal", "classificacaofiscal", dto);
+    }
+
+    @PostMapping("alterar")
+    public String alterar(@Valid @ModelAttribute("classificacaofiscal") ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
+
+	if (result.hasErrors()) {
+
+	    return "cadastro/classificacaofiscal";
 	}
 
-	@GetMapping("/editar/{id}")
-	public ModelAndView editar(@PathVariable("id") Integer id) {
+	service.update(dto);
 
-		ClassificacaoFiscalDTO dto = service.findById(id);
+	attr.addFlashAttribute("success", "Classificação fiscal alterada.");
 
-		return new ModelAndView("/cadastro/classificacaofiscal", "classificacaofiscal", dto);
-	}
-
-	@PostMapping("alterar")
-	public String alterar(@Valid @ModelAttribute("classificacaofiscal") ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
-
-		if (result.hasErrors()) {
-
-			return "cadastro/classificacaofiscal";
-		}
-
-		service.update(dto);
-
-		attr.addFlashAttribute("success", "Classificação fiscal alterada.");
-
-		return "redirect:/classificacaofiscal/form";
-	}
+	return "redirect:/classificacaofiscal/form";
+    }
 }
