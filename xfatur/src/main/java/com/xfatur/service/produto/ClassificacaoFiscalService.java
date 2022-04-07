@@ -3,6 +3,8 @@ package com.xfatur.service.produto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class ClassificacaoFiscalService implements Servico {
     private ClassificacaoFiscalRepository repository;
 
     @Transactional(readOnly = false)
+    @CacheEvict(value = { "findByDescricao", "findByNcm" }, allEntries = true)
     public ClassificacaoFiscalDTO save(ClassificacaoFiscalDTO classificacaoFiscalDTO) {
 
 	ClassificacaoFiscal saved = repository.save(mapper.toModel(classificacaoFiscalDTO));
@@ -54,16 +57,19 @@ public class ClassificacaoFiscalService implements Servico {
 	return repository.hasNcm(id, ncm);
     }
 
+    @Cacheable(value = "findByDescricao")
     public Page<ClassificacaoFiscalView> findByDescricao(String search, Pageable pageable) {
 	return repository.findByDescricao(search, pageable);
 
     }
 
+    @Cacheable(value = "findByNcm")
     public Page<ClassificacaoFiscalView> findByNcm(String search, Pageable pageable) {
 	return repository.findByNcm(search, pageable);
     }
 
     @Transactional(readOnly = false)
+    @CacheEvict(value = { "findByDescricao", "findByNcm" }, allEntries = true)
     public void update(ClassificacaoFiscalDTO dto) {
 	repository.update(dto.getId(), dto.getNcm(), dto.getDescricao());
 
