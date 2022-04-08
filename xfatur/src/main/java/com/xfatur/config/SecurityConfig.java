@@ -30,29 +30,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UsuarioService usuarioService;
 
-    /*
-     * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-     * 
-     * @@@@@@@@@@@@ Configurações de autenticação - controle de acesso de login
-     * 
-     * Para bloquear o primeiro login
-     */
+    // Configurações de autenticação - controle de acesso de login
+    // Para bloquear o primeiro login
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	auth.userDetailsService(usuarioService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
-    /*
-     * Configurações de conteúdos estáticos(css/javascript/imagens)
-     * 
-     */
+    // Configurações de conteúdos estáticos(css/javascript/imagens)
     @Override
     public void configure(WebSecurity web) throws Exception {
+
     }
 
-    /*
-     * Configuraçãoes de Autorização - quem pode acessar cada url e perfil de acesso
-     */
+    // Configuraçãoes de Autorização - quem pode acessar cada url e perfil de acesso
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -70,7 +61,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		.antMatchers("/cadastro/classificacaofiscal/**").hasAnyAuthority(FATURAMENTO)
 
-		// Acessos privados admin
 		.antMatchers("/u/editar/senha", "/u/confirmar/senha").hasAnyAuthority(FATURAMENTO, FISCAL)
 
 		.anyRequest()
@@ -120,21 +110,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public SessionRegistry sessionRegistry() {
-
 	return new SessionRegistryImpl();
     }
 
     @Bean
     public ServletListenerRegistrationBean<?> servletListenerRegistrationBean() {
-
 	return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher());
     }
 
-    /**
-     * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-     * Para invalidar a sessão do primeiro login
-     */
-
+    // Para invalidar a sessão do primeiro login
     @Bean
     public SessionAuthenticationStrategy sessionAuthenticationStrategy() {
 	return new RegisterSessionAuthenticationStrategy(sessionRegistry());

@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -16,36 +17,56 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
+import org.springframework.security.web.FilterChainProxy;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
+import com.xfatur.XFaturApplication;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
 
-@WebMvcTest(ClassificacaoFiscalController.class)
-//@SpringBootTest
-//@AutoConfigureMockMvc
+//@WebMvcTest(ClassificacaoFiscalController.class)
+@SpringBootTest(classes = { XFaturApplication.class })
+@AutoConfigureMockMvc
 @DisplayName("Controller - Classificação Fiscal")
+@ActiveProfiles("dev")
 class ClassificacaoFiscalControllerTest {
 
     @Autowired
+    private WebApplicationContext context;
+
+    @Autowired
+    private FilterChainProxy filterChainProxy;
+
     private MockMvc mock;
+
+    @BeforeEach
+    public void setup() {
+	mock = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity()).addFilters(filterChainProxy).build();
+    }
 
     @MockBean
     private ClassificacaoFiscalService service;
 
     @Test
     @DisplayName("GET /classificacaofiscal/form >> abrir formulário")
-
+    @WithUserDetails("msergiost@hotmail.com")
     void openForm_test() throws Exception {
 	Assertions.assertNotNull(mock, "Formulário encontrado");
 
-	mock.perform(get("/classificacaofiscal/form"))
+	mock.perform(get("/classificacaofiscal/form").with(csrf()))
 
 		.andExpect(status().isOk())
 
@@ -172,14 +193,16 @@ class ClassificacaoFiscalControllerTest {
     }
 
     @Test
+
     @DisplayName("GET /classificacaofiscal/editar/{id}")
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal.sql" }, config = @SqlConfig(encoding = "UTF-8"))
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal-clean.sql" }, executionPhase = AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8"))
+    @WithUserDetails("msergiost@hotmail.com")
     void editar_id() throws Exception {
 
 	Integer id = service.findIdByDescricao("SORVETE DE MASSA");
 
-	mock.perform(get("/classificacaofiscal/editar/{id}", id))
+	mock.perform(get("/classificacaofiscal/editar/{id}", id).with(csrf()))
 
 		.andExpect(status().isOk())
 
@@ -204,6 +227,8 @@ class ClassificacaoFiscalControllerTest {
     @DisplayName("GET /classificacaofiscal/editar/{id} >> inexistente")
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal.sql" }, config = @SqlConfig(encoding = "UTF-8"))
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal-clean.sql" }, executionPhase = AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8"))
+
+    @WithUserDetails("msergiost@hotmail.com")
     void editar_id_inexistente() throws Exception {
 
 	Integer id = 879765467;
