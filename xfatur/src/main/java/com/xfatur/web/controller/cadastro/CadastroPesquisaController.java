@@ -35,6 +35,7 @@ public class CadastroPesquisaController {
 	return "/cadastro/pesquisa";
     }
 
+    
     @GetMapping("/pesquisar/datatables")
     public ResponseEntity<?> datatables(HttpServletRequest request) {
 	Map<String, Object> data = execute(request);

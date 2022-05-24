@@ -12,7 +12,9 @@ import java.util.stream.Stream;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xfatur.exception.NaturezaJuridicaException;
@@ -22,7 +24,7 @@ import com.xfatur.testutil.CreateModelTest;
 
 //@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 ////@TestInstance(Lifecycle.PER_CLASS)
-////@TestMethodOrder(OrderAnnotation.class)
+@TestMethodOrder(OrderAnnotation.class)
 class NaturezaJuridicaServiceTest {
     @Autowired
     NaturezaJuridicaService service;
