@@ -6,7 +6,7 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -20,13 +20,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
-import org.springframework.security.web.FilterChainProxy;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
@@ -36,25 +35,22 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.xfatur.XFaturApplication;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
+import com.xfatur.validation.dto.cadastro.ClassificacaoFiscalDTO;
 
-//@WebMvcTest(ClassificacaoFiscalController.class)
 @SpringBootTest(classes = { XFaturApplication.class })
-@AutoConfigureMockMvc
-@DisplayName("Controller - Classificação Fiscal")
 @ActiveProfiles("dev")
+@WithMockUser(username = "msergiost@hotail.com", roles = { "FINANCEIRO", "FATURAMENTO", "FISCAL" })
+@DisplayName("Controller - Classificação Fiscal")
 class ClassificacaoFiscalControllerTest {
 
     @Autowired
     private WebApplicationContext context;
 
-    @Autowired
-    private FilterChainProxy filterChainProxy;
-
     private MockMvc mock;
 
     @BeforeEach
     public void setup() {
-	mock = MockMvcBuilders.webAppContextSetup(context).apply(SecurityMockMvcConfigurers.springSecurity()).addFilters(filterChainProxy).build();
+	mock = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).build();
     }
 
     @MockBean
@@ -62,11 +58,14 @@ class ClassificacaoFiscalControllerTest {
 
     @Test
     @DisplayName("GET /classificacaofiscal/form >> abrir formulário")
-    @WithUserDetails("msergiost@hotmail.com")
     void openForm_test() throws Exception {
 	Assertions.assertNotNull(mock, "Formulário encontrado");
 
-	mock.perform(get("/classificacaofiscal/form").with(csrf()))
+	mock.perform(get("/classificacaofiscal/form")
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
+	)
 
 		.andExpect(status().isOk())
 
@@ -97,6 +96,8 @@ class ClassificacaoFiscalControllerTest {
 
 	mock.perform(post("/classificacaofiscal/salvar")
 
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
 		.contentType(APPLICATION_FORM_URLENCODED)
 
 		.param("id", "")
@@ -121,6 +122,8 @@ class ClassificacaoFiscalControllerTest {
     void gravar_em_branco() throws Exception {
 
 	mock.perform(post("/classificacaofiscal/salvar")
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
 		.contentType(APPLICATION_FORM_URLENCODED)
 
@@ -159,6 +162,8 @@ class ClassificacaoFiscalControllerTest {
 
 	mock.perform(post("/classificacaofiscal/salvar")
 
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
 		.contentType(APPLICATION_FORM_URLENCODED)
 
 		.param("id", "")
@@ -169,9 +174,9 @@ class ClassificacaoFiscalControllerTest {
 
 	)
 
-		.andExpect(status().isOk())
+		.andExpect(status().is3xxRedirection())
 
-		.andExpect(view().name("cadastro/classificacaofiscal"))
+		.andExpect(view().name("redirect:/classificacaofiscal/form"))
 
 		.andExpect(model().attribute("classificacaofiscal", allOf(
 
@@ -193,16 +198,24 @@ class ClassificacaoFiscalControllerTest {
     }
 
     @Test
-
     @DisplayName("GET /classificacaofiscal/editar/{id}")
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal.sql" }, config = @SqlConfig(encoding = "UTF-8"))
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal-clean.sql" }, executionPhase = AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8"))
-    @WithUserDetails("msergiost@hotmail.com")
     void editar_id() throws Exception {
 
 	Integer id = service.findIdByDescricao("SORVETE DE MASSA");
+	ClassificacaoFiscalDTO dto = new ClassificacaoFiscalDTO();
+	dto.setId(id);
+	dto.setDescricao("SORVETE DE MASSA");
+	dto.setNcm("1234.5678");
 
-	mock.perform(get("/classificacaofiscal/editar/{id}", id).with(csrf()))
+	Mockito.when(service.findById(id)).thenReturn(dto);
+
+	mock.perform(get("/classificacaofiscal/editar/{id}", id)
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
+	)
 
 		.andExpect(status().isOk())
 
@@ -228,12 +241,15 @@ class ClassificacaoFiscalControllerTest {
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal.sql" }, config = @SqlConfig(encoding = "UTF-8"))
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal-clean.sql" }, executionPhase = AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8"))
 
-    @WithUserDetails("msergiost@hotmail.com")
     void editar_id_inexistente() throws Exception {
 
 	Integer id = 879765467;
 
-	mock.perform(get("/classificacaofiscal/editar/{id}", id))
+	mock.perform(get("/classificacaofiscal/editar/{id}", id)
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
+	)
 
 		.andExpect(status().isOk())
 
@@ -256,6 +272,8 @@ class ClassificacaoFiscalControllerTest {
 	Integer id = service.findIdByDescricao("SORVETE DE MASSA");
 
 	mock.perform(post("/classificacaofiscal/alterar")
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
 		.contentType(APPLICATION_FORM_URLENCODED)
 
@@ -284,6 +302,8 @@ class ClassificacaoFiscalControllerTest {
 	Integer id = service.findIdByDescricao("SORVETE DE MASSA");
 
 	mock.perform(post("/classificacaofiscal/alterar")
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
 		.contentType(APPLICATION_FORM_URLENCODED)
 
@@ -328,6 +348,8 @@ class ClassificacaoFiscalControllerTest {
 
 	mock.perform(post("/classificacaofiscal/alterar")
 
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
 		.contentType(APPLICATION_FORM_URLENCODED)
 
 		.param("id", String.valueOf(id))
@@ -338,9 +360,9 @@ class ClassificacaoFiscalControllerTest {
 
 	)
 
-		.andExpect(status().isOk())
+		.andExpect(status().is3xxRedirection())
 
-		.andExpect(view().name("cadastro/classificacaofiscal"))
+		.andExpect(view().name("redirect:/classificacaofiscal/form"))
 
 		.andExpect(model().attribute("classificacaofiscal", allOf(
 
@@ -359,7 +381,5 @@ class ClassificacaoFiscalControllerTest {
 		.andExpect(content().string(containsString("action=\"/classificacaofiscal/alterar\"")))
 
 	;
-
     }
-
 }
