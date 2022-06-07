@@ -6,26 +6,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.MockMvc;
 
-import com.xfatur.XFaturApplication;
+import com.base.BaseTest;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { XFaturApplication.class })
-@AutoConfigureMockMvc
-@WithMockUser(username = "msergiost@homail.com", authorities = { "FATURAMENTO" })
-@ActiveProfiles("dev")
 @DisplayName("Controller - Cadastro")
-class CadastroControllerTest {
-
-    @Autowired
-    private MockMvc mock;
+class CadastroControllerTest extends BaseTest {
 
     @Test
     @DisplayName("GET /cadastros")

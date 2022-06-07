@@ -17,24 +17,22 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.jdbc.SqlConfig.TransactionMode;
 
+import com.base.BaseTest;
 import com.xfatur.exception.ListaPrecoIdNotFoundException;
 import com.xfatur.model.preco.Item;
 import com.xfatur.model.preco.Lista;
 import com.xfatur.model.produto.Produto;
 import com.xfatur.service.produto.ProdutoService;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(value = Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("Service - Lista de Preço")
-class ListaServiceTest {
+class ListaServiceTest extends BaseTest {
 
     List<Integer> idsLista = new ArrayList<Integer>();
 

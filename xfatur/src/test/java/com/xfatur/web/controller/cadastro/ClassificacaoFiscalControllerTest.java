@@ -19,31 +19,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.web.servlet.MockMvc;
 
-import com.xfatur.XFaturApplication;
+import com.base.BaseTest;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { XFaturApplication.class })
-@AutoConfigureMockMvc
-@WithMockUser(username = "msergiost@hotmail.com", authorities = { "FISCAL" })
-@ActiveProfiles("dev")
 @DisplayName("Controller - Classificação Fiscal")
-class ClassificacaoFiscalControllerTest {
+class ClassificacaoFiscalControllerTest extends BaseTest {
 
     @Autowired
     private ClassificacaoFiscalService service;
-
-    @Autowired
-    private MockMvc mock;
 
     @Test
     @DisplayName("GET /classificacaofiscal/form >> abrir formulário")
