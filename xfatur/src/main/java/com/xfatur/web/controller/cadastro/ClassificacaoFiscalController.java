@@ -2,6 +2,7 @@ package com.xfatur.web.controller.cadastro;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,13 +21,8 @@ import com.xfatur.validation.dto.cadastro.ClassificacaoFiscalDTO;
 @RequestMapping("classificacaofiscal")
 public class ClassificacaoFiscalController {
 
-//    @Autowired
+    @Autowired
     private ClassificacaoFiscalService service;
-
-    public ClassificacaoFiscalController(ClassificacaoFiscalService service) {
-	this.service = service;
-	// TODO Auto-generated constructor stub
-    }
 
     @GetMapping("form")
     public String openForm(Model model) {

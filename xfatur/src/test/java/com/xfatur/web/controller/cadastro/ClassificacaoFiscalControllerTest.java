@@ -20,10 +20,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.ActiveProfiles;
@@ -35,16 +34,18 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.xfatur.XFaturApplication;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
-import com.xfatur.validation.dto.cadastro.ClassificacaoFiscalDTO;
 
-@SpringBootTest(classes = { XFaturApplication.class })
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { XFaturApplication.class })
+@WithMockUser(username = "msergiost@hotmail.com", authorities = { "FISCAL" })
 @ActiveProfiles("dev")
-@WithMockUser(username = "msergiost@hotail.com", roles = { "FINANCEIRO", "FATURAMENTO", "FISCAL" })
 @DisplayName("Controller - Classificação Fiscal")
 class ClassificacaoFiscalControllerTest {
 
     @Autowired
     private WebApplicationContext context;
+
+    @Autowired
+    private ClassificacaoFiscalService service;
 
     private MockMvc mock;
 
@@ -52,9 +53,6 @@ class ClassificacaoFiscalControllerTest {
     public void setup() {
 	mock = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).build();
     }
-
-    @MockBean
-    private ClassificacaoFiscalService service;
 
     @Test
     @DisplayName("GET /classificacaofiscal/form >> abrir formulário")
@@ -174,9 +172,9 @@ class ClassificacaoFiscalControllerTest {
 
 	)
 
-		.andExpect(status().is3xxRedirection())
+		.andExpect(status().isOk())
 
-		.andExpect(view().name("redirect:/classificacaofiscal/form"))
+		.andExpect(view().name("cadastro/classificacaofiscal"))
 
 		.andExpect(model().attribute("classificacaofiscal", allOf(
 
@@ -204,12 +202,6 @@ class ClassificacaoFiscalControllerTest {
     void editar_id() throws Exception {
 
 	Integer id = service.findIdByDescricao("SORVETE DE MASSA");
-	ClassificacaoFiscalDTO dto = new ClassificacaoFiscalDTO();
-	dto.setId(id);
-	dto.setDescricao("SORVETE DE MASSA");
-	dto.setNcm("1234.5678");
-
-	Mockito.when(service.findById(id)).thenReturn(dto);
 
 	mock.perform(get("/classificacaofiscal/editar/{id}", id)
 
@@ -279,7 +271,7 @@ class ClassificacaoFiscalControllerTest {
 
 		.param("id", String.valueOf(id))
 
-		.param("ncm", "1111.1111")
+		.param("ncm", "1111.1112")
 
 		.param("descricao", "alterado")
 
@@ -360,9 +352,9 @@ class ClassificacaoFiscalControllerTest {
 
 	)
 
-		.andExpect(status().is3xxRedirection())
+		.andExpect(status().isOk())
 
-		.andExpect(view().name("redirect:/classificacaofiscal/form"))
+		.andExpect(view().name("cadastro/classificacaofiscal"))
 
 		.andExpect(model().attribute("classificacaofiscal", allOf(
 
