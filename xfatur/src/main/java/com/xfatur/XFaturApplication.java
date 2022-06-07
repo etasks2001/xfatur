@@ -15,8 +15,7 @@ public class XFaturApplication {
 
     public static void main(String[] args) {
 	BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-	
-	
+
 	SpringApplication.run(XFaturApplication.class, args);
 
     }
