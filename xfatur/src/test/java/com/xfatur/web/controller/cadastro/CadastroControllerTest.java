@@ -21,7 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.xfatur.XFaturApplication;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { XFaturApplication.class })
-@WithMockUser(username = "msergiost@hotmail.com", authorities = { "FATURAMENTO" })
+@WithMockUser(username = "msergiost@homail.com", authorities = { "FATURAMENTO" })
 @ActiveProfiles("dev")
 @DisplayName("Controller - Cadastro")
 class CadastroControllerTest {

@@ -202,6 +202,7 @@ class ClassificacaoFiscalControllerTest {
     void editar_id() throws Exception {
 
 	Integer id = service.findIdByDescricao("SORVETE DE MASSA");
+	System.out.println("Código encontrado: " + id);
 
 	mock.perform(get("/classificacaofiscal/editar/{id}", id)
 
