@@ -12,7 +12,7 @@ import com.xfatur.XFaturApplication;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { XFaturApplication.class })
 @AutoConfigureMockMvc
-@WithMockUser(username = "msergiost@homail.com", authorities = { "FATURAMENTO" })
+@WithMockUser(username = "msergiost@homail.com", authorities = { "FINANCEIRO", "FATURAMENTO", "FISCAL" })
 @ActiveProfiles("dev")
 public abstract class BaseTest {
 

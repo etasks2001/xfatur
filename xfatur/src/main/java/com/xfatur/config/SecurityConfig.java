@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		.antMatchers("/cadastros").hasAnyAuthority(FATURAMENTO)
 
-		.antMatchers("/cadastro/classificacaofiscal/**").hasAnyAuthority(FATURAMENTO)
+		.antMatchers("/classificacaofiscal/**").hasAnyAuthority(FATURAMENTO)
 
 		.antMatchers("/u/editar/senha", "/u/confirmar/senha").hasAnyAuthority(FATURAMENTO, FISCAL)
 

@@ -3,6 +3,7 @@ package com.xfatur.web.controller.cadastro;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,7 @@ public class ClassificacaoFiscalController {
 	return "/cadastro/classificacaofiscal";
     }
 
+    @PreAuthorize("hasAnyAuthority('FATURAMENTO')")
     @PostMapping("salvar")
     public String salvar(@Valid @ModelAttribute("classificacaofiscal") ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
 	if (result.hasErrors()) {
@@ -45,6 +47,7 @@ public class ClassificacaoFiscalController {
 	return "redirect:/classificacaofiscal/form";
     }
 
+    @PreAuthorize("hasAnyAuthority('FATURAMENTO')")
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable("id") Integer id) {
 
@@ -53,6 +56,7 @@ public class ClassificacaoFiscalController {
 	return new ModelAndView("/cadastro/classificacaofiscal", "classificacaofiscal", dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('FATURAMENTO')")
     @PostMapping("alterar")
     public String alterar(@Valid @ModelAttribute("classificacaofiscal") ClassificacaoFiscalDTO dto, BindingResult result, RedirectAttributes attr) {
 

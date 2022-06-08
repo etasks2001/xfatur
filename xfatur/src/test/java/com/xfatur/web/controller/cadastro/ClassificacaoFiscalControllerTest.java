@@ -19,9 +19,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.base.BaseTest;
 import com.xfatur.service.produto.ClassificacaoFiscalService;
@@ -31,6 +33,40 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
 
     @Autowired
     private ClassificacaoFiscalService service;
+
+    @Test
+    @DisplayName("GET /classificacaofiscal/form >> abrir formulário acesso negado")
+    @WithMockUser(username = "msergiost@hotmail.com", authorities = { "FINANCEIRO", "FISCAL" })
+    void openForm_acessoNegado() throws Exception {
+	mock.perform(get("/classificacaofiscal/form")
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf()
+
+		))
+
+		.andExpect(status().is4xxClientError())
+
+		.andExpect(MockMvcResultMatchers.forwardedUrl("/acesso-negado"))
+
+	;
+    }
+
+    @Test
+    @DisplayName("GET /classificacaofiscal/salvar >> salvar acesso negado")
+    @WithMockUser(username = "msergiost@hotmail.com", authorities = { "FINANCEIRO", "FISCAL" })
+    void salvar_acessonegado() throws Exception {
+	mock.perform(post("/classificacaofiscal/salvar")
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
+	)
+
+		.andExpect(status().is4xxClientError())
+
+		.andExpect(MockMvcResultMatchers.forwardedUrl("/acesso-negado"))
+
+	;
+    }
 
     @Test
     @DisplayName("GET /classificacaofiscal/form >> abrir formulário")
