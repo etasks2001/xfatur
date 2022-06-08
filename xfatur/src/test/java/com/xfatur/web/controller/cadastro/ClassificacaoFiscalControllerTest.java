@@ -23,6 +23,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.base.BaseTest;
@@ -35,7 +36,42 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     private ClassificacaoFiscalService service;
 
     @Test
-    @DisplayName("GET /classificacaofiscal/form >> abrir formulário acesso negado")
+    @DisplayName("POST / classificacaofiscal/alterar >> acesso negado")
+    @WithMockUser(username = "msergiost@hotmail.com", authorities = { "FINANCEIRO", "FISCAL" })
+    void alterar_acessoNegado() throws Exception {
+	mock.perform(MockMvcRequestBuilders.post("/classificacaofiscal/alterar")
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
+	)
+
+		.andExpect(status().is4xxClientError())
+
+		.andExpect(MockMvcResultMatchers.forwardedUrl("/acesso-negado"))
+
+	;
+
+    }
+
+    @Test
+    @DisplayName("POST / classificacaofiscal/editar/{id} >> acesso negado")
+    @WithMockUser(username = "msergisot@hotmail.com", authorities = { "FINANCEIRO", "FISCAL" })
+    void edit_acessoNegado() throws Exception {
+	mock.perform(MockMvcRequestBuilders.post("/classificacaofiscal/editar/{id}", 1)
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
+	)
+
+		.andExpect(status().is4xxClientError())
+
+		.andExpect(MockMvcResultMatchers.forwardedUrl("/acesso-negado"))
+
+	;
+    }
+
+    @Test
+    @DisplayName("POST /classificacaofiscal/form >> acesso negado")
     @WithMockUser(username = "msergiost@hotmail.com", authorities = { "FINANCEIRO", "FISCAL" })
     void openForm_acessoNegado() throws Exception {
 	mock.perform(get("/classificacaofiscal/form")
