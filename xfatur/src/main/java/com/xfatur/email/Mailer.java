@@ -31,7 +31,7 @@ public class Mailer implements Runnable {
 	    String mensagem = "Message";
 	    String assunto = "Assunto";
 	    String userName = "mauro@francosuissa.com.br";
-	    String password = "Mas159357$";
+	    String password = "$";
 
 	    Properties props = System.getProperties();
 
