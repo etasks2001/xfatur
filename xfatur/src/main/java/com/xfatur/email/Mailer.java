@@ -1,5 +1,7 @@
 package com.xfatur.email;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Date;
 import java.util.Properties;
 
@@ -26,12 +28,16 @@ public class Mailer implements Runnable {
     public void run() {
 	try {
 
-	    String to = "msergiost@hotmail.com";
-	    String from = "mauro@francosuissa.com.br";
+	    Properties smtpProperties = System.getProperties();
+
+	    smtpProperties.load(new FileInputStream(new File("c:/smtp.properties")));
+
+	    String to = smtpProperties.getProperty("to");
+	    String from = smtpProperties.getProperty("from");
 	    String mensagem = "Message";
 	    String assunto = "Assunto";
-	    String userName = "mauro@francosuissa.com.br";
-	    String password = "$";
+	    String userName = smtpProperties.getProperty("from");
+	    String password = smtpProperties.getProperty("password");
 
 	    Properties props = System.getProperties();
 
@@ -66,7 +72,7 @@ public class Mailer implements Runnable {
 
 	    body.setText(mensagem);
 
-	    String[] files = new String[] { "c:/pws.txt", "c:/pws2.txt", "c:/mde/teste-assinado.xml" };
+	    String[] files = new String[] { "c:/pws.txt", "c:/pws2.txt", "c:/soap.xml" };
 	    for (String file : files) {
 		MimeBodyPart attach = new MimeBodyPart();
 		attach.attachFile(file);
@@ -74,6 +80,7 @@ public class Mailer implements Runnable {
 	    }
 
 	    multiPart.addBodyPart(body);
+
 	    message.setContent(multiPart);
 	    message.setSentDate(new Date());
 
