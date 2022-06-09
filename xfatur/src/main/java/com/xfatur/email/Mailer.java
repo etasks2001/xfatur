@@ -80,7 +80,12 @@ public class Mailer implements Runnable {
 	    message.setSentDate(new Date());
 
 	    SMTPTransport smtpTransport = new SMTPTransport(session, null);
-	    smtpTransport.send(message);
+
+	    smtpTransport.sendMessage(message, null);
+
+	    smtpTransport.close();
+
+//	    smtpTransport.send(message);
 //	    Transport.send(message);
 
 	    System.out.println("enviado");
