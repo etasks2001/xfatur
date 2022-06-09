@@ -45,8 +45,6 @@ public class Mailer implements Runnable {
 	    props.put("mail.smtp.port", "465");
 	    props.put("mail.smtp.socketFactory.fallback", "false");
 
-	    String[] files = new String[] { "c:/pws.txt", "c:/pws2.txt", "c:/mde/teste-assinado.xml" };
-
 	    Session session = Session.getInstance(props, new Authenticator() {
 		@Override
 		protected PasswordAuthentication getPasswordAuthentication() {
@@ -68,6 +66,7 @@ public class Mailer implements Runnable {
 
 	    body.setText(mensagem);
 
+	    String[] files = new String[] { "c:/pws.txt", "c:/pws2.txt", "c:/mde/teste-assinado.xml" };
 	    for (String file : files) {
 		MimeBodyPart attach = new MimeBodyPart();
 		attach.attachFile(file);
