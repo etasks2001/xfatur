@@ -7,11 +7,10 @@ import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
-import com.sun.mail.smtp.SMTPTransport;
 
 public class Mailer implements Runnable {
 
@@ -32,7 +31,7 @@ public class Mailer implements Runnable {
 	    String mensagem = "Message";
 	    String assunto = "Assunto";
 	    String userName = "mauro@francosuissa.com.br";
-	    String password = "s$";
+	    String password = "Mas159357$";
 
 	    Properties props = System.getProperties();
 
@@ -79,14 +78,7 @@ public class Mailer implements Runnable {
 	    message.setContent(multiPart);
 	    message.setSentDate(new Date());
 
-	    SMTPTransport smtpTransport = new SMTPTransport(session, null);
-
-	    smtpTransport.sendMessage(message, null);
-
-	    smtpTransport.close();
-
-//	    smtpTransport.send(message);
-//	    Transport.send(message);
+	    Transport.send(message);
 
 	    System.out.println("enviado");
 
