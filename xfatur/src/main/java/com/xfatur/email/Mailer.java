@@ -2,11 +2,13 @@ package com.xfatur.email;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -14,6 +16,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Mailer implements Runnable {
 
     public static void main(String[] args) throws InterruptedException {
@@ -28,7 +33,7 @@ public class Mailer implements Runnable {
     public void run() {
 	try {
 
-	    Properties smtpProperties = System.getProperties();
+	    Properties smtpProperties = new Properties();
 
 	    smtpProperties.load(new FileInputStream(new File("c:/smtp.properties")));
 
@@ -36,16 +41,16 @@ public class Mailer implements Runnable {
 	    String from = smtpProperties.getProperty("from");
 	    String mensagem = "Message";
 	    String assunto = "Assunto";
-	    String userName = smtpProperties.getProperty("from");
+	    String userName = from;
 	    String password = smtpProperties.getProperty("password");
 
 	    Properties props = System.getProperties();
 
 	    props.put("mail.smtp.ssl.enabled", "true");
 	    props.put("mail.smtp.starttls.enable", "true");
+	    props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 	    props.put("mail.smtp.socketFactory.port", "465");
-	    props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-//	    props.put("mail.smtp.socketFactory.class", "com.xfatur.email.AlwaysTrustSSLContextFactory");
+	    props.put("mail.smtp.socketFactory.class", "com.xfatur.email.AlwaysTrustSSLContextFactory");
 	    props.put("mail.smtp.auth", "true");
 	    props.put("mail.smtp.host", "email-ssl.com.br");
 	    props.put("mail.smtp.port", "465");
@@ -88,9 +93,8 @@ public class Mailer implements Runnable {
 
 	    System.out.println("enviado");
 
-	} catch (Exception e) {
+	} catch (MessagingException | IOException e) {
 	    e.printStackTrace();
 	}
-
     }
 }
