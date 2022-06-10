@@ -58,6 +58,8 @@ public class UsuarioController {
 
     @PostMapping("/cadastro/salvar")
     public String salvarUsuarios(Usuario usuario, RedirectAttributes attr) {
+	System.out.println(usuario);
+
 	List<Perfil> perfis = usuario.getPerfis();
 
 	if (perfis.size() > 2 ||
@@ -83,13 +85,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/editar/credenciais/usuario/{id}")
-    public ModelAndView editarCredenciais(@PathVariable("id") Long id) {
+    public ModelAndView editarCredenciais(@PathVariable("id") Integer id) {
 
 	return new ModelAndView("usuario/cadastro", "usuario", usuarioService.buscaPorId(id));
     }
 
     @GetMapping("/editar/dados/usuario/{id}/perfis/{perfis}")
-    public ModelAndView preEditarCadastroDadosPessoais(@PathVariable("id") Long usuarioId, @PathVariable("perfis") Long[] perfisId) {
+    public ModelAndView preEditarCadastroDadosPessoais(@PathVariable("id") Integer usuarioId, @PathVariable("perfis") Integer[] perfisId) {
 
 	Usuario us = usuarioService.buscaPorIdEPerfis(usuarioId, perfisId);
 

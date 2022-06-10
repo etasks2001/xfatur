@@ -7,7 +7,7 @@
 <body>
 
 	<section class="layout-content" layout:fragment="corpo">
-		<main role="main">
+		<main role="main" style="diplay:flex;flex-direction:column">
 
 		<section class="jumbotron text-center">
 			<img class="d-block mx-auto" th:src="@{/image/spring-security.png}"
@@ -53,11 +53,11 @@
 
 							<div class="mb-3">
 								<label for="perfis">Perfil</label>
-								<select id="perfis" class="custom-select" size="4"
+								<select id="perfis" class="custom-select" size="3"
 										th:field="*{perfis}" multiple required>
-									<option value="1">Administrador</option>
+									<option value="1">Financeiro</option>
 									<option value="2">Faturamento</option>
-									<option value="3">Paciente</option>
+									<option value="3">Fiscal</option>
 								</select>
 
 								<input type="hidden" value="0" name="perfis"/>
@@ -97,7 +97,9 @@
 	
 	$('#perfis').ready(function(){
 		var perfis = [[${usuario.perfis}]];
+		
 		$.each(perfis, function(k, v) {
+			console.log(v);
 			$('#perfis option[value="'+ v.id +'"]').attr('selected', 'selected');
 		})
 	});

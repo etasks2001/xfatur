@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.xfatur.model.security.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     @Query("select u from Usuario u where u.email = :email")
     Usuario findByEmail(@Param("email") String email);
@@ -19,7 +19,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Page<Usuario> findPorEmailOrPerfil(String search, Pageable pageable);
 
     @Query("select distinct u from Usuario u join u.perfis p where u.id = :usuarioId and p.id in :perfisId")
-    Optional<Usuario> findByIdAndPerfis(@Param("usuarioId") Long usuarioId, @Param("perfisId") Long[] perfisId);
+    Optional<Usuario> findByIdAndPerfis(@Param("usuarioId") Integer usuarioId, @Param("perfisId") Integer[] perfisId);
 
     @Query("select u from Usuario u where u.email like :email and u.ativo=true ")
     Optional<Usuario> findByEmailAndAtivo(String email);

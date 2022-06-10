@@ -22,7 +22,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
@@ -101,4 +101,7 @@ public class Usuario {
 	return id == null;
     }
 
+    public Integer getId() {
+	return id;
+    }
 }

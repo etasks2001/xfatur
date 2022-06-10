@@ -2,6 +2,7 @@
 <html 
 	layout:decorate="~{layout}"
 	xmlns:th="http://www.thymeleaf.org" 
+	
 	>
 <head>
 	<meta charset="UTF-8" />
@@ -16,6 +17,8 @@
           <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-2" th:href="@{/estoque}"><span class="fas fa-pallet"></span> [(#{home.menu.estoque})]</a>
           <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-3" th:href="@{/escrituracao}"><span class="fas fa-clipboard-list"></span> [(#{home.menu.escrituracao})]</a>
           <a class="nav-link text-white m-1 border border-secondary rounded btnmenu grupo-4" th:href="@{/relatorios}" ><span class="far fa-chart-bar"></span> [(#{home.menu.relatorios})]</a>
+		<script th:src="~{}" th:fragment="js"></script>
+		<script th:inline="javascript" th:fragment="inlinescript"></script>
       </div>
 
 

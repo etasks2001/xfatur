@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
-	layout:decorate="~{layout}">
+	layout:decorate="~{layout}"
+>
 <head>
 <meta charset="UTF-8" />
 </head>
 <body>
 
 	<section class="layout-content" layout:fragment="corpo">
-		<main role="main">
+		<main role="main" style="display:flex; flex-direction:column" >
 
 		<section class="jumbotron text-center">
 			<img class="d-block mx-auto" th:src="@{/image/spring-security.png}"
 				width="72" height="72">
 			<div class="container">
-				<h1 class="jumbotron-heading">Clínica Spring Security</h1>
-				<p class="lead text-muted">Médicos e Especialistas</p>
+				<h1 class="jumbotron-heading"> Spring Security</h1>
+				<p class="lead text-muted">fdsafd</p>
 			</div>
 		</section>
 
@@ -48,7 +49,7 @@
 		</main>
 		
 	</section>
-	<script	th:src="@{/js/usuario.js(v=${version})}" th:fragment="js"></script>
-	<script th:inline="javascript" th:fragment="inlinescript"></script>
+	<script	th:src="@{/js/usuario.js}" th:fragment="js"></script>
+	
 </body>
 </html>
