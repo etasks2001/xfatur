@@ -11,7 +11,7 @@ public class Perfil {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "descricao", nullable = false, unique = true)
     private String desc;
@@ -20,7 +20,7 @@ public class Perfil {
 	super();
     }
 
-    public Perfil(Long id) {
+    public Perfil(Integer id) {
 	this.id = id;
     }
 
@@ -30,5 +30,9 @@ public class Perfil {
 
     public void setDesc(String desc) {
 	this.desc = desc;
+    }
+
+    public Integer getId() {
+	return id;
     }
 }

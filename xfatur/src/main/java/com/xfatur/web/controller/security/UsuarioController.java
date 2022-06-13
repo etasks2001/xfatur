@@ -1,6 +1,5 @@
 package com.xfatur.web.controller.security;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -25,14 +24,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.xfatur.model.security.Perfil;
 import com.xfatur.model.security.PerfilTipo;
 import com.xfatur.model.security.Usuario;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.security.UsuarioService;
+import com.xfatur.validation.dto.security.PerfilDTO;
+import com.xfatur.validation.dto.security.UsuarioDTO;
 
 @Controller
 @RequestMapping("u")
 public class UsuarioController {
 
-//    @Autowired
-//    private MedicoService medicoService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -57,27 +59,18 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastro/salvar")
-    public String salvarUsuarios(Usuario usuario, RedirectAttributes attr) {
+    public String salvarUsuarios(UsuarioDTO usuario, RedirectAttributes attr) {
 	System.out.println(usuario);
 
-	List<Perfil> perfis = usuario.getPerfis();
+	Usuario usuarioAlterar = usuarioService.buscaPorId(usuario.getId());
 
-	if (perfis.size() > 2 ||
+	usuarioAlterar.setPerfis(modelMapper.toModel(usuario.getPerfis()));
 
-		perfis.containsAll(Arrays.asList(new Perfil(PerfilTipo.FINANCEIRO.getCod()), new Perfil(PerfilTipo.FISCAL.getCod()))))
-
-	{
-
-	    attr.addFlashAttribute("falha", "Paciente não pode ser Admin e/ou Médico.");
-	    attr.addFlashAttribute("usuario", usuario);
-
-	} else {
-	    try {
-		usuarioService.salvarUsuario(usuario);
-		attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso.");
-	    } catch (DataIntegrityViolationException e) {
-		attr.addFlashAttribute("falha", "E-mail já existe.");
-	    }
+	try {
+	    usuarioService.salvarUsuario(usuarioAlterar);
+	    attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso.");
+	} catch (DataIntegrityViolationException e) {
+	    attr.addFlashAttribute("falha", "E-mail já existe.");
 	}
 
 	return "redirect:/u/novo/cadastro/usuario";
@@ -87,7 +80,13 @@ public class UsuarioController {
     @GetMapping("/editar/credenciais/usuario/{id}")
     public ModelAndView editarCredenciais(@PathVariable("id") Integer id) {
 
-	return new ModelAndView("usuario/cadastro", "usuario", usuarioService.buscaPorId(id));
+	Usuario usuario = usuarioService.buscaPorId(id);
+	List<PerfilDTO> perfisDTO = modelMapper.toDto(usuario.getPerfis());
+
+	UsuarioDTO usuarioDTO = modelMapper.toDto(usuario);
+	usuarioDTO.setPerfis(perfisDTO);
+
+	return new ModelAndView("usuario/cadastro", "usuarioDTO", usuarioDTO);
     }
 
     @GetMapping("/editar/dados/usuario/{id}/perfis/{perfis}")

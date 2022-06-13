@@ -1,5 +1,7 @@
 package com.xfatur.repository.mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 
 import com.xfatur.model.produto.ClassificacaoFiscal;
@@ -15,6 +17,8 @@ import com.xfatur.model.produto.TipoSelo;
 import com.xfatur.model.produto.TipoValidade;
 import com.xfatur.model.produto.Tributacao;
 import com.xfatur.model.produto.Unidade;
+import com.xfatur.model.security.Perfil;
+import com.xfatur.model.security.Usuario;
 import com.xfatur.validation.dto.cadastro.ClassificacaoFiscalDTO;
 import com.xfatur.validation.dto.cadastro.LinhaDTO;
 import com.xfatur.validation.dto.cadastro.MarcaDTO;
@@ -28,6 +32,8 @@ import com.xfatur.validation.dto.cadastro.TipoSeloDTO;
 import com.xfatur.validation.dto.cadastro.TipoValidadeDTO;
 import com.xfatur.validation.dto.cadastro.TributacaoDTO;
 import com.xfatur.validation.dto.cadastro.UnidadeDTO;
+import com.xfatur.validation.dto.security.PerfilDTO;
+import com.xfatur.validation.dto.security.UsuarioDTO;
 
 @Mapper(componentModel = "spring")
 public interface ModelMapper {
@@ -87,5 +93,17 @@ public interface ModelMapper {
     public Produto toModel(ProdutoDTO dto);
 
     public ProdutoDTO toDto(Produto model);
+
+    public Usuario toModel(UsuarioDTO dto);
+
+    public UsuarioDTO toDto(Usuario model);
+
+    public Perfil toModel(PerfilDTO dto);
+
+    public PerfilDTO toDto(Perfil model);
+
+    List<Perfil> toModel(List<PerfilDTO> dto);
+
+    List<PerfilDTO> toDto(List<Perfil> model);
 
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+<html xmlns:layout="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.w3.org/1999/xhtml"
 	  layout:decorate="~{layout}">
 <head>
 <meta charset="UTF-8" />
@@ -27,7 +28,7 @@
 						<div th:replace="fragments/alert :: alerta-sucesso"></div>
 
 						<form th:action="@{/u/cadastro/salvar}"
-								th:object="${usuario}" method="POST" class="was-validated">
+								th:object="${usuarioDTO}" method="POST" class="was-validated">
 							
 							<div class="mb-3">
 								<label for="email">Email</label>
