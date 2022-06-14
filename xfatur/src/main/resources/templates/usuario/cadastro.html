@@ -53,9 +53,9 @@
 							</div>
 
 							<div class="mb-3">
-								<label for="perfis">Perfil</label>
-								<select id="perfis" class="custom-select" size="3"
-										th:field="*{perfis}" multiple required>
+								<label for="perfisDTO">Perfil</label>
+								<select id="perfisDTO" class="custom-select" size="3"
+										th:field="*{perfisDTO}" multiple required>
 									<option value="1">Financeiro</option>
 									<option value="2">Faturamento</option>
 									<option value="3">Fiscal</option>
@@ -96,12 +96,14 @@
 	<script	th:src="~{}" th:fragment="js"></script>
 	<script th:inline="javascript" th:fragment="inlinescript">
 	
-	$('#perfis').ready(function(){
-		var perfis = [[${usuario.perfis}]];
+	console.log([[${usuarioDTO}]]);
+	
+	$('#perfisDTO').ready(function(){
+		var perfisDTO = [[${usuarioDTO.perfisDTO}]];
 		
-		$.each(perfis, function(k, v) {
+		$.each(perfisDTO, function(k, v) {
 			console.log(v);
-			$('#perfis option[value="'+ v.id +'"]').attr('selected', 'selected');
+			$('#perfisDTO option[value="'+ v.id +'"]').attr('selected', 'selected');
 		})
 	});
 	</script>

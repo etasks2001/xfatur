@@ -108,4 +108,10 @@ public class Usuario {
     public void setId(Integer id) {
 	this.id = id;
     }
+
+    @Override
+    public String toString() {
+	return "Usuario [id=" + id + ", email=" + email + ", senha=" + senha + ", ativo=" + ativo + ", codigoVerificador=" + codigoVerificador + "]";
+    }
+
 }

@@ -5,6 +5,14 @@ public class PerfilDTO {
 
     private String desc;
 
+    public PerfilDTO() {
+	super();
+    }
+
+    public PerfilDTO(Integer id) {
+	this.id = id;
+    }
+
     public Integer getId() {
 	return id;
     }

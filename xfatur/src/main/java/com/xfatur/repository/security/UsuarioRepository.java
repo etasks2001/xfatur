@@ -12,7 +12,7 @@ import com.xfatur.model.security.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-    @Query("select u from Usuario u where u.email = :email")
+    @Query("select distinct u from Usuario u join u.perfis p where u.email = :email")
     Usuario findByEmail(@Param("email") String email);
 
     @Query("select distinct u from Usuario u join u.perfis p where u.email like :search% or p.desc like :search%")

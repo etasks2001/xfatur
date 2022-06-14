@@ -20,13 +20,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
+import com.xfatur.exception.UsuarioIdNotFoundException;
 import com.xfatur.model.security.Perfil;
 import com.xfatur.model.security.PerfilTipo;
 import com.xfatur.model.security.Usuario;
+import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.security.UsuarioRepository;
+import com.xfatur.validation.dto.security.PerfilDTO;
+import com.xfatur.validation.dto.security.UsuarioDTO;
 
 @Service
 public class UsuarioService implements UserDetailsService {
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Autowired
     private Datatables datatables;
 
@@ -74,17 +82,45 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Transactional(readOnly = false)
-    public void salvarUsuario(Usuario usuario) {
-	String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
+    public void salvarUsuario(UsuarioDTO usuarioDTO) {
+	Usuario usuario = repository.findByEmail(usuarioDTO.getEmail());
+	List<Perfil> perfis = usuario.getPerfis();
+
+	String crypt = new BCryptPasswordEncoder().encode(usuarioDTO.getSenha());
 
 	usuario.setSenha(crypt);
 
 	repository.save(usuario);
     }
 
-    @Transactional(readOnly = false)
-    public Usuario buscaPorId(Integer id) {
-	return repository.findById(id).get();
+    private UsuarioDTO convert(Usuario usuario) {
+	UsuarioDTO usuarioDTO = modelMapper.toDto(usuario);
+	List<PerfilDTO> perfisDTO = modelMapper.toDto(usuario.getPerfis());
+
+	usuarioDTO.setPerfisDTO(perfisDTO);
+	return usuarioDTO;
+
+    }
+
+    private Usuario convert(UsuarioDTO usuarioDTO) {
+	Usuario usuario = modelMapper.toModel(usuarioDTO);
+	List<Perfil> perfis = modelMapper.toModel(usuarioDTO.getPerfisDTO());
+
+	usuario.setPerfis(perfis);
+	return usuario;
+
+    }
+
+    @Transactional(readOnly = true)
+    public UsuarioDTO buscaPorId(Integer id) {
+
+	Optional<Usuario> usuarioOptional = repository.findById(id);
+	if (usuarioOptional.isPresent()) {
+	    UsuarioDTO usuarioDTO = convert(usuarioOptional.get());
+
+	    return usuarioDTO;
+	}
+	throw new UsuarioIdNotFoundException("Usuário não encontrado.");
     }
 
     @Transactional(readOnly = true)

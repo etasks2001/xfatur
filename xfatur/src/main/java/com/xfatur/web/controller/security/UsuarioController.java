@@ -1,7 +1,5 @@
 package com.xfatur.web.controller.security;
 
-import java.util.List;
-
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,17 +22,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.xfatur.model.security.Perfil;
 import com.xfatur.model.security.PerfilTipo;
 import com.xfatur.model.security.Usuario;
-import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.service.security.UsuarioService;
-import com.xfatur.validation.dto.security.PerfilDTO;
 import com.xfatur.validation.dto.security.UsuarioDTO;
 
 @Controller
 @RequestMapping("u")
 public class UsuarioController {
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -59,15 +52,10 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastro/salvar")
-    public String salvarUsuarios(UsuarioDTO usuario, RedirectAttributes attr) {
-	System.out.println(usuario);
-
-	Usuario usuarioAlterar = usuarioService.buscaPorId(usuario.getId());
-
-	usuarioAlterar.setPerfis(modelMapper.toModel(usuario.getPerfis()));
-
+    public String salvarUsuarios(UsuarioDTO usuarioDTO, RedirectAttributes attr) {
 	try {
-	    usuarioService.salvarUsuario(usuarioAlterar);
+
+	    usuarioService.salvarUsuario(usuarioDTO);
 	    attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso.");
 	} catch (DataIntegrityViolationException e) {
 	    attr.addFlashAttribute("falha", "E-mail já existe.");
@@ -79,12 +67,7 @@ public class UsuarioController {
 
     @GetMapping("/editar/credenciais/usuario/{id}")
     public ModelAndView editarCredenciais(@PathVariable("id") Integer id) {
-
-	Usuario usuario = usuarioService.buscaPorId(id);
-	List<PerfilDTO> perfisDTO = modelMapper.toDto(usuario.getPerfis());
-
-	UsuarioDTO usuarioDTO = modelMapper.toDto(usuario);
-	usuarioDTO.setPerfis(perfisDTO);
+	UsuarioDTO usuarioDTO = usuarioService.buscaPorId(id);
 
 	return new ModelAndView("usuario/cadastro", "usuarioDTO", usuarioDTO);
     }
