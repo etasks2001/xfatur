@@ -6,16 +6,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class StringToInteger implements Converter<String, Integer> {
 
-	@Override
-	public Integer convert(String text) {
+    @Override
+    public Integer convert(String text) {
 
-		String text2 = text.trim();
+	String text2 = text.trim();
 
-		if (text2.matches("[0-9]+")) {
-			return Integer.valueOf(text2);
-		}
-
-		return null;
+	if (text2.matches("[0-9]+")) {
+	    return Integer.valueOf(text2);
 	}
+
+	return null;
+    }
 
 }
