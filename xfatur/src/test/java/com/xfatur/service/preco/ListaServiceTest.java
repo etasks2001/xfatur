@@ -133,6 +133,8 @@ class ListaServiceTest extends BaseTest {
 	    MatcherAssert.assertThat(item1.getDestacar(), Matchers.is(item2.getDestacar()));
 	    MatcherAssert.assertThat(item1.getProduto().getId(), Matchers.is(item2.getProduto().getId()));
 
+	    itens1.remove(0);
+
 	});
     }
 

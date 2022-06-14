@@ -3,8 +3,6 @@ package com.xfatur.validation.dto.security;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xfatur.model.security.PerfilTipo;
-
 public class UsuarioDTO {
     private Integer id;
 
@@ -15,17 +13,6 @@ public class UsuarioDTO {
     private List<PerfilDTO> perfisDTO = new ArrayList<PerfilDTO>();
 
     private boolean ativo;
-
-    public UsuarioDTO() {
-	super();
-    }
-
-    public void addPerfil(PerfilTipo tipo) {
-	if (this.perfisDTO == null) {
-	    this.perfisDTO = new ArrayList<>();
-	}
-	this.perfisDTO.add(new PerfilDTO(tipo.getCod()));
-    }
 
     public Integer getId() {
 	return id;

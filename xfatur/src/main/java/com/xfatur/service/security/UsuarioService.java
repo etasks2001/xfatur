@@ -1,5 +1,6 @@
 package com.xfatur.service.security;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -83,14 +84,18 @@ public class UsuarioService implements UserDetailsService {
 
     @Transactional(readOnly = false)
     public void salvarUsuario(UsuarioDTO usuarioDTO) {
+
 	Usuario usuario = repository.findByEmail(usuarioDTO.getEmail());
-	List<Perfil> perfis = usuario.getPerfis();
+
+	List<PerfilDTO> perfisDTO = usuarioDTO.getPerfisDTO();
+
+	List<Perfil> perfis = new ArrayList<Perfil>(perfisDTO.size());
+	perfisDTO.forEach(p -> perfis.add(new Perfil(p.getId())));
 
 	String crypt = new BCryptPasswordEncoder().encode(usuarioDTO.getSenha());
 
 	usuario.setSenha(crypt);
-
-	repository.save(usuario);
+	usuario.setPerfis(perfis);
     }
 
     private UsuarioDTO convert(Usuario usuario) {
@@ -99,15 +104,6 @@ public class UsuarioService implements UserDetailsService {
 
 	usuarioDTO.setPerfisDTO(perfisDTO);
 	return usuarioDTO;
-
-    }
-
-    private Usuario convert(UsuarioDTO usuarioDTO) {
-	Usuario usuario = modelMapper.toModel(usuarioDTO);
-	List<Perfil> perfis = modelMapper.toModel(usuarioDTO.getPerfisDTO());
-
-	usuario.setPerfis(perfis);
-	return usuario;
 
     }
 

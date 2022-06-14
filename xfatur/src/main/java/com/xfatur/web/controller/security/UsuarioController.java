@@ -33,7 +33,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("/novo/cadastro/usuario")
-    public String cadastroPorAdminParaAdminMedicoPaciente(Usuario usuario) {
+    public String cadastroPorAdminParaAdminMedicoPaciente(UsuarioDTO usuario) {
 
 	return "usuario/cadastro";
 
