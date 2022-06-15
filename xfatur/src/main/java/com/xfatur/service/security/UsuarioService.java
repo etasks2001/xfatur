@@ -92,9 +92,11 @@ public class UsuarioService implements UserDetailsService {
 	List<Perfil> perfis = new ArrayList<Perfil>(perfisDTO.size());
 	perfisDTO.forEach(p -> perfis.add(new Perfil(p.getId())));
 
-	String crypt = new BCryptPasswordEncoder().encode(usuarioDTO.getSenha());
+	if (usuarioDTO.getSenha() != null) {
+	    String crypt = new BCryptPasswordEncoder().encode(usuarioDTO.getSenha());
+	    usuario.setSenha(crypt);
+	}
 
-	usuario.setSenha(crypt);
 	usuario.setPerfis(perfis);
     }
 
@@ -193,4 +195,10 @@ public class UsuarioService implements UserDetailsService {
 	emailService.enviarPedidoDeRedefinicaoDeSenha(email, verificador);
 
     }
+
+    @Transactional(readOnly = true)
+    public Boolean hasEmail(String email) {
+	return repository.hasEmail(email);
+    }
+
 }

@@ -55,6 +55,11 @@ window.onload = function() {
 		}
 	}
 
+	var email = document.getElementById("email");
+	if(email){
+		email.addEventListener("input", lowercase);
+	}
+	
 	var abreviacao = document.getElementById("unidade-abreviacao");
 	if (abreviacao) {
 		abreviacao.addEventListener("input", lowercase);

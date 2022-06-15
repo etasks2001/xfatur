@@ -12,6 +12,9 @@ import com.xfatur.model.security.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
+    @Query("select count(u)>0 from Usuario u where u.email = :email")
+    Boolean hasEmail(@Param("email") String email);
+
     @Query("select distinct u from Usuario u join u.perfis p where u.email = :email")
     Usuario findByEmail(@Param("email") String email);
 
