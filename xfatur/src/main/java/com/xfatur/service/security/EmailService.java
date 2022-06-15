@@ -14,6 +14,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 @Service
 public class EmailService {
 
+    private static final String NAO_RESPONDER_HOTMAIL_COM = "email";
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -28,16 +30,17 @@ public class EmailService {
 	context.setVariable("Titulo", "Bem vindo");
 	context.setVariable("text", "Precisamos que confirme seu cadastro, clicando no link abaixo.");
 	context.setVariable("linkConfirmacao", "http://localhost:8080/u/confirmacao/cadastro?codigo=" + codigo);
+
 	String html = template.process("email/confirmacao", context);
+
 	helper.setTo(destino);
 	helper.setText(html, true);
 	helper.setSubject("Confirmção de cadastro");
-	helper.setFrom("nao-responder@hotmail.com");
+	helper.setFrom(NAO_RESPONDER_HOTMAIL_COM);
 
 	helper.addInline("logo", new ClassPathResource("/static/image/spring-security.png"));
 
 	mailSender.send(message);
-
     }
 
     public void enviarPedidoDeRedefinicaoDeSenha(String destino, String verificador) throws MessagingException {
@@ -45,21 +48,18 @@ public class EmailService {
 	MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, "UTF-8");
 
 	Context context = new Context();
-	context.setVariable("Titulo", "Bem vindo");
-	context.setVariable("text", "Precisamos que confirme seu cadastro, clicando no link abaixo.");
-
 	context.setVariable("verificador", verificador);
 
 	String html = template.process("email/confirmacao", context);
+
 	helper.setTo(destino);
 	helper.setText(html, true);
 	helper.setSubject("Redefinição de cadastro");
-	helper.setFrom("nao-responder@hotmail.com");
+	helper.setFrom(NAO_RESPONDER_HOTMAIL_COM);
 
 	helper.addInline("logo", new ClassPathResource("/static/image/spring-security.png"));
 
 	mailSender.send(message);
 
     }
-
 }

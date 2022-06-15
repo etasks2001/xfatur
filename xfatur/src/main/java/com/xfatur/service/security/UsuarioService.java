@@ -193,5 +193,4 @@ public class UsuarioService implements UserDetailsService {
 	emailService.enviarPedidoDeRedefinicaoDeSenha(email, verificador);
 
     }
-
 }
