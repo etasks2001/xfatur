@@ -23,7 +23,6 @@ import org.springframework.util.Base64Utils;
 
 import com.xfatur.exception.UsuarioIdNotFoundException;
 import com.xfatur.model.security.Perfil;
-import com.xfatur.model.security.PerfilTipo;
 import com.xfatur.model.security.Usuario;
 import com.xfatur.repository.mappers.ModelMapper;
 import com.xfatur.repository.security.UsuarioRepository;
@@ -138,20 +137,6 @@ public class UsuarioService implements UserDetailsService {
 
     }
 
-    @Transactional(readOnly = false)
-    public void salvarCadastroPaciente(Usuario usuario) throws MessagingException {
-	BCryptPasswordEncoder crypt = new BCryptPasswordEncoder();
-
-	String encoded = crypt.encode(usuario.getSenha());
-	usuario.setSenha(encoded);
-	usuario.addPerfil(PerfilTipo.FISCAL);
-
-	repository.save(usuario);
-
-	emailDeConfirmacaoDeCadastro(usuario.getEmail());
-
-    }
-
     @Transactional(readOnly = true)
     public Usuario buscarPorEmail(String email) {
 	return repository.findByEmail(email);
@@ -168,19 +153,6 @@ public class UsuarioService implements UserDetailsService {
     public void emailDeConfirmacaoDeCadastro(String email) throws MessagingException {
 	String codigo = Base64Utils.encodeToString(email.getBytes());
 	emailService.enviarPedidoDeConformacaoDeCadastro(email, codigo);
-
-    }
-
-    @Transactional(readOnly = false)
-    public void ativarCadastroPaciente(String codigo) {
-	String email = new String(Base64Utils.decode(codigo.getBytes()));
-	Usuario usuario = buscarPorEmail(email);
-
-	if (usuario.hasNotId()) {
-	    throw new AcessoNegadoException("Não possível ativar seu cadastro.");
-	}
-
-	usuario.setAtivo(true);
 
     }
 

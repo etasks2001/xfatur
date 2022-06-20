@@ -49,23 +49,33 @@ public class UsuarioController {
 
     @PostMapping("/cadastro/salvar")
     public String salvarUsuarios(UsuarioDTO usuarioDTO, RedirectAttributes attr) throws MessagingException {
-	Boolean hasEmail = service.hasEmail(usuarioDTO.getEmail());
 
-	if (hasEmail) {
-	    attr.addFlashAttribute("falha", "E-mail já existe.");
+	if (usuarioDTO.getId() == null) {
+	    Boolean hasEmail = service.hasEmail(usuarioDTO.getEmail());
 
-	    attr.addFlashAttribute("usuarioDTO", usuarioDTO);
+	    if (hasEmail) {
+		attr.addFlashAttribute("falha", "E-mail já existe.");
+
+		attr.addFlashAttribute("usuarioDTO", usuarioDTO);
+	    } else {
+
+		String senha = String.valueOf((int) (Math.random() * 1000000));
+
+		usuarioDTO.setSenha(senha);
+
+		service.salvarUsuario(usuarioDTO);
+
+		attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso. A senha é ");
+	    }
 	} else {
 
 	    service.salvarUsuario(usuarioDTO);
 	    service.emailDeConfirmacaoDeCadastro(usuarioDTO.getEmail());
 
 	    attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso. Foi enviado um e-mail para confirmar o cadastro.");
-
 	}
 
 	return "redirect:/u/novo/cadastro/usuario";
-
     }
 
     @GetMapping("/editar/credenciais/usuario/{id}")
@@ -74,28 +84,6 @@ public class UsuarioController {
 
 	return new ModelAndView("usuario/cadastro", "usuarioDTO", usuarioDTO);
     }
-
-//    @GetMapping("/editar/dados/usuario/{id}/perfis/{perfis}")
-//    public ModelAndView preEditarCadastroDadosPessoais(@PathVariable("id") Integer usuarioId, @PathVariable("perfis") Integer[] perfisId) {
-//
-//	Usuario us = service.buscaPorIdEPerfis(usuarioId, perfisId);
-//
-//	if (us.getPerfis().contains(new Perfil(PerfilTipo.FINANCEIRO.getCod()))
-//
-//	) {
-//
-//	    return new ModelAndView("usuario/cadastro", "usuario", us);
-//
-//	} else if (us.getPerfis().contains(new Perfil(PerfilTipo.FISCAL.getCod()))) {
-//	    ModelAndView model = new ModelAndView("error");
-//	    model.addObject("status", "403");
-//	    model.addObject("error", "Área restrita.");
-//	    model.addObject("message", "Os dados de pacientes são restritos a ele.");
-//
-//	    return model;
-//	}
-//	return new ModelAndView("redirect:/u/lista");
-//    }
 
     @GetMapping("/editar/senha")
     public String editarSenha() {
@@ -127,40 +115,14 @@ public class UsuarioController {
     }
 
     @GetMapping("/novo/cadastro")
-    public String novoCadastro(Usuario usuario) {
-	return "cadastrar-se";
+    public String novoCadastro(UsuarioDTO usuarioDTO) {
+	return "usuario/cadastro";
     }
 
     @GetMapping("/cadastro/realizado")
     public String cadastroRealizado() {
 
 	return "fragments/mensagem";
-    }
-
-//    @PostMapping("/cadastro/paciente/salvar")
-//    public String savlarCadastroPaciente(Usuario usuario, BindingResult result) throws MessagingException {
-//
-//	try {
-//	    service.salvarCadastroPaciente(usuario);
-//	} catch (DataIntegrityViolationException e) {
-//	    result.reject("email", "Este e-mail já está cadastrado.");
-//	    return "cadastrar-se";
-//	}
-//
-//	return "redirect:/u/cadastro/realizado";
-//    }
-
-    @GetMapping("/confirmacao/cadastro")
-    public String respostaConfirmacaoCadastroPaciente(@RequestParam("codigo") String codigo, RedirectAttributes attr) {
-
-	service.ativarCadastroPaciente(codigo);
-
-	attr.addFlashAttribute("alerta", "sucesso");
-	attr.addFlashAttribute("Titulo", "Cadastro ativado.");
-	attr.addFlashAttribute("texto", "Seu cadastro está ativo.");
-	attr.addFlashAttribute("subtexto", "Siga com seu login e senha.");
-
-	return "redirect:/login";
     }
 
     @GetMapping("/p/redefinir/senha")
@@ -178,7 +140,6 @@ public class UsuarioController {
 	model.addAttribute("usuario", new Usuario(email));
 
 	return "usuario/recuperar-senha";
-
     }
 
     @PostMapping("/p/nova/senha")
