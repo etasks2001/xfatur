@@ -47,18 +47,17 @@ window.onload = function() {
 		regex : "^[0-9]*$"
 	});
 
-	let inputs = document.querySelectorAll("input");
+	let inputs = document.querySelectorAll("input :not([id*='test'])");
 	if (inputs) {
 		for (var i = 0; i < inputs.length; i++) {
 			inputs[i].addEventListener("input", uppercase);
 			inputs[i].addEventListener("blur", onblur);
 		}
 	}
+	
+	
+	
 
-	var email = document.getElementById("email");
-	if(email){
-		email.addEventListener("input", lowercase);
-	}
 	
 	var abreviacao = document.getElementById("unidade-abreviacao");
 	if (abreviacao) {

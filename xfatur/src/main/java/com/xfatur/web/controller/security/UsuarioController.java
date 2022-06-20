@@ -5,15 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,13 +24,6 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService service;
-
-    @GetMapping("/novo/cadastro/usuario")
-    public String cadastroPorAdminParaAdminMedicoPaciente(UsuarioDTO usuario) {
-
-	return "usuario/cadastro";
-
-    }
 
     @GetMapping("/lista")
     public String listarUsuarios() {
@@ -63,19 +53,18 @@ public class UsuarioController {
 
 		usuarioDTO.setSenha(senha);
 
-		service.salvarUsuario(usuarioDTO);
+		service.inserirUsuario(usuarioDTO);
 
-		attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso. A senha é ");
+		attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso. A senha é " + senha);
 	    }
 	} else {
 
 	    service.salvarUsuario(usuarioDTO);
-	    service.emailDeConfirmacaoDeCadastro(usuarioDTO.getEmail());
 
-	    attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso. Foi enviado um e-mail para confirmar o cadastro.");
+	    attr.addFlashAttribute("sucesso", "Alterado com sucesso.");
 	}
 
-	return "redirect:/u/novo/cadastro/usuario";
+	return "redirect:/u/novo/cadastro";
     }
 
     @GetMapping("/editar/credenciais/usuario/{id}")
@@ -85,44 +74,9 @@ public class UsuarioController {
 	return new ModelAndView("usuario/cadastro", "usuarioDTO", usuarioDTO);
     }
 
-    @GetMapping("/editar/senha")
-    public String editarSenha() {
-
-	return "usuario/editar-senha";
-
-    }
-
-    @PostMapping("/confirmar/senha")
-    public String editarSenha(@RequestParam("senha1") String senha1, @RequestParam("senha2") String senha2, @RequestParam("senha3") String senha3, @AuthenticationPrincipal User user,
-	    RedirectAttributes attr) {
-
-	if (!senha1.equals(senha2)) {
-	    attr.addFlashAttribute("falha", "Senha não confere.");
-	    return "redirect:/u/editar/senha";
-	}
-
-	Usuario usuario = service.buscarPorEmail(user.getUsername());
-
-	if (!UsuarioService.isSenhaCorreta(senha3, usuario.getSenha())) {
-	    attr.addFlashAttribute("falha", "Senha atual não confere.");
-	    return "redirect:/u/editar/senha";
-	}
-
-	service.alterarSenha(usuario, senha1);
-	attr.addFlashAttribute("sucesso", "Senha alterada com sucesso.");
-	return "redirect:/u/editar/senha";
-
-    }
-
     @GetMapping("/novo/cadastro")
     public String novoCadastro(UsuarioDTO usuarioDTO) {
 	return "usuario/cadastro";
-    }
-
-    @GetMapping("/cadastro/realizado")
-    public String cadastroRealizado() {
-
-	return "fragments/mensagem";
     }
 
     @GetMapping("/p/redefinir/senha")
@@ -154,7 +108,7 @@ public class UsuarioController {
 
 	service.alterarSenha(u, usuario.getSenha());
 	model.addAttribute("alerta", "Sucesso");
-	model.addAttribute("titulo", "Senha redefinica.");
+	model.addAttribute("titulo", "Senha redefinida.");
 	model.addAttribute("texto", "Você já pode logar no sistema.");
 
 	return "login";

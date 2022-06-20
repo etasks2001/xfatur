@@ -96,6 +96,7 @@ public class UsuarioService implements UserDetailsService {
 	    usuario.setSenha(crypt);
 	}
 
+	usuario.setAtivo(usuarioDTO.isAtivo());
 	usuario.setPerfis(perfis);
     }
 
@@ -127,6 +128,26 @@ public class UsuarioService implements UserDetailsService {
 
     public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
 	return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada);
+    }
+
+    @Transactional(readOnly = false)
+    public void inserirUsuario(UsuarioDTO usuarioDTO) {
+
+	Usuario usuario = modelMapper.toModel(usuarioDTO);
+
+	List<PerfilDTO> perfisDTO = usuarioDTO.getPerfisDTO();
+
+	List<Perfil> perfis = new ArrayList<Perfil>(perfisDTO.size());
+	perfisDTO.forEach(p -> perfis.add(new Perfil(p.getId())));
+	usuario.setPerfis(perfis);
+
+	String crypt = new BCryptPasswordEncoder().encode(usuarioDTO.getSenha());
+	usuario.setSenha(crypt);
+
+	usuario.setAtivo(usuarioDTO.isAtivo());
+
+	repository.save(usuario);
+
     }
 
     @Transactional(readOnly = false)
