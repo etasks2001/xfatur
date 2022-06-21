@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	
-	let languageConfig={
+	let languageConfig = {
 			emptyTable: 'Sem dados',
 		    loadingRecords: "Carregando...",
 		    infoEmpty: 'Mostrando 0 de 0 of 0 linhas',

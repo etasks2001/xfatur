@@ -37,31 +37,33 @@ public class UsuarioController {
 	return ResponseEntity.ok(service.buscarTodos(request));
     }
 
+    @PostMapping("/cadastro/alterar")
+    public String alterarUsuarios(UsuarioDTO usuarioDTO, RedirectAttributes attr) {
+	service.alterarUsuario(usuarioDTO);
+
+	attr.addFlashAttribute("sucesso", "Alterado com sucesso.");
+
+	return "redirect:/u/lista";
+    }
+
     @PostMapping("/cadastro/salvar")
     public String salvarUsuarios(UsuarioDTO usuarioDTO, RedirectAttributes attr) throws MessagingException {
 
-	if (usuarioDTO.getId() == null) {
-	    Boolean hasEmail = service.hasEmail(usuarioDTO.getEmail());
+	Boolean hasEmail = service.hasEmail(usuarioDTO.getEmail());
 
-	    if (hasEmail) {
-		attr.addFlashAttribute("falha", "E-mail já existe.");
+	if (hasEmail) {
+	    attr.addFlashAttribute("falha", "E-mail já existe.");
 
-		attr.addFlashAttribute("usuarioDTO", usuarioDTO);
-	    } else {
-
-		String senha = String.valueOf((int) (Math.random() * 1000000));
-
-		usuarioDTO.setSenha(senha);
-
-		service.inserirUsuario(usuarioDTO);
-
-		attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso. A senha é " + senha);
-	    }
+	    attr.addFlashAttribute("usuarioDTO", usuarioDTO);
 	} else {
 
-	    service.salvarUsuario(usuarioDTO);
+	    String senha = String.valueOf((int) (Math.random() * 1000000));
 
-	    attr.addFlashAttribute("sucesso", "Alterado com sucesso.");
+	    usuarioDTO.setSenha(senha);
+
+	    service.inserirUsuario(usuarioDTO);
+
+	    attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso. A senha é " + senha);
 	}
 
 	return "redirect:/u/novo/cadastro";

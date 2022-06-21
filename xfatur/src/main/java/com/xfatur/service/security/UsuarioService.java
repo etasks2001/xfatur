@@ -82,9 +82,9 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Transactional(readOnly = false)
-    public void salvarUsuario(UsuarioDTO usuarioDTO) {
+    public void alterarUsuario(UsuarioDTO usuarioDTO) {
 
-	Usuario usuario = repository.findByEmail(usuarioDTO.getEmail());
+	Usuario usuario = repository.findById(usuarioDTO.getId()).get();
 
 	List<PerfilDTO> perfisDTO = usuarioDTO.getPerfisDTO();
 

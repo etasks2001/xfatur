@@ -24,15 +24,14 @@
 				<div class="d-flex justify-content-center">
 					<div class="col-md-8">
 						<div th:replace="fragments/alert :: alerta-sucesso"></div>
-						<form th:action="@{/u/cadastro/salvar}" th:object="${usuarioDTO}" method="POST" class="was-validated">
-							
+						<form th:action="${usuarioDTO.id == null} ? @{/u/cadastro/salvar} : @{/u/cadastro/alterar}" th:object="${usuarioDTO}" method="POST" class="was-validated">
 							<div class="mb-3">
 								<label for="email">Email</label>
 								<div class="input-group">
 									<div class="input-group-prepend">
 										<span class="input-group-text"	id="validationTooltipUsernamePrepend">@</span>
 									</div>
-									<input type="email" class="form-control" id="email"  th:field="*{email}" placeholder="Email"   aria-describedby="validationTooltipUsernamePrepend" required />
+									<input type="email" class="form-control" id="email"  th:field="*{email}" placeholder="Email"   aria-describedby="validationTooltipUsernamePrepend" required th:disabled="${usuarioDTO.id!=null}"   />
 									<div class="invalid-feedback">Email é requerido.</div>
 								</div>
 							</div>
@@ -69,7 +68,7 @@
 							<div class="form-group row">
 								<div class="col-sm-10">
 									<button type="submit" class="btn btn-primary"
-										data-toggle="tooltip" data-placement="right" title="Salvar"><i class="fas fa-save"></i>
+										data-toggle="tooltip" data-placement="right" th:title="${usuarioDTO.id == null ? 'Gravar' :'Alterar'}"><i class="fas fa-save"></i>
 									</button>
 								</div>
 							</div>
