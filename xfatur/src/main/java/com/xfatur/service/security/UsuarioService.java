@@ -194,4 +194,8 @@ public class UsuarioService implements UserDetailsService {
 	return repository.hasEmail(email);
     }
 
+    public void excluirUsuario(Integer id) {
+	repository.deleteById(id);
+    }
+
 }

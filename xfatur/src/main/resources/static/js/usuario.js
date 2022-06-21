@@ -56,15 +56,6 @@ $(document).ready(function() {
 					},
 					orderable : false
 				},
-				{	data : 'id',	
-					render : function(id) {
-						return ''.concat('<a class="btn btn-danger btn-sm btn-block"', ' ') 
-								 .concat('id="dp_').concat(id).concat('"', ' ') 
-								 .concat('role="button" title="Excluir" data-toggle="tooltip" data-placement="right">', ' ')
-								 .concat('<i class="fas xmark"></i></a>');
-					},
-					orderable : false
-				}
 		]
 	});
 	
