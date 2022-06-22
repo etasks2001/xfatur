@@ -102,14 +102,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		.rememberMe();
 
-	// Impedir o segundo login
 	http.sessionManagement().maximumSessions(1).expiredUrl("/expired").maxSessionsPreventsLogin(false).sessionRegistry(sessionRegistry());
 
 	http.sessionManagement().sessionFixation().newSession().sessionAuthenticationStrategy(sessionAuthenticationStrategy());
 
     }
 
-    // Impedir o segundo login
     @Bean
     public SessionRegistry sessionRegistry() {
 	return new SessionRegistryImpl();
@@ -120,7 +118,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher());
     }
 
-    // Para invalidar a sessão do primeiro login
     @Bean
     public SessionAuthenticationStrategy sessionAuthenticationStrategy() {
 	return new RegisterSessionAuthenticationStrategy(sessionRegistry());
