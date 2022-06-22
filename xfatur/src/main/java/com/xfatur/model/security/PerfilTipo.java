@@ -3,19 +3,19 @@ package com.xfatur.model.security;
 public enum PerfilTipo {
     FINANCEIRO(1, "FINANCEIRO"), FATURAMENTO(2, "FATURAMENTO"), FISCAL(3, "FISCAL");
 
-    private int cod;
-    private String desc;
+    private int codigo;
+    private String descricao;
 
-    private PerfilTipo(int cod, String desc) {
-	this.cod = cod;
-	this.desc = desc;
+    private PerfilTipo(int codigo, String descricao) {
+	this.codigo = codigo;
+	this.descricao = descricao;
     }
 
-    public int getCod() {
-	return cod;
+    public int getCodigo() {
+	return codigo;
     }
 
-    public String getDesc() {
-	return desc;
+    public String getDescricao() {
+	return descricao;
     }
 }

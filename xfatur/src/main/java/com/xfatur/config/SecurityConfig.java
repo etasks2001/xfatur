@@ -23,27 +23,23 @@ import com.xfatur.service.security.UsuarioService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String FINANCEIRO = PerfilTipo.FINANCEIRO.getDesc();
-    private static final String FATURAMENTO = PerfilTipo.FATURAMENTO.getDesc();
-    private static final String FISCAL = PerfilTipo.FISCAL.getDesc();
+    private static final String FINANCEIRO = PerfilTipo.FINANCEIRO.getDescricao();
+    private static final String FATURAMENTO = PerfilTipo.FATURAMENTO.getDescricao();
+    private static final String FISCAL = PerfilTipo.FISCAL.getDescricao();
 
     @Autowired
     private UsuarioService usuarioService;
 
-    // Configurações de autenticação - controle de acesso de login
-    // Para bloquear o primeiro login
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	auth.userDetailsService(usuarioService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
-    // Configurações de conteúdos estáticos(css/javascript/imagens)
     @Override
     public void configure(WebSecurity web) throws Exception {
 
     }
 
-    // Configuraçãoes de Autorização - quem pode acessar cada url e perfil de acesso
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 

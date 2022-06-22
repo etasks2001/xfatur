@@ -50,7 +50,7 @@ public class Usuario {
 	if (this.perfis == null) {
 	    this.perfis = new ArrayList<>();
 	}
-	this.perfis.add(new Perfil(tipo.getCod()));
+	this.perfis.add(new Perfil(tipo.getCodigo()));
     }
 
     public Usuario(String email) {
