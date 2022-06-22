@@ -114,7 +114,5 @@ public class UsuarioController {
 	model.addAttribute("texto", "Você já pode logar no sistema.");
 
 	return "login";
-
     }
-
 }
