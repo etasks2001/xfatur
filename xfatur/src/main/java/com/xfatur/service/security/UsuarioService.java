@@ -121,11 +121,6 @@ public class UsuarioService implements UserDetailsService {
 	throw new UsuarioIdNotFoundException("Usuário não encontrado.");
     }
 
-    @Transactional(readOnly = true)
-    public Usuario buscaPorIdEPerfis(Integer usuarioId, Integer[] perfisId) {
-	return repository.findByIdAndPerfis(usuarioId, perfisId).orElseThrow(() -> new UsernameNotFoundException("Usuário inexistente."));
-    }
-
     public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
 	return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada);
     }

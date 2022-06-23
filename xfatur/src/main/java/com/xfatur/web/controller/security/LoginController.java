@@ -1,4 +1,4 @@
-package com.xfatur.web.controller;
+package com.xfatur.web.controller.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
