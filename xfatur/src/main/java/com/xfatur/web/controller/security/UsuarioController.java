@@ -25,16 +25,9 @@ public class UsuarioController {
     @Autowired
     private UsuarioService service;
 
-    @GetMapping("/lista")
-    public String listarUsuarios() {
-
-	return "usuario/lista";
-    }
-
-    @GetMapping("/datatables/server/usuarios")
-    public ResponseEntity<?> listarUsuariosDataTables(HttpServletRequest request) {
-
-	return ResponseEntity.ok(service.buscarTodos(request));
+    @GetMapping("/cadastro/novo")
+    public String novoCadastro(UsuarioDTO usuarioDTO) {
+	return "usuario/cadastro";
     }
 
     @PostMapping("/cadastro/alterar")
@@ -66,28 +59,35 @@ public class UsuarioController {
 	    attr.addFlashAttribute("sucesso", "Operação realizadao com sucesso. A senha é " + senha);
 	}
 
-	return "redirect:/u/novo/cadastro";
+	return "redirect:/u/cadastro/novo";
     }
 
-    @GetMapping("/editar/credenciais/usuario/{id}")
+    @GetMapping("/lista")
+    public String listarUsuarios() {
+
+	return "usuario/lista";
+    }
+
+    @GetMapping("/pesquisa/datatables")
+    public ResponseEntity<?> listarUsuariosDataTables(HttpServletRequest request) {
+
+	return ResponseEntity.ok(service.buscarTodos(request));
+    }
+
+    @GetMapping("/editar/credenciais/{id}")
     public ModelAndView editarCredenciais(@PathVariable("id") Integer id) {
 	UsuarioDTO usuarioDTO = service.buscaPorId(id);
 
 	return new ModelAndView("usuario/cadastro", "usuarioDTO", usuarioDTO);
     }
 
-    @GetMapping("/novo/cadastro")
-    public String novoCadastro(UsuarioDTO usuarioDTO) {
-	return "usuario/cadastro";
-    }
-
-    @GetMapping("/p/redefinir/senha")
+    @GetMapping("/redefinir/senha/pedido")
     public String pedidoRedefinirSenha() {
 
-	return "usuario/pedido-recuperar-senha";
+	return "usuario/pedido-redefinir-senha";
     }
 
-    @GetMapping("/p/recuperar/senha")
+    @GetMapping("/redefinir/confirmar")
     public String redefinirSenha(String email, ModelMap model) throws MessagingException {
 
 	service.redefinicaoDeSenha(email);
@@ -95,16 +95,16 @@ public class UsuarioController {
 	model.addAttribute("sucesso", "Em instantes você receberá um e-mail para redefinir sua senha.");
 	model.addAttribute("usuario", new Usuario(email));
 
-	return "usuario/recuperar-senha";
+	return "usuario/redefinir-senha";
     }
 
-    @PostMapping("/p/nova/senha")
+    @PostMapping("/redefinir/nova/senha")
     public String confirmacaoDeRedefinicaoDeSenha(Usuario usuario, ModelMap model) {
 	Usuario u = service.buscarPorEmail(usuario.getEmail());
 
 	if (!usuario.getCodigoVerificador().equals(u.getCodigoVerificador())) {
 	    model.addAttribute("falha", "Código verificador não confere.");
-	    return "usuario/recuperar-senha";
+	    return "usuario/redefinir-senha";
 	}
 	u.setCodigoVerificador(null);
 

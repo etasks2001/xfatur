@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	http.authorizeRequests()
 
-		.antMatchers("/", "/login", "/webjars/**", "/css/**", "/js/**", "/image/**", "/u/p/**", "/expired")
+		.antMatchers("/", "/login", "/webjars/**", "/css/**", "/js/**", "/image/**", "/u/redefinir/**", "/expired")
 
 		.permitAll()
 
@@ -56,8 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/cadastros").hasAnyAuthority(FATURAMENTO)
 
 		.antMatchers("/classificacaofiscal/**").hasAnyAuthority(FATURAMENTO)
-
-		.antMatchers("/u/editar/senha", "/u/confirmar/senha", "/u/excluir/usuario").hasAnyAuthority(FATURAMENTO, FISCAL)
 
 		.anyRequest()
 

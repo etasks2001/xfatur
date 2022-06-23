@@ -25,7 +25,7 @@ $(document).ready(function() {
 		serverSide : true,
 		responsive : true,
 		ajax : {
-			url : '/u/datatables/server/usuarios',
+			url : '/u/pesquisa/datatables',
 			data : 'data'
 		},
 		columns : [
@@ -49,7 +49,7 @@ $(document).ready(function() {
 				{	data : 'id',	
 					render : function(id) {
 						return ''.concat('<a class="btn btn-success btn-sm btn-block"', ' ')
-								 .concat('href="').concat('/u/editar/credenciais/usuario/').concat(id, '"', ' ') 
+								 .concat('href="').concat('/u/editar/credenciais/').concat(id, '"', ' ') 
 								 .concat('role="button" title="Editar" data-toggle="tooltip" data-placement="right">', ' ')
 								 .concat('<i class="fas fa-duotone fa-pen-to-square"></i></a>');
 					},
