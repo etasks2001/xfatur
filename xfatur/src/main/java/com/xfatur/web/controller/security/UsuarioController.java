@@ -92,7 +92,7 @@ public class UsuarioController {
 
 	service.redefinicaoDeSenha(email);
 
-	model.addAttribute("sucesso", "Em instantes você receberá um e-mail para redefinir sua senha.");
+	model.addAttribute("sucesso", "Em instantes você receberá um código verificador para redefinir sua senha.");
 	model.addAttribute("usuario", new Usuario(email));
 
 	return "usuario/redefinir-senha";

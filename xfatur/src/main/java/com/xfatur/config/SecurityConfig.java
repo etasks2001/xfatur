@@ -116,5 +116,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public SessionAuthenticationStrategy sessionAuthenticationStrategy() {
 	return new RegisterSessionAuthenticationStrategy(sessionRegistry());
     }
-
 }

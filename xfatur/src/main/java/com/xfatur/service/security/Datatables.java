@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 public class Datatables {
 
     private HttpServletRequest request;
+
     private String[] colunas;
 
     public Datatables() {
@@ -70,6 +71,7 @@ public class Datatables {
     public Sort.Direction getDirection() {
 	String order = this.request.getParameter("order[0][dir]");
 	Sort.Direction sort = Sort.Direction.ASC;
+
 	if (order.equalsIgnoreCase("desc")) {
 	    sort = Sort.Direction.DESC;
 	}

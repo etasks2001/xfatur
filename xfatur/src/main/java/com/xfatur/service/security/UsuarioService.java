@@ -76,6 +76,7 @@ public class UsuarioService implements UserDetailsService {
     public Map<String, Object> buscarTodos(HttpServletRequest request) {
 	datatables.setRequest(request);
 	datatables.setColunas(DatatablesColunas.USUARIOS);
+
 	Page<Usuario> page = datatables.getSearch().isEmpty() ? repository.findAll(datatables.getPageable()) : repository.findPorEmailOrPerfil(datatables.getSearch(), datatables.getPageable());
 
 	return datatables.getResponse(page);

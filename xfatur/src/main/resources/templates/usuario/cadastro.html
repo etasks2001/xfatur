@@ -24,7 +24,7 @@
 				<div class="d-flex justify-content-center">
 					<div class="col-md-8">
 						<div th:replace="fragments/alert :: alerta-sucesso"></div>
-						<form th:action="${usuarioDTO.id == null} ? @{/u/cadastro/salvar} : @{/u/cadastro/alterar}" th:object="${usuarioDTO}" method="POST" class="was-validated">
+						<form th:action="${usuarioDTO.id == null} ? @{/u/cadastro/salvar} : @{/u/cadastro/alterar}" th:object="${usuarioDTO}" method="POST" >
 							<div class="mb-3">
 								<label for="email">Email</label>
 								<div class="input-group">
@@ -35,19 +35,9 @@
 									<div class="invalid-feedback">Email é requerido.</div>
 								</div>
 							</div>
-							
-							
-<!-- 							<div class="mb-3">
-								<label for="senha">Senha</label> 
-								<input type="password" class="form-control" id="senha" maxlength="6"
-										th:field="*{senha}" placeholder="Insira sua senha de acesso" required />
-								<div class="invalid-feedback">Senha é requerida para confirmar a operação.</div>
-							</div>
- -->
 							<div class="mb-3">
 								<label for="perfisDTO">Perfil</label>
-								<select id="perfisDTO" class="custom-select" size="3"
-										th:field="*{perfisDTO}" multiple required>
+								<select id="perfisDTO" class="custom-select" size="3" th:field="*{perfisDTO}" multiple required>
 									<option value="1">Financeiro</option>
 									<option value="2">Faturamento</option>
 									<option value="3">Fiscal</option>
@@ -86,7 +76,6 @@
 	<script th:inline="javascript" th:fragment="inlinescript">
 	
 	
-	
 	$('#perfisDTO').ready(function(){
 		var perfisDTO = [[${usuarioDTO.perfisDTO}]];
 		
@@ -95,6 +84,21 @@
 			$('#perfisDTO option[value="'+ v.id +'"]').attr('selected', 'selected');
 		})
 	});
+	
+	$('option').mousedown(function(e) {
+	    e.preventDefault();
+	    var originalScrollTop = $(this).parent().scrollTop();
+	    console.log(originalScrollTop);
+	    $(this).prop('selected', $(this).prop('selected') ? false : true);
+	    var self = this;
+	    $(this).parent().focus();
+	    setTimeout(function() {
+	        $(self).parent().scrollTop(originalScrollTop);
+	    }, 0);
+	    
+	    return false;
+	});
+	
 	</script>
 </body>
 </html>
