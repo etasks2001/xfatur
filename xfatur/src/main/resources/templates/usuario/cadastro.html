@@ -11,8 +11,7 @@
 		<main role="main" style="diplay:flex;flex-direction:column">
 
 		<section class="jumbotron text-center">
-			<img class="d-block mx-auto" th:src="@{/image/spring-security.png}"
-				width="72" height="72">
+			<img class="d-block mx-auto" th:src="@{/image/spring-security.png}" width="72" height="72">
 			<div class="container">
 				<h1 class="jumbotron-heading">Faturamento</h1>
 				<p class="lead text-muted">Faturamento</p>
@@ -24,6 +23,7 @@
 				<div class="d-flex justify-content-center">
 					<div class="col-md-8">
 						<div th:replace="fragments/alert :: alerta-sucesso"></div>
+						
 						<form th:action="${usuarioDTO.id == null} ? @{/u/cadastro/salvar} : @{/u/cadastro/alterar}" th:object="${usuarioDTO}" method="POST" >
 							<div class="mb-3">
 								<label for="email">Email</label>
@@ -31,10 +31,11 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text"	id="validationTooltipUsernamePrepend">@</span>
 									</div>
-									<input type="email" class="form-control" id="email"  th:field="*{email}" placeholder="Email"   aria-describedby="validationTooltipUsernamePrepend" required th:disabled="${usuarioDTO.id!=null}"   />
+									<input type="email" class="form-control" id="email"  th:field="*{email}" placeholder="Email" aria-describedby="validationTooltipUsernamePrepend" required th:disabled="${usuarioDTO.id!=null}"/>
 									<div class="invalid-feedback">Email é requerido.</div>
 								</div>
 							</div>
+						
 							<div class="mb-3">
 								<label for="perfisDTO">Perfil</label>
 								<select id="perfisDTO" class="custom-select" size="3" th:field="*{perfisDTO}" multiple required>
@@ -54,11 +55,11 @@
 								</div>
 							</div>
 
-							<input type="hidden" th:field="*{id}"> 
+							<input type="hidden" th:field="*{id}">
+							 
 							<div class="form-group row">
 								<div class="col-sm-10">
-									<button type="submit" class="btn btn-primary"
-										data-toggle="tooltip" data-placement="right" th:title="${usuarioDTO.id == null ? 'Gravar' :'Alterar'}"><i class="fas fa-save"></i>
+									<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="right" th:title="${usuarioDTO.id == null ? 'Gravar' :'Alterar'}"><i class="fas fa-save"></i>
 									</button>
 								</div>
 							</div>
