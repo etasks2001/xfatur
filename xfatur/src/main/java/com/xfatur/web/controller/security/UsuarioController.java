@@ -25,8 +25,8 @@ public class UsuarioController {
     @Autowired
     private UsuarioService service;
 
-    @GetMapping("/cadastro/novo")
-    public String novoCadastro(UsuarioDTO usuarioDTO) {
+    @GetMapping("/cadastro/form")
+    public String form(UsuarioDTO usuarioDTO) {
 	return "usuario/cadastro";
     }
 

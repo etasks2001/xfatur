@@ -14,10 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class XFaturApplication {
 
     public static void main(String[] args) {
-	BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+	System.out.println(new BCryptPasswordEncoder().encode("123"));
 
 	SpringApplication.run(XFaturApplication.class, args);
 
     }
-
 }
