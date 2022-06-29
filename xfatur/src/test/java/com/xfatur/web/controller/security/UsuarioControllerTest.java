@@ -1,6 +1,8 @@
 package com.xfatur.web.controller.security;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -25,11 +27,10 @@ class UsuarioControllerTest extends BaseTest {
     @Test
     @DisplayName("GET u/cadastro/form >> abre formulário")
     void abre_formulário() throws Exception {
+
 	mock.perform(MockMvcRequestBuilders.get("/u/cadastro/form")
 
-		.with(SecurityMockMvcRequestPostProcessors.csrf()
-
-		)
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
 	)
 
@@ -87,7 +88,10 @@ class UsuarioControllerTest extends BaseTest {
 
 		.andExpect(MockMvcResultMatchers.view().name("redirect:/u/lista"))
 
+		.andExpect(flash().attribute("sucesso", is("Alterado com sucesso.")))
+
+		.andExpect(MockMvcResultMatchers.redirectedUrl("/u/lista"))
+
 	;
     }
-
 }
