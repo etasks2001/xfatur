@@ -63,10 +63,10 @@ class UsuarioControllerTest extends BaseTest {
     @Sql(scripts = { "classpath:/usuario.sql" }, config = @SqlConfig(encoding = "UTF-8"))
     @Sql(scripts = { "classpath:/usuario-clean.sql" }, executionPhase = AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8"))
     @DisplayName("POST u/cadastro/alterar >> alterar registro ok")
-    void alterar_usuario() throws Exception {
+    void alterar_credenciais() throws Exception {
 	Usuario usuario = service.buscarPorEmail("email@email.com.br");
 
-	mock.perform(MockMvcRequestBuilders.post("/u/cadastro/alterar")
+	mock.perform(MockMvcRequestBuilders.post("/u/cadastro/alterar/credenciais")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 

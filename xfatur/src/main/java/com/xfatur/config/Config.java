@@ -2,6 +2,7 @@ package com.xfatur.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
@@ -25,10 +26,14 @@ public class Config {
 	loggingFilter.setMaxPayloadLength(64000);
 
 	loggingFilter.setIncludeHeaders(true);
-	loggingFilter.setBeforeMessagePrefix("Before>>>");
-	loggingFilter.setAfterMessagePrefix("After>>>");
 
 	return loggingFilter;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder getBCryptPasswordEncoder() {
+
+	return new BCryptPasswordEncoder();
     }
 
 }

@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
-import com.xfatur.exception.UsuarioIdNotFoundException;
 import com.xfatur.model.security.Perfil;
 import com.xfatur.model.security.Usuario;
 import com.xfatur.repository.mappers.ModelMapper;
@@ -31,6 +30,9 @@ import com.xfatur.validation.dto.security.UsuarioDTO;
 
 @Service
 public class UsuarioService implements UserDetailsService {
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -83,7 +85,7 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Transactional(readOnly = false)
-    public void alterarUsuario(UsuarioDTO usuarioDTO) {
+    public void alterarCredenciais(UsuarioDTO usuarioDTO) {
 
 	Usuario usuario = repository.findById(usuarioDTO.getId()).get();
 
@@ -92,38 +94,26 @@ public class UsuarioService implements UserDetailsService {
 	List<Perfil> perfis = new ArrayList<Perfil>(perfisDTO.size());
 	perfisDTO.forEach(p -> perfis.add(new Perfil(p.getId())));
 
-	if (usuarioDTO.getSenha() != null) {
-	    String crypt = new BCryptPasswordEncoder().encode(usuarioDTO.getSenha());
-	    usuario.setSenha(crypt);
-	}
-
 	usuario.setAtivo(usuarioDTO.isAtivo());
 	usuario.setPerfis(perfis);
-    }
-
-    private UsuarioDTO convert(Usuario usuario) {
-	UsuarioDTO usuarioDTO = modelMapper.toDto(usuario);
-	List<PerfilDTO> perfisDTO = modelMapper.toDto(usuario.getPerfis());
-
-	usuarioDTO.setPerfisDTO(perfisDTO);
-	return usuarioDTO;
-
     }
 
     @Transactional(readOnly = true)
     public UsuarioDTO buscaPorId(Integer id) {
 
 	Optional<Usuario> usuarioOptional = repository.findById(id);
-	if (usuarioOptional.isPresent()) {
-	    UsuarioDTO usuarioDTO = convert(usuarioOptional.get());
 
-	    return usuarioDTO;
-	}
-	throw new UsuarioIdNotFoundException("Usuário não encontrado.");
+	Usuario usuario = usuarioOptional.get();
+
+	UsuarioDTO usuarioDTO = modelMapper.toDto(usuario);
+	List<PerfilDTO> perfisDTO = modelMapper.toDto(usuario.getPerfis());
+
+	usuarioDTO.setPerfisDTO(perfisDTO);
+	return usuarioDTO;
     }
 
-    public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
-	return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada);
+    public boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
+	return bCryptPasswordEncoder.matches(senhaDigitada, senhaArmazenada);
     }
 
     @Transactional(readOnly = false)
@@ -137,7 +127,7 @@ public class UsuarioService implements UserDetailsService {
 	perfisDTO.forEach(p -> perfis.add(new Perfil(p.getId())));
 	usuario.setPerfis(perfis);
 
-	String crypt = new BCryptPasswordEncoder().encode(usuarioDTO.getSenha());
+	String crypt = bCryptPasswordEncoder.encode(usuarioDTO.getSenha());
 	usuario.setSenha(crypt);
 
 	usuario.setAtivo(usuarioDTO.isAtivo());
@@ -148,7 +138,7 @@ public class UsuarioService implements UserDetailsService {
 
     @Transactional(readOnly = false)
     public void alterarSenha(Usuario usuario, String senha) {
-	usuario.setSenha(new BCryptPasswordEncoder().encode(senha));
+	usuario.setSenha(bCryptPasswordEncoder.encode(senha));
 
 	repository.save(usuario);
 

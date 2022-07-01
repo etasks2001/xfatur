@@ -30,9 +30,10 @@ public class UsuarioController {
 	return "usuario/cadastro";
     }
 
-    @PostMapping("/cadastro/alterar")
-    public String alterarUsuarios(UsuarioDTO usuarioDTO, RedirectAttributes attr) {
-	service.alterarUsuario(usuarioDTO);
+    @PostMapping("/cadastro/alterar/credenciais")
+    public String alterarCredenciais(UsuarioDTO usuarioDTO, RedirectAttributes attr) {
+
+	service.alterarCredenciais(usuarioDTO);
 
 	attr.addFlashAttribute("sucesso", "Alterado com sucesso.");
 
