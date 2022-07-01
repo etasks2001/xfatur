@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
+import org.thymeleaf.context.Context;
 
 import com.xfatur.service.ListaPreco;
 
@@ -36,4 +37,8 @@ public class Config {
 	return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public Context getContextThymeLeaf() {
+	return new Context();
+    }
 }

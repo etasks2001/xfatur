@@ -40,8 +40,8 @@ public class UsuarioController {
 	return "redirect:/u/lista";
     }
 
-    @PostMapping("/cadastro/salvar")
-    public String salvarUsuarios(UsuarioDTO usuarioDTO, RedirectAttributes attr) throws MessagingException {
+    @PostMapping("/cadastro/gravar")
+    public String gravarUsuario(UsuarioDTO usuarioDTO, RedirectAttributes attr) throws MessagingException {
 
 	Boolean hasEmail = service.hasEmail(usuarioDTO.getEmail());
 

@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import com.xfatur.model.security.Perfil;
 import com.xfatur.model.security.Usuario;
@@ -154,12 +153,6 @@ public class UsuarioService implements UserDetailsService {
     public Optional<Usuario> buscarPorEmailEAtivo(String email) {
 
 	return repository.findByEmailAndAtivo(email);
-
-    }
-
-    public void emailDeConfirmacaoDeCadastro(String email) throws MessagingException {
-	String codigo = Base64Utils.encodeToString(email.getBytes());
-	emailService.enviarPedidoDeConformacaoDeCadastro(email, codigo);
 
     }
 

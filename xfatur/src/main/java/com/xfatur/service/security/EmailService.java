@@ -1,11 +1,17 @@
 package com.xfatur.service.security;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.MailException;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
@@ -14,52 +20,41 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 @Service
 public class EmailService {
 
-    private static final String NAO_RESPONDER_HOTMAIL_COM = "email";
-
     @Autowired
-    private JavaMailSender mailSender;
+    private JavaMailSenderImpl mailSender;
 
     @Autowired
     private SpringTemplateEngine template;
 
-    public void enviarPedidoDeConformacaoDeCadastro(String destino, String codigo) throws MessagingException {
-	MimeMessage message = mailSender.createMimeMessage();
-	MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, "UTF-8");
-
-	Context context = new Context();
-	context.setVariable("Titulo", "Bem vindo");
-	context.setVariable("text", "Precisamos que confirme seu cadastro, clicando no link abaixo.");
-	context.setVariable("linkConfirmacao", "http://localhost:8080/u/confirmacao/cadastro?codigo=" + codigo);
-
-	String html = template.process("email/confirmacao", context);
-
-	helper.setTo(destino);
-	helper.setText(html, true);
-	helper.setSubject("Confirmção de cadastro");
-	helper.setFrom(NAO_RESPONDER_HOTMAIL_COM);
-
-	helper.addInline("logo", new ClassPathResource("/static/image/spring-security.png"));
-
-	mailSender.send(message);
-    }
+    @Autowired
+    private Context context;
 
     public void enviarPedidoDeRedefinicaoDeSenha(String destino, String verificador) throws MessagingException {
-	MimeMessage message = mailSender.createMimeMessage();
-	MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, "UTF-8");
+	try {
+	    Properties properties = new Properties();
+	    properties.load(new FileInputStream(new File("c:/email.properties")));
 
-	Context context = new Context();
-	context.setVariable("verificador", verificador);
+	    mailSender.setUsername(properties.getProperty("username"));
+	    mailSender.setPassword(properties.getProperty("password"));
 
-	String html = template.process("email/confirmacao", context);
+	    MimeMessage message = mailSender.createMimeMessage();
+	    MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, "UTF-8");
 
-	helper.setTo(destino);
-	helper.setText(html, true);
-	helper.setSubject("Redefinição de cadastro");
-	helper.setFrom(NAO_RESPONDER_HOTMAIL_COM);
+	    context.setVariable("verificador", verificador);
 
-	helper.addInline("logo", new ClassPathResource("/static/image/spring-security.png"));
+	    String html = template.process("email/confirmacao", context);
 
-	mailSender.send(message);
+	    helper.setTo(destino);
+	    helper.setText(html, true);
+	    helper.setSubject("Redefinição de cadastro");
+	    helper.setFrom(properties.getProperty("from"));
+
+	    helper.addInline("logo", new ClassPathResource("/static/image/spring-security.png"));
+
+	    mailSender.send(message);
+	} catch (MailException | IOException e) {
+	    throw new MessagingException(e.getMessage());
+	}
 
     }
 }

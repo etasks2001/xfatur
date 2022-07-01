@@ -24,7 +24,7 @@
 					<div class="col-md-8">
 						<div th:replace="fragments/alert :: alerta-sucesso"></div>
 						
-						<form th:action="${usuarioDTO.id == null} ? @{/u/cadastro/salvar} : @{/u/cadastro/alterar/credenciais}" th:object="${usuarioDTO}" method="POST" >
+						<form th:action="${usuarioDTO.id == null} ? @{/u/cadastro/gravar} : @{/u/cadastro/alterar/credenciais}" th:object="${usuarioDTO}" method="POST" >
 							<div class="mb-3">
 								<label for="email">Email</label>
 								<div class="input-group">
