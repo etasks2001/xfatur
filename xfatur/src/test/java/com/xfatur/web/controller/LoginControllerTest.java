@@ -25,7 +25,7 @@ public class LoginControllerTest extends BaseTest {
     @WithMockUser(username = "email@email.com.br", authorities = { "FATURAMENTO" })
     void login_test() throws Exception {
 
-	mock.perform(post("/login")
+	mockMvc.perform(post("/login")
 
 		.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 
@@ -51,7 +51,7 @@ public class LoginControllerTest extends BaseTest {
     @Sql(scripts = { "classpath:/usuario-clean.sql" }, executionPhase = AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8"))
     void login_falhou_test() throws Exception {
 
-	mock.perform(post("/login")
+	mockMvc.perform(post("/login")
 
 		.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 

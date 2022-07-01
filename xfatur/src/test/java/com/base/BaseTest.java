@@ -17,6 +17,6 @@ import com.xfatur.XFaturApplication;
 public abstract class BaseTest {
 
     @Autowired
-    protected MockMvc mock;
+    protected MockMvc mockMvc;
 
 }

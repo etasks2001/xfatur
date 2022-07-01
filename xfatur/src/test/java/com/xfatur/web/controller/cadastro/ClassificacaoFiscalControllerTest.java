@@ -39,7 +39,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     @DisplayName("POST / classificacaofiscal/alterar >> acesso negado")
     @WithMockUser(username = "msergiost@hotmail.com", authorities = { "FINANCEIRO", "FISCAL" })
     void alterar_acessoNegado() throws Exception {
-	mock.perform(MockMvcRequestBuilders.post("/classificacaofiscal/alterar")
+	mockMvc.perform(MockMvcRequestBuilders.post("/classificacaofiscal/alterar")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -57,7 +57,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     @DisplayName("POST / classificacaofiscal/editar/{id} >> acesso negado")
     @WithMockUser(username = "msergisot@hotmail.com", authorities = { "FINANCEIRO", "FISCAL" })
     void edit_acessoNegado() throws Exception {
-	mock.perform(MockMvcRequestBuilders.post("/classificacaofiscal/editar/{id}", 1)
+	mockMvc.perform(MockMvcRequestBuilders.post("/classificacaofiscal/editar/{id}", 1)
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -74,7 +74,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     @DisplayName("POST /classificacaofiscal/form >> acesso negado")
     @WithMockUser(username = "msergiost@hotmail.com", authorities = { "FINANCEIRO", "FISCAL" })
     void openForm_acessoNegado() throws Exception {
-	mock.perform(get("/classificacaofiscal/form")
+	mockMvc.perform(get("/classificacaofiscal/form")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf()
 
@@ -91,7 +91,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     @DisplayName("GET /classificacaofiscal/salvar >> salvar acesso negado")
     @WithMockUser(username = "msergiost@hotmail.com", authorities = { "FINANCEIRO", "FISCAL" })
     void salvar_acessonegado() throws Exception {
-	mock.perform(post("/classificacaofiscal/salvar")
+	mockMvc.perform(post("/classificacaofiscal/salvar")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -107,9 +107,9 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     @Test
     @DisplayName("GET /classificacaofiscal/form >> abrir formulário")
     void openForm_test() throws Exception {
-	Assertions.assertNotNull(mock, "Formulário encontrado");
+	Assertions.assertNotNull(mockMvc, "Formulário encontrado");
 
-	mock.perform(get("/classificacaofiscal/form")
+	mockMvc.perform(get("/classificacaofiscal/form")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -142,7 +142,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     @Sql(scripts = { "classpath:/cadastro/classificacaofiscal-clean.sql" }, executionPhase = AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8"))
     void gravar() throws Exception {
 
-	mock.perform(post("/classificacaofiscal/salvar")
+	mockMvc.perform(post("/classificacaofiscal/salvar")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -169,7 +169,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     @DisplayName("POST /classificacaofiscal/salvar >> em branco")
     void gravar_em_branco() throws Exception {
 
-	mock.perform(post("/classificacaofiscal/salvar")
+	mockMvc.perform(post("/classificacaofiscal/salvar")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -208,7 +208,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     @DisplayName("POST /classificacaofiscal/salvar >> registro já existente")
     void gravar_registro_ja_existente() throws Exception {
 
-	mock.perform(post("/classificacaofiscal/salvar")
+	mockMvc.perform(post("/classificacaofiscal/salvar")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -254,7 +254,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
 	Integer id = service.findIdByDescricao("SORVETE DE MASSA");
 	System.out.println("Código encontrado: " + id);
 
-	mock.perform(get("/classificacaofiscal/editar/{id}", id)
+	mockMvc.perform(get("/classificacaofiscal/editar/{id}", id)
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -288,7 +288,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
 
 	Integer id = 879765467;
 
-	mock.perform(get("/classificacaofiscal/editar/{id}", id)
+	mockMvc.perform(get("/classificacaofiscal/editar/{id}", id)
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -314,7 +314,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     void alterar_cadastro() throws Exception {
 	Integer id = service.findIdByDescricao("SORVETE DE MASSA");
 
-	mock.perform(post("/classificacaofiscal/alterar")
+	mockMvc.perform(post("/classificacaofiscal/alterar")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -344,7 +344,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     void alterar_cadastro_com_erros_nos_campos() throws Exception {
 	Integer id = service.findIdByDescricao("SORVETE DE MASSA");
 
-	mock.perform(post("/classificacaofiscal/alterar")
+	mockMvc.perform(post("/classificacaofiscal/alterar")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -389,7 +389,7 @@ class ClassificacaoFiscalControllerTest extends BaseTest {
     void alterar_cadastro_para_outro_ja_existente() throws Exception {
 	Integer id = service.findIdByDescricao("SORVETE DE MASSA");
 
-	mock.perform(post("/classificacaofiscal/alterar")
+	mockMvc.perform(post("/classificacaofiscal/alterar")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 

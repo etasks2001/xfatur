@@ -19,9 +19,9 @@ class CadastroControllerTest extends BaseTest {
     @DisplayName("GET /cadastros")
     void openForm() throws Exception {
 
-	Assertions.assertThat(mock).isNotNull();
+	Assertions.assertThat(mockMvc).isNotNull();
 
-	mock.perform(get("/cadastros")
+	mockMvc.perform(get("/cadastros")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
 
@@ -37,7 +37,7 @@ class CadastroControllerTest extends BaseTest {
     @DisplayName("GET /cadastros - acesso negado")
     @WithMockUser(username = "msergiost@homail.com", authorities = { "FINANCEIRO", "FISCAL" })
     void openForm_acesso_negado() throws Exception {
-	mock.perform(get("/cadastros").with(SecurityMockMvcRequestPostProcessors.csrf()))
+	mockMvc.perform(get("/cadastros").with(SecurityMockMvcRequestPostProcessors.csrf()))
 
 		.andExpect(status().is4xxClientError())
 
