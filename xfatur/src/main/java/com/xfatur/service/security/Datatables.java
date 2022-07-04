@@ -31,16 +31,8 @@ public class Datatables {
 	return json;
     }
 
-    public HttpServletRequest getRequest() {
-	return request;
-    }
-
     public void setRequest(HttpServletRequest request) {
 	this.request = request;
-    }
-
-    public String[] getColunas() {
-	return colunas;
     }
 
     public void setColunas(String[] colunas) {

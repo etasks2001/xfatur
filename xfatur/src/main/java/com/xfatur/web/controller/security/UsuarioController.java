@@ -85,7 +85,7 @@ public class UsuarioController {
     @GetMapping("/redefinir/senha/pedido")
     public String pedidoRedefinirSenha() {
 
-	return "usuario/pedido-redefinir-senha";
+	return "usuario/redefinir-senha-pedido";
     }
 
     @GetMapping("/redefinir/confirmar")

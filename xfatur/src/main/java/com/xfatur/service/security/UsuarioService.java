@@ -78,8 +78,7 @@ public class UsuarioService implements UserDetailsService {
 	datatables.setRequest(request);
 	datatables.setColunas(DatatablesColunas.USUARIOS);
 
-	System.out.println(datatables.getSearch());
-	Page<Usuario> page = datatables.getSearch().isEmpty() ? repository.findAll(datatables.getPageable()) : repository.findPorEmailOrPerfil(datatables.getSearch(), datatables.getPageable());
+	Page<Usuario> page = repository.findAll(datatables.getPageable());
 
 	return datatables.getResponse(page);
     }
@@ -110,10 +109,6 @@ public class UsuarioService implements UserDetailsService {
 
 	usuarioDTO.setPerfisDTO(perfisDTO);
 	return usuarioDTO;
-    }
-
-    public boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
-	return bCryptPasswordEncoder.matches(senhaDigitada, senhaArmazenada);
     }
 
     @Transactional(readOnly = false)
@@ -172,10 +167,6 @@ public class UsuarioService implements UserDetailsService {
     @Transactional(readOnly = true)
     public Boolean hasEmail(String email) {
 	return repository.hasEmail(email);
-    }
-
-    public void excluirUsuario(Integer id) {
-	repository.deleteById(id);
     }
 
 }
