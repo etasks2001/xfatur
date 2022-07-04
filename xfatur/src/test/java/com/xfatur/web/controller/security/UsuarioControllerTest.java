@@ -650,4 +650,26 @@ class UsuarioControllerTest extends BaseTest {
 
     }
 
+    @Test
+    @DisplayName("GET u/redefinir/confirmar - Usuário não encontrado")
+    void test_redefinirSenha_usuario_nao_encontrado() throws Exception {
+	mockMvc.perform(MockMvcRequestBuilders
+
+		.get("/u/redefinir/confirmar")
+
+		.param("email", "fdlasdfkl@fjdksalf.com")
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
+	)
+
+		.andExpect(MockMvcResultMatchers.status().isOk())
+
+		.andExpect(MockMvcResultMatchers.model().attribute("error", "Operação não pode ser realizada."))
+
+		.andExpect(MockMvcResultMatchers.model().attribute("message", "Usuário fdlasdfkl@fjdksalf.com não encontrado."))
+
+	;
+    }
+
 }

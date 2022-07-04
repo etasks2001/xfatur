@@ -9,8 +9,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.base.BaseTest;
@@ -69,6 +71,30 @@ public class LoginControllerTest extends BaseTest {
 
 	;
 
+    }
+
+    @Test
+    @DisplayName("POST /login - usuario não encontrado")
+    void test_login_usuario_nao_encontrado() throws Exception {
+	mockMvc.perform(MockMvcRequestBuilders
+
+		.post("/login")
+
+		.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
+		.param("username", "jdfkaslç@fjdskalcdfj.com")
+
+		.param("password", "fdasfda")
+
+	)
+
+		.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+
+		.andExpect(MockMvcResultMatchers.redirectedUrl("/login-error"))
+
+	;
     }
 
 }
