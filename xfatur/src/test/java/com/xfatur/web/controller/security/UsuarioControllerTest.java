@@ -5,12 +5,15 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.List;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
@@ -23,12 +26,16 @@ import com.base.BaseTest;
 import com.test.util.Order;
 import com.xfatur.model.security.Perfil;
 import com.xfatur.model.security.Usuario;
+import com.xfatur.service.security.EmailService;
 import com.xfatur.service.security.UsuarioService;
 
 class UsuarioControllerTest extends BaseTest {
 
     @Autowired
     private UsuarioService service;
+
+    @Autowired
+    private EmailService emailService = Mockito.mock(EmailService.class);
 
     @Test
     @DisplayName("GET u/cadastro/form >> abre formulário")
@@ -44,9 +51,9 @@ class UsuarioControllerTest extends BaseTest {
 
 		.andExpect(MockMvcResultMatchers.view().name("usuario/cadastro"))
 
-		.andExpect(MockMvcResultMatchers.model().attributeExists("usuarioDTO"))
+		.andExpect(MockMvcResultMatchers.model().attributeExists("usuario"))
 
-		.andExpect(MockMvcResultMatchers.model().attribute("usuarioDTO",
+		.andExpect(MockMvcResultMatchers.model().attribute("usuario",
 
 			Matchers.allOf(
 
@@ -198,9 +205,9 @@ class UsuarioControllerTest extends BaseTest {
 
 		.andExpect(MockMvcResultMatchers.view().name("usuario/cadastro"))
 
-		.andExpect(MockMvcResultMatchers.model().attributeExists("usuarioDTO"))
+		.andExpect(MockMvcResultMatchers.model().attributeExists("usuario"))
 
-		.andExpect(MockMvcResultMatchers.model().attribute("usuarioDTO",
+		.andExpect(MockMvcResultMatchers.model().attribute("usuario",
 
 			allOf(
 
@@ -461,6 +468,7 @@ class UsuarioControllerTest extends BaseTest {
     @Sql(scripts = { "classpath:/usuario.sql" }, config = @SqlConfig(encoding = "UTF-8"))
     @Sql(scripts = { "classpath:/usuario-clean.sql" }, executionPhase = AFTER_TEST_METHOD, config = @SqlConfig(encoding = "UTF-8"))
     void test_redefinirSenha() throws Exception {
+
 	mockMvc.perform(MockMvcRequestBuilders.get("/u/redefinir/confirmar")
 
 		.with(SecurityMockMvcRequestPostProcessors.csrf())
@@ -469,9 +477,9 @@ class UsuarioControllerTest extends BaseTest {
 
 	)
 
-		.andExpect(MockMvcResultMatchers.status().isOk())
+		.andExpect(status().isOk())
 
-		.andExpect(MockMvcResultMatchers.view().name("usuario/redefinir-senha"))
+		.andExpect(view().name("usuario/redefinir-senha"))
 
 		.andExpect(MockMvcResultMatchers.model().attributeExists("sucesso"))
 

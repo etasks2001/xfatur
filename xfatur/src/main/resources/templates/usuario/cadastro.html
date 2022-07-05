@@ -24,14 +24,14 @@
 					<div class="col-md-8">
 						<div th:replace="fragments/alert :: alerta-sucesso"></div>
 						
-						<form th:action="${usuarioDTO.id == null} ? @{/u/cadastro/gravar} : @{/u/cadastro/alterar/credenciais}" th:object="${usuarioDTO}" method="POST" >
+						<form th:action="${usuario.id == null} ? @{/u/cadastro/gravar} : @{/u/cadastro/alterar/credenciais}" th:object="${usuario}" method="POST" >
 							<div class="mb-3">
 								<label for="email">Email</label>
 								<div class="input-group">
 									<div class="input-group-prepend">
 										<span class="input-group-text"	id="validationTooltipUsernamePrepend">@</span>
 									</div>
-									<input type="email" class="form-control" id="email"  th:field="*{email}" placeholder="Email" aria-describedby="validationTooltipUsernamePrepend" required th:disabled="${usuarioDTO.id!=null}"/>
+									<input type="email" class="form-control" id="email"  th:field="*{email}" placeholder="Email" aria-describedby="validationTooltipUsernamePrepend" required th:disabled="${usuario.id != null}"/>
 									<div class="invalid-feedback">Email é requerido.</div>
 								</div>
 							</div>
@@ -59,7 +59,7 @@
 							 
 							<div class="form-group row">
 								<div class="col-sm-10">
-									<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="right" th:title="${usuarioDTO.id == null ? 'Gravar' :'Alterar'}"><i class="fas fa-save"></i>
+									<button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="right" th:title="${usuario.id == null ? 'Gravar' :'Alterar'}"><i class="fas fa-save"></i>
 									</button>
 								</div>
 							</div>
@@ -78,7 +78,7 @@
 	
 	
 	$('#perfisDTO').ready(function(){
-		var perfisDTO = [[${usuarioDTO.perfisDTO}]];
+		var perfisDTO = [[${usuario.perfisDTO}]];
 		
 		$.each(perfisDTO, function(k, v) {
 			console.log(v);

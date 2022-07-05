@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +27,12 @@ public class UsuarioController {
     private UsuarioService service;
 
     @GetMapping("/cadastro/form")
-    public String form(UsuarioDTO usuarioDTO) {
+    public String form(@ModelAttribute("usuario") UsuarioDTO usuarioDTO) {
 	return "usuario/cadastro";
     }
 
     @PostMapping("/cadastro/alterar/credenciais")
-    public String alterarCredenciais(UsuarioDTO usuarioDTO, RedirectAttributes attr) {
+    public String alterarCredenciais(@ModelAttribute("usuario") UsuarioDTO usuarioDTO, RedirectAttributes attr) {
 
 	service.alterarCredenciais(usuarioDTO);
 
@@ -41,7 +42,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastro/gravar")
-    public String gravarUsuario(UsuarioDTO usuarioDTO, RedirectAttributes attr) throws MessagingException {
+    public String gravarUsuario(@ModelAttribute("usuario") UsuarioDTO usuarioDTO, RedirectAttributes attr) throws MessagingException {
 
 	Boolean hasEmail = service.hasEmail(usuarioDTO.getEmail());
 
@@ -79,7 +80,7 @@ public class UsuarioController {
     public ModelAndView editarCredenciais(@PathVariable("id") Integer id) {
 	UsuarioDTO usuarioDTO = service.buscaPorId(id);
 
-	return new ModelAndView("usuario/cadastro", "usuarioDTO", usuarioDTO);
+	return new ModelAndView("usuario/cadastro", "usuario", usuarioDTO);
     }
 
     @GetMapping("/redefinir/senha/pedido")
@@ -100,7 +101,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/redefinir/nova/senha")
-    public String confirmacaoDeRedefinicaoDeSenha(Usuario usuario, ModelMap model) {
+    public String confirmacaoDeRedefinicaoDeSenha(@ModelAttribute("usuario") UsuarioDTO usuario, ModelMap model) {
 	Usuario u = service.buscarPorEmail(usuario.getEmail());
 
 	if (!usuario.getCodigoVerificador().equals(u.getCodigoVerificador())) {

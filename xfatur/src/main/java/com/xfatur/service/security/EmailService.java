@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class EmailService {
 
 	    mailSender.send(message);
 	} catch (MailException | IOException e) {
-	    throw new MessagingException(e.getMessage());
+	    throw new SendFailedException("Erro de autenticação ou comunicação", e);
 	}
 
     }

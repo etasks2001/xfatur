@@ -10,6 +10,8 @@ public class UsuarioDTO {
 
     private String senha;
 
+    private String codigoVerificador;
+
     private List<PerfilDTO> perfisDTO = new ArrayList<PerfilDTO>();
 
     private boolean ativo;
@@ -52,6 +54,14 @@ public class UsuarioDTO {
 
     public void setAtivo(boolean ativo) {
 	this.ativo = ativo;
+    }
+
+    public String getCodigoVerificador() {
+	return codigoVerificador;
+    }
+
+    public void setCodigoVerificador(String codigoVerificador) {
+	this.codigoVerificador = codigoVerificador;
     }
 
 }

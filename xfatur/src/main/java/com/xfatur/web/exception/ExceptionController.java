@@ -1,5 +1,7 @@
 package com.xfatur.web.exception;
 
+import javax.mail.SendFailedException;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,4 +33,16 @@ public class ExceptionController {
 
 	return model;
     }
+
+    @ExceptionHandler(SendFailedException.class)
+    public ModelAndView emailRedefinicaoDeSenhaNaoPodeSerEnviado(SendFailedException e) {
+	ModelAndView model = new ModelAndView("error");
+
+	model.addObject("status", "404");
+	model.addObject("error", "E-mail não pode ser enviado.");
+	model.addObject("message", e.getMessage());
+
+	return model;
+    }
+
 }
