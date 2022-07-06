@@ -8,10 +8,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -19,6 +21,27 @@ import com.base.BaseTest;
 
 @DisplayName("Controller - Login")
 public class LoginControllerTest extends BaseTest {
+
+    @Test
+    @DisplayName("GET")
+    void test_index() throws Exception {
+	MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+
+		.get("/")
+
+		.with(SecurityMockMvcRequestPostProcessors.csrf())
+
+	)
+
+		.andExpect(MockMvcResultMatchers.status().isOk())
+
+		.andExpect(MockMvcResultMatchers.view().name("")).andReturn()
+
+	;
+
+	MockHttpSession session = (MockHttpSession) mvcResult.getRequest().getSession();
+
+    }
 
     @Test
     @DisplayName("POST /login")
