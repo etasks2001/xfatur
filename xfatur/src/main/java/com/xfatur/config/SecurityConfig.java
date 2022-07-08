@@ -51,6 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		.permitAll()
 
+		.antMatchers("/actuator/**").permitAll()
+
 		.antMatchers("/home").hasAnyAuthority(FINANCEIRO, FATURAMENTO, FISCAL)
 
 		.antMatchers("/cadastros").hasAnyAuthority(FATURAMENTO)
