@@ -5,6 +5,8 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TES
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Enumeration;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -35,11 +37,17 @@ public class LoginControllerTest extends BaseTest {
 
 		.andExpect(MockMvcResultMatchers.status().isOk())
 
-		.andExpect(MockMvcResultMatchers.view().name("")).andReturn()
+		.andExpect(MockMvcResultMatchers.view().name("home")).andReturn()
 
 	;
 
-	MockHttpSession session = (MockHttpSession) mvcResult.getRequest().getSession();
+	MockHttpSession mockHttpSession = (MockHttpSession) mvcResult.getRequest().getSession();
+
+	Enumeration<String> attributeNames = mockHttpSession.getAttributeNames();
+
+	while (attributeNames.hasMoreElements()) {
+	    System.out.println(attributeNames.nextElement());
+	}
 
     }
 
